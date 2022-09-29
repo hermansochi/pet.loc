@@ -1,0 +1,6 @@
+/.idea
+/.vscode
+/vendor
+/var/cache/*
+/var/log/*
+/var/test/*

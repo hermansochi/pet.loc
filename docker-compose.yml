@@ -1,0 +1,95 @@
+version: "3.9"
+services:
+    traefik:
+        image: traefik:2.4
+        command:
+            --providers.docker=true
+            --providers.docker.exposedByDefault=false
+            --entryPoints.http.address=:80
+        ports:
+            - "80:80"
+        networks:
+            - traefik-public
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock:ro
+        labels:
+            - traefik.enable=true
+            - traefik.docker.network=traefik-public
+
+    api:
+        build:
+            context: api/docker
+            dockerfile: development/nginx/Dockerfile
+        volumes:
+            - ./api:/app:rw
+        networks:
+            - traefik-public
+            - default
+        labels:
+            - traefik.enable=true
+            - traefik.docker.network=traefik-public
+            - traefik.http.routers.api.rule=Host(`api.localhost`)
+            - traefik.http.routers.api.entryPoints=http
+            - traefik.http.services.api.loadBalancer.server.port=80
+
+    api-php-fpm:
+        build:
+            context: api/docker
+            dockerfile: development/php-fpm/Dockerfile
+        volumes:
+            - ./api:/app:rw
+
+    api-php-cli:
+        build:
+            context: api/docker
+            dockerfile: development/php-cli/Dockerfile
+        volumes:
+            - ./api:/app:rw
+
+    react-node:
+        build:
+            context: react/docker/development/node
+        environment:
+            WDS_SOCKET_PORT: 0
+        volumes:
+            - ./react:/app:rw
+        command: sh -c "until [ -f .ready ] ; do sleep 1 ; done && yarn start"
+        tty: true
+
+    node-cli:
+        build:
+            context: react/docker/development/node
+        volumes:
+            - ./react:/app
+
+    react:
+        build:
+            context: react/docker/development/nginx
+        networks:
+            - traefik-public
+            - default
+        labels:
+            - traefik.enable=true
+            - traefik.docker.network=traefik-public
+            - traefik.http.routers.react.rule=Host(`reactpet.localhost`) || Host(`www.reactpet.localhost`)
+            - traefik.http.routers.react.entryPoints=http
+            - traefik.http.services.react.loadBalancer.server.port=80
+
+    vue:
+        build:
+            context: vue/docker/development/nginx
+        volumes:
+            - ./vue:/app:rw
+        networks:
+            - traefik-public
+            - default
+        labels:
+            - traefik.enable=true
+            - traefik.docker.network=traefik-public
+            - traefik.http.routers.vue.rule=Host(`vuepet.localhost`) || Host(`www.vuepet.localhost`)
+            - traefik.http.routers.vue.entryPoints=http
+            - traefik.http.services.vue.loadBalancer.server.port=80
+
+networks:
+    traefik-public:
+        name: traefik-public
