@@ -1,9 +1,27 @@
-# Laravel + ReactJS Pet project
+# Laravel + ReactJS + VueJS Pet project
 
-Запуск тестовой среды разработки в фоне: make up
-Остановка тестовой среды разработки: make down
-Перезапуск тестовой среды разработки: make restart
+Учебный проект группы товарищей Lunch Brotherhood:
+ - Herman Alexandrov hermansochi@ya.ru: Sofrware Architect, Lead fullstack developer, devops.
 
-Полная пересборка проекта (с потерей данных): make init
+0. Ставим docker, docker-compose и make.
+1. форкаем репу.
+2. git clone https://github.com/hermansochi/pet.loc.git
+3. Запрашиваем у hermansochi файл .env и копируем его в /api/.env
+4. В каталоге с проектом делаем make.
+5. Фронт на React открывается по фдресу reactpet.localhost
+6. Фронт на React пишем в папке /react/src
+7. Фронт на Vue открывается по адресу vuepet.localhost
+8. Фронт на Vue пишем в папке /vue/src
+9. REST API бек на адресе api.localhost
+10. Бек в /api
+11. Шлем PR как описано тут https://rustycrate.ru/%D1%80%D1%83%D0%BA%D0%BE%D0%B2%D0%BE%D0%B4%D1%81%D1%82%D0%B2%D0%B0/2016/03/07/contributing.html
+
+#Полезные комманды:
+- make init     Полная пересборка проекта (с потерей данных)
+- make up       Запуск тестовой среды разработки в фоне
+- make down     Остановка тестовой среды разработки. 
+- make restart  Перезапуск тестовой среды разработки: 
+
+Полный список комманд см. Makefile в корне проекта.
 
 Установка backend: docker-compose run --rm api-php-cli composer install
