@@ -4,7 +4,7 @@ Tasks for the Laravel + ReactJS Pet project.
 
 ### Todo
 - [ ] Dev: Install Prettier.
-- [ ] Dev: Install Stylelint.
+- [ ] Org: Write react testing guide.
 
 ### In Progress
 
@@ -12,6 +12,7 @@ Tasks for the Laravel + ReactJS Pet project.
 
 ### Done ✓
 
+- [x] Dev: Install Stylelint.
 - [x] Dev: Make lint fix.
 - [x] Org: Write JS code style guide.
 - [x] Dev: Add eslint to react app.

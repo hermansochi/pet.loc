@@ -1,5 +1,7 @@
 # Laravel + ReactJS + VueJS Pet project
 
+Документацию по проекту см. в папке /docs
+
 Учебный проект группы товарищей Lunch Brotherhood:
  - Herman Alexandrov hermansochi@ya.ru: Sofrware Architect, Lead fullstack developer, devops.
 

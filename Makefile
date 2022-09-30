@@ -40,4 +40,9 @@ react-lint:
 react-lint-fix:
 	docker-compose run --rm node-cli yarn eslint-fix
 
+react-test-watch:
+	docker-compose run --rm node-cli yarn test
+
+react-test:
+	docker-compose run --rm node-cli yarn test --watchAll=false
 
