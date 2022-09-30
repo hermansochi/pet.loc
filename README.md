@@ -10,9 +10,9 @@
 2. git clone https://github.com/hermansochi/pet.loc.git
 3. Запрашиваем у hermansochi файл .env и копируем его в /api/.env
 4. В каталоге с проектом делаем make.
-5. Фронт на React открывается по фдресу reactpet.localhost
+5. Фронт на React открывается по фдресу react.localhost
 6. Фронт на React пишем в папке /react/src
-7. Фронт на Vue открывается по адресу vuepet.localhost
+7. Фронт на Vue открывается по адресу vue.localhost
 8. Фронт на Vue пишем в папке /vue/src
 9. REST API бек на адресе api.localhost
 10. Бек в /api
