@@ -4,6 +4,7 @@ Tasks for the Laravel + ReactJS Pet project.
 
 ### Todo
 - [ ] Dev: Install Prettier.
+- [ ] Dev: Install Stylelint.
 
 ### In Progress
 

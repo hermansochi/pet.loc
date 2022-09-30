@@ -1,5 +1,6 @@
 # Java Script Code style
 
+Провеются js и jsx файлы в /src
 Используется eslint с настройкой eslint:recommended со следующими соглашениями:
 
 space-before-function-paren
@@ -37,3 +38,7 @@ template-curly-spacing
 semi
  - [x] window.alert('hi');
  - [x] window.alert('hi')
+
+# CSS Code style
+Проверяются css файлы в /src и вложенных подпапках.
+Правила проверки stylelint-config-standard.

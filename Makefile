@@ -34,7 +34,10 @@ react-ready:
 	docker run --rm -v ${PWD}/react:/app -w /app alpine touch .ready
 
 react-lint:
-	docker-compose run --rm node-cli yarn lint
+	docker-compose run --rm node-cli yarn eslint
+	docker-compose run --rm node-cli yarn stylelint
 
 react-lint-fix:
-	docker-compose run --rm node-cli yarn lint-fix
+	docker-compose run --rm node-cli yarn eslint-fix
+
+

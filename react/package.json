@@ -11,15 +11,18 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0"
+    "@testing-library/user-event": "^13.5.0",
+    "stylelint": "^14.13.0",
+    "stylelint-config-standard": "^28.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint --ext .js,.jsx src",
-    "lint-fix": "eslint --fix --ext .js,.jsx src"
+    "eslint": "eslint --ext .js,.jsx src",
+    "eslint-fix": "eslint --fix --ext .js,.jsx src",
+    "stylelint": "stylelint \"src/**/*.css\""
   },
   "eslintConfig": {
     "extends": [
