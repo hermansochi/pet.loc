@@ -5,6 +5,7 @@ up: docker-up
 down: docker-down
 restart: down up
 lint: react-lint
+lint-fix: react-lint-fix
 
 docker-up:
 	docker-compose up -d
@@ -34,3 +35,6 @@ react-ready:
 
 react-lint:
 	docker-compose run --rm node-cli yarn lint
+
+react-lint-fix:
+	docker-compose run --rm node-cli yarn lint-fix
