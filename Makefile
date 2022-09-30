@@ -4,6 +4,7 @@ init: docker-down-clear \
 up: docker-up
 down: docker-down
 restart: down up
+lint: react-lint
 
 docker-up:
 	docker-compose up -d
@@ -30,3 +31,6 @@ react-yarn-install:
 
 react-ready:
 	docker run --rm -v ${PWD}/react:/app -w /app alpine touch .ready
+
+react-lint:
+	docker-compose run --rm node-cli yarn lint
