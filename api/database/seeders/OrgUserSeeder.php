@@ -15,6 +15,6 @@ class OrgUserSeeder extends Seeder
      */
     public function run()
     {
-        OrgUser::factory()->count(10)->create();
+        OrgUser::factory()->count(1000)->create();
     }
 }
