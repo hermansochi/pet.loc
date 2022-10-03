@@ -16,8 +16,8 @@
 9. sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 10. sudo service docker start
 11. sudo docker run hello-world
-12. VERSION=$(curl --silent https://api.github.com/repos/docker/compose/releases/latest | grep -Po '"tag_name": "\K.*\d')
-13. DESTINATION=/usr/local/bin/docker-compose
+12. НЕ НАДО! VERSION=$(curl --silent https://api.github.com/repos/docker/compose/releases/latest | grep -Po '"tag_name": "\K.*\d')
+13. НЕ НАДО! DESTINATION=/usr/local/bin/docker-compose
 sudo curl -L https://github.com/docker/compose/releases/download/${VERSION}/docker-compose-$(uname -s)-$(uname -m) -o $DESTINATION
 sudo chmod 755 $DESTINATION
 

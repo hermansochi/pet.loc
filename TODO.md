@@ -3,8 +3,6 @@
 Tasks for the Laravel + ReactJS Pet project.
 
 ### Todo
-
-- [ ] Back: Make initial migrations.
 - [ ] Dev: Install Prettier.
 - [ ] Dev: Make Vue development env.
 
@@ -14,6 +12,9 @@ Tasks for the Laravel + ReactJS Pet project.
 
 ### Done ✓
 
+- [x] Dev: Try migrate from docker-compose to docker compose.
+- [x] Back: Make initial migrations.
+- [x] Back: Make seeder for OrgUser.
 - [x] Dev: Make postgres container, add pdo_pgsql to php-fpm & php-cli containers.
 - [x] Org: Write react testing guide.
 - [x] Dev: Install Stylelint.
