@@ -106,6 +106,19 @@ services:
             - traefik.http.routers.vue.entryPoints=http
             - traefik.http.services.vue.loadBalancer.server.port=80
 
+    api-postgres:
+        image: postgres:13.3-alpine
+        environment:
+            POSTGRES_USER: app
+            POSTGRES_PASSWORD: secret
+            POSTGRES_DB: app
+        volumes:
+            - api-postgres:/var/lib/postgresql/data
+        ports:
+            - "54321:5432"
+volumes:
+    api-postgres:
+
 networks:
     traefik-public:
         name: traefik-public

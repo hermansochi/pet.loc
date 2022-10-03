@@ -8,6 +8,9 @@ restart: down up
 lint: react-lint vue-lint
 lint-fix: react-lint-fix
 
+memory:
+	sudo sh -c "echo 3 > /proc/sys/vm/drop_caches"
+
 docker-up:
 	docker-compose up -d
 
