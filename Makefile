@@ -1,7 +1,7 @@
 init: docker-down-clear \
 	react-clear vue-clear \
 	docker-pull docker-build docker-up \
-	react-init vue-init
+	api-init react-init vue-init
 up: docker-up
 down: docker-down
 restart: down up
@@ -22,6 +22,14 @@ docker-pull:
 
 docker-build:
 	docker-compose build --pull
+
+api-init: api-permissions api-composer-install
+
+api-permissions:
+	docker run --rm -v ${PWD}/api:/app -w /app alpine chmod -R 777 storage bootstrap
+
+api-composer-install:
+	docker-compose run --rm api-php-cli composer install
 
 react-clear:
 	docker run --rm -v ${PWD}/react:/app -w /app alpine sh -c 'rm -rf .ready build'
