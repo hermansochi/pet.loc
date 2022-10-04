@@ -3,6 +3,8 @@
 Tasks for the Laravel + ReactJS Pet project.
 
 ### Todo
+
+- [ ] Back: Install DarkaOnLine/L5-Swagger.
 - [ ] Dev: Install Prettier.
 - [ ] Dev: Make Vue development env.
 - [ ] Front: Install React router.
@@ -13,6 +15,7 @@ Tasks for the Laravel + ReactJS Pet project.
 
 ### Done ✓
 
+- [x] Dev: Add wait for DB ready script and migration & seeder commands.
 - [x] Front: Install Axios.
 - [x] Front: Install Redux Toolkit and React-Redux.
 - [x] Front: Install tailwind.

@@ -25,8 +25,6 @@ class OrgUserFactory extends Factory
         $name = self::Translit($lname);
         $name .= '.';
         $name .= self::Translit(mb_substr($fname, 0, 1));
-        $name .= '.';
-        $name .= $this->faker->uuid();;
 
         $company = $this->faker->randomElement([
             'Клоун',
@@ -122,7 +120,7 @@ class OrgUserFactory extends Factory
         ]);
 
         return [
-            'name' => $name,
+            'name' => $name . '.' . $this->faker->uuid(),
             'hide' => false,
             'thumbnail' => false,
             'firstname' => $fname,
