@@ -3,6 +3,7 @@
 Tasks for the Laravel + ReactJS Pet project.
 
 ### Todo
+- [ ] Front: Install tailwind.
 - [ ] Dev: Install Prettier.
 - [ ] Dev: Make Vue development env.
 
