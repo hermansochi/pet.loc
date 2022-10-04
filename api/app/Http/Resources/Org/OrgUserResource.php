@@ -30,8 +30,8 @@ class OrgUserResource extends JsonResource
             'title' => $this->title,
             'department' => $this->department,
             'company' => $this->company,
-            'createdAt' => $this->created_at,
-            'updatedAt' => $this->updated_at,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
     }
 }

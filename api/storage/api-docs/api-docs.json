@@ -73,22 +73,22 @@
                         "type": "boolean",
                         "example": false
                     },
-                    "firstName": {
+                    "first_name": {
                         "description": "User first name / Имя сотрудника",
                         "type": "string",
-                        "maxLength": 255,
+                        "maxLength": 50,
                         "example": "Иван"
                     },
-                    "lastName": {
+                    "last_name": {
                         "description": "User last name / Фамилия сотрудника",
                         "type": "string",
-                        "maxLength": 255,
+                        "maxLength": 50,
                         "example": "Иванов"
                     },
-                    "middleName": {
+                    "middle_name": {
                         "description": "User middle name / Отчество сотрудника",
                         "type": "string",
-                        "maxLength": 255,
+                        "maxLength": 50,
                         "example": "Иванович"
                     },
                     "birthday": {
@@ -139,13 +139,13 @@
                         "maxLength": 255,
                         "example": "ООО Рога и копыта"
                     },
-                    "createdAt": {
+                    "created_at": {
                         "description": "Initial creation timestamp / Таймштамп создания записи",
                         "type": "string",
                         "format": "date-time",
                         "example": "2019-02-25 12:59:20"
                     },
-                    "updatedAt": {
+                    "updated_at": {
                         "description": "ULast update timestamp / Таймштамп изменения записи",
                         "type": "string",
                         "format": "date-time",

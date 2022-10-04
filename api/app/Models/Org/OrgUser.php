@@ -114,14 +114,14 @@ use App\Traits\Uuids;
  *             example="ООО Рога и копыта"
  *     ),
  *     @OA\Property(
- *             property="createdAt",
+ *             property="created_at",
  *             type="string",
  *             format="date-time",
  *             description="Initial creation timestamp / Таймштамп создания записи",
  *             example="2019-02-25 12:59:20"
  *     ),
  *     @OA\Property(
- *             property="updatedAt",
+ *             property="updated_at",
  *             type="string",
  *             format="date-time",
  *             description="ULast update timestamp / Таймштамп изменения записи",
