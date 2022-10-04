@@ -3,7 +3,6 @@
 Tasks for the Laravel + ReactJS Pet project.
 
 ### Todo
-- [ ] Front: Install tailwind.
 - [ ] Dev: Install Prettier.
 - [ ] Dev: Make Vue development env.
 
@@ -13,6 +12,8 @@ Tasks for the Laravel + ReactJS Pet project.
 
 ### Done ✓
 
+- [x] Front: Install Redux Toolkit and React-Redux.
+- [x] Front: Install tailwind.
 - [x] Dev: Try migrate from docker-compose to docker compose.
 - [x] Back: Make initial migrations.
 - [x] Back: Make seeder for OrgUser.
