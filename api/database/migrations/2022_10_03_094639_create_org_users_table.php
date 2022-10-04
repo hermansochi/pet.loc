@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->boolean('hide')->default(false);
             $table->boolean('thumbnail')->default(false);
-            $table->string('firstname')->nullable();
-            $table->string('lastname')->nullable();
-            $table->string('middlename')->nullable();
+            $table->string('first_name', 50)->nullable();
+            $table->string('last_name', 50)->nullable();
+            $table->string('middle_name', 50)->nullable();
             $table->string('birthday', 10)->nullable();
             $table->string('email')->nullable();
             $table->string('cn')->nullable();

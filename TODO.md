@@ -4,7 +4,11 @@ Tasks for the Laravel + ReactJS Pet project.
 
 ### Todo
 
+- [ ] Back: Make bithday field function for seeder.
+- [ ] Back: Fix: swap title & company in seeder.
+- [ ] Back: Make resource controller for OrgUser.
 - [ ] Back: Install DarkaOnLine/L5-Swagger.
+- [ ] Back: Add swagger doc for OrgUser.
 - [ ] Dev: Install Prettier.
 - [ ] Dev: Make Vue development env.
 - [ ] Front: Install React router.

@@ -1,0 +1,168 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Api Documentation",
+        "description": "REST API for pet projects / REST API для тренировочных проектов",
+        "contact": {
+            "email": "hermansochi@ya.ru"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://api.localhost/api/v1",
+            "description": "API Server"
+        }
+    ],
+    "paths": {
+        "/orguser": {
+            "get": {
+                "tags": [
+                    "OrgUser"
+                ],
+                "summary": "Get list of organization users / Возвращает список сотрудников",
+                "description": "Returns list of organization users / Возвращает список сотрудников в JSON коллекции с метаданными",
+                "operationId": "getOrgUserList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation / Успех",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "$ref": "#/components/schemas/OrgUser"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "OrgUser": {
+                "title": "OrgUser",
+                "description": "Organization user / Сотрудник организации",
+                "properties": {
+                    "id": {
+                        "description": "Uniq organization user ID / Уникальный ID сотрудника в формате UUID",
+                        "type": "uuid",
+                        "example": "976b48f0-7fd3-4d03-82ce-395ddeafe5d6"
+                    },
+                    "name": {
+                        "description": "Uniq organization user name / Уникальное имя сотрудника",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Sorokina.F.cb64ffcc-7336-3050-80f6-a6d51abfb053"
+                    },
+                    "hide": {
+                        "description": "If eq true - don't show user / Если true - то не показывать сотрудника",
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "thumbnail": {
+                        "description": "If eq false - show default user avatar / Если false - то сотрудник без аватара, показать дефолтный",
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "firstName": {
+                        "description": "User first name / Имя сотрудника",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Иван"
+                    },
+                    "lastName": {
+                        "description": "User last name / Фамилия сотрудника",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Иванов"
+                    },
+                    "middleName": {
+                        "description": "User middle name / Отчество сотрудника",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Иванович"
+                    },
+                    "birthday": {
+                        "description": "Birthday without year dd.mm / День рождения сотрудника без года dd.mm",
+                        "type": "string",
+                        "maxLength": 10,
+                        "example": "25.01"
+                    },
+                    "email": {
+                        "description": "user email / Электронная почта сотрудника",
+                        "type": "email",
+                        "maxLength": 10,
+                        "example": "my.email@example.ru"
+                    },
+                    "cn": {
+                        "description": "Common name (LDAP attrib) / В общем случае ФИО сотрудника",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Иванов Иван Иванович"
+                    },
+                    "telephone": {
+                        "description": "Internal phone number / Внутренний или добавочный телефонный номер",
+                        "type": "string",
+                        "maxLength": 20,
+                        "example": "7777"
+                    },
+                    "mobile": {
+                        "description": "Cellular phone number. 10 digits. / Мобильный телефонный номер. 10 цифр без префиксов 8 или +7",
+                        "type": "string",
+                        "maxLength": 20,
+                        "example": "9899001010"
+                    },
+                    "title": {
+                        "description": "Position / Должность",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Переворачиватель пингвинов"
+                    },
+                    "department": {
+                        "description": "Department / Отдел",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Бухгалтерия"
+                    },
+                    "company": {
+                        "description": "Company / Организация",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "ООО Рога и копыта"
+                    },
+                    "createdAt": {
+                        "description": "Initial creation timestamp / Таймштамп создания записи",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2019-02-25 12:59:20"
+                    },
+                    "updatedAt": {
+                        "description": "ULast update timestamp / Таймштамп изменения записи",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2019-02-25 12:59:20"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "OrgUser"
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "OrgUser",
+            "description": "API Endpoints of organization users / Эндпоинты для получения информации о сотрудниках"
+        }
+    ]
+}

@@ -26,7 +26,7 @@ docker-pull:
 docker-build:
 	docker compose build --pull
 
-api-init: api-permissions api-composer-install api-wait-db api-migrations api-fixtures
+api-init: api-permissions api-composer-install api-wait-db api-migrations api-fixtures api-generate-docs
 
 api-permissions:
 	docker run --rm -v ${PWD}/api:/app -w /app alpine chmod -R 777 storage bootstrap
@@ -42,6 +42,9 @@ api-migrations:
 
 api-fixtures:
 	docker compose run --rm api-php-cli php artisan db:seed
+
+api-generate-docs:
+	docker compose run --rm api-php-cli php artisan l5-swagger:generate
 
 react-clear:
 	docker run --rm -v ${PWD}/react:/app -w /app alpine sh -c 'rm -rf .ready build'

@@ -26,7 +26,19 @@ class OrgUserFactory extends Factory
         $name .= '.';
         $name .= self::Translit(mb_substr($fname, 0, 1));
 
-        $company = $this->faker->randomElement([
+        $month = $this->faker->randomElement([
+            '01' , '02', '03', '04' , '05', '06', '07' , '08', '09', '10' , '11', '12'
+        ]);
+
+        $days = date('t', mktime(0, 0, 0, (int)$month, 1, 2022));
+
+        $day = (string) $this->faker->numberBetween(1, (int) $days);
+
+        if (mb_strlen($day) === 1) {
+            $day = '0' . $day;
+        }
+        
+        $title = $this->faker->randomElement([
             'Клоун',
             'Переворачиватель пингвинов',
             'Комик, юморист',
@@ -109,10 +121,11 @@ class OrgUserFactory extends Factory
 
         ]);
 
-        $title = $this->faker->randomElement([
+        $company = $this->faker->randomElement([
             'ООО "РогаРадио"',
             'ООО "Рога и копыта"',
             'ООО "БумПрофи"',
+            'ООО "Бумалопа трейдинг"',
             'ООО "Вилюна экспресс"',
             'ООО "Нарита и сын"',
             'ООО "Рогофей"',
@@ -123,10 +136,10 @@ class OrgUserFactory extends Factory
             'name' => $name . '.' . $this->faker->uuid(),
             'hide' => false,
             'thumbnail' => false,
-            'firstname' => $fname,
-            'lastname' => $lname,
-            'middlename' => $mname,
-            //$table->string('birthday', 10)->nullable();
+            'first_name' => $fname,
+            'last_name' => $lname,
+            'middle_name' => $mname,
+            'birthday' => $day . '.' . $month,
             'email' => $name . '@example.ru',
             'cn' => $lname . ' ' . $fname . ' ' . $mname,
             'telephone'=> $this->faker->numerify('####'),
