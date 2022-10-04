@@ -1,5 +1,5 @@
-1. 
-2. 
+1. Убедится что у вас 64 разрядная система и минимум 4Гб памяти.
+2. Убедится что ваше железо поддерживает KVM virtualization. https://docs.docker.com/desktop/install/linux-install/#kvm-virtualization-support
 
 3. sudo apt update
 
