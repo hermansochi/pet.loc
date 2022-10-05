@@ -20,7 +20,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::prefix('v1')->group(function () {
-    Route::apiResource('orguser', OrgUserController::class)->only([
-        'index'
-    ]); 
+    Route::prefix('org')->group(function () {
+        Route::apiResource('users', OrgUserController::class)->only([
+            'index'
+        ]); 
+    });
 });

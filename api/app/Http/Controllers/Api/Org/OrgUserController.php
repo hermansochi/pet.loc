@@ -16,21 +16,46 @@ class OrgUserController extends Controller
      */
     /**
      * @OA\Get(
-     *      path="/orguser",
+     *      path="/org/users",
      *      operationId="getAllOrgUser",
-     *      tags={"OrgUser"},
+     *      tags={"OrgUsers"},
      *      summary="Get all organization users / Возвращает всех сотрудников",
      *      description="Returns all organization users with pagination / Возвращает список сотрудников в JSON коллекции с метаданными c разбивкой по страницам",
+     *      @OA\Parameter(
+     *          name="page",
+     *          in="query",
+     *          description="The page number / Номер страницы",
+     *          required=false,
+     *          @OA\Schema(
+     *              type="integer",
+     *          )
+     *      ),
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation / Успех",
      *          @OA\JsonContent(
-     *             oneOf={
-     *                 @OA\Schema(ref="#/components/schemas/OrgUser"),
-     *             },
-     *         )
+     *                 type="array",
+     *                 @OA\Items(
+     *                      ref="#/components/schemas/OrgUser"
+     *                 ),
+     *              )
+     *          )
      *      ),
-     *     )
+     *      @OA\Response(
+     *          response=404,
+     *          description="User not found / Сотрудник не найден",
+     *          @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(
+     *                 property="data",
+     *                 type="array",
+     *                 @OA\Items(
+     *                     ref="#/components/schemas/OrgUser"
+     *                 ),
+     *             )
+     *          )
+     *       ),
+     * )
      */
     public function index()
     {

@@ -25,13 +25,29 @@ use Illuminate\Routing\Controller as BaseController;
  *      url=L5_SWAGGER_CONST_HOST,
  *      description="API Server"
  * )
+ *
+ * @OA\Tag(
+ *     name="OrgUser",
+ *     description="API Endpoints of organization users / Эндпоинты для получения информации о сотрудниках"
+ * )
+ * 
+ * @OA\Schema(
+ *     title="Links",
+ *     description="Links / Ссылки",
+ *     @OA\Xml(name="Links"),
+ *     @OA\Property(
+ *             property="Links",
+ *             type="object",
+ *             example={
+ *                "first": "http://127.0.0.1:8000/api/users?page=1",
+ *                "last": "http://127.0.0.1:8000/api/users?page=1",
+ *                "prev": null,
+ *                "next": null,
+ *             },
+ *     ),
+ * )
+**/
 
-    *
-    * @OA\Tag(
-    *     name="OrgUser",
-    *     description="API Endpoints of organization users / Эндпоинты для получения информации о сотрудниках"
-    * )
-    */
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
