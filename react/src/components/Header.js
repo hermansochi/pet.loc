@@ -10,6 +10,8 @@ export default function Header({
   setSorting,
   search,
   setSearch,
+  directionSort,
+  setDirectionSort,
 }) {
   const options = listThemes.map((el, i) => {
     return <option key={i}>{el}</option>;
@@ -35,6 +37,29 @@ export default function Header({
     setSearch("");
   }
 
+  function changeDirectionSort(arg) {
+    setDirectionSort(arg);
+  }
+
+  let showDirectionSort = directionSort ? (
+    <div
+      className="tooltip tooltip-bottom cursor-pointer"
+      data-tip="по убыванию"
+    >
+      <div className="text-2xl" onClick={() => changeDirectionSort(false)}>
+        ↓
+      </div>
+    </div>
+  ) : (
+    <div
+      className="tooltip tooltip-bottom cursor-pointer"
+      data-tip="по возростанию"
+    >
+      <div className="text-2xl" onClick={() => changeDirectionSort(true)}>
+        ↑
+      </div>
+    </div>
+  );
   let out = (
     <div className="w-full h-20 px-[2%] flex items-center justify-between shadow-md shadow-current text-sm">
       <div className="relative w-full max-w-[35%]">
@@ -102,6 +127,7 @@ export default function Header({
           <option value="age">Возраст</option>
           <option value="work">Должность</option>
         </select>
+        <div className="flex items-center">{showDirectionSort}</div>
       </div>
       <div className="tooltip tooltip-left" data-tip="выбрать тему">
         <select
