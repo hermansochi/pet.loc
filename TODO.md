@@ -14,6 +14,7 @@ Tasks for the Laravel + ReactJS Pet project.
 
 ### Done ✓
 
+- [ ] Front: Disable  react/prop-types check in eslint.
 - [x] Back: Add city & gender in DB.
 - [x] Back: Make Healthcheck endpoint.
 - [x] Back: Add org/user endpoint description.

@@ -2,6 +2,8 @@
 
 >**Документацию по проекту см. в папке /docs**
 
+>**Rest API спроектирован максимально близко к спецификации [JSON:API v1.1](https://jsonapi.org/)
+
 Учебный проект группы товарищей Lunch Brotherhood:
  - Herman Alexandrov (hermansochi@ya.ru): Software Architect, Lead fullstack developer, devops.
 
