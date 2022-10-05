@@ -14,6 +14,7 @@ Tasks for the Laravel + ReactJS Pet project.
 
 ### Done ✓
 
+- [x] Dev: Push dev .env in git.
 - [x] Back: Add swagger doc for OrgUser.
 - [x] Back: Fix: createdAt and updatedAt fields.
 - [x] Back: Make bithday field function for seeder.

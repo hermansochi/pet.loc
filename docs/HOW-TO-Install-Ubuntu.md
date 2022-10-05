@@ -3,11 +3,7 @@
 
 3. sudo apt update
 
-4. sudo apt-get install \
-    ca-certificates \
-    curl \
-    gnupg \
-    lsb-release
+4. sudo apt-get install ca-certificates curl gnupg lsb-release
 5. sudo mkdir -p /etc/apt/keyrings
 6. curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 7. echo \
