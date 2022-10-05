@@ -1,20 +1,28 @@
-import React from 'react';
+import React, { useState } from "react";
+import Header from "./components/Header";
 
 function App() {
+  const [theme, setTheme] = useState("retro");
+  const [region, setRegion] = useState("все");
+  const [sorting, setSorting] = useState("name");
+  const [search, setSearch] = useState("");
+  const [directionSort, setDirectionSort] = useState(true);
+
   return (
-    <div className="w-screen h-screen flex justify-center">
-      <div className="flex-col">
-        <div>
-          <h1 className="text-3xl font-bold">
-            Hello from react!
-          </h1>
-        </div>
-        <div>
-          <p>Через четыре года здесь будет город-сад.</p>
-        </div>
-      </div>
+    <div className="w-full h-full flex justify-center" data-theme={theme}>
+      <Header
+        setTheme={setTheme}
+        region={region}
+        setRegion={setRegion}
+        sorting={sorting}
+        setSorting={setSorting}
+        setSearch={setSearch}
+        search={search}
+        directionSort={directionSort}
+        setDirectionSort={setDirectionSort}
+      />
     </div>
-  )
+  );
 }
 
 export default App;
