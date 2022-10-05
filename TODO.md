@@ -4,7 +4,6 @@ Tasks for the Laravel + ReactJS Pet project.
 
 ### Todo
 
-- [ ] Back: Add swagger doc for OrgUser.
 - [ ] Dev: Install Prettier.
 - [ ] Dev: Make Vue development env.
 - [ ] Front: Install React router.
@@ -15,6 +14,15 @@ Tasks for the Laravel + ReactJS Pet project.
 
 ### Done ✓
 
+- [ ] Front: Disable  react/prop-types check in eslint.
+- [x] Back: Add city & gender in DB.
+- [x] Back: Make Healthcheck endpoint.
+- [x] Back: Add org/user endpoint description.
+- [x] Back: Uninstall Swagger, install Scribe.
+- [x] Docs: Fix errors.
+- [x] Front: Install daisyUI.
+- [x] Dev: Push dev .env in git.
+- [x] Back: Add swagger doc for OrgUser.
 - [x] Back: Fix: createdAt and updatedAt fields.
 - [x] Back: Make bithday field function for seeder.
 - [x] Back: Fix: swap title & company in seeder.

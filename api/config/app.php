@@ -197,7 +197,6 @@ return [
         /*
          * Additional Service Providers by Hermansochi
          */
-        L5Swagger\L5SwaggerServiceProvider::class,
     ],
 
     /*

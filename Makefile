@@ -44,7 +44,7 @@ api-fixtures:
 	docker compose run --rm api-php-cli php artisan db:seed
 
 api-generate-docs:
-	docker compose run --rm api-php-cli php artisan l5-swagger:generate
+	docker compose run --rm api-php-cli php artisan scribe:generate
 
 react-clear:
 	docker run --rm -v ${PWD}/react:/app -w /app alpine sh -c 'rm -rf .ready build'
