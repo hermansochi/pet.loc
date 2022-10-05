@@ -3,7 +3,14 @@ import React from "react";
 import { listThemes } from "./listThemes";
 import SvgComponent from "./SvgComponent";
 
-export default function Header({ setTheme, region, setRegion, setSorting }) {
+export default function Header({
+  setTheme,
+  region,
+  setRegion,
+  setSorting,
+  search,
+  setSearch,
+}) {
   const options = listThemes.map((el, i) => {
     return <option key={i}>{el}</option>;
   });
@@ -20,6 +27,14 @@ export default function Header({ setTheme, region, setRegion, setSorting }) {
     setSorting(e.target.value);
   }
 
+  function inputSearch(e) {
+    setSearch(e.target.value);
+  }
+
+  function deletTextSearch() {
+    setSearch("");
+  }
+
   let out = (
     <div className="w-full h-20 px-[2%] flex items-center justify-between shadow-md shadow-current text-sm">
       <div className="relative w-full max-w-[35%]">
@@ -30,8 +45,13 @@ export default function Header({ setTheme, region, setRegion, setSorting }) {
           type="text"
           placeholder="Поиск..."
           className="input  input-sm input-bordered indent-[20px] w-full"
+          value={search}
+          onInput={inputSearch}
         />
-        <div className="absolute w-3 h-3 top-[6px] right-2 cursor-pointer">
+        <div
+          className="absolute w-3 h-3 top-[6px] right-2 cursor-pointer"
+          onClick={deletTextSearch}
+        >
           <SvgComponent name="close" />
         </div>
       </div>
