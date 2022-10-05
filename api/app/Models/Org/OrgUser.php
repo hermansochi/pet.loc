@@ -118,18 +118,25 @@ use App\Traits\Uuids;
  *             type="string",
  *             format="date-time",
  *             description="Initial creation timestamp / Таймштамп создания записи",
- *             example="2019-02-25 12:59:20"
+ *             example="2022-10-04T13:10:25.000000Z"
  *     ),
  *     @OA\Property(
  *             property="updated_at",
  *             type="string",
  *             format="date-time",
  *             description="ULast update timestamp / Таймштамп изменения записи",
- *             example="2019-02-25 12:59:20"
+ *             example="2022-10-04T13:10:25.000000Z"
  *     )
  * )
  */
 class OrgUser extends Model
 {
     use HasFactory, Uuids;
+
+    protected $table = 'org_users';
+
+    protected $dates = [
+        'created_at',
+        'updated_at'
+    ];
 }

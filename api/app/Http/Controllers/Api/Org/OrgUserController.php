@@ -17,10 +17,10 @@ class OrgUserController extends Controller
     /**
      * @OA\Get(
      *      path="/orguser",
-     *      operationId="getOrgUserList",
+     *      operationId="getAllOrgUser",
      *      tags={"OrgUser"},
-     *      summary="Get list of organization users / Возвращает список сотрудников",
-     *      description="Returns list of organization users / Возвращает список сотрудников в JSON коллекции с метаданными",
+     *      summary="Get all organization users / Возвращает всех сотрудников",
+     *      description="Returns all organization users with pagination / Возвращает список сотрудников в JSON коллекции с метаданными c разбивкой по страницам",
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation / Успех",
