@@ -7,6 +7,7 @@ Tasks for the Laravel + ReactJS Pet project.
 - [ ] Dev: Install Prettier.
 - [ ] Dev: Make Vue development env.
 - [ ] Front: Install React router.
+- [ ] Back: Implement method Show for OrgUser.
 
 ### In Progress
 
