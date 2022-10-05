@@ -53,7 +53,7 @@ export default function Header({
   ) : (
     <div
       className="tooltip tooltip-bottom cursor-pointer"
-      data-tip="по возростанию"
+      data-tip="по возрастанию"
     >
       <div className="text-2xl" onClick={() => changeDirectionSort(true)}>
         ↑
