@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Header from "./components/Header";
 
 function App() {
-  const [theme, setTheme] = useState("retro");
+  const [theme, setTheme] = useState("cupcake");
   const [region, setRegion] = useState("все");
   const [sorting, setSorting] = useState("name");
   const [search, setSearch] = useState("");

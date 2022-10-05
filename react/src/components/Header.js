@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { listThemes } from "./listThemes";
 import SvgComponent from "./SvgComponent";
 
 export default function Header({
@@ -13,7 +12,15 @@ export default function Header({
   directionSort,
   setDirectionSort,
 }) {
-  const options = listThemes.map((el, i) => {
+  const options = [
+    "cupcake",
+    "retro",
+    "synthwave",
+    "valentine",
+    "luxury",
+    "night",
+    "winter",
+  ].map((el, i) => {
     return <option key={i}>{el}</option>;
   });
 
@@ -46,7 +53,7 @@ export default function Header({
       className="tooltip tooltip-bottom cursor-pointer"
       data-tip="по убыванию"
     >
-      <div className="text-2xl" onClick={() => changeDirectionSort(false)}>
+      <div className="text-2xl ml-2" onClick={() => changeDirectionSort(false)}>
         ↓
       </div>
     </div>
@@ -55,7 +62,7 @@ export default function Header({
       className="tooltip tooltip-bottom cursor-pointer"
       data-tip="по возростанию"
     >
-      <div className="text-2xl" onClick={() => changeDirectionSort(true)}>
+      <div className="text-2xl ml-2" onClick={() => changeDirectionSort(true)}>
         ↑
       </div>
     </div>
