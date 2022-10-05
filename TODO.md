@@ -14,6 +14,8 @@ Tasks for the Laravel + ReactJS Pet project.
 
 ### Done ✓
 
+- [x] Back: Make Healthcheck endpoint.
+- [x] Back: Add org/user endpoint description.
 - [x] Back: Uninstall Swagger, install Scribe.
 - [x] Docs: Fix errors.
 - [x] Front: Install daisyUI.

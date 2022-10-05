@@ -74,8 +74,18 @@
                                                     <li class="tocify-item level-2" data-unique="endpoints-GETapi-user">
                                 <a href="#endpoints-GETapi-user">GET api/user</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-org-users">
-                                <a href="#endpoints-GETapi-v1-org-users">GET api/v1/org/users</a>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-healthcheck">
+                                <a href="#endpoints-GETapi-v1-healthcheck">Healthcheck</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
+                    <ul id="tocify-header-organization-employee-directory-management" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="organization-employee-directory-management">
+                    <a href="#organization-employee-directory-management">Organization employee directory management</a>
+                </li>
+                                    <ul id="tocify-subheader-organization-employee-directory-management" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="organization-employee-directory-management-GETapi-v1-org-users">
+                                <a href="#organization-employee-directory-management-GETapi-v1-org-users">Display a listing of the organization users.</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -95,6 +105,7 @@
     <div class="dark-box"></div>
     <div class="content">
         <h1 id="introduction">Introduction</h1>
+<p>В этой документации Вы найдете информацию о работе с нашим API.</p>
 <p>This documentation aims to provide all the information you need to work with our API.</p>
 <aside>As you scroll, you'll see code examples for working with the API in different programming languages in the dark area to the right (or as part of the content on mobile).
 You can switch the language used with the tabs at the top right (or from the nav menu at the top left on mobile).</aside>
@@ -205,12 +216,150 @@ access-control-allow-origin: *
         </p>
                     </form>
 
-                    <h2 id="endpoints-GETapi-v1-org-users">GET api/v1/org/users</h2>
+                    <h2 id="endpoints-GETapi-v1-healthcheck">Healthcheck</h2>
 
 <p>
 </p>
 
+<p>Проверяет что контейнер с backend работоспособен. Если все нормально, то возвращает
+status code 200 в ответе. Любой другой код говорит о неработоспособности сервиса.</p>
+<p>Check that the service is up. If everything is okay, you'll get a 200 OK response.
+Otherwise, the request will fail with a 400 error, and a response listing the failed services.</p>
 
+<span id="example-requests-GETapi-v1-healthcheck">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://api.localhost/api/v1/healthcheck" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://api.localhost/api/v1/healthcheck"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-healthcheck">
+            <blockquote>
+            <p>Example response (400, Service is unhealthy):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;status&quot;: &quot;down&quot;,
+    &quot;services&quot;: {
+        &quot;database&quot;: &quot;down&quot;
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary>
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 59
+access-control-allow-origin: *
+ </code></pre>
+        </details>         <pre>
+
+<code class="language-json">{
+    &quot;status&quot;: &quot;up&quot;,
+    &quot;services&quot;: {
+        &quot;database&quot;: &quot;1 ms&quot;
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-healthcheck" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-healthcheck"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-healthcheck"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-healthcheck" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-healthcheck"></code></pre>
+</span>
+<form id="form-GETapi-v1-healthcheck" data-method="GET"
+      data-path="api/v1/healthcheck"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-healthcheck', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-healthcheck"
+                    onclick="tryItOut('GETapi-v1-healthcheck');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-healthcheck"
+                    onclick="cancelTryOut('GETapi-v1-healthcheck');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-healthcheck" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/healthcheck</code></b>
+        </p>
+                    </form>
+
+    <h3>Response</h3>
+    <h4 class="fancy-heading-panel"><b>Response Fields</b></h4>
+    <p>
+            <b><code>status</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+<br>
+<p>The status of this API (<code>up</code> or <code>down</code>).</p>
+        </p>
+                <p>
+            <b><code>services</code></b>&nbsp;&nbsp;
+<small>object</small>&nbsp;
+ &nbsp;
+<br>
+<p>Map of each downstream service and their status (<code>ping time</code> or <code>down</code>).</p>
+        </p>
+                    <h1 id="organization-employee-directory-management">Organization employee directory management</h1>
+
+    <p>APIs for managing organization employee directory /
+API для управления справочником сотрудников организации</p>
+<aside class="success">Описание полей см. в эндпоинте org/users</aside>
+
+                                <h2 id="organization-employee-directory-management-GETapi-v1-org-users">Display a listing of the organization users.</h2>
+
+<p>
+</p>
+
+<p>Возвращает всех сотрудников организации массивом в объекте data, метаинформацией в объекте meta, ссылками в
+объекте links.</p>
 
 <span id="example-requests-GETapi-v1-org-users">
 <blockquote>Example request:</blockquote>
@@ -244,316 +393,59 @@ fetch(url, {
             <blockquote>
             <p>Example response (200):</p>
         </blockquote>
-                <details class="annotation">
-            <summary>
-                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
-            </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
-content-type: application/json
-x-ratelimit-limit: 60
-x-ratelimit-remaining: 59
-access-control-allow-origin: *
- </code></pre>
-        </details>         <pre>
+                <pre>
 
 <code class="language-json">{
     &quot;data&quot;: [
         {
-            &quot;id&quot;: &quot;976b48f0-7fd3-4d03-82ce-395ddeafe5d5&quot;,
-            &quot;name&quot;: &quot;Alexandrov.H.976b48f0-7fd3-4d03-82ce-395ddeafe5d5&quot;,
-            &quot;hide&quot;: false,
-            &quot;thumbnail&quot;: true,
-            &quot;first_name&quot;: &quot;Герман&quot;,
-            &quot;last_name&quot;: &quot;Александров&quot;,
-            &quot;middle_name&quot;: &quot;Евгеньевич&quot;,
-            &quot;birthday&quot;: &quot;25.01&quot;,
-            &quot;email&quot;: &quot;hermansochi@ya.ru&quot;,
-            &quot;cn&quot;: &quot;Александров Герман Евгеньевич&quot;,
-            &quot;telephone&quot;: &quot;6677&quot;,
-            &quot;mobile&quot;: &quot;9899001010&quot;,
-            &quot;title&quot;: &quot;Web developer&quot;,
-            &quot;department&quot;: &quot;Dream team&quot;,
-            &quot;company&quot;: &quot;Looking for a job&quot;,
-            &quot;created_at&quot;: &quot;2022-10-05T08:14:23.000000Z&quot;,
-            &quot;updated_at&quot;: &quot;2022-10-05T08:14:23.000000Z&quot;
-        },
-        {
-            &quot;id&quot;: &quot;976d5103-ced0-469c-83aa-4bbc0d4d44c3&quot;,
-            &quot;name&quot;: &quot;Turova.T.c94bf411-fc97-3e73-8bb0-9ff2c77da9f6&quot;,
+            &quot;id&quot;: &quot;976d9938-9c80-4a57-af4d-f7cbba19fe55&quot;,
+            &quot;name&quot;: &quot;Zajcev.E.4c4306fe-2e13-35a3-a23d-33d16862032d&quot;,
             &quot;hide&quot;: false,
             &quot;thumbnail&quot;: false,
-            &quot;first_name&quot;: &quot;Таисия&quot;,
-            &quot;last_name&quot;: &quot;Турова&quot;,
-            &quot;middle_name&quot;: &quot;Фёдоровна&quot;,
-            &quot;birthday&quot;: &quot;10.02&quot;,
-            &quot;email&quot;: &quot;Turova.T@example.ru&quot;,
-            &quot;cn&quot;: &quot;Турова Таисия Фёдоровна&quot;,
-            &quot;telephone&quot;: &quot;1320&quot;,
-            &quot;mobile&quot;: &quot;9895446716&quot;,
-            &quot;title&quot;: &quot;Круговоротчик&quot;,
-            &quot;department&quot;: &quot;Отдел закупок&quot;,
-            &quot;company&quot;: &quot;ООО \&quot;Рогатрон\&quot;&quot;,
-            &quot;created_at&quot;: &quot;2022-10-05T08:14:24.000000Z&quot;,
-            &quot;updated_at&quot;: &quot;2022-10-05T08:14:24.000000Z&quot;
-        },
-        {
-            &quot;id&quot;: &quot;976d5103-d15a-45fa-bfe9-92a435e25ab1&quot;,
-            &quot;name&quot;: &quot;Panov.V.23710e49-069b-3138-a9b4-e3c7bc4489c4&quot;,
-            &quot;hide&quot;: false,
-            &quot;thumbnail&quot;: false,
-            &quot;first_name&quot;: &quot;Виль&quot;,
-            &quot;last_name&quot;: &quot;Панов&quot;,
-            &quot;middle_name&quot;: &quot;Алексеевич&quot;,
-            &quot;birthday&quot;: &quot;10.11&quot;,
-            &quot;email&quot;: &quot;Panov.V@example.ru&quot;,
-            &quot;cn&quot;: &quot;Панов Виль Алексеевич&quot;,
-            &quot;telephone&quot;: &quot;5916&quot;,
-            &quot;mobile&quot;: &quot;9893599881&quot;,
-            &quot;title&quot;: &quot;Калькулятор&quot;,
-            &quot;department&quot;: &quot;Управление бухгалтерского учета&quot;,
-            &quot;company&quot;: &quot;ООО \&quot;РогаРадио\&quot;&quot;,
-            &quot;created_at&quot;: &quot;2022-10-05T08:14:24.000000Z&quot;,
-            &quot;updated_at&quot;: &quot;2022-10-05T08:14:24.000000Z&quot;
-        },
-        {
-            &quot;id&quot;: &quot;976d5103-d280-4f5b-987d-e50ad2ec7972&quot;,
-            &quot;name&quot;: &quot;Medvedeva.G.0c48d204-99fa-3a21-90f6-57b783c3d73a&quot;,
-            &quot;hide&quot;: false,
-            &quot;thumbnail&quot;: false,
-            &quot;first_name&quot;: &quot;Галина&quot;,
-            &quot;last_name&quot;: &quot;Медведева&quot;,
-            &quot;middle_name&quot;: &quot;Львовна&quot;,
-            &quot;birthday&quot;: &quot;31.08&quot;,
-            &quot;email&quot;: &quot;Medvedeva.G@example.ru&quot;,
-            &quot;cn&quot;: &quot;Медведева Галина Львовна&quot;,
-            &quot;telephone&quot;: &quot;6387&quot;,
-            &quot;mobile&quot;: &quot;9897140638&quot;,
-            &quot;title&quot;: &quot;Завивальщик спиралей&quot;,
-            &quot;department&quot;: &quot;Внутренний аудит&quot;,
-            &quot;company&quot;: &quot;ООО \&quot;Рога и копыта\&quot;&quot;,
-            &quot;created_at&quot;: &quot;2022-10-05T08:14:24.000000Z&quot;,
-            &quot;updated_at&quot;: &quot;2022-10-05T08:14:24.000000Z&quot;
-        },
-        {
-            &quot;id&quot;: &quot;976d5103-d422-474b-9ea0-85614fa0327c&quot;,
-            &quot;name&quot;: &quot;Terenteva.F.24759b62-7eda-3ddd-8be8-7549176567ea&quot;,
-            &quot;hide&quot;: false,
-            &quot;thumbnail&quot;: false,
-            &quot;first_name&quot;: &quot;Флорентина&quot;,
-            &quot;last_name&quot;: &quot;Терентьева&quot;,
-            &quot;middle_name&quot;: &quot;Андреевна&quot;,
-            &quot;birthday&quot;: &quot;13.06&quot;,
-            &quot;email&quot;: &quot;Terenteva.F@example.ru&quot;,
-            &quot;cn&quot;: &quot;Терентьева Флорентина Андреевна&quot;,
-            &quot;telephone&quot;: &quot;8104&quot;,
-            &quot;mobile&quot;: &quot;9892486760&quot;,
-            &quot;title&quot;: &quot;Монтажник позитива&quot;,
-            &quot;department&quot;: &quot;Юридическая служба&quot;,
-            &quot;company&quot;: &quot;ООО \&quot;Вилюна экспресс\&quot;&quot;,
-            &quot;created_at&quot;: &quot;2022-10-05T08:14:24.000000Z&quot;,
-            &quot;updated_at&quot;: &quot;2022-10-05T08:14:24.000000Z&quot;
-        },
-        {
-            &quot;id&quot;: &quot;976d5103-d538-4ef9-b89c-865da6075aab&quot;,
-            &quot;name&quot;: &quot;Baranov.L.3c123a95-7b57-3816-9b3c-e598cbe24c2b&quot;,
-            &quot;hide&quot;: false,
-            &quot;thumbnail&quot;: false,
-            &quot;first_name&quot;: &quot;Лаврентий&quot;,
-            &quot;last_name&quot;: &quot;Баранов&quot;,
-            &quot;middle_name&quot;: &quot;Фёдорович&quot;,
-            &quot;birthday&quot;: &quot;24.04&quot;,
-            &quot;email&quot;: &quot;Baranov.L@example.ru&quot;,
-            &quot;cn&quot;: &quot;Баранов Лаврентий Фёдорович&quot;,
-            &quot;telephone&quot;: &quot;0498&quot;,
-            &quot;mobile&quot;: &quot;9892631301&quot;,
-            &quot;title&quot;: &quot;Порционист лао-ча&quot;,
-            &quot;department&quot;: &quot;Отдел продаж&quot;,
-            &quot;company&quot;: &quot;ООО \&quot;Рогатрон\&quot;&quot;,
-            &quot;created_at&quot;: &quot;2022-10-05T08:14:24.000000Z&quot;,
-            &quot;updated_at&quot;: &quot;2022-10-05T08:14:24.000000Z&quot;
-        },
-        {
-            &quot;id&quot;: &quot;976d5103-d64b-4854-b649-4aa03ddf5815&quot;,
-            &quot;name&quot;: &quot;Fadeeva.L.21ab0cc8-bcb2-308c-adc1-76be20f568aa&quot;,
-            &quot;hide&quot;: false,
-            &quot;thumbnail&quot;: false,
-            &quot;first_name&quot;: &quot;Лилия&quot;,
-            &quot;last_name&quot;: &quot;Фадеева&quot;,
-            &quot;middle_name&quot;: &quot;Владимировна&quot;,
-            &quot;birthday&quot;: &quot;29.10&quot;,
-            &quot;email&quot;: &quot;Fadeeva.L@example.ru&quot;,
-            &quot;cn&quot;: &quot;Фадеева Лилия Владимировна&quot;,
-            &quot;telephone&quot;: &quot;5731&quot;,
-            &quot;mobile&quot;: &quot;9894917770&quot;,
-            &quot;title&quot;: &quot;Долбежник&quot;,
-            &quot;department&quot;: &quot;Инженерная служба&quot;,
-            &quot;company&quot;: &quot;ООО \&quot;Рогофей\&quot;&quot;,
-            &quot;created_at&quot;: &quot;2022-10-05T08:14:24.000000Z&quot;,
-            &quot;updated_at&quot;: &quot;2022-10-05T08:14:24.000000Z&quot;
-        },
-        {
-            &quot;id&quot;: &quot;976d5103-d7ce-48e2-b927-e99d1b6fa321&quot;,
-            &quot;name&quot;: &quot;Nikonov.V.dbee66ce-e1ba-3e38-89f8-d1a5fa0bdfc6&quot;,
-            &quot;hide&quot;: false,
-            &quot;thumbnail&quot;: false,
-            &quot;first_name&quot;: &quot;Валентин&quot;,
-            &quot;last_name&quot;: &quot;Никонов&quot;,
-            &quot;middle_name&quot;: &quot;Андреевич&quot;,
-            &quot;birthday&quot;: &quot;02.11&quot;,
-            &quot;email&quot;: &quot;Nikonov.V@example.ru&quot;,
-            &quot;cn&quot;: &quot;Никонов Валентин Андреевич&quot;,
-            &quot;telephone&quot;: &quot;9504&quot;,
-            &quot;mobile&quot;: &quot;9897294490&quot;,
-            &quot;title&quot;: &quot;Демонстратор пластических поз&quot;,
-            &quot;department&quot;: &quot;Администрация&quot;,
-            &quot;company&quot;: &quot;ООО \&quot;Рога и копыта\&quot;&quot;,
-            &quot;created_at&quot;: &quot;2022-10-05T08:14:24.000000Z&quot;,
-            &quot;updated_at&quot;: &quot;2022-10-05T08:14:24.000000Z&quot;
-        },
-        {
-            &quot;id&quot;: &quot;976d5103-d91c-4177-b4b9-a23b485c2b6a&quot;,
-            &quot;name&quot;: &quot;Mamontova.M.ebfd069a-a0c4-3fa0-9c4b-1f22274b35fb&quot;,
-            &quot;hide&quot;: false,
-            &quot;thumbnail&quot;: false,
-            &quot;first_name&quot;: &quot;Марта&quot;,
-            &quot;last_name&quot;: &quot;Мамонтова&quot;,
-            &quot;middle_name&quot;: &quot;Ивановна&quot;,
-            &quot;birthday&quot;: &quot;25.06&quot;,
-            &quot;email&quot;: &quot;Mamontova.M@example.ru&quot;,
-            &quot;cn&quot;: &quot;Мамонтова Марта Ивановна&quot;,
-            &quot;telephone&quot;: &quot;3568&quot;,
-            &quot;mobile&quot;: &quot;9898248855&quot;,
-            &quot;title&quot;: &quot;Разрисовщик обоев&quot;,
-            &quot;department&quot;: &quot;Коммерческий отдел&quot;,
-            &quot;company&quot;: &quot;ООО \&quot;Бумалопа трейдинг\&quot;&quot;,
-            &quot;created_at&quot;: &quot;2022-10-05T08:14:24.000000Z&quot;,
-            &quot;updated_at&quot;: &quot;2022-10-05T08:14:24.000000Z&quot;
-        },
-        {
-            &quot;id&quot;: &quot;976d5103-da2d-4622-bdff-d9798a762e76&quot;,
-            &quot;name&quot;: &quot;Burov.A.ae0bd538-bbf9-37cd-a394-3e7dcdc59d0c&quot;,
-            &quot;hide&quot;: false,
-            &quot;thumbnail&quot;: false,
-            &quot;first_name&quot;: &quot;Ананий&quot;,
-            &quot;last_name&quot;: &quot;Буров&quot;,
-            &quot;middle_name&quot;: &quot;Александрович&quot;,
-            &quot;birthday&quot;: &quot;04.05&quot;,
-            &quot;email&quot;: &quot;Burov.A@example.ru&quot;,
-            &quot;cn&quot;: &quot;Буров Ананий Александрович&quot;,
-            &quot;telephone&quot;: &quot;8286&quot;,
-            &quot;mobile&quot;: &quot;9893002015&quot;,
-            &quot;title&quot;: &quot;Сушильщик дощечек&quot;,
-            &quot;department&quot;: &quot;Отдел маркетинга&quot;,
-            &quot;company&quot;: &quot;ООО \&quot;БумПрофи\&quot;&quot;,
-            &quot;created_at&quot;: &quot;2022-10-05T08:14:24.000000Z&quot;,
-            &quot;updated_at&quot;: &quot;2022-10-05T08:14:24.000000Z&quot;
-        },
-        {
-            &quot;id&quot;: &quot;976d5103-db8d-4e8f-8d14-4c80a3ff2f91&quot;,
-            &quot;name&quot;: &quot;Solovyov.G.6c1707e1-3ca2-3fff-8168-6c41b47e38ad&quot;,
-            &quot;hide&quot;: false,
-            &quot;thumbnail&quot;: false,
-            &quot;first_name&quot;: &quot;Гарри&quot;,
-            &quot;last_name&quot;: &quot;Соловьёв&quot;,
-            &quot;middle_name&quot;: &quot;Андреевич&quot;,
-            &quot;birthday&quot;: &quot;15.02&quot;,
-            &quot;email&quot;: &quot;Solovyov.G@example.ru&quot;,
-            &quot;cn&quot;: &quot;Соловьёв Гарри Андреевич&quot;,
-            &quot;telephone&quot;: &quot;3916&quot;,
-            &quot;mobile&quot;: &quot;9893596749&quot;,
-            &quot;title&quot;: &quot;Комик, юморист&quot;,
-            &quot;department&quot;: &quot;Инженерная служба&quot;,
-            &quot;company&quot;: &quot;ООО \&quot;Бумалопа трейдинг\&quot;&quot;,
-            &quot;created_at&quot;: &quot;2022-10-05T08:14:24.000000Z&quot;,
-            &quot;updated_at&quot;: &quot;2022-10-05T08:14:24.000000Z&quot;
-        },
-        {
-            &quot;id&quot;: &quot;976d5103-dd20-42d3-9ed4-fbb6fe4cccaf&quot;,
-            &quot;name&quot;: &quot;Mihajlova.M.4d3d8650-1671-3dc7-be35-1034ef8532a1&quot;,
-            &quot;hide&quot;: false,
-            &quot;thumbnail&quot;: false,
-            &quot;first_name&quot;: &quot;Мальвина&quot;,
-            &quot;last_name&quot;: &quot;Михайлова&quot;,
-            &quot;middle_name&quot;: &quot;Андреевна&quot;,
-            &quot;birthday&quot;: &quot;20.09&quot;,
-            &quot;email&quot;: &quot;Mihajlova.M@example.ru&quot;,
-            &quot;cn&quot;: &quot;Михайлова Мальвина Андреевна&quot;,
-            &quot;telephone&quot;: &quot;1801&quot;,
-            &quot;mobile&quot;: &quot;9890468161&quot;,
-            &quot;title&quot;: &quot;Младший помощник веб-программиста&quot;,
-            &quot;department&quot;: &quot;Отдел закупок&quot;,
-            &quot;company&quot;: &quot;ООО \&quot;Бумалопа трейдинг\&quot;&quot;,
-            &quot;created_at&quot;: &quot;2022-10-05T08:14:24.000000Z&quot;,
-            &quot;updated_at&quot;: &quot;2022-10-05T08:14:24.000000Z&quot;
-        },
-        {
-            &quot;id&quot;: &quot;976d5103-de2f-4b6d-91bd-3e53d51319f8&quot;,
-            &quot;name&quot;: &quot;Panov.M.68d1b59e-6dd9-323b-adac-cabf81dd2360&quot;,
-            &quot;hide&quot;: false,
-            &quot;thumbnail&quot;: false,
-            &quot;first_name&quot;: &quot;Марк&quot;,
-            &quot;last_name&quot;: &quot;Панов&quot;,
+            &quot;first_name&quot;: &quot;Эрик&quot;,
+            &quot;last_name&quot;: &quot;Зайцев&quot;,
             &quot;middle_name&quot;: &quot;Максимович&quot;,
-            &quot;birthday&quot;: &quot;18.06&quot;,
-            &quot;email&quot;: &quot;Panov.M@example.ru&quot;,
-            &quot;cn&quot;: &quot;Панов Марк Максимович&quot;,
-            &quot;telephone&quot;: &quot;9485&quot;,
-            &quot;mobile&quot;: &quot;9898873525&quot;,
-            &quot;title&quot;: &quot;Архитектор&quot;,
-            &quot;department&quot;: &quot;Отдел налогового учета&quot;,
-            &quot;company&quot;: &quot;ООО \&quot;Рогофей\&quot;&quot;,
-            &quot;created_at&quot;: &quot;2022-10-05T08:14:24.000000Z&quot;,
-            &quot;updated_at&quot;: &quot;2022-10-05T08:14:24.000000Z&quot;
+            &quot;birthday&quot;: &quot;21.07&quot;,
+            &quot;email&quot;: &quot;Zajcev.E@example.ru&quot;,
+            &quot;cn&quot;: &quot;Зайцев Эрик Максимович&quot;,
+            &quot;telephone&quot;: &quot;4104&quot;,
+            &quot;mobile&quot;: &quot;9891415595&quot;,
+            &quot;title&quot;: &quot;Комик, юморист&quot;,
+            &quot;department&quot;: &quot;Служба слаботочных систем&quot;,
+            &quot;company&quot;: &quot;ООО \&quot;Вилюна экспресс\&quot;&quot;,
+            &quot;created_at&quot;: &quot;2022-10-05T11:36:18.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-05T11:36:18.000000Z&quot;
         },
         {
-            &quot;id&quot;: &quot;976d5103-df41-4af2-9f9d-da55cf9df77a&quot;,
-            &quot;name&quot;: &quot;Trofimova.N.1af4cbbe-d899-3b39-96b1-9f13a7e1a589&quot;,
+            &quot;id&quot;: &quot;976d9938-a148-4693-8295-ec09898c65fe&quot;,
+            &quot;name&quot;: &quot;SHilov.R.e7012773-e7cd-33ca-8971-afeae5920885&quot;,
             &quot;hide&quot;: false,
             &quot;thumbnail&quot;: false,
-            &quot;first_name&quot;: &quot;Наталья&quot;,
-            &quot;last_name&quot;: &quot;Трофимова&quot;,
-            &quot;middle_name&quot;: &quot;Борисовна&quot;,
-            &quot;birthday&quot;: &quot;07.09&quot;,
-            &quot;email&quot;: &quot;Trofimova.N@example.ru&quot;,
-            &quot;cn&quot;: &quot;Трофимова Наталья Борисовна&quot;,
-            &quot;telephone&quot;: &quot;6379&quot;,
-            &quot;mobile&quot;: &quot;9890198022&quot;,
-            &quot;title&quot;: &quot;Бегунщик смесительных бегунков&quot;,
-            &quot;department&quot;: &quot;Отдел налогового учета&quot;,
-            &quot;company&quot;: &quot;ООО \&quot;Рогатрон\&quot;&quot;,
-            &quot;created_at&quot;: &quot;2022-10-05T08:14:24.000000Z&quot;,
-            &quot;updated_at&quot;: &quot;2022-10-05T08:14:24.000000Z&quot;
-        },
-        {
-            &quot;id&quot;: &quot;976d5103-e0e5-40cd-866e-9acda033d08e&quot;,
-            &quot;name&quot;: &quot;Smirnova.U.bdba54c9-1b02-37d8-8bd1-6f8c92c153e5&quot;,
-            &quot;hide&quot;: false,
-            &quot;thumbnail&quot;: false,
-            &quot;first_name&quot;: &quot;Ульяна&quot;,
-            &quot;last_name&quot;: &quot;Смирнова&quot;,
-            &quot;middle_name&quot;: &quot;Романовна&quot;,
-            &quot;birthday&quot;: &quot;14.07&quot;,
-            &quot;email&quot;: &quot;Smirnova.U@example.ru&quot;,
-            &quot;cn&quot;: &quot;Смирнова Ульяна Романовна&quot;,
-            &quot;telephone&quot;: &quot;0881&quot;,
-            &quot;mobile&quot;: &quot;9896084026&quot;,
-            &quot;title&quot;: &quot;Изготовитель зубочисток&quot;,
-            &quot;department&quot;: &quot;Отдел закупок&quot;,
+            &quot;first_name&quot;: &quot;Ростислав&quot;,
+            &quot;last_name&quot;: &quot;Шилов&quot;,
+            &quot;middle_name&quot;: &quot;Максимович&quot;,
+            &quot;birthday&quot;: &quot;10.05&quot;,
+            &quot;email&quot;: &quot;SHilov.R@example.ru&quot;,
+            &quot;cn&quot;: &quot;Шилов Ростислав Максимович&quot;,
+            &quot;telephone&quot;: &quot;6834&quot;,
+            &quot;mobile&quot;: &quot;9896025419&quot;,
+            &quot;title&quot;: &quot;Главный бухгалтер&quot;,
+            &quot;department&quot;: &quot;Отдел по связям с общественностью&quot;,
             &quot;company&quot;: &quot;ООО \&quot;РогаРадио\&quot;&quot;,
-            &quot;created_at&quot;: &quot;2022-10-05T08:14:24.000000Z&quot;,
-            &quot;updated_at&quot;: &quot;2022-10-05T08:14:24.000000Z&quot;
+            &quot;created_at&quot;: &quot;2022-10-05T11:36:18.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-05T11:36:18.000000Z&quot;
         }
     ],
     &quot;links&quot;: {
-        &quot;first&quot;: &quot;http://api.localhost/api/v1/org/users?page=1&quot;,
-        &quot;last&quot;: &quot;http://api.localhost/api/v1/org/users?page=67&quot;,
+        &quot;first&quot;: &quot;/?page=1&quot;,
+        &quot;last&quot;: &quot;/?page=1&quot;,
         &quot;prev&quot;: null,
-        &quot;next&quot;: &quot;http://api.localhost/api/v1/org/users?page=2&quot;
+        &quot;next&quot;: null
     },
     &quot;meta&quot;: {
         &quot;current_page&quot;: 1,
         &quot;from&quot;: 1,
-        &quot;last_page&quot;: 67,
+        &quot;last_page&quot;: 1,
         &quot;links&quot;: [
             {
                 &quot;url&quot;: null,
@@ -561,80 +453,20 @@ access-control-allow-origin: *
                 &quot;active&quot;: false
             },
             {
-                &quot;url&quot;: &quot;http://api.localhost/api/v1/org/users?page=1&quot;,
+                &quot;url&quot;: &quot;/?page=1&quot;,
                 &quot;label&quot;: &quot;1&quot;,
                 &quot;active&quot;: true
             },
             {
-                &quot;url&quot;: &quot;http://api.localhost/api/v1/org/users?page=2&quot;,
-                &quot;label&quot;: &quot;2&quot;,
-                &quot;active&quot;: false
-            },
-            {
-                &quot;url&quot;: &quot;http://api.localhost/api/v1/org/users?page=3&quot;,
-                &quot;label&quot;: &quot;3&quot;,
-                &quot;active&quot;: false
-            },
-            {
-                &quot;url&quot;: &quot;http://api.localhost/api/v1/org/users?page=4&quot;,
-                &quot;label&quot;: &quot;4&quot;,
-                &quot;active&quot;: false
-            },
-            {
-                &quot;url&quot;: &quot;http://api.localhost/api/v1/org/users?page=5&quot;,
-                &quot;label&quot;: &quot;5&quot;,
-                &quot;active&quot;: false
-            },
-            {
-                &quot;url&quot;: &quot;http://api.localhost/api/v1/org/users?page=6&quot;,
-                &quot;label&quot;: &quot;6&quot;,
-                &quot;active&quot;: false
-            },
-            {
-                &quot;url&quot;: &quot;http://api.localhost/api/v1/org/users?page=7&quot;,
-                &quot;label&quot;: &quot;7&quot;,
-                &quot;active&quot;: false
-            },
-            {
-                &quot;url&quot;: &quot;http://api.localhost/api/v1/org/users?page=8&quot;,
-                &quot;label&quot;: &quot;8&quot;,
-                &quot;active&quot;: false
-            },
-            {
-                &quot;url&quot;: &quot;http://api.localhost/api/v1/org/users?page=9&quot;,
-                &quot;label&quot;: &quot;9&quot;,
-                &quot;active&quot;: false
-            },
-            {
-                &quot;url&quot;: &quot;http://api.localhost/api/v1/org/users?page=10&quot;,
-                &quot;label&quot;: &quot;10&quot;,
-                &quot;active&quot;: false
-            },
-            {
                 &quot;url&quot;: null,
-                &quot;label&quot;: &quot;...&quot;,
-                &quot;active&quot;: false
-            },
-            {
-                &quot;url&quot;: &quot;http://api.localhost/api/v1/org/users?page=66&quot;,
-                &quot;label&quot;: &quot;66&quot;,
-                &quot;active&quot;: false
-            },
-            {
-                &quot;url&quot;: &quot;http://api.localhost/api/v1/org/users?page=67&quot;,
-                &quot;label&quot;: &quot;67&quot;,
-                &quot;active&quot;: false
-            },
-            {
-                &quot;url&quot;: &quot;http://api.localhost/api/v1/org/users?page=2&quot;,
                 &quot;label&quot;: &quot;Next &amp;raquo;&quot;,
                 &quot;active&quot;: false
             }
         ],
-        &quot;path&quot;: &quot;http://api.localhost/api/v1/org/users&quot;,
-        &quot;per_page&quot;: 15,
-        &quot;to&quot;: 15,
-        &quot;total&quot;: 1001
+        &quot;path&quot;: &quot;/&quot;,
+        &quot;per_page&quot;: 2,
+        &quot;to&quot;: 2,
+        &quot;total&quot;: 2
     }
 }</code>
  </pre>
@@ -678,9 +510,146 @@ access-control-allow-origin: *
             <small class="badge badge-green">GET</small>
             <b><code>api/v1/org/users</code></b>
         </p>
+                    <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>page</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number"
+               name="page"
+               data-endpoint="GETapi-v1-org-users"
+               value="1"
+               data-component="url" hidden>
+    <br>
+<p>Response page number / Номер страницы.</p>
+            </p>
                     </form>
 
-            
+    <h3>Response</h3>
+    <h4 class="fancy-heading-panel"><b>Response Fields</b></h4>
+    <p>
+            <b><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+<br>
+<p>The uuid of the organization user / ID сотрудника в формате UUID.</p>
+        </p>
+                <p>
+            <b><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+<br>
+<p>The uniq name of the organization user / Уникальное имя сотрудника.</p>
+        </p>
+                <p>
+            <b><code>hide</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+ &nbsp;
+<br>
+<p>If eq true then don't show the employee / Если true то не показывать сотрудника.</p>
+        </p>
+                <p>
+            <b><code>thumbnail</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+ &nbsp;
+<br>
+<p>If eq true show avatar, otherwise show default avatar / Если true то показать
+фото профиля, в противном случае показать дефолтное фото.</p>
+        </p>
+                <p>
+            <b><code>first_name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+<br>
+<p>Employee name / Имя сотрудника.</p>
+        </p>
+                <p>
+            <b><code>last_name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+<br>
+<p>Employee last name / Фамилия сотрудника.</p>
+        </p>
+                <p>
+            <b><code>middle_name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+<br>
+<p>Employee middle name / Отчество сотрудника.</p>
+        </p>
+                <p>
+            <b><code>birthday</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+<br>
+<p>Date of birth in the format dd.mm / Дата рождения в формате dd.mm</p>
+        </p>
+                <p>
+            <b><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+<br>
+<p>email / Адрес электронной почты.</p>
+        </p>
+                <p>
+            <b><code>cn</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+<br>
+<p>LDAP common name / LDAP cn. В общем случай ФИО.</p>
+        </p>
+                <p>
+            <b><code>telephone</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+<br>
+<p>Internal or additional phone number in nnnn format / Внутренний или
+дополнительный номер телефона в формате nnnn.</p>
+        </p>
+                <p>
+            <b><code>mobile</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+<br>
+<p>Cell phone number in the format nnnnnnnnnn / Номер мобильного телефона
+в формате nnnnnnnnnn.</p>
+        </p>
+                <p>
+            <b><code>title</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+<br>
+<p>Employee position / Должность сотрудника.</p>
+        </p>
+                <p>
+            <b><code>department</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+<br>
+<p>Employee's department / Структурное подразделение сотрудника.</p>
+        </p>
+                <p>
+            <b><code>company</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+<br>
+<p>Employee's company / Компания.</p>
+        </p>
+                <p>
+            <b><code>created_at</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+<br>
+<p>Creation date (UTC) / Дата создания записи (UTC).</p>
+        </p>
+                <p>
+            <b><code>updated_at</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+<br>
+<p>Modification date (UTC) / Дата изменения записи (UTC).</p>
+        </p>
+                
 
         
     </div>

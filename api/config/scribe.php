@@ -254,6 +254,8 @@ return [
      * Text to place in the "Introduction" section, right after the `description`. Markdown and HTML are supported.
      */
     'intro_text' => <<<INTRO
+В этой документации Вы найдете информацию о работе с нашим API.
+
 This documentation aims to provide all the information you need to work with our API.
 
 <aside>As you scroll, you'll see code examples for working with the API in different programming languages in the dark area to the right (or as part of the content on mobile).
