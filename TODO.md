@@ -14,6 +14,9 @@ Tasks for the Laravel + ReactJS Pet project.
 
 ### Done ✓
 
+- [x] Back: Uninstall Swagger, install Scribe.
+- [x] Docs: Fix errors.
+- [x] Front: Install daisyUI.
 - [x] Dev: Push dev .env in git.
 - [x] Back: Add swagger doc for OrgUser.
 - [x] Back: Fix: createdAt and updatedAt fields.
