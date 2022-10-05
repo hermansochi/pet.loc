@@ -19,6 +19,7 @@ class OrgUserResource extends JsonResource
             'name' => $this->name,
             'hide' => $this->hide,
             'thumbnail' => $this->thumbnail,
+            'gender' => $this->gender,
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'middle_name' => $this->middle_name,
@@ -30,6 +31,7 @@ class OrgUserResource extends JsonResource
             'title' => $this->title,
             'department' => $this->department,
             'company' => $this->company,
+            'city' => $this->city,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

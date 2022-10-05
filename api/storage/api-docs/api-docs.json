@@ -19,25 +19,35 @@
         }
     ],
     "paths": {
-        "/orguser": {
+        "/org/users": {
             "get": {
                 "tags": [
-                    "OrgUser"
+                    "OrgUsers"
                 ],
-                "summary": "Get list of organization users / Возвращает список сотрудников",
-                "description": "Returns list of organization users / Возвращает список сотрудников в JSON коллекции с метаданными",
-                "operationId": "getOrgUserList",
+                "summary": "Get all organization users / Возвращает всех сотрудников",
+                "description": "Returns all organization users with pagination / Возвращает список сотрудников в JSON коллекции с метаданными c разбивкой по страницам",
+                "operationId": "getAllOrgUser",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "The page number / Номер страницы",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation / Успех",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "oneOf": [
-                                        {
-                                            "$ref": "#/components/schemas/OrgUser"
-                                        }
-                                    ]
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/OrgUser"
+                                    }
                                 }
                             }
                         }
@@ -48,6 +58,25 @@
     },
     "components": {
         "schemas": {
+            "Controller": {
+                "title": "Links",
+                "description": "Links / Ссылки",
+                "properties": {
+                    "Links": {
+                        "type": "object",
+                        "example": {
+                            "first": "http://127.0.0.1:8000/api/users?page=1",
+                            "last": "http://127.0.0.1:8000/api/users?page=1",
+                            "prev": null,
+                            "next": null
+                        }
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Links"
+                }
+            },
             "OrgUser": {
                 "title": "OrgUser",
                 "description": "Organization user / Сотрудник организации",
@@ -143,18 +172,38 @@
                         "description": "Initial creation timestamp / Таймштамп создания записи",
                         "type": "string",
                         "format": "date-time",
-                        "example": "2019-02-25 12:59:20"
+                        "example": "2022-10-04T13:10:25.000000Z"
                     },
                     "updated_at": {
                         "description": "ULast update timestamp / Таймштамп изменения записи",
                         "type": "string",
                         "format": "date-time",
-                        "example": "2019-02-25 12:59:20"
+                        "example": "2022-10-04T13:10:25.000000Z"
                     }
                 },
                 "type": "object",
                 "xml": {
                     "name": "OrgUser"
+                }
+            }
+        },
+        "responses": {
+            "404": {
+                "description": "User not found / Сотрудник не найден",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/OrgUser"
+                                    }
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
                 }
             }
         }

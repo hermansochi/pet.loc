@@ -7,30 +7,50 @@ use Illuminate\Http\Request;
 use App\Models\Org\OrgUser;
 use App\Http\Resources\Org\OrgUserCollection;
 
+/**
+ * @group Organization employee directory management
+ * 
+ * APIs for managing organization employee directory /
+ * API для управления справочником сотрудников организации
+ * <aside class="success">Описание полей см. в эндпоинте org/users</aside>
+ */
+
 class OrgUserController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the organization users.
+     * Возвращает всех сотрудников организации массивом в объекте data, метаинформацией в объекте meta, ссылками в 
+     * объекте links.
+     * 
+     * @unauthenticated
+     * 
+     * @urlParam page integer Response page number / Номер страницы. Example: 1
+     * @responseField id The uuid of the organization user / ID сотрудника в формате UUID.
+     * @responseField name The uniq name of the organization user / Уникальное имя сотрудника.
+     * @responseField hide If eq true then don't show the employee / Если true то не показывать сотрудника.
+     * @responseField thumbnail If eq true show avatar, otherwise show default avatar / Если true то показать
+     *          фото профиля, в противном случае показать дефолтное фото.
+     * @responseField gender m - male, f - female, u - unknown / Пол: m - мужчина, f - женщина, u - неизвестен.
+     * @responseField first_name Employee name / Имя сотрудника.
+     * @responseField last_name Employee last name / Фамилия сотрудника.
+     * @responseField middle_name Employee middle name / Отчество сотрудника.
+     * @responseField birthday Date of birth in the format dd.mm / Дата рождения в формате dd.mm
+     * @responseField email email / Адрес электронной почты.
+     * @responseField cn LDAP common name / LDAP cn. В общем случай ФИО.
+     * @responseField telephone Internal or additional phone number in nnnn format / Внутренний или
+     *          дополнительный номер телефона в формате nnnn.
+     * @responseField mobile Cell phone number in the format nnnnnnnnnn / Номер мобильного телефона
+     *          в формате nnnnnnnnnn.
+     * @responseField title Employee position / Должность сотрудника.
+     * @responseField department Employee's department / Структурное подразделение сотрудника.
+     * @responseField company Employee's company / Компания.
+     * @responseField city Employee's city / Город.
+     * @responseField created_at Creation date (UTC) / Дата создания записи (UTC).
+     * @responseField updated_at Modification date (UTC) / Дата изменения записи (UTC).
+     * @apiResourceCollection 200 App\Http\Resources\Org\OrgUserCollection
+     * @apiResourceModel App\Models\Org\OrgUser paginate=2
      *
      * @return \Illuminate\Http\Response
-     */
-    /**
-     * @OA\Get(
-     *      path="/orguser",
-     *      operationId="getOrgUserList",
-     *      tags={"OrgUser"},
-     *      summary="Get list of organization users / Возвращает список сотрудников",
-     *      description="Returns list of organization users / Возвращает список сотрудников в JSON коллекции с метаданными",
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation / Успех",
-     *          @OA\JsonContent(
-     *             oneOf={
-     *                 @OA\Schema(ref="#/components/schemas/OrgUser"),
-     *             },
-     *         )
-     *      ),
-     *     )
      */
     public function index()
     {
