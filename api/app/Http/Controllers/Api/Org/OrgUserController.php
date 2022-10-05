@@ -30,6 +30,7 @@ class OrgUserController extends Controller
      * @responseField hide If eq true then don't show the employee / Если true то не показывать сотрудника.
      * @responseField thumbnail If eq true show avatar, otherwise show default avatar / Если true то показать
      *          фото профиля, в противном случае показать дефолтное фото.
+     * @responseField gender m - male, f - female, u - unknown / Пол: m - мужчина, f - женщина, u - неизвестен.
      * @responseField first_name Employee name / Имя сотрудника.
      * @responseField last_name Employee last name / Фамилия сотрудника.
      * @responseField middle_name Employee middle name / Отчество сотрудника.
@@ -43,6 +44,7 @@ class OrgUserController extends Controller
      * @responseField title Employee position / Должность сотрудника.
      * @responseField department Employee's department / Структурное подразделение сотрудника.
      * @responseField company Employee's company / Компания.
+     * @responseField city Employee's city / Город.
      * @responseField created_at Creation date (UTC) / Дата создания записи (UTC).
      * @responseField updated_at Modification date (UTC) / Дата изменения записи (UTC).
      * @apiResourceCollection 200 App\Http\Resources\Org\OrgUserCollection

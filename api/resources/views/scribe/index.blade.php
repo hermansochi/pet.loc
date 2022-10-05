@@ -398,42 +398,46 @@ fetch(url, {
 <code class="language-json">{
     &quot;data&quot;: [
         {
-            &quot;id&quot;: &quot;976d9938-9c80-4a57-af4d-f7cbba19fe55&quot;,
-            &quot;name&quot;: &quot;Zajcev.E.4c4306fe-2e13-35a3-a23d-33d16862032d&quot;,
+            &quot;id&quot;: &quot;976daaf4-b937-423f-8bfc-ded45e1bc4ed&quot;,
+            &quot;name&quot;: &quot;Vinogradova.U.25828ca0-6272-3ef1-ba30-407a85c40137&quot;,
             &quot;hide&quot;: false,
             &quot;thumbnail&quot;: false,
-            &quot;first_name&quot;: &quot;Эрик&quot;,
-            &quot;last_name&quot;: &quot;Зайцев&quot;,
-            &quot;middle_name&quot;: &quot;Максимович&quot;,
-            &quot;birthday&quot;: &quot;21.07&quot;,
-            &quot;email&quot;: &quot;Zajcev.E@example.ru&quot;,
-            &quot;cn&quot;: &quot;Зайцев Эрик Максимович&quot;,
-            &quot;telephone&quot;: &quot;4104&quot;,
-            &quot;mobile&quot;: &quot;9891415595&quot;,
-            &quot;title&quot;: &quot;Комик, юморист&quot;,
-            &quot;department&quot;: &quot;Служба слаботочных систем&quot;,
-            &quot;company&quot;: &quot;ООО \&quot;Вилюна экспресс\&quot;&quot;,
-            &quot;created_at&quot;: &quot;2022-10-05T11:36:18.000000Z&quot;,
-            &quot;updated_at&quot;: &quot;2022-10-05T11:36:18.000000Z&quot;
+            &quot;gender&quot;: &quot;f&quot;,
+            &quot;first_name&quot;: &quot;Ульяна&quot;,
+            &quot;last_name&quot;: &quot;Виноградова&quot;,
+            &quot;middle_name&quot;: &quot;Евгеньевна&quot;,
+            &quot;birthday&quot;: &quot;01.10&quot;,
+            &quot;email&quot;: &quot;Vinogradova.U@example.ru&quot;,
+            &quot;cn&quot;: &quot;Виноградова Ульяна Евгеньевна&quot;,
+            &quot;telephone&quot;: &quot;1873&quot;,
+            &quot;mobile&quot;: &quot;9897146983&quot;,
+            &quot;title&quot;: &quot;Бухгалтер&quot;,
+            &quot;department&quot;: &quot;Отдел закупок&quot;,
+            &quot;company&quot;: &quot;ООО \&quot;Нарита и сын\&quot;&quot;,
+            &quot;city&quot;: &quot;Краснодар&quot;,
+            &quot;created_at&quot;: &quot;2022-10-05T12:25:53.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-05T12:25:53.000000Z&quot;
         },
         {
-            &quot;id&quot;: &quot;976d9938-a148-4693-8295-ec09898c65fe&quot;,
-            &quot;name&quot;: &quot;SHilov.R.e7012773-e7cd-33ca-8971-afeae5920885&quot;,
+            &quot;id&quot;: &quot;976daaf4-bd81-4b14-981e-7cb1d4250445&quot;,
+            &quot;name&quot;: &quot;Antonova.T.83824bfb-e6bb-3679-89ff-653fe29603d7&quot;,
             &quot;hide&quot;: false,
             &quot;thumbnail&quot;: false,
-            &quot;first_name&quot;: &quot;Ростислав&quot;,
-            &quot;last_name&quot;: &quot;Шилов&quot;,
-            &quot;middle_name&quot;: &quot;Максимович&quot;,
-            &quot;birthday&quot;: &quot;10.05&quot;,
-            &quot;email&quot;: &quot;SHilov.R@example.ru&quot;,
-            &quot;cn&quot;: &quot;Шилов Ростислав Максимович&quot;,
-            &quot;telephone&quot;: &quot;6834&quot;,
-            &quot;mobile&quot;: &quot;9896025419&quot;,
-            &quot;title&quot;: &quot;Главный бухгалтер&quot;,
-            &quot;department&quot;: &quot;Отдел по связям с общественностью&quot;,
-            &quot;company&quot;: &quot;ООО \&quot;РогаРадио\&quot;&quot;,
-            &quot;created_at&quot;: &quot;2022-10-05T11:36:18.000000Z&quot;,
-            &quot;updated_at&quot;: &quot;2022-10-05T11:36:18.000000Z&quot;
+            &quot;gender&quot;: &quot;f&quot;,
+            &quot;first_name&quot;: &quot;Тамара&quot;,
+            &quot;last_name&quot;: &quot;Антонова&quot;,
+            &quot;middle_name&quot;: &quot;Евгеньевна&quot;,
+            &quot;birthday&quot;: &quot;14.11&quot;,
+            &quot;email&quot;: &quot;Antonova.T@example.ru&quot;,
+            &quot;cn&quot;: &quot;Антонова Тамара Евгеньевна&quot;,
+            &quot;telephone&quot;: &quot;7502&quot;,
+            &quot;mobile&quot;: &quot;9897615119&quot;,
+            &quot;title&quot;: &quot;Сомелье&quot;,
+            &quot;department&quot;: &quot;Внутренний аудит&quot;,
+            &quot;company&quot;: &quot;ООО \&quot;БумПрофи\&quot;&quot;,
+            &quot;city&quot;: &quot;Москва&quot;,
+            &quot;created_at&quot;: &quot;2022-10-05T12:25:53.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-05T12:25:53.000000Z&quot;
         }
     ],
     &quot;links&quot;: {
@@ -557,6 +561,13 @@ fetch(url, {
 фото профиля, в противном случае показать дефолтное фото.</p>
         </p>
                 <p>
+            <b><code>gender</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+<br>
+<p>m - male, f - female, u - unknown / Пол: m - мужчина, f - женщина, u - неизвестен.</p>
+        </p>
+                <p>
             <b><code>first_name</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
  &nbsp;
@@ -634,6 +645,13 @@ fetch(url, {
  &nbsp;
 <br>
 <p>Employee's company / Компания.</p>
+        </p>
+                <p>
+            <b><code>city</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+<br>
+<p>Employee's city / Город.</p>
         </p>
                 <p>
             <b><code>created_at</code></b>&nbsp;&nbsp;

@@ -21,6 +21,7 @@ class OrgUserSeeder extends Seeder
             'name' => 'Alexandrov.H.976b48f0-7fd3-4d03-82ce-395ddeafe5d5',
             'hide' => false,
             'thumbnail' => true,
+            'gender' => 'm',
             'first_name' => 'Герман',
             'last_name' => 'Александров',
             'middle_name' => 'Евгеньевич',
@@ -33,6 +34,7 @@ class OrgUserSeeder extends Seeder
             'title' => 'Web developer',
             'department' => 'Dream team',
             'company' => 'Looking for a job',
+            'city' => 'Сочи',
             'created_at' => now(),
             'updated_at' => now(),
             

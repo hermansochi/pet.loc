@@ -132,10 +132,18 @@ class OrgUserFactory extends Factory
             'ООО "Рогатрон"',
         ]);
 
+        $city = $this->faker->randomElement([
+            'Сочи',
+            'Краснодар',
+            'Москва',
+            'Владивосток',
+        ]);
+
         return [
             'name' => $name . '.' . $this->faker->uuid(),
             'hide' => false,
             'thumbnail' => false,
+            'gender' => ($gender === 'male') ? 'm' : 'f',
             'first_name' => $fname,
             'last_name' => $lname,
             'middle_name' => $mname,
@@ -147,7 +155,8 @@ class OrgUserFactory extends Factory
             //$table->string('description')->nullable();
             'title' => $title,
             'department' => $department,
-            'company' => $company
+            'company' => $company,
+            'city' => $city
         ];
     }
 
