@@ -7,7 +7,6 @@ Tasks for the Laravel + ReactJS Pet project.
 - [ ] Dev: Install Prettier.
 - [ ] Dev: Make Vue development env.
 - [ ] Front: Install React router.
-- [ ] Herman: Back: Make vCard QR code generator endpoint.
 
 ### In Progress
 
@@ -15,6 +14,7 @@ Tasks for the Laravel + ReactJS Pet project.
 
 ### Done ✓
 
+- [x] Herman: Back: Make vCard QR code generator endpoint.
 - [x] Herman: Dev: Install ext-gd in php-fpm & php-cli containers.
 - [x] Herman: Back: Add simplesoftwareio/simple-qrcode.
 - [x] Herman: Dev: Make react conteiner for Underdante.

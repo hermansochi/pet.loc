@@ -71,12 +71,14 @@ class OrgUserController extends Controller
     }
 
     /**
-     * Display the Employee by uuid.
-     * Вернет сотрудника по uuid.
+     * Employee info by ID
+     * 
+     * Return the Employee info by uuid. /
+     * Вернет информацию о сотруднике по uuid.
      * 
      * @unauthenticated
      * 
-     * @urlParam id string employee uuid / uuid сотрудника . Example: 976b48f0-7fd3-4d03-82ce-395ddeafe5d5
+     * @urlParam id string required employee uuid / uuid сотрудника . Example: 976b48f0-7fd3-4d03-82ce-395ddeafe5d5
      * 
      * @param  string  $id
      * @return \Illuminate\Http\Response
