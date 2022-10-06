@@ -50,3 +50,4 @@ Tasks for the Laravel + ReactJS Pet project.
 - [x] Dev: Add eslint to react app.
 - [x] Dev: Make initial git.
 - [x] All: Поговорить.
+- [x] AnderyDov: Org: Write create and update forc on gitHub in README.md
