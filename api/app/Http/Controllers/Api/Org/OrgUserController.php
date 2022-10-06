@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Org\OrgUser;
 use App\Http\Resources\Org\OrgUserCollection;
+use App\Http\Resources\Org\OrgUserResource;
 
 /**
  * @group Organization employee directory management
@@ -70,14 +71,19 @@ class OrgUserController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
+     * Display the Employee by uuid.
+     * Вернет сотрудника по uuid.
+     * 
+     * @unauthenticated
+     * 
+     * @urlParam id string employee uuid / uuid сотрудника . Example: 976b48f0-7fd3-4d03-82ce-395ddeafe5d5
+     * 
+     * @param  string  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+        return new OrgUserResource(OrgUser::findOrFail($id));
     }
 
     /**

@@ -1,0 +1,20 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: rgb(189, 189, 189);
+}
+.App {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  overflow: visible;
+  transition: all 3s ease-in;
+  background: rgb(189, 189, 189);
+}
+
+@media (max-width: 400px) {
+  .App {
+    flex-direction: column;
+  }
+}
