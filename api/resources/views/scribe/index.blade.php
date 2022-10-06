@@ -288,7 +288,7 @@ access-control-allow-origin: *
 <code class="language-json">{
     &quot;status&quot;: &quot;up&quot;,
     &quot;services&quot;: {
-        &quot;database&quot;: &quot;1 ms&quot;
+        &quot;database&quot;: &quot;15 ms&quot;
     }
 }</code>
  </pre>
@@ -401,46 +401,6 @@ fetch(url, {
 <code class="language-json">{
     &quot;data&quot;: [
         {
-            &quot;id&quot;: &quot;976dcd0f-1bd4-4d66-adb9-dddb0b469f26&quot;,
-            &quot;name&quot;: &quot;Belyaev.F.19deb5e7-0f8e-38d0-bff7-027834f6766e&quot;,
-            &quot;hide&quot;: false,
-            &quot;thumbnail&quot;: false,
-            &quot;gender&quot;: &quot;m&quot;,
-            &quot;first_name&quot;: &quot;Фёдор&quot;,
-            &quot;last_name&quot;: &quot;Беляев&quot;,
-            &quot;middle_name&quot;: &quot;Сергеевич&quot;,
-            &quot;birthday&quot;: &quot;27.03&quot;,
-            &quot;email&quot;: &quot;Belyaev.F@example.ru&quot;,
-            &quot;cn&quot;: &quot;Беляев Фёдор Сергеевич&quot;,
-            &quot;telephone&quot;: &quot;5802&quot;,
-            &quot;mobile&quot;: &quot;9898034893&quot;,
-            &quot;title&quot;: &quot;Архитектор&quot;,
-            &quot;department&quot;: &quot;Управление бухгалтерского учета&quot;,
-            &quot;company&quot;: &quot;ООО \&quot;БумПрофи\&quot;&quot;,
-            &quot;city&quot;: &quot;Краснодар&quot;,
-            &quot;created_at&quot;: &quot;2022-10-05T14:01:15.000000Z&quot;,
-            &quot;updated_at&quot;: &quot;2022-10-05T14:01:15.000000Z&quot;
-        },
-        {
-            &quot;id&quot;: &quot;976dcd0f-2088-4529-b829-3eab9857beee&quot;,
-            &quot;name&quot;: &quot;Savina.I.fa9c3191-4403-3f9a-819d-bb044cc06950&quot;,
-            &quot;hide&quot;: false,
-            &quot;thumbnail&quot;: false,
-            &quot;gender&quot;: &quot;f&quot;,
-            &quot;first_name&quot;: &quot;Ирина&quot;,
-            &quot;last_name&quot;: &quot;Савина&quot;,
-            &quot;middle_name&quot;: &quot;Львовна&quot;,
-            &quot;birthday&quot;: &quot;04.06&quot;,
-            &quot;email&quot;: &quot;Savina.I@example.ru&quot;,
-            &quot;cn&quot;: &quot;Савина Ирина Львовна&quot;,
-            &quot;telephone&quot;: &quot;1614&quot;,
-            &quot;mobile&quot;: &quot;9897012591&quot;,
-            &quot;title&quot;: &quot;Главный бухгалтер&quot;,
-            &quot;department&quot;: &quot;Отдел налогового учета&quot;,
-            &quot;company&quot;: &quot;ООО \&quot;Вилюна экспресс\&quot;&quot;,
-            &quot;city&quot;: &quot;Владивосток&quot;,
-            &quot;created_at&quot;: &quot;2022-10-05T14:01:15.000000Z&quot;,
-            &quot;updated_at&quot;: &quot;2022-10-05T14:01:15.000000Z&quot;
         }
     ],
     &quot;links&quot;: {

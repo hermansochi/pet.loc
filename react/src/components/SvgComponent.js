@@ -1,9 +1,4 @@
 import React from "react";
-import PropType from "prop-types";
-
-SvgComponent.PropType = {
-  name: PropType.string,
-};
 
 const icons = {
   search: {
