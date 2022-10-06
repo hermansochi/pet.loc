@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./components/Header";
 
 function App() {
@@ -7,6 +7,28 @@ function App() {
   const [sorting, setSorting] = useState("name");
   const [search, setSearch] = useState("");
   const [directionSort, setDirectionSort] = useState(true);
+
+  const url = new URL("http://api.localhost/api/v1/healthcheck");
+  const headers = {
+    "Content-Type": "application/json",
+    Accept: "application/json",
+  };
+
+  useEffect(() => {
+    fetch(url, {
+      method: "GET",
+      headers,
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+        if (response.status === "up") {
+          console.log("good");
+        } else {
+          alert("bad");
+        }
+      });
+  }, []);
 
   return (
     <div className="w-full h-full flex justify-center" data-theme={theme}>
