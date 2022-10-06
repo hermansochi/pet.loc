@@ -16,7 +16,7 @@ Tasks for the Laravel + ReactJS Pet project.
 ### Done ✓
 
 - [x] Herman: Dev: Install ext-gd in php-fpm & php-cli containers.
-- [x] Herman: Back: simplesoftwareio/simple-qrcode.
+- [x] Herman: Back: Add simplesoftwareio/simple-qrcode.
 - [x] Herman: Dev: Make react conteiner for Underdante.
 - [x] Herman: Back: Fix: Access to fetch at  from origin  has been blocked by CORS policy.
 - [x] Herman: Back: Add api/resources/views/scribe/ to gitignore
