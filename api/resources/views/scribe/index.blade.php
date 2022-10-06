@@ -100,7 +100,7 @@
                             <li><a href="http://github.com/knuckleswtf/scribe">Documentation powered by Scribe ✍</a></li>
                     </ul>
         <ul class="toc-footer" id="last-updated">
-        <li>Last updated: October 5 2022</li>
+        <li>Last updated: October 6 2022</li>
     </ul>
 </div>
 
@@ -288,7 +288,7 @@ access-control-allow-origin: *
 <code class="language-json">{
     &quot;status&quot;: &quot;up&quot;,
     &quot;services&quot;: {
-        &quot;database&quot;: &quot;15 ms&quot;
+        &quot;database&quot;: &quot;1 ms&quot;
     }
 }</code>
  </pre>
@@ -401,6 +401,46 @@ fetch(url, {
 <code class="language-json">{
     &quot;data&quot;: [
         {
+            &quot;id&quot;: &quot;976f34aa-d650-438b-94b0-57f6aa6eec3a&quot;,
+            &quot;name&quot;: &quot;Tihonov.S.49f541e8-0a6a-3930-b7fd-50ca62b24279&quot;,
+            &quot;hide&quot;: false,
+            &quot;thumbnail&quot;: false,
+            &quot;gender&quot;: &quot;m&quot;,
+            &quot;first_name&quot;: &quot;Сава&quot;,
+            &quot;last_name&quot;: &quot;Тихонов&quot;,
+            &quot;middle_name&quot;: &quot;Евгеньевич&quot;,
+            &quot;birthday&quot;: &quot;25.08&quot;,
+            &quot;email&quot;: &quot;Tihonov.S@example.ru&quot;,
+            &quot;cn&quot;: &quot;Тихонов Сава Евгеньевич&quot;,
+            &quot;telephone&quot;: &quot;1133&quot;,
+            &quot;mobile&quot;: &quot;9890669203&quot;,
+            &quot;title&quot;: &quot;Клоун&quot;,
+            &quot;department&quot;: &quot;Служба безопасности&quot;,
+            &quot;company&quot;: &quot;ООО \&quot;Бумалопа трейдинг\&quot;&quot;,
+            &quot;city&quot;: &quot;Владивосток&quot;,
+            &quot;created_at&quot;: &quot;2022-10-06T06:46:47.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-06T06:46:47.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: &quot;976f34aa-dab8-4004-aef7-888575907387&quot;,
+            &quot;name&quot;: &quot;Gordeev.S.1dc66298-8643-3892-ad59-16cc3b767f9b&quot;,
+            &quot;hide&quot;: false,
+            &quot;thumbnail&quot;: false,
+            &quot;gender&quot;: &quot;m&quot;,
+            &quot;first_name&quot;: &quot;Степан&quot;,
+            &quot;last_name&quot;: &quot;Гордеев&quot;,
+            &quot;middle_name&quot;: &quot;Львович&quot;,
+            &quot;birthday&quot;: &quot;25.02&quot;,
+            &quot;email&quot;: &quot;Gordeev.S@example.ru&quot;,
+            &quot;cn&quot;: &quot;Гордеев Степан Львович&quot;,
+            &quot;telephone&quot;: &quot;2852&quot;,
+            &quot;mobile&quot;: &quot;9892467360&quot;,
+            &quot;title&quot;: &quot;Машинист холодильника&quot;,
+            &quot;department&quot;: &quot;Юридическая служба&quot;,
+            &quot;company&quot;: &quot;ООО \&quot;Рога и копыта\&quot;&quot;,
+            &quot;city&quot;: &quot;Москва&quot;,
+            &quot;created_at&quot;: &quot;2022-10-06T06:46:47.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-06T06:46:47.000000Z&quot;
         }
     ],
     &quot;links&quot;: {

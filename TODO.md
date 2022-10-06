@@ -8,6 +8,7 @@ Tasks for the Laravel + ReactJS Pet project.
 - [ ] Dev: Make Vue development env.
 - [ ] Front: Install React router.
 - [ ] Back: Implement method Show for OrgUser.
+- [ ] Herman: Dev: Make react conteiner for Underdante.
 
 ### In Progress
 
@@ -15,6 +16,7 @@ Tasks for the Laravel + ReactJS Pet project.
 
 ### Done ✓
 
+- [x] Herman: Back: Fix: Access to fetch at  from origin  has been blocked by CORS policy.
 - [x] Herman: Back: Add api/resources/views/scribe/ to gitignore
 - [x] AnderyDov: Front: Fix: Fix mini problems with themes.
 - [x] Front: Disable  react/prop-types check in eslint.
