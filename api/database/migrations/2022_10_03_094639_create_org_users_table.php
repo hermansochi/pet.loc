@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->boolean('hide')->default(false);
             $table->boolean('thumbnail')->default(false);
+            $table->string('gender', 1)->default('u');
             $table->string('first_name', 50)->nullable();
             $table->string('last_name', 50)->nullable();
             $table->string('middle_name', 50)->nullable();
@@ -30,6 +31,7 @@ return new class extends Migration
             $table->string('title')->nullable();
             $table->string('department')->nullable();
             $table->string('company')->nullable();
+            $table->string('city', 50)->nullable();
             $table->timestamps();
             // indexes
             $table->index('email');

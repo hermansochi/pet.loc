@@ -7,6 +7,7 @@ Tasks for the Laravel + ReactJS Pet project.
 - [ ] Dev: Install Prettier.
 - [ ] Dev: Make Vue development env.
 - [ ] Front: Install React router.
+- [ ] Back: Implement method Show for OrgUser.
 
 ### In Progress
 
@@ -14,6 +15,10 @@ Tasks for the Laravel + ReactJS Pet project.
 
 ### Done ✓
 
+- [ ] Front: Disable  react/prop-types check in eslint.
+- [x] Back: Add city & gender in DB.
+- [x] Back: Make Healthcheck endpoint.
+- [x] Back: Add org/user endpoint description.
 - [x] Back: Uninstall Swagger, install Scribe.
 - [x] Docs: Fix errors.
 - [x] Front: Install daisyUI.
