@@ -1,7 +1,23 @@
 init: docker-down-clear \
-	react-clear vue-clear \
+	react-clear vue-clear underdante-clear \
 	docker-pull docker-build docker-up \
-	api-init react-init vue-init
+	api-init react-init underdante-init vue-init
+
+init-andrey: docker-down-clear \
+	react-clear \
+	docker-pull docker-build docker-up \
+	api-init react-init
+
+init-ann: docker-down-clear \
+	vue-clear \
+	docker-pull docker-build docker-up \
+	api-init vue-init
+
+init-underdante: docker-down-clear \
+	underdante-clear \
+	docker-pull docker-build docker-up \
+	api-init underdante-init
+
 up: docker-up
 down: docker-down
 restart: down up
@@ -49,21 +65,32 @@ api-generate-docs:
 react-clear:
 	docker run --rm -v ${PWD}/react:/app -w /app alpine sh -c 'rm -rf .ready build'
 
+underdante-clear:
+	docker run --rm -v ${PWD}/underdante:/app -w /app alpine sh -c 'rm -rf .ready build'
+
 vue-clear:
 	docker run --rm -v ${PWD}/vue:/app -w /app alpine sh -c 'rm -rf .ready dist'
 
 react-init: react-yarn-install react-ready
+
+underdante-init: underdante-yarn-install underdante-ready
 
 vue-init: vue-npm-install vue-ready
 
 react-yarn-install:
 	docker compose run --rm react-node-cli yarn install
 
+underdante-yarn-install:
+	docker compose run --rm underdante-node-cli yarn install
+
 vue-npm-install:
 	docker compose run --rm vue-node-cli npm install
 
 react-ready:
 	docker run --rm -v ${PWD}/react:/app -w /app alpine touch .ready
+
+underdante-ready:
+	docker run --rm -v ${PWD}/underdante:/app -w /app alpine touch .ready
 
 vue-ready:
 	docker run --rm -v ${PWD}/vue:/app -w /app alpine touch .ready
@@ -80,6 +107,19 @@ react-test-watch:
 
 react-test:
 	docker compose run --rm react-node-cli yarn test --watchAll=false
+
+underdante-lint:
+	docker compose run --rm underdante-node-cli yarn eslint
+	docker compose run --rm underdante-node-cli yarn stylelint
+
+underdante-lint-fix:
+	docker compose run --rm underdante-node-cli yarn eslint-fix
+
+underdante-test-watch:
+	docker compose run --rm underdante-node-cli yarn test
+
+underdante-test:
+	docker compose run --rm underdante-node-cli yarn test --watchAll=false
 
 vue-lint:
 	docker compose run --rm vue-node-cli npm run lint

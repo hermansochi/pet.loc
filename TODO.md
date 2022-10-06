@@ -15,13 +15,24 @@ Tasks for the Laravel + ReactJS Pet project.
 
 ### Done ✓
 
+<<<<<<< HEAD
 - [ ] Front: Disable  react/prop-types check in eslint.
+=======
+- [x] Herman: Back: Make vCard QR code generator endpoint.
+- [x] Herman: Dev: Install ext-gd in php-fpm & php-cli containers.
+- [x] Herman: Back: Add simplesoftwareio/simple-qrcode.
+- [x] Herman: Dev: Make react conteiner for Underdante.
+- [x] Herman: Back: Fix: Access to fetch at  from origin  has been blocked by CORS policy.
+- [x] Herman: Back: Add api/resources/views/scribe/ to gitignore
+- [x] AnderyDov: Front: Fix: Fix mini problems with themes.
+- [x] Front: Disable  react/prop-types check in eslint.
+>>>>>>> c7d5ce39d1d0de29c38b27e0d102cd61112c3226
 - [x] Back: Add city & gender in DB.
 - [x] Back: Make Healthcheck endpoint.
 - [x] Back: Add org/user endpoint description.
 - [x] Back: Uninstall Swagger, install Scribe.
 - [x] Docs: Fix errors.
-- [x] Front: Install daisyUI.
+- [x] Front: Install daisyUI.git 
 - [x] Dev: Push dev .env in git.
 - [x] Back: Add swagger doc for OrgUser.
 - [x] Back: Fix: createdAt and updatedAt fields.

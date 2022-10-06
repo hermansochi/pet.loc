@@ -75,6 +75,35 @@ services:
             - traefik.http.routers.react.entryPoints=http
             - traefik.http.services.react.loadBalancer.server.port=80
 
+    underdante-node:
+        build:
+            context: underdante/docker/development/node
+        environment:
+            WDS_SOCKET_PORT: 0
+        volumes:
+            - ./underdante:/app:rw
+        command: sh -c "until [ -f .ready ] ; do sleep 1 ; done && yarn start"
+        tty: true
+
+    underdante-node-cli:
+        build:
+            context: underdante/docker/development/node
+        volumes:
+            - ./underdante:/app
+
+    underdante:
+        build:
+            context: underdante/docker/development/nginx
+        networks:
+            - traefik-public
+            - default
+        labels:
+            - traefik.enable=true
+            - traefik.docker.network=traefik-public
+            - traefik.http.routers.underdante.rule=Host(`underdante.localhost`) || Host(`www.underdante.localhost`)
+            - traefik.http.routers.underdante.entryPoints=http
+            - traefik.http.services.underdante.loadBalancer.server.port=80
+
     vue-node:
         build:
             context: vue/docker/development/node
