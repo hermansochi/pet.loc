@@ -13,12 +13,12 @@ export default function Header({
 }) {
   const options = [
     "cupcake",
-    "retro",
-    "synthwave",
-    "valentine",
-    "luxury",
-    "night",
     "winter",
+    "retro",
+    "valentine",
+    "synthwave",
+    "night",
+    "luxury",
   ].map((el, i) => {
     return <option key={i}>{el}</option>;
   });
