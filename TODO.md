@@ -15,7 +15,9 @@ Tasks for the Laravel + ReactJS Pet project.
 
 ### Done ✓
 
-- [ ] Front: Disable  react/prop-types check in eslint.
+- [x] Herman: Back: Add api/resources/views/scribe/ to gitignore
+- [x] AnderyDov: Front: Fix: Fix mini problems with themes.
+- [x] Front: Disable  react/prop-types check in eslint.
 - [x] Back: Add city & gender in DB.
 - [x] Back: Make Healthcheck endpoint.
 - [x] Back: Add org/user endpoint description.
