@@ -37,7 +37,7 @@ class QRCodeController extends Controller
     }
 
     /**
-     * Generate QR Code vCard by emploee uuid
+     * EmployeeQR Code vCard
      * 
      * Return QRCode jpg image with encoded Employee vCard.
      * Вернет QRCode изображение в формате jpg с закодированым контактом сотрудника
@@ -46,6 +46,8 @@ class QRCodeController extends Controller
      * 
      * @urlParam id string required employee uuid / uuid сотрудника . Example: 976b48f0-7fd3-4d03-82ce-395ddeafe5d5
      * @response 200 scenario="Operation successful" <?xml version="1.0" encoding="UTF-8"?><svg ....>...</svg>
+     * @response 422 scenario="Validation error" {"message":"The selected style is invalid.","errors":{"style":["The selected style is invalid."]}}
+     * @response 404 scenario="Employee not found" {"message": "Employee with id 976b48f0-7fd3-4d03-82ce-395ddeafe5d4 not found", "error": "404 not found"}
      * 
      * @param  \Illuminate\Http\Request
      * @param  string  $id
@@ -93,11 +95,19 @@ class QRCodeController extends Controller
 
         //dd($validated['r'], $validated['g'], $validated['b'], $validated['a']);
 
-        $user = OrgUser::findOrFail($id);
+        
+        try {
+            $user = OrgUser::findOrFail($id);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return response([
+                'message' => 'Employee with id ' . $id . ' not found',
+                'error' => '404 not found'
+            ], 404);
+        }
+ 
         $vCard = 'BEGIN:VCARD' . PHP_EOL . 'VERSION:3.0' . PHP_EOL;
         $vCard .= 'N:' . $user->last_name . ';' . $user->first_name . PHP_EOL;
-        $vCard .= 'FN:' . $user->last_cn . PHP_EOL;
-        $vCard .= 'TEL;TYPE=work,VOICE:88001234567#' . $user->telephone . PHP_EOL;
+        $vCard .= 'TEL;TYPE=work,VOICE:88001234567,' . $user->telephone . PHP_EOL;
         $vCard .= 'TEL;TYPE=cell,VOICE:+7' . $user->mobile . PHP_EOL;
         $vCard .= 'EMAIL:' . $user->email . PHP_EOL;
         $vCard .= 'TITLE:' . $user->title . PHP_EOL;

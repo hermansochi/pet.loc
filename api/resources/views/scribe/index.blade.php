@@ -91,7 +91,7 @@
                                 <a href="#organization-employee-directory-management-GETapi-v1-org-users--id-">Employee info by ID</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="organization-employee-directory-management-GETapi-v1-org-qrcodes--id-">
-                                <a href="#organization-employee-directory-management-GETapi-v1-org-qrcodes--id-">Generate QR Code vCard by emploee uuid</a>
+                                <a href="#organization-employee-directory-management-GETapi-v1-org-qrcodes--id-">EmployeeQR Code vCard</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -283,7 +283,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 60
-x-ratelimit-remaining: 56
+x-ratelimit-remaining: 58
 access-control-allow-origin: *
  </code></pre>
         </details>         <pre>
@@ -404,46 +404,46 @@ fetch(url, {
 <code class="language-json">{
     &quot;data&quot;: [
         {
-            &quot;id&quot;: &quot;976fcd26-6683-4d23-bd18-9515535091e5&quot;,
-            &quot;name&quot;: &quot;Gavrilova.M.a88f29fa-bddc-3986-9ff4-aeb8ac73d9b7&quot;,
-            &quot;hide&quot;: false,
-            &quot;thumbnail&quot;: false,
-            &quot;gender&quot;: &quot;f&quot;,
-            &quot;first_name&quot;: &quot;Мальвина&quot;,
-            &quot;last_name&quot;: &quot;Гаврилова&quot;,
-            &quot;middle_name&quot;: &quot;Александровна&quot;,
-            &quot;birthday&quot;: &quot;04.10&quot;,
-            &quot;email&quot;: &quot;Gavrilova.M@example.ru&quot;,
-            &quot;cn&quot;: &quot;Гаврилова Мальвина Александровна&quot;,
-            &quot;telephone&quot;: &quot;2981&quot;,
-            &quot;mobile&quot;: &quot;9894811999&quot;,
-            &quot;title&quot;: &quot;Депутат, политик&quot;,
-            &quot;department&quot;: &quot;Служба персонала&quot;,
-            &quot;company&quot;: &quot;ООО \&quot;Вилюна экспресс\&quot;&quot;,
-            &quot;city&quot;: &quot;Москва&quot;,
-            &quot;created_at&quot;: &quot;2022-10-06T13:53:10.000000Z&quot;,
-            &quot;updated_at&quot;: &quot;2022-10-06T13:53:10.000000Z&quot;
-        },
-        {
-            &quot;id&quot;: &quot;976fcd26-6c48-43ae-81c1-15f0fde23df9&quot;,
-            &quot;name&quot;: &quot;Silin.M.8bd83549-f6e5-3a1e-829b-175c2046e75b&quot;,
+            &quot;id&quot;: &quot;976fe4e9-b243-43f8-bf21-f797aaa7c4e0&quot;,
+            &quot;name&quot;: &quot;Voronov.D.639eda1a-2e4c-324c-9d1e-4dee37e0f5d6&quot;,
             &quot;hide&quot;: false,
             &quot;thumbnail&quot;: false,
             &quot;gender&quot;: &quot;m&quot;,
-            &quot;first_name&quot;: &quot;Марат&quot;,
-            &quot;last_name&quot;: &quot;Силин&quot;,
-            &quot;middle_name&quot;: &quot;Романович&quot;,
-            &quot;birthday&quot;: &quot;01.09&quot;,
-            &quot;email&quot;: &quot;Silin.M@example.ru&quot;,
-            &quot;cn&quot;: &quot;Силин Марат Романович&quot;,
-            &quot;telephone&quot;: &quot;5274&quot;,
-            &quot;mobile&quot;: &quot;9895328803&quot;,
-            &quot;title&quot;: &quot;Коксоразгрузчик&quot;,
-            &quot;department&quot;: &quot;Внутренний аудит&quot;,
-            &quot;company&quot;: &quot;ООО \&quot;Бумалопа трейдинг\&quot;&quot;,
-            &quot;city&quot;: &quot;Москва&quot;,
-            &quot;created_at&quot;: &quot;2022-10-06T13:53:10.000000Z&quot;,
-            &quot;updated_at&quot;: &quot;2022-10-06T13:53:10.000000Z&quot;
+            &quot;first_name&quot;: &quot;Денис&quot;,
+            &quot;last_name&quot;: &quot;Воронов&quot;,
+            &quot;middle_name&quot;: &quot;Львович&quot;,
+            &quot;birthday&quot;: &quot;27.11&quot;,
+            &quot;email&quot;: &quot;Voronov.D@example.ru&quot;,
+            &quot;cn&quot;: &quot;Воронов Денис Львович&quot;,
+            &quot;telephone&quot;: &quot;2063&quot;,
+            &quot;mobile&quot;: &quot;9899869262&quot;,
+            &quot;title&quot;: &quot;Долбежник&quot;,
+            &quot;department&quot;: &quot;Отдел налогового учета&quot;,
+            &quot;company&quot;: &quot;ООО \&quot;РогаРадио\&quot;&quot;,
+            &quot;city&quot;: &quot;Сочи&quot;,
+            &quot;created_at&quot;: &quot;2022-10-06T14:59:36.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-06T14:59:36.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: &quot;976fe4e9-b7fa-4816-b6d1-cad4ae7a282d&quot;,
+            &quot;name&quot;: &quot;SHubin.A.c86c7852-6b27-3ad0-a4df-1ead62ae121b&quot;,
+            &quot;hide&quot;: false,
+            &quot;thumbnail&quot;: false,
+            &quot;gender&quot;: &quot;m&quot;,
+            &quot;first_name&quot;: &quot;Александр&quot;,
+            &quot;last_name&quot;: &quot;Шубин&quot;,
+            &quot;middle_name&quot;: &quot;Дмитриевич&quot;,
+            &quot;birthday&quot;: &quot;12.06&quot;,
+            &quot;email&quot;: &quot;SHubin.A@example.ru&quot;,
+            &quot;cn&quot;: &quot;Шубин Александр Дмитриевич&quot;,
+            &quot;telephone&quot;: &quot;5935&quot;,
+            &quot;mobile&quot;: &quot;9891316565&quot;,
+            &quot;title&quot;: &quot;Мойщик мокрых отходов&quot;,
+            &quot;department&quot;: &quot;Отдел маркетинга&quot;,
+            &quot;company&quot;: &quot;ООО \&quot;БумПрофи\&quot;&quot;,
+            &quot;city&quot;: &quot;Краснодар&quot;,
+            &quot;created_at&quot;: &quot;2022-10-06T14:59:36.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-06T14:59:36.000000Z&quot;
         }
     ],
     &quot;links&quot;: {
@@ -720,7 +720,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 60
-x-ratelimit-remaining: 57
+x-ratelimit-remaining: 59
 access-control-allow-origin: *
  </code></pre>
         </details>         <pre>
@@ -1328,7 +1328,7 @@ access-control-allow-origin: *
             </p>
                     </form>
 
-                    <h2 id="organization-employee-directory-management-GETapi-v1-org-qrcodes--id-">Generate QR Code vCard by emploee uuid</h2>
+                    <h2 id="organization-employee-directory-management-GETapi-v1-org-qrcodes--id-">EmployeeQR Code vCard</h2>
 
 <p>
 </p>
@@ -1387,6 +1387,30 @@ fetch(url, {
                 <pre>
 
 <code class="language-json">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;svg ....&gt;...&lt;/svg&gt;</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422, Validation error):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;The selected style is invalid.&quot;,
+    &quot;errors&quot;: {
+        &quot;style&quot;: [
+            &quot;The selected style is invalid.&quot;
+        ]
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, Employee not found):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Employee with id 976b48f0-7fd3-4d03-82ce-395ddeafe5d4 not found&quot;,
+    &quot;error&quot;: &quot;404 not found&quot;
+}</code>
  </pre>
     </span>
 <span id="execution-results-GETapi-v1-org-qrcodes--id-" hidden>
