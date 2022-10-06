@@ -7,7 +7,7 @@ Tasks for the Laravel + ReactJS Pet project.
 - [ ] Dev: Install Prettier.
 - [ ] Dev: Make Vue development env.
 - [ ] Front: Install React router.
-- [ ] Back: Implement method Show for OrgUser.
+- [ ] Herman: Back: Make vCard QR code generator endpoint.
 
 ### In Progress
 
@@ -15,6 +15,8 @@ Tasks for the Laravel + ReactJS Pet project.
 
 ### Done ✓
 
+- [x] Herman: Dev: Install ext-gd in php-fpm & php-cli containers.
+- [x] Herman: Back: simplesoftwareio/simple-qrcode.
 - [x] Herman: Dev: Make react conteiner for Underdante.
 - [x] Herman: Back: Fix: Access to fetch at  from origin  has been blocked by CORS policy.
 - [x] Herman: Back: Add api/resources/views/scribe/ to gitignore
@@ -25,7 +27,7 @@ Tasks for the Laravel + ReactJS Pet project.
 - [x] Back: Add org/user endpoint description.
 - [x] Back: Uninstall Swagger, install Scribe.
 - [x] Docs: Fix errors.
-- [x] Front: Install daisyUI.
+- [x] Front: Install daisyUI.git 
 - [x] Dev: Push dev .env in git.
 - [x] Back: Add swagger doc for OrgUser.
 - [x] Back: Fix: createdAt and updatedAt fields.

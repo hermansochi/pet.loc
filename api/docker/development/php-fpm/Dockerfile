@@ -9,6 +9,24 @@ RUN apk add --no-cache postgresql-dev fcgi git \
     && docker-php-ext-install pdo_pgsql xdebug \
     && apk del git
 
+RUN apk add --no-cache \
+      freetype \
+      libjpeg-turbo \
+      libpng \
+      freetype-dev \
+      libjpeg-turbo-dev \
+      libpng-dev \
+    && docker-php-ext-configure gd \
+      --with-freetype=/usr/include/ \
+      --with-jpeg=/usr/include/ \
+    && docker-php-ext-install -j$(nproc) gd \
+    && docker-php-ext-enable gd \
+    && apk del --no-cache \
+      freetype-dev \
+      libjpeg-turbo-dev \
+      libpng-dev \
+    && rm -rf /tmp/*
+
 RUN mv $PHP_INI_DIR/php.ini-development $PHP_INI_DIR/php.ini
 
 COPY ./common/php/conf.d /usr/local/etc/php/conf.d
