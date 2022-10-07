@@ -88,7 +88,10 @@
                                 <a href="#organization-employee-directory-management-GETapi-v1-org-users">Display a listing of the organization users.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="organization-employee-directory-management-GETapi-v1-org-users--id-">
-                                <a href="#organization-employee-directory-management-GETapi-v1-org-users--id-">Display the Employee by uuid.</a>
+                                <a href="#organization-employee-directory-management-GETapi-v1-org-users--id-">Employee info by ID</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="organization-employee-directory-management-GETapi-v1-org-qrcodes--id-">
+                                <a href="#organization-employee-directory-management-GETapi-v1-org-qrcodes--id-">EmployeeQR Code vCard</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -401,46 +404,6 @@ fetch(url, {
 <code class="language-json">{
     &quot;data&quot;: [
         {
-            &quot;id&quot;: &quot;9770e232-a754-4d9a-a24b-e45b90dcdeca&quot;,
-            &quot;name&quot;: &quot;Nikonova.Z.4eba8157-4ecd-3893-b695-88de2e680d81&quot;,
-            &quot;hide&quot;: false,
-            &quot;thumbnail&quot;: false,
-            &quot;gender&quot;: &quot;f&quot;,
-            &quot;first_name&quot;: &quot;Зинаида&quot;,
-            &quot;last_name&quot;: &quot;Никонова&quot;,
-            &quot;middle_name&quot;: &quot;Борисовна&quot;,
-            &quot;birthday&quot;: &quot;15.09&quot;,
-            &quot;email&quot;: &quot;Nikonova.Z@example.ru&quot;,
-            &quot;cn&quot;: &quot;Никонова Зинаида Борисовна&quot;,
-            &quot;telephone&quot;: &quot;5697&quot;,
-            &quot;mobile&quot;: &quot;9890227745&quot;,
-            &quot;title&quot;: &quot;Навальщик основ&quot;,
-            &quot;department&quot;: &quot;Отдел маркетинга&quot;,
-            &quot;company&quot;: &quot;ООО \&quot;РогаРадио\&quot;&quot;,
-            &quot;city&quot;: &quot;Краснодар&quot;,
-            &quot;created_at&quot;: &quot;2022-10-07T02:47:51.000000Z&quot;,
-            &quot;updated_at&quot;: &quot;2022-10-07T02:47:51.000000Z&quot;
-        },
-        {
-            &quot;id&quot;: &quot;9770e232-b6ae-4cbf-a4a4-131a0496296b&quot;,
-            &quot;name&quot;: &quot;Makarov.D.84f864c8-fe53-387f-9525-0b3632d7e693&quot;,
-            &quot;hide&quot;: false,
-            &quot;thumbnail&quot;: false,
-            &quot;gender&quot;: &quot;m&quot;,
-            &quot;first_name&quot;: &quot;Данила&quot;,
-            &quot;last_name&quot;: &quot;Макаров&quot;,
-            &quot;middle_name&quot;: &quot;Романович&quot;,
-            &quot;birthday&quot;: &quot;08.07&quot;,
-            &quot;email&quot;: &quot;Makarov.D@example.ru&quot;,
-            &quot;cn&quot;: &quot;Макаров Данила Романович&quot;,
-            &quot;telephone&quot;: &quot;3109&quot;,
-            &quot;mobile&quot;: &quot;9894901580&quot;,
-            &quot;title&quot;: &quot;Люковой&quot;,
-            &quot;department&quot;: &quot;Административно-хозяйственная служба&quot;,
-            &quot;company&quot;: &quot;ООО \&quot;Нарита и сын\&quot;&quot;,
-            &quot;city&quot;: &quot;Краснодар&quot;,
-            &quot;created_at&quot;: &quot;2022-10-07T02:47:51.000000Z&quot;,
-            &quot;updated_at&quot;: &quot;2022-10-07T02:47:51.000000Z&quot;
         }
     ],
     &quot;links&quot;: {
@@ -670,12 +633,13 @@ fetch(url, {
 <br>
 <p>Modification date (UTC) / Дата изменения записи (UTC).</p>
         </p>
-                        <h2 id="organization-employee-directory-management-GETapi-v1-org-users--id-">Display the Employee by uuid.</h2>
+                        <h2 id="organization-employee-directory-management-GETapi-v1-org-users--id-">Employee info by ID</h2>
 
 <p>
 </p>
 
-<p>Вернет сотрудника по uuid.</p>
+<p>Return the Employee info by uuid. /
+Вернет информацию о сотруднике по uuid.</p>
 
 <span id="example-requests-GETapi-v1-org-users--id-">
 <blockquote>Example request:</blockquote>
@@ -827,7 +791,7 @@ access-control-allow-origin: *
         },
         {
             &quot;file&quot;: &quot;/app/app/Http/Controllers/Api/Org/OrgUserController.php&quot;,
-            &quot;line&quot;: 86,
+            &quot;line&quot;: 88,
             &quot;function&quot;: &quot;__callStatic&quot;,
             &quot;class&quot;: &quot;Illuminate\\Database\\Eloquent\\Model&quot;,
             &quot;type&quot;: &quot;::&quot;
@@ -1313,7 +1277,7 @@ access-control-allow-origin: *
                     <p>
                 <b><code>id</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
-<i>optional</i> &nbsp;
+ &nbsp;
                 <input type="text"
                name="id"
                data-endpoint="GETapi-v1-org-users--id-"
@@ -1323,6 +1287,278 @@ access-control-allow-origin: *
 <p>employee uuid / uuid сотрудника .</p>
             </p>
                     </form>
+
+                    <h2 id="organization-employee-directory-management-GETapi-v1-org-qrcodes--id-">EmployeeQR Code vCard</h2>
+
+<p>
+</p>
+
+<p>Return QRCode jpg image with encoded Employee vCard.
+Вернет QRCode изображение в формате jpg с закодированым контактом сотрудника</p>
+
+<span id="example-requests-GETapi-v1-org-qrcodes--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://api.localhost/api/v1/org/qrcodes/976b48f0-7fd3-4d03-82ce-395ddeafe5d5?size=600&amp;style=round&amp;eye=circle&amp;r=128&amp;g=128&amp;b=128&amp;a=100&amp;br=32&amp;bg=32&amp;bb=32&amp;ba=0" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://api.localhost/api/v1/org/qrcodes/976b48f0-7fd3-4d03-82ce-395ddeafe5d5"
+);
+
+const params = {
+    "size": "600",
+    "style": "round",
+    "eye": "circle",
+    "r": "128",
+    "g": "128",
+    "b": "128",
+    "a": "100",
+    "br": "32",
+    "bg": "32",
+    "bb": "32",
+    "ba": "0",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-org-qrcodes--id-">
+            <blockquote>
+            <p>Example response (200, Operation successful):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;svg ....&gt;...&lt;/svg&gt;</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422, Validation error):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;The selected style is invalid.&quot;,
+    &quot;errors&quot;: {
+        &quot;style&quot;: [
+            &quot;The selected style is invalid.&quot;
+        ]
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, Employee not found):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Employee with id 976b48f0-7fd3-4d03-82ce-395ddeafe5d4 not found&quot;,
+    &quot;error&quot;: &quot;404 not found&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-org-qrcodes--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-org-qrcodes--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-org-qrcodes--id-"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-org-qrcodes--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-org-qrcodes--id-"></code></pre>
+</span>
+<form id="form-GETapi-v1-org-qrcodes--id-" data-method="GET"
+      data-path="api/v1/org/qrcodes/{id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-org-qrcodes--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-org-qrcodes--id-"
+                    onclick="tryItOut('GETapi-v1-org-qrcodes--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-org-qrcodes--id-"
+                    onclick="cancelTryOut('GETapi-v1-org-qrcodes--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-org-qrcodes--id-" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/org/qrcodes/{id}</code></b>
+        </p>
+                    <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text"
+               name="id"
+               data-endpoint="GETapi-v1-org-qrcodes--id-"
+               value="976b48f0-7fd3-4d03-82ce-395ddeafe5d5"
+               data-component="url" hidden>
+    <br>
+<p>employee uuid / uuid сотрудника .</p>
+            </p>
+                        <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                    <p>
+                <b><code>size</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number"
+               name="size"
+               data-endpoint="GETapi-v1-org-qrcodes--id-"
+               value="600"
+               data-component="query" hidden>
+    <br>
+<p>Image size. / Размер изображения. Must be between 10 and 800.</p>
+            </p>
+                    <p>
+                <b><code>style</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text"
+               name="style"
+               data-endpoint="GETapi-v1-org-qrcodes--id-"
+               value="round"
+               data-component="query" hidden>
+    <br>
+<p>QR code style. square | dot | round. 'square' by default. / Стиль QR кода.</p>
+            </p>
+                    <p>
+                <b><code>eye</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text"
+               name="eye"
+               data-endpoint="GETapi-v1-org-qrcodes--id-"
+               value="circle"
+               data-component="query" hidden>
+    <br>
+<p>QR code eye style. square | circle. 'square' by default. / Стиль QR кода.</p>
+            </p>
+                    <p>
+                <b><code>r</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number"
+               name="r"
+               data-endpoint="GETapi-v1-org-qrcodes--id-"
+               value="128"
+               data-component="query" hidden>
+    <br>
+<p>Foreground red color in RGBA model. Default: 0/ Красная составляющая цвета. Must be between 0 and 255.</p>
+            </p>
+                    <p>
+                <b><code>g</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number"
+               name="g"
+               data-endpoint="GETapi-v1-org-qrcodes--id-"
+               value="128"
+               data-component="query" hidden>
+    <br>
+<p>Foreground green color in RGBA model. Default: 0 / Зеленая составляющая цвета. Must be between 0 and 255.</p>
+            </p>
+                    <p>
+                <b><code>b</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number"
+               name="b"
+               data-endpoint="GETapi-v1-org-qrcodes--id-"
+               value="128"
+               data-component="query" hidden>
+    <br>
+<p>Foreground blue color in RGBA model. Default: 0/ Синия составляющая цвета. Must be between 0 and 255.</p>
+            </p>
+                    <p>
+                <b><code>a</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number"
+               name="a"
+               data-endpoint="GETapi-v1-org-qrcodes--id-"
+               value="100"
+               data-component="query" hidden>
+    <br>
+<p>Transparency (Alpha) in RGBA model. Default: 100/ Прозрачность (Альфа-канал) цвета. Must be between 0 and 255.</p>
+            </p>
+                    <p>
+                <b><code>br</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number"
+               name="br"
+               data-endpoint="GETapi-v1-org-qrcodes--id-"
+               value="32"
+               data-component="query" hidden>
+    <br>
+<p>Background red color in RGBA model. Default: 255/ Красная составляющая фонового цвета. Must be between 0 and 255.</p>
+            </p>
+                    <p>
+                <b><code>bg</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number"
+               name="bg"
+               data-endpoint="GETapi-v1-org-qrcodes--id-"
+               value="32"
+               data-component="query" hidden>
+    <br>
+<p>Background green color in RGBA model. Default: 255 / Зеленая составляющая фонового цвета. Must be between 0 and 255.</p>
+            </p>
+                    <p>
+                <b><code>bb</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number"
+               name="bb"
+               data-endpoint="GETapi-v1-org-qrcodes--id-"
+               value="32"
+               data-component="query" hidden>
+    <br>
+<p>Background blue color in RGBA model. Default: 255 / Синяя составляющая фонового цвета. Must be between 0 and 255.</p>
+            </p>
+                    <p>
+                <b><code>ba</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number"
+               name="ba"
+               data-endpoint="GETapi-v1-org-qrcodes--id-"
+               value="0"
+               data-component="query" hidden>
+    <br>
+<p>Background transparency (Alpha) in RGBA model. Default: 0/ Прозрачность (Альфа-канал) фона. Must be between 0 and 255.</p>
+            </p>
+                </form>
 
             
 
