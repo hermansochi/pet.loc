@@ -2,14 +2,11 @@ import React, { useState, useEffect } from "react";
 import Header from "./components/Header";
 import Main from "./components/Main";
 import { devUrl, healthcheck, versionApi, headers, orgUsers } from "./patch.js";
+import { useSelector } from "react-redux";
 
 function App() {
-  const [theme, setTheme] = useState("cupcake");
-  const [region, setRegion] = useState("все");
-  const [sorting, setSorting] = useState("name");
-  const [search, setSearch] = useState("");
-  const [directionSort, setDirectionSort] = useState(true);
   const [stateUsers, setStateUsers] = useState([]);
+  const theme = useSelector((state) => state.app.theme);
 
   const url = new URL(`${devUrl}${versionApi}`);
 
@@ -35,25 +32,13 @@ function App() {
     })
       .then((response) => response.json())
       .then((response) => {
-        // console.log(response);
         setStateUsers(response.data);
       });
   }
 
   return (
     <div className="w-full h-full flex flex-col" data-theme={theme}>
-      <Header
-        setTheme={setTheme}
-        region={region}
-        setRegion={setRegion}
-        sorting={sorting}
-        setSorting={setSorting}
-        setSearch={setSearch}
-        search={search}
-        directionSort={directionSort}
-        setDirectionSort={setDirectionSort}
-        stateUsers={stateUsers}
-      />
+      <Header stateUsers={stateUsers} />
       <Main stateUsers={stateUsers} />
     </div>
   );
