@@ -103,7 +103,7 @@
                             <li><a href="http://github.com/knuckleswtf/scribe">Documentation powered by Scribe ✍</a></li>
                     </ul>
         <ul class="toc-footer" id="last-updated">
-        <li>Last updated: October 6 2022</li>
+        <li>Last updated: October 7 2022</li>
     </ul>
 </div>
 
@@ -291,7 +291,7 @@ access-control-allow-origin: *
 <code class="language-json">{
     &quot;status&quot;: &quot;up&quot;,
     &quot;services&quot;: {
-        &quot;database&quot;: &quot;1 ms&quot;
+        &quot;database&quot;: &quot;3 ms&quot;
     }
 }</code>
  </pre>
@@ -404,46 +404,6 @@ fetch(url, {
 <code class="language-json">{
     &quot;data&quot;: [
         {
-            &quot;id&quot;: &quot;976fe4e9-b243-43f8-bf21-f797aaa7c4e0&quot;,
-            &quot;name&quot;: &quot;Voronov.D.639eda1a-2e4c-324c-9d1e-4dee37e0f5d6&quot;,
-            &quot;hide&quot;: false,
-            &quot;thumbnail&quot;: false,
-            &quot;gender&quot;: &quot;m&quot;,
-            &quot;first_name&quot;: &quot;Денис&quot;,
-            &quot;last_name&quot;: &quot;Воронов&quot;,
-            &quot;middle_name&quot;: &quot;Львович&quot;,
-            &quot;birthday&quot;: &quot;27.11&quot;,
-            &quot;email&quot;: &quot;Voronov.D@example.ru&quot;,
-            &quot;cn&quot;: &quot;Воронов Денис Львович&quot;,
-            &quot;telephone&quot;: &quot;2063&quot;,
-            &quot;mobile&quot;: &quot;9899869262&quot;,
-            &quot;title&quot;: &quot;Долбежник&quot;,
-            &quot;department&quot;: &quot;Отдел налогового учета&quot;,
-            &quot;company&quot;: &quot;ООО \&quot;РогаРадио\&quot;&quot;,
-            &quot;city&quot;: &quot;Сочи&quot;,
-            &quot;created_at&quot;: &quot;2022-10-06T14:59:36.000000Z&quot;,
-            &quot;updated_at&quot;: &quot;2022-10-06T14:59:36.000000Z&quot;
-        },
-        {
-            &quot;id&quot;: &quot;976fe4e9-b7fa-4816-b6d1-cad4ae7a282d&quot;,
-            &quot;name&quot;: &quot;SHubin.A.c86c7852-6b27-3ad0-a4df-1ead62ae121b&quot;,
-            &quot;hide&quot;: false,
-            &quot;thumbnail&quot;: false,
-            &quot;gender&quot;: &quot;m&quot;,
-            &quot;first_name&quot;: &quot;Александр&quot;,
-            &quot;last_name&quot;: &quot;Шубин&quot;,
-            &quot;middle_name&quot;: &quot;Дмитриевич&quot;,
-            &quot;birthday&quot;: &quot;12.06&quot;,
-            &quot;email&quot;: &quot;SHubin.A@example.ru&quot;,
-            &quot;cn&quot;: &quot;Шубин Александр Дмитриевич&quot;,
-            &quot;telephone&quot;: &quot;5935&quot;,
-            &quot;mobile&quot;: &quot;9891316565&quot;,
-            &quot;title&quot;: &quot;Мойщик мокрых отходов&quot;,
-            &quot;department&quot;: &quot;Отдел маркетинга&quot;,
-            &quot;company&quot;: &quot;ООО \&quot;БумПрофи\&quot;&quot;,
-            &quot;city&quot;: &quot;Краснодар&quot;,
-            &quot;created_at&quot;: &quot;2022-10-06T14:59:36.000000Z&quot;,
-            &quot;updated_at&quot;: &quot;2022-10-06T14:59:36.000000Z&quot;
         }
     ],
     &quot;links&quot;: {
