@@ -1,7 +1,10 @@
 import React from "react";
 import SvgComponent from "./SvgComponent";
+import { useSelector } from "react-redux";
 
 export default function User() {
+  const theme = useSelector((state) => state.app.theme);
+
   const defaultUser = {
     birthday: "09.09",
     city: "Москва",
@@ -24,6 +27,20 @@ export default function User() {
     updatedAt: "2022-10-06T10:33:01.000000Z",
   };
 
+  function formateNum(num) {
+    let n = num.split("");
+    return `+7 (${n[0]}${n[1]}${n[2]}) ${n[3]}${n[4]}${n[5]} ${n[6]}${n[7]} ${n[8]}${n[9]}`;
+  }
+
+  function handlerClickQR(e) {
+    let t = e.currentTarget;
+    t.classList.toggle("scale-[300%]");
+    t.classList.toggle("translate-x-[-200px]");
+    t.classList.toggle("z-20");
+    t.classList.toggle("bg-white");
+    t.lastElementChild.classList.toggle("bg-transparent");
+  }
+
   let gender;
   switch (defaultUser.gender) {
     case "m":
@@ -38,26 +55,73 @@ export default function User() {
       break;
   }
 
+  let styleImg = "";
+  switch (theme) {
+    case "luxury":
+      styleImg = "brightness-110 bg-current";
+      break;
+
+    case "night":
+      styleImg = "brightness-110 bg-current";
+      break;
+
+    case "synthwave":
+      styleImg = "brightness-110 bg-current";
+      break;
+
+    default:
+      break;
+  }
+
   let out = (
-    <div className="w-[95%] shadow-md shadow-current rounded-2xl h-28 my-4 flex items-center text-xs p-2 space-x-2">
-      <div className="h-full aspect-square rounded-2xl overflow-hidden shadow-md shadow-current relative">
+    <div className="w-full  shadow-sm shadow-current h-20  flex shadow-inner items-center text-xs px-4 py-2 space-x-2 relative">
+      <div className="h-full aspect-square rounded-full overflow-hidden  border-current">
         <SvgComponent name="people" />
-        <div className="absolute top-1 left-1 h-5 w-5 z-10">
+        <div className="absolute top-4 left-4 h-5 w-5 z-10">
           <SvgComponent name={gender} />
         </div>
       </div>
-      <div className="flex flex-grow flex-col shadow-md shadow-current rounded-2xl h-full p-2">
-        <div>{defaultUser.cn}</div>
+      <div className="flex flex-grow flex-col justify-center h-full p-2">
+        <div className="text-sm font-medium">{defaultUser.cn}</div>
         <div>{defaultUser.company}</div>
         <div>{defaultUser.department}</div>
         <div>{defaultUser.title}</div>
-        <div>{defaultUser.city}</div>
       </div>
-      <div className="flex flex-grow flex-col shadow-md shadow-current rounded-2xl h-full p-2">
-        <div>телефон: {defaultUser.telephone}</div>
-        <div>мобтльный:{defaultUser.mobile}</div>
-        <div>email:{defaultUser.email}</div>
-        <div>день рождения: {defaultUser.birthday}</div>
+      <div className="flex flex-grow flex-col justify-center  h-full p-2">
+        <div className="w-full">
+          <span className="font-medium w-[50%] inline-block">телефон: </span>
+          {defaultUser.telephone}
+        </div>
+        <div className="w-full">
+          <span className="font-medium w-[50%] inline-block">мобтльный: </span>
+          {formateNum(defaultUser.mobile)}
+        </div>
+        <div className="w-full">
+          <span className="font-medium w-[50%] inline-block">email: </span>
+          {defaultUser.email}
+        </div>
+      </div>
+      <div className="flex flex-grow flex-col justify-center h-full p-2">
+        <div className="w-full">
+          <span className="font-medium w-[50%] inline-block">
+            день рождения:{" "}
+          </span>
+          {defaultUser.birthday}
+        </div>
+        <div className="w-full">
+          <span className="font-medium w-[50%] inline-block">город: </span>
+          {defaultUser.city}
+        </div>
+      </div>
+      <div
+        className="border-current h-full aspect-square border rounded-2xl p-2 cursor-pointer duration-700 backdrop-opacity-0"
+        onClick={handlerClickQR}
+      >
+        <img
+          className={styleImg}
+          src="http://api.localhost/api/v1/org/qrcodes/976b48f0-7fd3-4d03-82ce-395ddeafe5d5"
+          alt="alt"
+        />
       </div>
     </div>
   );

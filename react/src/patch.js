@@ -5,8 +5,7 @@ export const healthcheck = "healthcheck";
 export const versionApi = "v1/";
 export const home = "/";
 export const orgUsers = "org/users/";
-
-// Authurels
+export const qrcodes = "org/qrcodes/";
 export const login = "login";
 export const events = "events";
 export const users = "users";

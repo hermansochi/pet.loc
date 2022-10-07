@@ -291,7 +291,7 @@ access-control-allow-origin: *
 <code class="language-json">{
     &quot;status&quot;: &quot;up&quot;,
     &quot;services&quot;: {
-        &quot;database&quot;: &quot;3 ms&quot;
+        &quot;database&quot;: &quot;1 ms&quot;
     }
 }</code>
  </pre>
@@ -404,6 +404,46 @@ fetch(url, {
 <code class="language-json">{
     &quot;data&quot;: [
         {
+            &quot;id&quot;: &quot;97712fff-d65e-4f30-84bf-518aeb9fb402&quot;,
+            &quot;name&quot;: &quot;YAkushev.F.a1f61e74-fe95-3612-ae92-a806454d6b37&quot;,
+            &quot;hide&quot;: false,
+            &quot;thumbnail&quot;: false,
+            &quot;gender&quot;: &quot;m&quot;,
+            &quot;first_name&quot;: &quot;Фёдор&quot;,
+            &quot;last_name&quot;: &quot;Якушев&quot;,
+            &quot;middle_name&quot;: &quot;Львович&quot;,
+            &quot;birthday&quot;: &quot;10.09&quot;,
+            &quot;email&quot;: &quot;YAkushev.F@example.ru&quot;,
+            &quot;cn&quot;: &quot;Якушев Фёдор Львович&quot;,
+            &quot;telephone&quot;: &quot;8672&quot;,
+            &quot;mobile&quot;: &quot;9893552039&quot;,
+            &quot;title&quot;: &quot;Мерчендайзер&quot;,
+            &quot;department&quot;: &quot;Отдел налогового учета&quot;,
+            &quot;company&quot;: &quot;ООО \&quot;Рогофей\&quot;&quot;,
+            &quot;city&quot;: &quot;Москва&quot;,
+            &quot;created_at&quot;: &quot;2022-10-07T06:25:23.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-07T06:25:23.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: &quot;97712fff-df9d-412d-895d-57f5959ac5b9&quot;,
+            &quot;name&quot;: &quot;Naumov.T.5010515e-3e03-3362-b1c6-8119dc62adc0&quot;,
+            &quot;hide&quot;: false,
+            &quot;thumbnail&quot;: false,
+            &quot;gender&quot;: &quot;m&quot;,
+            &quot;first_name&quot;: &quot;Трофим&quot;,
+            &quot;last_name&quot;: &quot;Наумов&quot;,
+            &quot;middle_name&quot;: &quot;Львович&quot;,
+            &quot;birthday&quot;: &quot;17.10&quot;,
+            &quot;email&quot;: &quot;Naumov.T@example.ru&quot;,
+            &quot;cn&quot;: &quot;Наумов Трофим Львович&quot;,
+            &quot;telephone&quot;: &quot;0108&quot;,
+            &quot;mobile&quot;: &quot;9899062313&quot;,
+            &quot;title&quot;: &quot;Электрослесарь подземный&quot;,
+            &quot;department&quot;: &quot;Служба безопасности&quot;,
+            &quot;company&quot;: &quot;ООО \&quot;БумПрофи\&quot;&quot;,
+            &quot;city&quot;: &quot;Владивосток&quot;,
+            &quot;created_at&quot;: &quot;2022-10-07T06:25:23.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2022-10-07T06:25:23.000000Z&quot;
         }
     ],
     &quot;links&quot;: {
