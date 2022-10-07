@@ -38,10 +38,10 @@ class QRCodeController extends Controller
     }
 
     /**
-     * EmployeeQR Code vCard
+     * Employee QR Code vCard
      * 
-     * Return QRCode jpg image with encoded Employee vCard.
-     * Вернет QRCode изображение в формате jpg с закодированым контактом сотрудника
+     * Return QRCode svg image with encoded Employee vCard.
+     * Вернет QRCode изображение в формате svg с закодированым контактом сотрудника
      * 
      * @unauthenticated
      * 
