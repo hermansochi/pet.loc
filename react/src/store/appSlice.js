@@ -11,19 +11,19 @@ const appSlice = createSlice({
   },
   reducers: {
     setTheme(state, action) {
-      state.theme = action.payload;
+      state.theme = action.payload.themrString;
     },
     setSorting(state, action) {
-      state.sorting = action.payload;
+      state.sorting = action.payload.sortingString;
     },
     setDirectionSort(state, action) {
-      state.directionSort = action.payload;
+      state.directionSort = action.payload.directionBool;
     },
     setSearch(state, action) {
-      state.search = action.payload;
+      state.search = action.payload.searchString;
     },
     setRegion(state, action) {
-      state.region = action.payload;
+      state.region = action.payload.regionString;
     },
   },
 });

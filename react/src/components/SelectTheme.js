@@ -6,7 +6,7 @@ export default function SelectTheme() {
   const dispatch = useDispatch();
 
   function changeTheme(e) {
-    dispatch(setTheme(e.target.value));
+    dispatch(setTheme({ themrString: e.target.value }));
   }
 
   let out = (

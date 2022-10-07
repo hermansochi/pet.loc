@@ -7,11 +7,11 @@ export default function SelectSorting() {
   const directionSort = useSelector((state) => state.app.directionSort);
 
   function changeSorting(e) {
-    dispatch(setSorting(e.target.value));
+    dispatch(setSorting({ sortingString: e.target.value }));
   }
 
   function changeDirectionSort(arg) {
-    dispatch(setDirectionSort(arg));
+    dispatch(setDirectionSort({ directionBool: arg }));
   }
 
   let showDirectionSort = directionSort ? (

@@ -8,11 +8,11 @@ export default function InputSearch() {
   const search = useSelector((state) => state.app.search);
 
   function inputSearch(e) {
-    dispatch(setSearch(e.target.value));
+    dispatch(setSearch({ searchString: e.target.value }));
   }
 
   function deletTextSearch() {
-    dispatch(setSearch(""));
+    dispatch(setSearch({ searchString: "" }));
   }
 
   let out = (
