@@ -77,7 +77,7 @@ export default function User() {
     <div className="w-full  shadow-sm shadow-current h-20  flex shadow-inner items-center text-xs px-4 py-2 space-x-2 relative">
       <div className="h-full aspect-square rounded-full overflow-hidden  border-current">
         <SvgComponent name="people" />
-        <div className="absolute top-4 left-4 h-5 w-5 z-10">
+        <div className="absolute top-4 left-4 h-3 w-3 z-10">
           <SvgComponent name={gender} />
         </div>
       </div>
@@ -93,7 +93,7 @@ export default function User() {
           {defaultUser.telephone}
         </div>
         <div className="w-full">
-          <span className="font-medium w-[50%] inline-block">мобтльный: </span>
+          <span className="font-medium w-[50%] inline-block">мобильный: </span>
           {formateNum(defaultUser.mobile)}
         </div>
         <div className="w-full">

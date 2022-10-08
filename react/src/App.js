@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Header from "./components/Header";
 import Main from "./components/Main";
 import { devUrl, healthcheck, versionApi, headers, orgUsers } from "./patch.js";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setUsers } from "./store/usersSlice";
 
 function App() {
-  const [stateUsers, setStateUsers] = useState([]);
+  const dispatch = useDispatch();
   const theme = useSelector((state) => state.app.theme);
 
   const url = new URL(`${devUrl}${versionApi}`);
@@ -20,7 +21,7 @@ function App() {
         if (response.status === "up") {
           getList();
         } else {
-          alert("bad");
+          alert("bad conncet");
         }
       });
   }, []);
@@ -32,14 +33,15 @@ function App() {
     })
       .then((response) => response.json())
       .then((response) => {
-        setStateUsers(response.data);
+        console.log(response);
+        dispatch(setUsers({ usersArray: response.data }));
       });
   }
 
   return (
     <div className="w-full h-full flex flex-col" data-theme={theme}>
-      <Header stateUsers={stateUsers} />
-      <Main stateUsers={stateUsers} />
+      <Header />
+      <Main />
     </div>
   );
 }
