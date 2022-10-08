@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Header from "./components/Header";
 import Main from "./components/Main";
-import { devUrl, healthcheck, versionApi, headers, orgUsers } from "./patch.js";
-import { useSelector } from "react-redux";
+import PreloaderUser from "./components/PreloaderUser";
+import { devUrl, healthcheck, versionApi, headers } from "./patch";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchUsers } from "./store/usersSlice";
 
 function App() {
-  const [stateUsers, setStateUsers] = useState([]);
+  const dispatch = useDispatch();
   const theme = useSelector((state) => state.app.theme);
+  const { status, error } = useSelector((state) => state.users);
+  console.log(status);
 
   const url = new URL(`${devUrl}${versionApi}`);
 
@@ -18,28 +22,22 @@ function App() {
       .then((response) => response.json())
       .then((response) => {
         if (response.status === "up") {
-          getList();
+          console.log("ok");
         } else {
-          alert("bad");
+          alert("bad conncet");
         }
       });
   }, []);
 
-  function getList() {
-    fetch(url + orgUsers + "?page=2", {
-      method: "GET",
-      headers,
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        setStateUsers(response.data);
-      });
-  }
+  useEffect(() => {
+    dispatch(fetchUsers(5));
+  }, [dispatch]);
 
   return (
     <div className="w-full h-full flex flex-col" data-theme={theme}>
-      <Header stateUsers={stateUsers} />
-      <Main stateUsers={stateUsers} />
+      <Header />
+      {status === "loading" ? <PreloaderUser /> : <Main />}
+      {error && <div>Error: {error}</div>}
     </div>
   );
 }

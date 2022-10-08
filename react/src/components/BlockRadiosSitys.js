@@ -7,7 +7,7 @@ export default function BlockRadiosSitys() {
   const region = useSelector((state) => state.app.region);
 
   function changeRegion(e) {
-    dispatch(setRegion(e.target.value));
+    dispatch(setRegion({ regionString: e.target.value }));
   }
 
   let out = (

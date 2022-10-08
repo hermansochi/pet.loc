@@ -7,27 +7,21 @@ export default function SelectSorting() {
   const directionSort = useSelector((state) => state.app.directionSort);
 
   function changeSorting(e) {
-    dispatch(setSorting(e.target.value));
+    dispatch(setSorting({ sortingString: e.target.value }));
   }
 
   function changeDirectionSort(arg) {
-    dispatch(setDirectionSort(arg));
+    dispatch(setDirectionSort({ directionBool: arg }));
   }
 
   let showDirectionSort = directionSort ? (
-    <div
-      className="tooltip tooltip-bottom cursor-pointer"
-      data-tip="по убыванию"
-    >
+    <div className="tooltip cursor-pointer" data-tip="по убыванию">
       <div className="text-2xl ml-2" onClick={() => changeDirectionSort(false)}>
         ↓
       </div>
     </div>
   ) : (
-    <div
-      className="tooltip tooltip-bottom cursor-pointer"
-      data-tip="по возростанию"
-    >
+    <div className="tooltip cursor-pointer" data-tip="по возростанию">
       <div className="text-2xl ml-2" onClick={() => changeDirectionSort(true)}>
         ↑
       </div>
