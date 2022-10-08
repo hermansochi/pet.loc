@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Header from "./components/Header";
 import Main from "./components/Main";
 import PreloaderUser from "./components/PreloaderUser";
-import { devUrl, healthcheck, versionApi, headers } from "./patch.js";
+import { devUrl, healthcheck, versionApi, headers } from "./patch";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUsers } from "./store/usersSlice";
 
@@ -30,7 +30,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    dispatch(fetchUsers());
+    dispatch(fetchUsers(5));
   }, [dispatch]);
 
   return (

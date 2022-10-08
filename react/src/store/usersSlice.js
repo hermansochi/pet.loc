@@ -1,14 +1,17 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { devUrl, versionApi, headers, orgUsers } from "../patch";
+// import { useSelector } from "react-redux";
+
+const url = new URL(`${devUrl}${versionApi}${orgUsers}?page=`);
+// const page = useSelector((state) => state.app.page);
 
 export const fetchUsers = createAsyncThunk(
   "users/fetchUsers",
-  async function (_, rejectedWithValue) {
+  async function (page, rejectedWithValue) {
     try {
-      let response = await fetch("http://api.localhost/api/v1/org/users", {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
+      let response = await fetch(url + page, {
+        method: "GET",
+        headers,
       });
       if (!response.ok) {
         throw new Error("Bod Connect");
@@ -28,12 +31,9 @@ const usersSlice = createSlice({
     users: [],
     status: null,
     error: null,
+    page: 0,
   },
-  reducers: {
-    setUsers(state, action) {
-      state.users.push(action.payload.usersArray);
-    },
-  },
+
   extraReducers: {
     [fetchUsers.pending]: (state, action) => {
       state.status = "loading";
