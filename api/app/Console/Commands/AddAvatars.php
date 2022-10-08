@@ -29,6 +29,8 @@ class AddAvatars extends Command
      */
     public function handle()
     {
+        $this->line('  <bg=blue;fg=white> INFO </> Check and prepare avatars.');
+        $this->newline();
         $mansFileNames = Storage::disk('avatars')->files('/mans');
         $womansFileNames = Storage::disk('avatars')->files('/womans');
 
@@ -64,11 +66,15 @@ class AddAvatars extends Command
         $fileSize = Storage::disk('avatars')->size($fileName);
         $fileType = Storage::disk('avatars')->mimeType($fileName);
 
+        $out = '  File: ' . $fileName . ' Mime-Type: ' . $fileType . ' File size: ' . $fileSize;
+
         if ($fileNameLen > 25 or $fileSize > 51200 or $fileType !== 'image/jpeg') {
-            $this->error('File: ' . $fileName . ' Mime-Type: ' . $fileType . ' File size: ' . $fileSize);
+            $out .= ' ' . str_repeat('.', 130 - mb_strlen($out)) . ' <fg=green>ERROR</>';
+            $this->error($out);
             return false;
         } else {
-            $this->line('File: ' . $fileName . ' Mime-Type: ' . $fileType . ' File size: ' . $fileSize);
+            $out .= ' ' . str_repeat('.', 131 - mb_strlen($out)) . ' <fg=green>DONE</>';
+            $this->line($out);
             return true;
         }
     }
