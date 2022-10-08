@@ -2,30 +2,8 @@ import React from "react";
 import SvgComponent from "./SvgComponent";
 import { useSelector } from "react-redux";
 
-export default function User() {
+export default function User({ data }) {
   const theme = useSelector((state) => state.app.theme);
-
-  const defaultUser = {
-    birthday: "09.09",
-    city: "Москва",
-    cn: "Фёдоров Тарас Сергеевич",
-    company: 'ООО "РогаРадио"',
-    createdAt: "2022-10-06T10:33:01.000000Z",
-    department: "Управление бухгалтерского учета",
-    email: "Fyodorov.T@example.ru",
-    firstName: "Тарас",
-    gender: "m",
-    hide: false,
-    id: "976f8593-64ae-4f89-8a27-934893b82823",
-    lastName: "Фёдоров",
-    middleName: "Сергеевич",
-    mobile: "9894881197",
-    name: "Fyodorov.T.21576620-6de5-38c0-87ee-c06edf5b4579",
-    telephone: "9007",
-    thumbnail: false,
-    title: "Главный инженер проекта",
-    updatedAt: "2022-10-06T10:33:01.000000Z",
-  };
 
   function formateNum(num) {
     let n = num.split("");
@@ -38,11 +16,19 @@ export default function User() {
     t.classList.toggle("translate-x-[-200px]");
     t.classList.toggle("z-20");
     t.classList.toggle("bg-white");
-    t.lastElementChild.classList.toggle("bg-transparent");
+    t.firstElementChild.classList.toggle("bg-white");
+    if (theme === "luxury" || theme === "night") {
+      t.firstElementChild.classList.toggle("bg-current");
+    }
+  }
+
+  function changeImage(e) {
+    e.currentTarget.nextElementSibling.classList.add("hidden");
+    e.currentTarget.classList.remove("hidden");
   }
 
   let gender;
-  switch (defaultUser.gender) {
+  switch (data.gender) {
     case "m":
       gender = "man";
       break;
@@ -58,15 +44,15 @@ export default function User() {
   let styleImg = "";
   switch (theme) {
     case "luxury":
-      styleImg = "brightness-110 bg-current";
+      styleImg = " brightness-110 bg-current";
       break;
 
     case "night":
-      styleImg = "brightness-110 bg-current";
+      styleImg = " brightness-110 bg-current";
       break;
 
     case "synthwave":
-      styleImg = "brightness-110 bg-current";
+      styleImg = " brightness-110 bg-current";
       break;
 
     default:
@@ -74,54 +60,64 @@ export default function User() {
   }
 
   let out = (
-    <div className="w-full  shadow-sm shadow-current h-20  flex shadow-inner items-center text-xs px-4 py-2 space-x-2 relative">
-      <div className="h-full aspect-square rounded-full overflow-hidden  border-current">
+    <div className="w-full outline outline-8 outline-secondary h-20 my-1.5  flex  items-center text-xs px-4 py-2 space-x-2 relative">
+      <div className="h-full min-h-[36px] min-w-[36px] aspect-square rounded-full flex items-center overflow-hidden  border-current">
         <SvgComponent name="people" />
         <div className="absolute top-4 left-4 h-3 w-3 z-10">
           <SvgComponent name={gender} />
         </div>
       </div>
-      <div className="flex flex-grow flex-col justify-center h-full p-2">
-        <div className="text-sm font-medium">{defaultUser.cn}</div>
-        <div>{defaultUser.company}</div>
-        <div>{defaultUser.department}</div>
-        <div>{defaultUser.title}</div>
+      <div className="flex min-w-[280px] flex-col justify-center h-full p-2">
+        <div className="text-sm font-medium">{data.cn}</div>
+        <div>{data.company}</div>
+        <div>{data.department}</div>
+        <div>{data.title}</div>
       </div>
-      <div className="flex flex-grow flex-col justify-center  h-full p-2">
+      <div className="flex w-[25%] min-w-[280px] flex-col justify-center  h-full p-2">
         <div className="w-full">
-          <span className="font-medium w-[50%] inline-block">телефон: </span>
-          {defaultUser.telephone}
+          <span className="font-medium min-w-[90px] inline-block">
+            телефон:{" "}
+          </span>
+          {data.telephone}
         </div>
         <div className="w-full">
-          <span className="font-medium w-[50%] inline-block">мобильный: </span>
-          {formateNum(defaultUser.mobile)}
+          <span className="font-medium min-w-[90px] inline-block">
+            мобильный:{" "}
+          </span>
+          {formateNum(data.mobile)}
         </div>
         <div className="w-full">
-          <span className="font-medium w-[50%] inline-block">email: </span>
-          {defaultUser.email}
+          <span className="font-medium min-w-[90px] inline-block">email: </span>
+          {data.email}
         </div>
       </div>
-      <div className="flex flex-grow flex-col justify-center h-full p-2">
+      <div className="flex w-[25%] flex-col justify-center h-full p-2">
         <div className="w-full">
           <span className="font-medium w-[50%] inline-block">
             день рождения:{" "}
           </span>
-          {defaultUser.birthday}
+          {data.birthday}
         </div>
         <div className="w-full">
           <span className="font-medium w-[50%] inline-block">город: </span>
-          {defaultUser.city}
+          {data.city}
         </div>
       </div>
-      <div
-        className="border-current h-full aspect-square border rounded-2xl p-2 cursor-pointer duration-700 backdrop-opacity-0"
-        onClick={handlerClickQR}
-      >
-        <img
-          className={styleImg}
-          src="http://api.localhost/api/v1/org/qrcodes/976b48f0-7fd3-4d03-82ce-395ddeafe5d5"
-          alt="alt"
-        />
+      <div className="flex flex-grow h-full justify-end">
+        <div
+          className="relative border-current h-full aspect-square border rounded-2xl p-2 cursor-pointer duration-700 backdrop-opacity-0"
+          onClick={handlerClickQR}
+        >
+          <img
+            className={styleImg}
+            src={`http://api.localhost/api/v1/org/qrcodes/${data.id}`}
+            alt="alt"
+            onLoad={changeImage}
+          />
+          <div className="w-full h-full  animate-spin bg-transparent">
+            <SvgComponent name="preloader" />
+          </div>
+        </div>
       </div>
     </div>
   );

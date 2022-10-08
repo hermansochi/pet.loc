@@ -1,13 +1,16 @@
 import React, { useEffect } from "react";
 import Header from "./components/Header";
 import Main from "./components/Main";
-import { devUrl, healthcheck, versionApi, headers, orgUsers } from "./patch.js";
+import PreloaderUser from "./components/PreloaderUser";
+import { devUrl, healthcheck, versionApi, headers } from "./patch.js";
 import { useSelector, useDispatch } from "react-redux";
-import { setUsers } from "./store/usersSlice";
+import { fetchUsers } from "./store/usersSlice";
 
 function App() {
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.app.theme);
+  const { status, error } = useSelector((state) => state.users);
+  console.log(status);
 
   const url = new URL(`${devUrl}${versionApi}`);
 
@@ -19,29 +22,22 @@ function App() {
       .then((response) => response.json())
       .then((response) => {
         if (response.status === "up") {
-          getList();
+          console.log("ok");
         } else {
           alert("bad conncet");
         }
       });
   }, []);
 
-  function getList() {
-    fetch(url + orgUsers + "?page=2", {
-      method: "GET",
-      headers,
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        console.log(response);
-        dispatch(setUsers({ usersArray: response.data }));
-      });
-  }
+  useEffect(() => {
+    dispatch(fetchUsers());
+  }, [dispatch]);
 
   return (
     <div className="w-full h-full flex flex-col" data-theme={theme}>
       <Header />
-      <Main />
+      {status === "loading" ? <PreloaderUser /> : <Main />}
+      {error && <div>Error: {error}</div>}
     </div>
   );
 }
