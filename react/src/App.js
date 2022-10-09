@@ -6,13 +6,13 @@ import PreloaderUser from "./components/PreloaderUser";
 import { devUrl, healthcheck, versionApi, headers } from "./patch";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUsers } from "./store/usersSlice";
-import { setShowqr } from "./store/appSlice";
+import { setPage, setShowqr } from "./store/appSlice";
 
 function App() {
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.app.theme);
   const showQr = useSelector((state) => state.app.showqr);
-  // const page = useSelector((state) => state.app.page);
+  const page = useSelector((state) => state.app.page);
   const { status, error } = useSelector((state) => state.users);
 
   const url = new URL(`${devUrl}${versionApi}`);
@@ -39,6 +39,16 @@ function App() {
   document.body.onclick = (e) => {
     if (!e.target.classList.contains("qr")) {
       dispatch(setShowqr({ showqrBoolean: false }));
+    }
+  };
+
+  window.onscroll = function () {
+    let scrollHeight, totalHeight;
+    scrollHeight = document.body.scrollHeight;
+    totalHeight = window.scrollY + window.innerHeight;
+
+    if (totalHeight >= scrollHeight) {
+      dispatch(setPage({ pageNumber: page + 1 }));
     }
   };
 
