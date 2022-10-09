@@ -16,8 +16,8 @@ export default function SelectTheme() {
         onChange={changeTheme}
       >
         {[
-          "corporate",
           "garden",
+          "corporate",
           "fantasy",
           "halloween",
           "forest",

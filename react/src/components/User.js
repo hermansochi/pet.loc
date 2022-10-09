@@ -31,14 +31,15 @@ export default function User({ data }) {
   }
 
   let out = (
-    <div className="w-full outline outline-8 outline-secondary h-20 my-1.5  flex  items-center text-xs px-4 py-2 space-x-2 relative">
-      <div className="h-full min-h-[36px] min-w-[36px] aspect-square rounded-full flex items-center overflow-hidden  border-current">
+    <div className="w-full outline hover:backdrop-brightness-200 outline-8 outline-secondary h-20 my-1.5  flex  items-center text-xs px-4 py-2 space-x-2">
+      <div className="relative h-full min-h-[36px] min-w-[36px] cursor-pointer hover:z-10 hover:translate-x-[20px] hover:scale-[200%] duration-300 aspect-square  flex items-center overflow-hidden  border-current">
         <SvgComponent name="people" />
         <img
+          className="rounded-full"
           src={`http://api.localhost/api/v1/org/avatars/${data.id}`}
           alt=""
         />
-        <div className="absolute top-3 left-3 h-3 w-3 z-10 text-primary">
+        <div className="absolute top-[2%] left-0 h-3 w-3 z-10 text-primary">
           <SvgComponent name={gender} />
         </div>
       </div>
