@@ -34,7 +34,11 @@ export default function User({ data }) {
     <div className="w-full outline outline-8 outline-secondary h-20 my-1.5  flex  items-center text-xs px-4 py-2 space-x-2 relative">
       <div className="h-full min-h-[36px] min-w-[36px] aspect-square rounded-full flex items-center overflow-hidden  border-current">
         <SvgComponent name="people" />
-        <div className="absolute top-4 left-4 h-3 w-3 z-10">
+        <img
+          src={`http://api.localhost/api/v1/org/avatars/${data.id}`}
+          alt=""
+        />
+        <div className="absolute top-3 left-3 h-3 w-3 z-10 text-primary">
           <SvgComponent name={gender} />
         </div>
       </div>

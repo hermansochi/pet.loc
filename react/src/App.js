@@ -12,6 +12,7 @@ function App() {
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.app.theme);
   const showQr = useSelector((state) => state.app.showqr);
+  // const page = useSelector((state) => state.app.page);
   const { status, error } = useSelector((state) => state.users);
 
   const url = new URL(`${devUrl}${versionApi}`);
@@ -30,7 +31,9 @@ function App() {
   }, []);
 
   useEffect(() => {
-    dispatch(fetchUsers(5));
+    for (let i = 0; i < 20; i++) {
+      dispatch(fetchUsers(i));
+    }
   }, [dispatch]);
 
   document.body.onclick = (e) => {
