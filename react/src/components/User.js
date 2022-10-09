@@ -1,16 +1,20 @@
 import React from "react";
 import SvgComponent from "./SvgComponent";
+import { useDispatch } from "react-redux";
+import { setId, setShowqr } from "../store/appSlice";
 
 export default function User({ data }) {
+  const dispactch = useDispatch();
+
   function formateNum(num) {
     let n = num.split("");
     return `+7 (${n[0]}${n[1]}${n[2]}) ${n[3]}${n[4]}${n[5]} ${n[6]}${n[7]} ${n[8]}${n[9]}`;
   }
 
-  // function changeImage(e) {
-  //   e.currentTarget.nextElementSibling.classList.add("hidden");
-  //   e.currentTarget.classList.remove("hidden");
-  // }
+  function changeCurrentId(e) {
+    dispactch(setId({ idString: e.currentTarget.id }));
+    dispactch(setShowqr({ showqrBoolean: true }));
+  }
 
   let gender;
   switch (data.gender) {
@@ -70,7 +74,17 @@ export default function User({ data }) {
           {data.city}
         </div>
       </div>
-      <div className="flex flex-grow h-full justify-end"></div>
+      <div className="flex flex-grow h-full justify-end items-center">
+        <div className="tooltip tooltip-left qr" data-tip="посмотреть QR Code">
+          <div
+            className="w-5 h-5 cursor-pointer qr"
+            id={data.id}
+            onClick={changeCurrentId}
+          >
+            <SvgComponent name="qr" />
+          </div>
+        </div>
+      </div>
     </div>
   );
 
