@@ -1,31 +1,16 @@
 import React from "react";
 import SvgComponent from "./SvgComponent";
-import { useSelector } from "react-redux";
 
 export default function User({ data }) {
-  const theme = useSelector((state) => state.app.theme);
-
   function formateNum(num) {
     let n = num.split("");
     return `+7 (${n[0]}${n[1]}${n[2]}) ${n[3]}${n[4]}${n[5]} ${n[6]}${n[7]} ${n[8]}${n[9]}`;
   }
 
-  function handlerClickQR(e) {
-    let t = e.currentTarget;
-    t.classList.toggle("scale-[300%]");
-    t.classList.toggle("translate-x-[-200px]");
-    t.classList.toggle("z-20");
-    t.classList.toggle("bg-white");
-    t.firstElementChild.classList.toggle("bg-white");
-    if (theme === "luxury" || theme === "night") {
-      t.firstElementChild.classList.toggle("bg-current");
-    }
-  }
-
-  function changeImage(e) {
-    e.currentTarget.nextElementSibling.classList.add("hidden");
-    e.currentTarget.classList.remove("hidden");
-  }
+  // function changeImage(e) {
+  //   e.currentTarget.nextElementSibling.classList.add("hidden");
+  //   e.currentTarget.classList.remove("hidden");
+  // }
 
   let gender;
   switch (data.gender) {
@@ -38,24 +23,6 @@ export default function User({ data }) {
 
     default:
       gender = "";
-      break;
-  }
-
-  let styleImg = "";
-  switch (theme) {
-    case "luxury":
-      styleImg = " brightness-110 bg-current";
-      break;
-
-    case "night":
-      styleImg = " brightness-110 bg-current";
-      break;
-
-    case "synthwave":
-      styleImg = " brightness-110 bg-current";
-      break;
-
-    default:
       break;
   }
 
@@ -103,22 +70,7 @@ export default function User({ data }) {
           {data.city}
         </div>
       </div>
-      <div className="flex flex-grow h-full justify-end">
-        <div
-          className="relative border-current h-full aspect-square border rounded-2xl p-2 cursor-pointer duration-700 backdrop-opacity-0"
-          onClick={handlerClickQR}
-        >
-          <img
-            className={styleImg}
-            src={`http://api.localhost/api/v1/org/qrcodes/${data.id}`}
-            alt="alt"
-            onLoad={changeImage}
-          />
-          <div className="w-full h-full  animate-spin bg-transparent">
-            <SvgComponent name="preloader" />
-          </div>
-        </div>
-      </div>
+      <div className="flex flex-grow h-full justify-end"></div>
     </div>
   );
 

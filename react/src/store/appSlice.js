@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const appSlice = createSlice({
   name: "app",
   initialState: {
-    theme: "luxury",
+    theme: "corporate",
     sorting: "name",
     directionSort: false,
     search: "",
