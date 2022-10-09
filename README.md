@@ -6,6 +6,7 @@
 
 Учебный проект группы товарищей Lunch Brotherhood:
  - Herman Alexandrov (hermansochi@ya.ru): Software Architect, Lead fullstack developer, devops.
+ - Anna Semenenko (cleo412): trainee
 
 1. Ставим docker, docker-compose и make.
 1. Форкаем репу.
