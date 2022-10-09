@@ -15,13 +15,16 @@ export default function SelectSorting() {
   }
 
   let showDirectionSort = directionSort ? (
-    <div className="tooltip cursor-pointer" data-tip="по убыванию">
+    <div className="tooltip tooltip-left cursor-pointer" data-tip="по убыванию">
       <div className="text-2xl ml-2" onClick={() => changeDirectionSort(false)}>
         ↓
       </div>
     </div>
   ) : (
-    <div className="tooltip cursor-pointer" data-tip="по возростанию">
+    <div
+      className="tooltip tooltip-left cursor-pointer"
+      data-tip="по возростанию"
+    >
       <div className="text-2xl ml-2" onClick={() => changeDirectionSort(true)}>
         ↑
       </div>

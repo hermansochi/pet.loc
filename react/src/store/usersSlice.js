@@ -1,9 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { devUrl, versionApi, headers, orgUsers } from "../patch";
-// import { useSelector } from "react-redux";
 
 const url = new URL(`${devUrl}${versionApi}${orgUsers}?page=`);
-// const page = useSelector((state) => state.app.page);
 
 export const fetchUsers = createAsyncThunk(
   "users/fetchUsers",
@@ -14,7 +12,7 @@ export const fetchUsers = createAsyncThunk(
         headers,
       });
       if (!response.ok) {
-        throw new Error("Bod Connect");
+        throw new Error("Bad Connect");
       }
       response = await response.json();
       response = response.data;
@@ -55,7 +53,5 @@ const usersSlice = createSlice({
     },
   },
 });
-
-export const { setUsers } = usersSlice.actions;
 
 export default usersSlice.reducer;

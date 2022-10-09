@@ -56,7 +56,7 @@ class OrgUserController extends Controller
     public function index()
     {
         //
-        return (new OrgUserCollection(OrgUser::paginate()));
+        return (new OrgUserCollection(OrgUser::paginate(50)));
     }
 
     /**

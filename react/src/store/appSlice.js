@@ -3,12 +3,14 @@ import { createSlice } from "@reduxjs/toolkit";
 const appSlice = createSlice({
   name: "app",
   initialState: {
-    theme: "luxury",
+    theme: "garden",
     sorting: "name",
     directionSort: false,
     search: "",
     region: "все",
     page: 1,
+    id: "",
+    showqr: false,
   },
   reducers: {
     setTheme(state, action) {
@@ -29,6 +31,13 @@ const appSlice = createSlice({
     setPage(state, action) {
       state.page = action.payload.pageNumber;
     },
+
+    setId(state, action) {
+      state.id = action.payload.idString;
+    },
+    setShowqr(state, action) {
+      state.showqr = action.payload.showqrBoolean;
+    },
   },
 });
 
@@ -39,6 +48,8 @@ export const {
   setSearch,
   setRegion,
   setPage,
+  setId,
+  setShowqr,
 } = appSlice.actions;
 
 export default appSlice.reducer;
