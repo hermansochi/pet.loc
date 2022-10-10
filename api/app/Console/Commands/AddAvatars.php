@@ -29,6 +29,7 @@ class AddAvatars extends Command
      */
     public function handle()
     {
+        $this->newline();
         $this->line('  <bg=blue;fg=white> INFO </> Check and prepare avatars.');
         $this->newline();
         $mansFileNames = Storage::disk('avatars')->files('/mans');

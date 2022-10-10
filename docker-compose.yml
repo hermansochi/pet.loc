@@ -112,8 +112,6 @@ services:
     vue-node:
         build:
             context: vue/docker/development/node
-        environment:
-            WDS_SOCKET_PORT: 0
         volumes:
             - ./vue:/app:rw
         command: npm run dev
