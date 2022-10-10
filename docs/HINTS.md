@@ -8,3 +8,7 @@
   - сбрасываем кеш git rm -rf --cached .
   - git add .
   - git commit -m 'removed gitignored files'
+
+- Лог docker:
+  - docker compose logs -f
+  - docker logs pet-vue-node-1
