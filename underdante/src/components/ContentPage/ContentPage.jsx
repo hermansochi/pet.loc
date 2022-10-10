@@ -11,14 +11,12 @@ const pagesAmount = useSelector(state=>state.pagesAmount) ;
 const dispatch = useDispatch() ;
 
 useEffect(()=>{
-    // if(pagesAmount.isDone){
 async function getAllUsers() {
     console.log(pagesAmount) ;
-    if (pagesAmount.isDone === true) {
+    if (pagesAmount.isDone) {
     let resultArr = [] ;
 
-    // for(let i = 1 ; i <= pagesAmount.amount ; i++) {
-    for(let i = 1 ; i <= 10 ; i++) {
+    for(let i = 1 ; i <= pagesAmount.amount ; i++) {
         let responce = await fetch(paths.getUsers(i)) ;
         let json = await responce.json() ;
 
@@ -29,13 +27,9 @@ async function getAllUsers() {
     let array = await res ;
     dispatch(setFullData({data:array})) ;
     console.log("getallusers") ;
-    // return resultArr ;
-// } 
     }
 }
-// getAllUsers().then(res=>console.log(res)) ;
 getAllUsers() ;
-// console.log(resultArr) ;
 
 
 } , [pagesAmount]) ;
