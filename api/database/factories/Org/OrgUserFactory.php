@@ -3,6 +3,7 @@
 namespace Database\Factories\Org;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
@@ -18,6 +19,22 @@ class OrgUserFactory extends Factory
     {
 
         $gender = $this->faker->randomElement(['male', 'female']);
+        $thumb = false;
+        $thumbName = null;
+
+        if (rand(1,100) < 97) {
+            if ($gender === 'male') {
+                $mansFileNames = unserialize(Storage::disk('avatars')->get('mans.name'));
+                //dd($mansFileNames);
+                $thumbName = $mansFileNames[array_rand($mansFileNames)];
+            } else {
+                $womansFileNames = unserialize(Storage::disk('avatars')->get('womans.name'));
+                //dd($womansFileNames);
+                $thumbName = $womansFileNames[array_rand($womansFileNames)];
+            }
+            $thumb = true;
+        }
+
         $fname = $this->faker->firstName($gender);
         $lname = $this->faker->lastName($gender);
         $mname = $this->faker->middleName($gender);
@@ -142,7 +159,8 @@ class OrgUserFactory extends Factory
         return [
             'name' => $name . '.' . $this->faker->uuid(),
             'hide' => false,
-            'thumbnail' => false,
+            'thumbnail' => $thumb,
+            'thumb_name' => $thumbName,
             'gender' => ($gender === 'male') ? 'm' : 'f',
             'first_name' => $fname,
             'last_name' => $lname,

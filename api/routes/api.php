@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Org\OrgUserController;
 use App\Http\Controllers\Api\Org\QRCodeController;
+use App\Http\Controllers\Api\Org\AvatarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,9 @@ Route::prefix('v1')->group(function () {
             'index', 'show'
         ]); 
         Route::apiResource('qrcodes', QRCodeController::class)->only([
+            'show'
+        ]);
+        Route::apiResource('avatars', AvatarController::class)->only([
             'show'
         ]);
     });

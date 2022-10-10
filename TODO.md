@@ -7,7 +7,11 @@ Tasks for the Laravel + ReactJS Pet project.
 - [ ] Dev: Install Prettier.
 - [ ] Dev: Make Vue development env.
 - [ ] Front: Install React router.
+<<<<<<< HEAD
 - [ ] Back: Implement method Show for OrgUser.
+=======
+- [ ] Herman: Back: Move uuid check for endpoints in middleware.
+>>>>>>> 432bd069b11387caf9dc6a89d1d604bde058c7e0
 
 ### In Progress
 
@@ -16,8 +20,13 @@ Tasks for the Laravel + ReactJS Pet project.
 ### Done ✓
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 - [ ] Front: Disable  react/prop-types check in eslint.
 =======
+=======
+- [x] Herman: Back: Make Avatar generator endpoint.
+- [x] Herman: Back: Implement uuid check for endpoints.
+>>>>>>> 432bd069b11387caf9dc6a89d1d604bde058c7e0
 - [x] Herman: Back: Make vCard QR code generator endpoint.
 - [x] Herman: Dev: Install ext-gd in php-fpm & php-cli containers.
 - [x] Herman: Back: Add simplesoftwareio/simple-qrcode.
@@ -55,3 +64,4 @@ Tasks for the Laravel + ReactJS Pet project.
 - [x] Dev: Add eslint to react app.
 - [x] Dev: Make initial git.
 - [x] All: Поговорить.
+- [x] AnderyDov: Org: Write guide for create and update forc on gitHub in README.md

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Models\Org\OrgUser;
+use Illuminate\Support\Str;
 
 /**
  * @group Organization employee directory management
@@ -37,17 +38,18 @@ class QRCodeController extends Controller
     }
 
     /**
-     * EmployeeQR Code vCard
+     * Employee QR Code vCard
      * 
-     * Return QRCode jpg image with encoded Employee vCard.
-     * Вернет QRCode изображение в формате jpg с закодированым контактом сотрудника
+     * Return QRCode svg image with encoded Employee vCard.
+     * Вернет QRCode изображение в формате svg с закодированым контактом сотрудника
      * 
      * @unauthenticated
      * 
      * @urlParam id string required employee uuid / uuid сотрудника . Example: 976b48f0-7fd3-4d03-82ce-395ddeafe5d5
      * @response 200 scenario="Operation successful" <?xml version="1.0" encoding="UTF-8"?><svg ....>...</svg>
+     * @response 422 scenario="Validation error" {"message": "id validation error", "errors": "976b48f0-7fd3-4d03-82ce-395dde111afe5d4 not valid uuid"}
      * @response 422 scenario="Validation error" {"message":"The selected style is invalid.","errors":{"style":["The selected style is invalid."]}}
-     * @response 404 scenario="Employee not found" {"message": "Employee with id 976b48f0-7fd3-4d03-82ce-395ddeafe5d4 not found", "error": "404 not found"}
+     * @response 404 scenario="Employee not found" {"message": "404 not found", "errors": "Employee with id  976b48f0-7fd3-4d03-82ce-395ddeafe5d4 not found"}
      * 
      * @param  \Illuminate\Http\Request
      * @param  string  $id
@@ -55,6 +57,13 @@ class QRCodeController extends Controller
      */
     public function show(Request $request, $id)
     {
+        if (!Str::isUuid($id)) {
+            return response([
+                'message' => 'id validation error',
+                'errors' => $id . ' not valid uuid'
+            ], 422);
+
+        }
         // Query parameters
         $validated = $request->validate([
             //Image size. / Размер изображения. Example: 600
@@ -100,8 +109,8 @@ class QRCodeController extends Controller
             $user = OrgUser::findOrFail($id);
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             return response([
-                'message' => 'Employee with id ' . $id . ' not found',
-                'error' => '404 not found'
+                'message' => '404 not found',
+                'errors' => 'Employee with id ' . $id . ' not found'
             ], 404);
         }
  
