@@ -4,6 +4,7 @@ export const prodUrl = "bla-bla-bla";
 export const healthcheck = "healthcheck";
 export const versionApi = "v1/";
 export const home = "/";
+export const avatars = "org/avatars/";
 export const orgUsers = "org/users/";
 export const qrcodes = "org/qrcodes/";
 export const login = "login";

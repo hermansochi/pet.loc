@@ -29,7 +29,18 @@ const usersSlice = createSlice({
     users: [],
     status: null,
     error: null,
-    page: 0,
+  },
+
+  reducers: {
+    setUsers(state, action) {
+      state.users = state.users.sort((a, b) => {
+        if (a[action.payload.paramString] > b[action.payload.paramString])
+          return action.payload.paramSortBoolean ? 1 : -1;
+        if (a[action.payload.paramString] <= b[action.payload.paramString])
+          return action.payload.paramSortBoolean ? -1 : 1;
+        else return false;
+      });
+    },
   },
 
   extraReducers: {
@@ -53,5 +64,6 @@ const usersSlice = createSlice({
     },
   },
 });
+export const { setUsers } = usersSlice.actions;
 
 export default usersSlice.reducer;
