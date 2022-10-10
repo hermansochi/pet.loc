@@ -5,6 +5,7 @@ import { setSearch } from "../store/appSlice";
 
 export default function InputSearch() {
   const dispatch = useDispatch();
+  const users = useSelector((state) => state.users.users);
   const search = useSelector((state) => state.app.search);
 
   function inputSearch(e) {
@@ -16,7 +17,11 @@ export default function InputSearch() {
   }
 
   let out = (
-    <div className="relative w-full max-w-[35%]">
+    <div
+      className={`relative w-full max-w-[35%] ${
+        users.length <= 1000 && "hidden"
+      }`}
+    >
       <div className="absolute w-4 h-4 top-2 left-2">
         <SvgComponent name="search" />
       </div>

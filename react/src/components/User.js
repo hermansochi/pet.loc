@@ -1,4 +1,5 @@
 import React from "react";
+import { devUrl, versionApi, avatars } from "../patch";
 import SvgComponent from "./SvgComponent";
 import { useDispatch } from "react-redux";
 import { setId, setShowqr } from "../store/appSlice";
@@ -36,7 +37,7 @@ export default function User({ data }) {
         <SvgComponent name="people" />
         <img
           className="rounded-full"
-          src={`http://api.localhost/api/v1/org/avatars/${data.id}`}
+          src={devUrl + versionApi + avatars + data.id}
           alt=""
         />
         <div className="absolute top-[2%] left-0 h-3 w-3 z-10 text-primary">
@@ -75,7 +76,7 @@ export default function User({ data }) {
           {data.birthday}
         </div>
         <div className="w-full">
-          <span className="font-medium w-[50%] inline-block">город: </span>
+          <span className="font-medium w-[50%] inline-block"></span>
           {data.city}
         </div>
       </div>

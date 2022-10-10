@@ -4,10 +4,9 @@ const appSlice = createSlice({
   name: "app",
   initialState: {
     theme: "garden",
-    sorting: "name",
-    directionSort: false,
+    sorting: "last_name",
+    directionSort: true,
     search: "",
-    region: "все",
     page: 1,
     id: "",
     showqr: false,
@@ -25,9 +24,7 @@ const appSlice = createSlice({
     setSearch(state, action) {
       state.search = action.payload.searchString;
     },
-    setRegion(state, action) {
-      state.region = action.payload.regionString;
-    },
+
     setPage(state, action) {
       state.page = action.payload.pageNumber;
     },
@@ -46,7 +43,6 @@ export const {
   setSorting,
   setDirectionSort,
   setSearch,
-  setRegion,
   setPage,
   setId,
   setShowqr,
