@@ -214,4 +214,19 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
+        /*
+    |--------------------------------------------------------------------------
+    | Application Additional parameters
+    |--------------------------------------------------------------------------
+    |
+    | By hermansochi
+    | APP_EMPLOYEES_TOTAL How many employees to create
+    | APP_EMPLOYEES_PER_PAGE How much to give to the api per page
+    |
+    */
+
+    'employees_total' => (int) env('APP_EMPLOYEES_TOTAL', 1000),
+    'employees_per_page' => (int) env('APP_EMPLOYEES_PER_PAGE', 100),
+
+
 ];

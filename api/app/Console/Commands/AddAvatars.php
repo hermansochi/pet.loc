@@ -29,7 +29,7 @@ class AddAvatars extends Command
      *
      * @return int
      */
-    public function handle()
+    public function handle(): int
     {
         $start = now();
         $this->newline();
@@ -55,7 +55,7 @@ class AddAvatars extends Command
         $bar->start();
         Storage::disk('public')->deleteDirectory('avatars');
         foreach ($orgUsers as $item) {
-            if ($item->gender = 'm') {
+            if (mb_strtolower($item->gender) === 'm') {
                 $randomAvatar = $mansFileNames[array_rand($mansFileNames)];
             } else {
                 $randomAvatar = $womansFileNames[array_rand($womansFileNames)];
@@ -80,7 +80,7 @@ class AddAvatars extends Command
      * Returns false if the file name is longer than 25 characters, the file size is greater than 50 kb, or the file
      * type is not jpeg.
      *
-     * @var string
+     * @param string $fileName
      *
      * @return bool
      */
