@@ -50,6 +50,9 @@ api-permissions:
 api-composer-install:
 	docker compose run --rm api-php-cli composer install
 
+api-psalm:
+	docker compose run --rm api-php-cli ./vendor/bin/psalm --show-info=true
+
 api-wait-db:
 	docker compose run --rm api-php-cli wait-for-it api-postgres:5432 -t 30
 

@@ -7,6 +7,7 @@ use App\Http\Resources\Org\OrgUserCollection;
 use App\Http\Resources\Org\OrgUserResource;
 use App\Models\Org\OrgUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 /**
  * @group Organization employee directory management
@@ -62,9 +63,8 @@ class OrgUserController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request): void
     {
         //
     }
@@ -78,13 +78,54 @@ class OrgUserController extends Controller
      * @unauthenticated
      *
      * @urlParam id string required employee uuid / uuid сотрудника . Example: 976b48f0-7fd3-4d03-82ce-395ddeafe5d5
+     * @response 200 scenario="Operation successful" {"data":
+     *      { "id": "976b48f0-7fd3-4d03-82ce-395ddeafe5d5",
+     *      "name": "Alexandrov.H.976b48f0-7fd3-4d03-82ce-395ddeafe5d5",
+     *      "hide": false,
+     *      "thumbnail": true,
+     *      "gender": "m",
+     *      "first_name": "Герман",
+     *      "last_name": "Александров",
+     *      "middle_name": "Евгеньевич",
+     *      "birthday": "25.01",
+     *      "email": "hermansochi@ya.ru",
+     *      "cn": "Александров Герман Евгеньевич",
+     *      "telephone": "6677",
+     *      "mobile": "9899001010",
+     *      "title": "Web developer",
+     *      "department": "Dream team",
+     *      "company": "Looking for a job",
+     *      "city": "Сочи",
+     *      "created_at": "2022-10-11T12:19:10.000000Z",
+     *      "updated_at": "2022-10-11T12:19:10.000000Z" }
+     * }
+     * 
+     * @response 422 scenario="Validation error" { "message": "id validation error", "errors": "111 not valid uuid" }
      *
-     * @param string  $id
+     * @response 404 scenario="Employee not found" {"message": "404 not found", "errors": "Employee with id  976b48f0-7fd3-4d03-82ce-395ddeafe5d4 not found"}
+     * 
+     * @param string $id
      * @return \App\Http\Resources\Org\OrgUserResource
      */
-    public function show($id)
+    public function show(string $id)
     {
-        return new OrgUserResource(OrgUser::findOrFail($id));
+        if (! Str::isUuid($id)) {
+            return response([
+                'message' => 'id validation error',
+                'errors' => $id.' not valid uuid',
+            ], 422);
+        }
+
+        try {
+            $user = OrgUser::findOrFail($id);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return response([
+                'message' => '404 not found',
+                'errors' => 'Employee with id '.$id.' not found',
+            ], 404);
+        }
+
+        return new OrgUserResource($user);
     }
 
     /**
@@ -92,9 +133,8 @@ class OrgUserController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id): void
     {
         //
     }
@@ -103,9 +143,8 @@ class OrgUserController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id): void
     {
         //
     }

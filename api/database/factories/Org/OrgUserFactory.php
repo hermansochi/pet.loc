@@ -5,7 +5,7 @@ namespace Database\Factories\Org;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory
  */
 class OrgUserFactory extends Factory
 {
@@ -248,7 +248,13 @@ class OrgUserFactory extends Factory
         ];
     }
 
-    private static function Translit($string)
+    /**
+     * Tranliterate cyrillic strings
+     *
+     * @param  string  $string
+     * @return string
+     */
+    private static function Translit(string $string): string
     {
         $table = [
             'А' => 'A',
@@ -320,11 +326,9 @@ class OrgUserFactory extends Factory
             ' ' => '_',
         ];
 
-        $output = str_replace(
+        return str_replace(
             array_keys($table),
             array_values($table), $string
         );
-
-        return $output;
     }
 }

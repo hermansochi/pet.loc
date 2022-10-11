@@ -15,10 +15,14 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 class QRCodeController extends Controller
 {
     /**
+     * @param \Illuminate\Http\Request
+     * @param  string  $id
+     * @return \Illuminate\Http\Response
+     *
      * Employee QR Code vCard
      *
      * Return QRCode svg image with encoded Employee vCard.
-     * Вернет QRCode изображение в формате svg с закодированым контактом сотрудника
+     * Вернет QRCode изображение в формате svg с закодированным контактом сотрудника
      *
      * @unauthenticated
      *
@@ -27,10 +31,6 @@ class QRCodeController extends Controller
      * @response 422 scenario="Validation error" {"message": "id validation error", "errors": "976b48f0-7fd3-4d03-82ce-395dde111afe5d4 not valid uuid"}
      * @response 422 scenario="Validation error" {"message":"The selected style is invalid.","errors":{"style":["The selected style is invalid."]}}
      * @response 404 scenario="Employee not found" {"message": "404 not found", "errors": "Employee with id  976b48f0-7fd3-4d03-82ce-395ddeafe5d4 not found"}
-     *
-     * @param \Illuminate\Http\Request
-     * @param string $id
-     * @return \Illuminate\Http\Response
      */
     public function show(Request $request, string $id)
     {
@@ -107,28 +107,5 @@ class QRCodeController extends Controller
             ->generate($vCard);
 
         return response($QRCode, 200)->header('Content-Type', 'image/svg+xml');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

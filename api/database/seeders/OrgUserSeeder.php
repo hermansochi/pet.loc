@@ -38,6 +38,6 @@ class OrgUserSeeder extends Seeder
             'updated_at' => now(),
 
         ]);
-        OrgUser::factory()->count(config('app.employees_total')-1)->create();
+        OrgUser::factory()->count(((int) config('app.employees_total')) - 1)->create();
     }
 }
