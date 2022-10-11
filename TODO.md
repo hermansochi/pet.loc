@@ -8,6 +8,7 @@ Tasks for the Laravel + ReactJS Pet project.
 
 - [ ] Front: Install React router.
 - [ ] Herman: Back: Move uuid check for endpoints in middleware.
+- [ ] Herman: Back: Make progress baf for avatar generation.
 
 ### In Progress
 
@@ -15,6 +16,7 @@ Tasks for the Laravel + ReactJS Pet project.
 
 ### Done ✓
 
+- [x] Herman: Back: Remove api generated avatars.
 - [x] Herman: Dev: Add custom endpoint creation from /docs/scribe.
 - [x] Herman: Back: Refactor avatar creation. Make static content. Like http://api.localhost/storage/avatars/976b48f0-7fd3-4d03-82ce-395ddeafe5d5.jpg
 - [x] Herman: Dev: Make Vue development env.

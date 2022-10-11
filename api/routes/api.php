@@ -29,9 +29,6 @@ Route::prefix('v1')->group(function () {
         Route::apiResource('qrcodes', QRCodeController::class)->only([
             'show'
         ]);
-        Route::apiResource('avatars', AvatarController::class)->only([
-            'show'
-        ]);
     });
 
     /**

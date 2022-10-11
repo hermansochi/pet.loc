@@ -1,0 +1,25 @@
+# To include an endpoint that isn't a part of your Laravel app (or belongs to a vendor package),
+# you can define it in a custom.*.yaml file, like this one.
+# Each custom file should contain an array of endpoints. Here's an example:
+# See https://scribe.knuckles.wtf/laravel/documenting/custom-endpoints#extra-sorting-groups-in-custom-endpoint-files for more options
+
+- httpMethods:
+    - GET
+  uri:  http://api.localhost/storage/avatars/{id}.jpg
+  metadata:
+    groupName: Organization employee directory management
+    title: Employee avatar
+    description: 'Return employee avatar jpg image. Вернет фото сотрудника в формате jpg. <aside class="warning">NON API ENDPOINT! The content returns ин web-server.</aside> '
+    authenticated: false
+  urlParameters:
+    param:
+      name: id
+      description: Employee uuid / uuid сотрудника.
+      required: true
+      example:  976b48f0-7fd3-4d03-82ce-395ddeafe5d5
+      type: string
+  responses:
+    - status: 200
+      description: 'When the thing was done smoothly.'
+      content: # Your response content can be an object, an array, a string or empty.
+         "image/jpeg"
