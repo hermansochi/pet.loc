@@ -62,6 +62,7 @@ api-fixtures:
 	docker compose run --rm api-php-cli php artisan avatar:add
 
 api-generate-docs:
+	cp ${PWD}/docs/scribe/* ${PWD}/api/.scribe/endpoints/ 
 	docker compose run --rm api-php-cli php artisan scribe:generate
 
 react-clear:

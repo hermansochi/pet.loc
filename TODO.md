@@ -14,6 +14,8 @@ Tasks for the Laravel + ReactJS Pet project.
 - [ ] Work ...
 
 ### Done ✓
+
+- [x] Herman: Dev: Add custom endpoint creation from /docs/scribe.
 - [x] Herman: Back: Refactor avatar creation. Make static content. Like http://api.localhost/storage/avatars/976b48f0-7fd3-4d03-82ce-395ddeafe5d5.jpg
 - [x] Herman: Dev: Make Vue development env.
 - [x] Herman: Back: Make Avatar generator endpoint.
