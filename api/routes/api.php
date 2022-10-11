@@ -39,9 +39,11 @@ Route::prefix('v1')->group(function () {
      * Check that the service is up. If everything is okay, you'll get a 200 OK response.
      * Otherwise, the request will fail with a 400 error, and a response listing the failed services.
      *
-     * @response 400 scenario="Service is unhealthy" {"status": "down", "services": {"database": "down"}}
+     * @response 200 scenario="Service is healthy" {"status": "down", "services": {"database": "down"},
+     * "employees": {"total": 1000, "per_page": 100}}
      * @responseField status The status of this API (`up` or `down`).
      * @responseField services Map of each downstream service and their status (`ping time` or `down`).
+     * @responseField employees total - How many employees in DB, per_page - How much to give to the api per page
      */
     Route::get('/healthcheck', function () {
         function ping($host, $port, $timeout)
@@ -60,6 +62,10 @@ Route::prefix('v1')->group(function () {
             'status' => 'up',
             'services' => [
                 'database' => ping('api-postgres', 5432, 10),
+            ],
+            'employees' => [
+                'total' => config('app.employees_total'),
+                'per_page' => config('app.employees_per_page'),
             ],
         ];
     });

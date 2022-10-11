@@ -8,6 +8,9 @@ Tasks for the Laravel + ReactJS Pet project.
 
 - [ ] Front: Install React router.
 - [ ] Herman: Back: Move uuid check for endpoints in middleware.
+- [ ] Herman: Dev: Fix: Error 409 raact ws HMR.
+- [ ] Herman: Dev: Install & Configure Psalm for Laravel.
+- [ ] Herman: Back: Add contsant Total Emploees Employes per page and in .env and healthchek endpoint.
 
 ### In Progress
 
@@ -15,7 +18,7 @@ Tasks for the Laravel + ReactJS Pet project.
 
 ### Done ✓
 
-- [x] Herman: Dev: Configure pint for Laravel.
+- [x] Herman: Dev: Configure Pint for Laravel.
 - [x] Herman: Back: Make progress baf for avatar generation.
 - [x] Herman: Back: Remove api generated avatars.
 - [x] Herman: Dev: Add custom endpoint creation from /docs/scribe.

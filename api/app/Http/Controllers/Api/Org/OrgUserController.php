@@ -50,12 +50,12 @@ class OrgUserController extends Controller
      * @apiResourceCollection 200 App\Http\Resources\Org\OrgUserCollection
      * @apiResourceModel App\Models\Org\OrgUser paginate=2
      *
-     * @return \Illuminate\Http\Response
+     * @return \App\Http\Resources\Org\OrgUserCollection
      */
     public function index()
     {
         //
-        return new OrgUserCollection(OrgUser::paginate(50));
+        return new OrgUserCollection(OrgUser::paginate(config('app.employees_per_page')));
     }
 
     /**
@@ -79,8 +79,8 @@ class OrgUserController extends Controller
      *
      * @urlParam id string required employee uuid / uuid сотрудника . Example: 976b48f0-7fd3-4d03-82ce-395ddeafe5d5
      *
-     * @param  string  $id
-     * @return \Illuminate\Http\Response
+     * @param string  $id
+     * @return \App\Http\Resources\Org\OrgUserResource
      */
     public function show($id)
     {
