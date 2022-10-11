@@ -5,7 +5,7 @@ Tasks for the Laravel + ReactJS Pet project.
 ### Todo
 
 - [ ] Dev: Install Prettier.
-- [ ] Dev: Make Vue development env.
+
 - [ ] Front: Install React router.
 - [ ] Herman: Back: Move uuid check for endpoints in middleware.
 
@@ -14,7 +14,8 @@ Tasks for the Laravel + ReactJS Pet project.
 - [ ] Work ...
 
 ### Done ✓
-
+- [x] Herman: Back: Refactor avatar creation. Make static content. Like http://api.localhost/storage/avatars/976b48f0-7fd3-4d03-82ce-395ddeafe5d5.jpg
+- [x] Herman: Dev: Make Vue development env.
 - [x] Herman: Back: Make Avatar generator endpoint.
 - [x] Herman: Back: Implement uuid check for endpoints.
 - [x] Herman: Back: Make vCard QR code generator endpoint.

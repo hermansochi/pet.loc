@@ -57,8 +57,9 @@ api-migrations:
 	docker compose run --rm api-php-cli php artisan migrate:fresh
 
 api-fixtures:
-	docker compose run --rm api-php-cli php artisan avatar:add
+	docker compose run --rm api-php-cli php artisan storage:link
 	docker compose run --rm api-php-cli php artisan db:seed
+	docker compose run --rm api-php-cli php artisan avatar:add
 
 api-generate-docs:
 	docker compose run --rm api-php-cli php artisan scribe:generate

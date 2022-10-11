@@ -5,6 +5,8 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use App\Models\Org\OrgUser;
+use Illuminate\Http\File;
 
 class AddAvatars extends Command
 {
@@ -20,7 +22,7 @@ class AddAvatars extends Command
      *
      * @var string
      */
-    protected $description = 'Check avatars and add to DB.';
+    protected $description = 'Check avatars and make static avatars in storage.';
 
     /**
      * Execute the console command.
@@ -41,16 +43,27 @@ class AddAvatars extends Command
             }
         }
 
-        Storage::disk('avatars')->put('mans.name', serialize($mansFileNames));
-
         foreach ($womansFileNames as $key => $item) {
             if (!$this::ValidAvatar($item)) {
                 unset($womansFileNames[$key]);
             }
         }
 
-        Storage::disk('avatars')->put('womans.name', serialize($womansFileNames));
+        $orgUsers = OrgUser::select('id', 'gender')->get();
+        Storage::disk('public')->deleteDirectory('avatars');
+        foreach ($orgUsers as $item) {
+            if ($item->gender = 'm') {
+                $randomAvatar = $mansFileNames[array_rand($mansFileNames)];
+            } else {
+                $randomAvatar = $womansFileNames[array_rand($womansFileNames)];
+            }
+            $this->line($item->id . ' - ' . $item->gender . ' - ' . $randomAvatar);
+            
+            $path = Storage::disk('public')
+                ->putFileAs('avatars', new File(resource_path() . '/avatars/' . $randomAvatar), $item->id . '.jpg');
+        }
 
+        
         return Command::SUCCESS;
     }
 
@@ -73,11 +86,8 @@ class AddAvatars extends Command
             $out .= ' ' . str_repeat('.', 130 - mb_strlen($out)) . ' <fg=green>ERROR</>';
             $this->error($out);
             return false;
-        } else {
-            $out .= ' ' . str_repeat('.', 131 - mb_strlen($out)) . ' <fg=green>DONE</>';
-            $this->line($out);
-            return true;
-        }
+        } 
+        return true;
     }
 
 }

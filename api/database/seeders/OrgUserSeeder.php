@@ -39,6 +39,6 @@ class OrgUserSeeder extends Seeder
             'updated_at' => now(),
             
         ]);
-        OrgUser::factory()->count(1000)->create();
+        OrgUser::factory()->count(500)->create();
     }
 }
