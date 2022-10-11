@@ -31,6 +31,7 @@ class AddAvatars extends Command
      */
     public function handle()
     {
+        $start = now();
         $this->newline();
         $this->line('  <bg=blue;fg=white> INFO </> Check and prepare avatars.');
         $this->newline();
@@ -50,6 +51,8 @@ class AddAvatars extends Command
         }
 
         $orgUsers = OrgUser::select('id', 'gender')->get();
+        $bar = $this->output->createProgressBar(count($orgUsers));
+        $bar->start();
         Storage::disk('public')->deleteDirectory('avatars');
         foreach ($orgUsers as $item) {
             if ($item->gender = 'm') {
@@ -57,13 +60,18 @@ class AddAvatars extends Command
             } else {
                 $randomAvatar = $womansFileNames[array_rand($womansFileNames)];
             }
-            $this->line($item->id . ' - ' . $item->gender . ' - ' . $randomAvatar);
+            $bar->advance();
             
             $path = Storage::disk('public')
                 ->putFileAs('avatars', new File(resource_path() . '/avatars/' . $randomAvatar), $item->id . '.jpg');
         }
 
-        
+        $bar->finish();
+        $this->newline();
+        $this->newline();
+        $time = $start->diffInMilliSeconds(now());
+        $this->line("  <bg=blue;fg=white> DONE </> <fg=gray>Processed in $time ms</>");
+        $this->newline();
         return Command::SUCCESS;
     }
 
@@ -79,12 +87,10 @@ class AddAvatars extends Command
         $fileNameLen = Str::length($fileName);
         $fileSize = Storage::disk('avatars')->size($fileName);
         $fileType = Storage::disk('avatars')->mimeType($fileName);
-
-        $out = '  File: ' . $fileName . ' Mime-Type: ' . $fileType . ' File size: ' . $fileSize;
-
+        $out = '  ' . $fileName . ' Mime-Type: ' . $fileType . ' size: ' . $fileSize;
         if ($fileNameLen > 25 or $fileSize > 51200 or $fileType !== 'image/jpeg') {
-            $out .= ' ' . str_repeat('.', 130 - mb_strlen($out)) . ' <fg=green>ERROR</>';
-            $this->error($out);
+            $out .= ' <fg=gray>' . str_repeat('.', 130 - mb_strlen($out)) . '</> <fg=red>ERROR</>';
+            $this->line($out);
             return false;
         } 
         return true;
