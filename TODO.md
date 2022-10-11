@@ -10,14 +10,14 @@ Tasks for the Laravel + ReactJS Pet project.
 - [ ] Herman: Back: Move uuid check for endpoints in middleware.
 - [ ] Herman: Dev: Fix: Error 409 raact ws HMR.
 - [ ] Herman: Dev: Install & Configure Psalm for Laravel.
-- [ ] Herman: Back: Add contsant Total Emploees Employes per page and in .env and healthchek endpoint.
 
-### In Progress
+# In Progress
 
 - [ ] Work ...
 
 ### Done ✓
 
+- [x] Herman: Back: Add contsant Total Emploees Employes per page and in .env and healthchek endpoint.
 - [x] Herman: Dev: Configure Pint for Laravel.
 - [x] Herman: Back: Make progress baf for avatar generation.
 - [x] Herman: Back: Remove api generated avatars.
