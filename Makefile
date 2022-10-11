@@ -74,7 +74,7 @@ underdante-clear:
 vue-clear:
 	docker run --rm -v ${PWD}/vue:/app -w /app alpine sh -c 'rm -rf .ready dist'
 
-react-init: react-yarn-install react-ready
+react-init: react-yarn-install react-ready 
 
 underdante-init: underdante-yarn-install underdante-ready
 
@@ -97,6 +97,9 @@ underdante-ready:
 
 vue-ready:
 	docker run --rm -v ${PWD}/vue:/app -w /app alpine touch .ready
+
+api-lint:
+	docker compose run --rm api-php-cli ./vendor/bin/pint
 
 react-lint:
 	docker compose run --rm react-node-cli yarn eslint

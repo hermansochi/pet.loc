@@ -2,11 +2,11 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Org\OrgUser;
 use Illuminate\Console\Command;
+use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use App\Models\Org\OrgUser;
-use Illuminate\Http\File;
 
 class AddAvatars extends Command
 {
@@ -39,13 +39,13 @@ class AddAvatars extends Command
         $womansFileNames = Storage::disk('avatars')->files('/womans');
 
         foreach ($mansFileNames as $key => $item) {
-            if (!$this::ValidAvatar($item)) {
+            if (! $this::ValidAvatar($item)) {
                 unset($mansFileNames[$key]);
             }
         }
 
         foreach ($womansFileNames as $key => $item) {
-            if (!$this::ValidAvatar($item)) {
+            if (! $this::ValidAvatar($item)) {
                 unset($womansFileNames[$key]);
             }
         }
@@ -61,9 +61,9 @@ class AddAvatars extends Command
                 $randomAvatar = $womansFileNames[array_rand($womansFileNames)];
             }
             $bar->advance();
-            
+
             $path = Storage::disk('public')
-                ->putFileAs('avatars', new File(resource_path() . '/avatars/' . $randomAvatar), $item->id . '.jpg');
+                ->putFileAs('avatars', new File(resource_path().'/avatars/'.$randomAvatar), $item->id.'.jpg');
         }
 
         $bar->finish();
@@ -72,28 +72,31 @@ class AddAvatars extends Command
         $time = $start->diffInMilliSeconds(now());
         $this->line("  <bg=blue;fg=white> DONE </> <fg=gray>Processed in $time ms</>");
         $this->newline();
+
         return Command::SUCCESS;
     }
 
     /**
-     * Returns false if the file name is longer than 25 characters, the file size is greater than 50 kb, or the file 
+     * Returns false if the file name is longer than 25 characters, the file size is greater than 50 kb, or the file
      * type is not jpeg.
      *
      * @var string
-     * @return boolean
+     *
+     * @return bool
      */
     private function validAvatar($fileName): bool
     {
         $fileNameLen = Str::length($fileName);
         $fileSize = Storage::disk('avatars')->size($fileName);
         $fileType = Storage::disk('avatars')->mimeType($fileName);
-        $out = '  ' . $fileName . ' Mime-Type: ' . $fileType . ' size: ' . $fileSize;
+        $out = '  '.$fileName.' Mime-Type: '.$fileType.' size: '.$fileSize;
         if ($fileNameLen > 25 or $fileSize > 51200 or $fileType !== 'image/jpeg') {
-            $out .= ' <fg=gray>' . str_repeat('.', 130 - mb_strlen($out)) . '</> <fg=red>ERROR</>';
+            $out .= ' <fg=gray>'.str_repeat('.', 130 - mb_strlen($out)).'</> <fg=red>ERROR</>';
             $this->line($out);
+
             return false;
-        } 
+        }
+
         return true;
     }
-
 }

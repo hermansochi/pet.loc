@@ -15,6 +15,7 @@ Tasks for the Laravel + ReactJS Pet project.
 
 ### Done ✓
 
+- [x] Herman: Dev: Configure pint for Laravel.
 - [x] Herman: Back: Make progress baf for avatar generation.
 - [x] Herman: Back: Remove api generated avatars.
 - [x] Herman: Dev: Add custom endpoint creation from /docs/scribe.

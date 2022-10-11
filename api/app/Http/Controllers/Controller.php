@@ -30,7 +30,7 @@ use Illuminate\Routing\Controller as BaseController;
  *     name="OrgUser",
  *     description="API Endpoints of organization users / Эндпоинты для получения информации о сотрудниках"
  * )
- * 
+ *
  * @OA\Schema(
  *     title="Links",
  *     description="Links / Ссылки",
@@ -46,8 +46,7 @@ use Illuminate\Routing\Controller as BaseController;
  *             },
  *     ),
  * )
-**/
-
+ **/
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
