@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Org\OrgUser;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use App\Models\Org\OrgUser;
 
 class OrgUserSeeder extends Seeder
 {
@@ -37,8 +36,8 @@ class OrgUserSeeder extends Seeder
             'city' => 'Сочи',
             'created_at' => now(),
             'updated_at' => now(),
-            
+
         ]);
-        OrgUser::factory()->count(1000)->create();
+        OrgUser::factory()->count(500)->create();
     }
 }

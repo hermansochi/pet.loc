@@ -3,28 +3,27 @@
 namespace App\Http\Controllers\Api\Org;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Org\OrgUser;
 use App\Http\Resources\Org\OrgUserCollection;
 use App\Http\Resources\Org\OrgUserResource;
+use App\Models\Org\OrgUser;
+use Illuminate\Http\Request;
 
 /**
  * @group Organization employee directory management
- * 
+ *
  * APIs for managing organization employee directory /
  * API для управления справочником сотрудников организации
  * <aside class="success">Описание полей см. в эндпоинте org/users</aside>
  */
-
 class OrgUserController extends Controller
 {
     /**
      * Display a listing of the organization users.
-     * Возвращает всех сотрудников организации массивом в объекте data, метаинформацией в объекте meta, ссылками в 
+     * Возвращает всех сотрудников организации массивом в объекте data, метаинформацией в объекте meta, ссылками в
      * объекте links.
-     * 
+     *
      * @unauthenticated
-     * 
+     *
      * @urlParam page integer Response page number / Номер страницы. Example: 1
      * @responseField id The uuid of the organization user / ID сотрудника в формате UUID.
      * @responseField name The uniq name of the organization user / Уникальное имя сотрудника.
@@ -56,7 +55,7 @@ class OrgUserController extends Controller
     public function index()
     {
         //
-        return (new OrgUserCollection(OrgUser::paginate(50)));
+        return new OrgUserCollection(OrgUser::paginate(50));
     }
 
     /**
@@ -72,14 +71,14 @@ class OrgUserController extends Controller
 
     /**
      * Employee info by ID
-     * 
+     *
      * Return the Employee info by uuid. /
      * Вернет информацию о сотруднике по uuid.
-     * 
+     *
      * @unauthenticated
-     * 
+     *
      * @urlParam id string required employee uuid / uuid сотрудника . Example: 976b48f0-7fd3-4d03-82ce-395ddeafe5d5
-     * 
+     *
      * @param  string  $id
      * @return \Illuminate\Http\Response
      */

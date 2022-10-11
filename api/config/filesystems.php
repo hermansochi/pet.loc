@@ -38,7 +38,7 @@ return [
 
         'avatars' => [
             'driver' => 'local',
-            'root' => resource_path() . '/avatars',
+            'root' => resource_path().'/avatars',
             'throw' => false,
         ],
 

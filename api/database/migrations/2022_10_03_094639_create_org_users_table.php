@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->boolean('hide')->default(false);
             $table->boolean('thumbnail')->default(false);
-            $table->string('thumb_name', 25)->nullable();
             $table->string('gender', 1)->default('u');
             $table->string('first_name', 50)->nullable();
             $table->string('last_name', 50)->nullable();

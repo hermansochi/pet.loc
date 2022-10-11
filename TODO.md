@@ -5,7 +5,7 @@ Tasks for the Laravel + ReactJS Pet project.
 ### Todo
 
 - [ ] Dev: Install Prettier.
-- [ ] Dev: Make Vue development env.
+
 - [ ] Front: Install React router.
 - [ ] Herman: Back: Move uuid check for endpoints in middleware.
 
@@ -15,6 +15,12 @@ Tasks for the Laravel + ReactJS Pet project.
 
 ### Done ✓
 
+- [x] Herman: Dev: Configure pint for Laravel.
+- [x] Herman: Back: Make progress baf for avatar generation.
+- [x] Herman: Back: Remove api generated avatars.
+- [x] Herman: Dev: Add custom endpoint creation from /docs/scribe.
+- [x] Herman: Back: Refactor avatar creation. Make static content. Like http://api.localhost/storage/avatars/976b48f0-7fd3-4d03-82ce-395ddeafe5d5.jpg
+- [x] Herman: Dev: Make Vue development env.
 - [x] Herman: Back: Make Avatar generator endpoint.
 - [x] Herman: Back: Implement uuid check for endpoints.
 - [x] Herman: Back: Make vCard QR code generator endpoint.
@@ -24,6 +30,7 @@ Tasks for the Laravel + ReactJS Pet project.
 - [x] Herman: Back: Fix: Access to fetch at  from origin  has been blocked by CORS policy.
 - [x] Herman: Back: Add api/resources/views/scribe/ to gitignore
 - [x] AnderyDov: Front: Fix: Fix mini problems with themes.
+- [x] AnderyDov: Org: Write guide for create and update force on gitHub in README.md
 - [x] Front: Disable  react/prop-types check in eslint.
 - [x] Back: Add city & gender in DB.
 - [x] Back: Make Healthcheck endpoint.
@@ -53,4 +60,3 @@ Tasks for the Laravel + ReactJS Pet project.
 - [x] Dev: Add eslint to react app.
 - [x] Dev: Make initial git.
 - [x] All: Поговорить.
-- [x] AnderyDov: Org: Write guide for create and update forc on gitHub in README.md

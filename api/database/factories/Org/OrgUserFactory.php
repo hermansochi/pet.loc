@@ -3,7 +3,6 @@
 namespace Database\Factories\Org;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Storage;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
@@ -17,21 +16,10 @@ class OrgUserFactory extends Factory
      */
     public function definition()
     {
-
         $gender = $this->faker->randomElement(['male', 'female']);
         $thumb = false;
-        $thumbName = null;
 
-        if (rand(1,100) < 97) {
-            if ($gender === 'male') {
-                $mansFileNames = unserialize(Storage::disk('avatars')->get('mans.name'));
-                //dd($mansFileNames);
-                $thumbName = $mansFileNames[array_rand($mansFileNames)];
-            } else {
-                $womansFileNames = unserialize(Storage::disk('avatars')->get('womans.name'));
-                //dd($womansFileNames);
-                $thumbName = $womansFileNames[array_rand($womansFileNames)];
-            }
+        if (rand(1, 100) < 97) {
             $thumb = true;
         }
 
@@ -44,17 +32,17 @@ class OrgUserFactory extends Factory
         $name .= self::Translit(mb_substr($fname, 0, 1));
 
         $month = $this->faker->randomElement([
-            '01' , '02', '03', '04' , '05', '06', '07' , '08', '09', '10' , '11', '12'
+            '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12',
         ]);
 
-        $days = date('t', mktime(0, 0, 0, (int)$month, 1, 2022));
+        $days = date('t', mktime(0, 0, 0, (int) $month, 1, 2022));
 
         $day = (string) $this->faker->numberBetween(1, (int) $days);
 
         if (mb_strlen($day) === 1) {
-            $day = '0' . $day;
+            $day = '0'.$day;
         }
-        
+
         $title = $this->faker->randomElement([
             'Клоун',
             'Переворачиватель пингвинов',
@@ -112,7 +100,90 @@ class OrgUserFactory extends Factory
             'Разрисовщик обоев',
             'Сливщик-разливщик',
             'Сушильщик дощечек',
-            'Электрослесарь подземный'
+            'Электрослесарь подземный',
+            'WEB дизайнер',
+            'Авиадиспетчер',
+            'Адвокат',
+            'Агроном',
+            'Актуарий',
+            'Биоинженер',
+            'Бармен',
+            'Биолог',
+            'Брокер',
+            'Верстальщик',
+            'Винодел',
+            'Врач',
+            'Востоковед',
+            'Генный инженер',
+            'Геодезист',
+            'Геолог',
+            'Графический дизайнер',
+            'Дипломат',
+            'Диетолог',
+            'Дизайнер',
+            'Журналист',
+            'Звукооператор',
+            'Инженер',
+            'Инженер по охране труда',
+            'Инженер проектировщик',
+            'Искусствовед',
+            'Картограф',
+            'Кинолог',
+            'Кондитер',
+            'Косметолог',
+            'Криминалист',
+            'Ландшафтный дизайнер',
+            'Лингвист',
+            'Логист',
+            'Логопед',
+            'Машинист электропоезда',
+            'Медсестра',
+            'Массажист',
+            'Мультипликатор',
+            'Невролог',
+            'Нейрохирург',
+            'Налоговый инспектор',
+            'Нанотехнолог',
+            'Океанолог',
+            'Ортопед',
+            'Официант',
+            'офис-менеджер',
+            'Педагог',
+            'Парикмахер',
+            'Педиатр',
+            'Пилот',
+            'Повар',
+            'Пожарный',
+            'Программист',
+            'Редактор',
+            'Рекрутер',
+            'Режиссер',
+            'Реабилитолог',
+            'Сварщик',
+            'Системный администратор',
+            'Следователь',
+            'Социолог',
+            'Стоматолог',
+            'Терапевт',
+            'Тестировщик ПО',
+            'Товаровед',
+            'Учитель',
+            'Фармацевт',
+            'Физик-теоретик',
+            'Флорист',
+            'Фотограф',
+            'Химик-технолог',
+            'Хирург',
+            'Хореограф',
+            'Художник-иллюстратор',
+            'Шеф-повар',
+            'Су-шеф',
+            'Эколог',
+            'Экономист',
+            'Энергетик',
+            'Этнограф',
+            'Ювелир',
+            'Юрист',
         ]);
 
         $department = $this->faker->randomElement([
@@ -139,14 +210,14 @@ class OrgUserFactory extends Factory
         ]);
 
         $company = $this->faker->randomElement([
-            'ООО "РогаРадио"',
+            'ОАО "Надежность"',
             'ООО "Рога и копыта"',
-            'ООО "БумПрофи"',
+            'ООО "Агропромышленная палата"',
             'ООО "Бумалопа трейдинг"',
-            'ООО "Вилюна экспресс"',
+            'ООО "Механизация"',
             'ООО "Нарита и сын"',
-            'ООО "Рогофей"',
-            'ООО "Рогатрон"',
+            'ООО "Партнер"',
+            'ООО "Кооператив Мобиль"',
         ]);
 
         $city = $this->faker->randomElement([
@@ -157,104 +228,103 @@ class OrgUserFactory extends Factory
         ]);
 
         return [
-            'name' => $name . '.' . $this->faker->uuid(),
+            'name' => $name.'.'.$this->faker->uuid(),
             'hide' => false,
             'thumbnail' => $thumb,
-            'thumb_name' => $thumbName,
             'gender' => ($gender === 'male') ? 'm' : 'f',
             'first_name' => $fname,
             'last_name' => $lname,
             'middle_name' => $mname,
-            'birthday' => $day . '.' . $month,
-            'email' => $name . '@example.ru',
-            'cn' => $lname . ' ' . $fname . ' ' . $mname,
-            'telephone'=> $this->faker->numerify('####'),
-            'mobile' => '989' . $this->faker->numerify('#######'),
+            'birthday' => $day.'.'.$month,
+            'email' => $name.'@example.ru',
+            'cn' => $lname.' '.$fname.' '.$mname,
+            'telephone' => $this->faker->numerify('####'),
+            'mobile' => '989'.$this->faker->numerify('#######'),
             //$table->string('description')->nullable();
             'title' => $title,
             'department' => $department,
             'company' => $company,
-            'city' => $city
+            'city' => $city,
         ];
     }
 
-    private static function Translit($string) 
-    { 
-      $table = array( 
-                  'А' => 'A', 
-                  'Б' => 'B', 
-                  'В' => 'V', 
-                  'Г' => 'G', 
-                  'Д' => 'D', 
-                  'Е' => 'E', 
-                  'Ё' => 'YO', 
-                  'Ж' => 'ZH', 
-                  'З' => 'Z', 
-                  'И' => 'I', 
-                  'Й' => 'J', 
-                  'К' => 'K', 
-                  'Л' => 'L', 
-                  'М' => 'M', 
-                  'Н' => 'N', 
-                  'О' => 'O', 
-                  'П' => 'P', 
-                  'Р' => 'R', 
-                  'С' => 'S', 
-                  'Т' => 'T', 
-                  'У' => 'U', 
-                  'Ф' => 'F', 
-                  'Х' => 'H', 
-                  'Ц' => 'C', 
-                  'Ч' => 'CH', 
-                  'Ш' => 'SH', 
-                  'Щ' => 'CSH', 
-                  'Ь' => '', 
-                  'Ы' => 'Y', 
-                  'Ъ' => '', 
-                  'Э' => 'E', 
-                  'Ю' => 'YU', 
-                  'Я' => 'YA', 
-                  'а' => 'a', 
-                  'б' => 'b', 
-                  'в' => 'v', 
-                  'г' => 'g', 
-                  'д' => 'd', 
-                  'е' => 'e', 
-                  'ё' => 'yo', 
-                  'ж' => 'zh', 
-                  'з' => 'z', 
-                  'и' => 'i', 
-                  'й' => 'j', 
-                  'к' => 'k', 
-                  'л' => 'l', 
-                  'м' => 'm', 
-                  'н' => 'n', 
-                  'о' => 'o', 
-                  'п' => 'p', 
-                  'р' => 'r', 
-                  'с' => 's', 
-                  'т' => 't', 
-                  'у' => 'u', 
-                  'ф' => 'f', 
-                  'х' => 'h', 
-                  'ц' => 'c', 
-                  'ч' => 'ch', 
-                  'ш' => 'sh', 
-                  'щ' => 'csh', 
-                  'ь' => '', 
-                  'ы' => 'y', 
-                  'ъ' => '', 
-                  'э' => 'e', 
-                  'ю' => 'yu', 
-                  'я' => 'ya',
-                  ' ' => '_' 
-      ); 
-   
-      $output = str_replace( 
-          array_keys($table), 
-          array_values($table),$string 
-      ); 
-   
-      return $output; 
+    private static function Translit($string)
+    {
+        $table = [
+            'А' => 'A',
+            'Б' => 'B',
+            'В' => 'V',
+            'Г' => 'G',
+            'Д' => 'D',
+            'Е' => 'E',
+            'Ё' => 'YO',
+            'Ж' => 'ZH',
+            'З' => 'Z',
+            'И' => 'I',
+            'Й' => 'J',
+            'К' => 'K',
+            'Л' => 'L',
+            'М' => 'M',
+            'Н' => 'N',
+            'О' => 'O',
+            'П' => 'P',
+            'Р' => 'R',
+            'С' => 'S',
+            'Т' => 'T',
+            'У' => 'U',
+            'Ф' => 'F',
+            'Х' => 'H',
+            'Ц' => 'C',
+            'Ч' => 'CH',
+            'Ш' => 'SH',
+            'Щ' => 'CSH',
+            'Ь' => '',
+            'Ы' => 'Y',
+            'Ъ' => '',
+            'Э' => 'E',
+            'Ю' => 'YU',
+            'Я' => 'YA',
+            'а' => 'a',
+            'б' => 'b',
+            'в' => 'v',
+            'г' => 'g',
+            'д' => 'd',
+            'е' => 'e',
+            'ё' => 'yo',
+            'ж' => 'zh',
+            'з' => 'z',
+            'и' => 'i',
+            'й' => 'j',
+            'к' => 'k',
+            'л' => 'l',
+            'м' => 'm',
+            'н' => 'n',
+            'о' => 'o',
+            'п' => 'p',
+            'р' => 'r',
+            'с' => 's',
+            'т' => 't',
+            'у' => 'u',
+            'ф' => 'f',
+            'х' => 'h',
+            'ц' => 'c',
+            'ч' => 'ch',
+            'ш' => 'sh',
+            'щ' => 'csh',
+            'ь' => '',
+            'ы' => 'y',
+            'ъ' => '',
+            'э' => 'e',
+            'ю' => 'yu',
+            'я' => 'ya',
+            ' ' => '_',
+        ];
+
+        $output = str_replace(
+            array_keys($table),
+            array_values($table), $string
+        );
+
+        return $output;
     }
 }
