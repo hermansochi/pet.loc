@@ -5,70 +5,28 @@ namespace Tests\Feature\Api\Org;
 use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\TestCase;
 
-class OrgUsersTest extends TestCase
+class QrCodesTest extends TestCase
 {
     /**
-     * Get valid employee.
+     * Get valid QR code.
      *
      * @return void
      */
-    public function test_get_valid_empoloee(): void
+    public function test_get_valid_qr_code(): void
     {
-        $response = $this->getJson('/api/v1/org/users/976b48f0-7fd3-4d03-82ce-395ddeafe5d5');
+        $response = $this->get('/api/v1/org/qrcodes/976b48f0-7fd3-4d03-82ce-395ddeafe5d5');
 
         $response
             ->assertStatus(200)
-            ->assertHeader('Content-Type', 'application/json')
-            ->assertJson(fn (AssertableJson $json) => $json
-                    ->where('data.first_name', 'Герман')
-                    ->where('data.last_name', 'Александров')
-                    ->missing('password')
-                    ->etc()
-            );
+            ->assertHeader('Content-Type', 'image/svg+xml');
     }
 
     /**
-     * Check employee JSON types.
+     * Get QR code for non existent employee.
      *
      * @return void
      */
-    public function test_check_employee_json_types(): void
-    {
-        $response = $this->getJson('/api/v1/org/users/976b48f0-7fd3-4d03-82ce-395ddeafe5d5');
-
-        $response
-            ->assertStatus(200)
-            ->assertHeader('Content-Type', 'application/json')
-            ->assertJson(fn (AssertableJson $json) => $json->whereAllType([
-                'data.id' => 'string',
-                'data.name' => 'string',
-                'data.hide' => 'boolean',
-                'data.thumbnail' => 'boolean',
-                'data.gender' => 'string',
-                'data.first_name' => 'string|null',
-                'data.last_name' => 'string|null',
-                'data.middle_name' => 'string|null',
-                'data.birthday' => 'string|null',
-                'data.email' => 'string|null',
-                'data.cn' => 'string|null',
-                'data.telephone' => 'string|null',
-                'data.mobile' => 'string|null',
-                'data.title' => 'string|null',
-                'data.department' => 'string|null',
-                'data.company' => 'string|null',
-                'data.city' => 'string|null',
-                'data.created_at' => 'string|null',
-                'data.updated_at' => 'string|null',
-            ])
-            );
-    }
-
-    /**
-     * Get invalid employee.
-     *
-     * @return void
-     */
-    public function test_get_invalid_empoloee(): void
+public function test_get_qr_code_for_non_existent_employee(): void
     {
         $response = $this->getJson('/api/v1/org/users/976b48f0-7fd3-4d03-82ce-395ddeafe5d1');
 
@@ -80,15 +38,14 @@ class OrgUsersTest extends TestCase
                      ->etc()
             );
     }
-
     /**
      * Get employee with invalid uuid.
      *
      * @return void
      */
-    public function test_get_empoloee_with_invalid_uuid(): void
+    public function test_get_qr_code_with_invalid_employee_uuid(): void
     {
-        $response = $this->getJson('/api/v1/org/users/976b48f0-7fd3-4d03-82ce-395ddeafe5d111');
+        $response = $this->getJson('/api/v1/org/qrcodes/976b48f0-7fd3-4d03-82ce-395ddeafe5d111');
 
         $response
             ->assertStatus(422)
@@ -100,32 +57,78 @@ class OrgUsersTest extends TestCase
     }
 
     /**
-     * Get first page with employees collection.
+     * Get QR Code exceeding the maximum size.
      *
      * @return void
      */
-    public function test_get_first_page_with_empoloees(): void
+    public function test_get_qr_code_exceeding_maximum_size(): void
     {
-        $response = $this->getJson('/api/v1/org/users/');
+        $response = $this->json('GET', '/api/v1/org/qrcodes/976b48f0-7fd3-4d03-82ce-395ddeafe5d5',
+        ['size' => 801]);
 
         $response
-            ->assertStatus(200)
+            ->assertStatus(422)
             ->assertHeader('Content-Type', 'application/json')
-            ->assertJson(fn (AssertableJson $json) => $json->has('links.first')
-                    ->has('links.last')
-                    ->has('links.prev')
-                    ->has('links.next')
-                    ->has('meta')
-                    ->where('meta.current_page', 1)
-                    ->where('meta.from', 1)
-                    ->has('meta.last_page')
-                    ->has('meta.links')
-                    ->has('meta.path')
-                    ->where('meta.per_page', config('app.employees_per_page'))
-                    ->has('meta.to')
-                    ->where('meta.total', config('app.employees_total'))
-                    ->has('data', config('app.employees_per_page'))
-
-            );
+            ->assertJson([
+                'message' => 'The size must be between 10 and 800.',
+                'errors' => ['size' => true]
+            ]);
     }
+
+    /**
+    * Get QR Code exceeding the minimum size.
+    *
+    * @return void
+    */
+    public function test_get_qr_code_exceeding_mainimum_size(): void
+    {
+        $response = $this->json('GET', '/api/v1/org/qrcodes/976b48f0-7fd3-4d03-82ce-395ddeafe5d5',
+        ['size' => 9]);
+
+        $response
+        ->assertStatus(422)
+        ->assertHeader('Content-Type', 'application/json')
+        ->assertJson([
+            'message' => 'The size must be between 10 and 800.',
+        'errors' => ['size' => true]
+        ]);
+    }
+
+    /**
+    * Get QR Code with non integer size.
+    *
+    * @return void
+    */
+    public function test_get_qr_code_with_non_integer_size(): void
+    {
+        $response = $this->json('GET', '/api/v1/org/qrcodes/976b48f0-7fd3-4d03-82ce-395ddeafe5d5',
+        ['size' => 80.1]);
+
+        $response
+        ->assertStatus(422)
+        ->assertHeader('Content-Type', 'application/json')
+        ->assertJson([
+            'message' => 'The size must be an integer.',
+        'errors' => ['size' => true]
+        ]);
+    }
+
+/**
+* Get QR Code with string insteand integer size.
+*
+* @return void
+*/
+public function test_get_qr_code_with_string_insteand_integer_size(): void
+{
+    $response = $this->json('GET', '/api/v1/org/qrcodes/976b48f0-7fd3-4d03-82ce-395ddeafe5d5',
+    ['size' => 'big']);
+
+    $response
+    ->assertStatus(422)
+    ->assertHeader('Content-Type', 'application/json')
+    ->assertJson([
+        'message' => 'The size must be an integer.',
+    'errors' => ['size' => true]
+    ]);
+}
 }
