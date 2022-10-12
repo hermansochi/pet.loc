@@ -7,7 +7,6 @@ import { setFullData } from "../../redux/slices/fullDataSlice";
 export default function ContentPage () {
 
 const pagesAmount = useSelector(state=>state.pagesAmount) ;
-// const pagesAmount = 67;
 const dispatch = useDispatch() ;
 
 useEffect(()=>{
@@ -27,6 +26,7 @@ async function getAllUsers() {
     let array = await res ;
     dispatch(setFullData({data:array})) ;
     console.log("getallusers") ;
+    resultArr = null ;
     }
 }
 getAllUsers() ;
