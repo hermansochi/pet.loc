@@ -50,6 +50,12 @@ api-permissions:
 api-composer-install:
 	docker compose run --rm api-php-cli composer install
 
+api-tests:
+	docker compose run --rm api-php-cli php artisan test
+
+api-tests-coverage:
+	docker compose run --rm api-php-cli vendor/bin/phpunit --coverage-html reports/
+
 api-psalm:
 	docker compose run --rm api-php-cli ./vendor/bin/psalm --show-info=true
 
@@ -65,7 +71,7 @@ api-fixtures:
 	docker compose run --rm api-php-cli php artisan avatar:add
 
 api-generate-docs:
-	cp ${PWD}/docs/scribe/* ${PWD}/api/.scribe/endpoints/ 
+	mkdir -p ${PWD}/api/.scribe/endpoints/ && cp ${PWD}/docs/scribe/* ${PWD}/api/.scribe/endpoints/ 
 	docker compose run --rm api-php-cli php artisan scribe:generate
 
 react-clear:

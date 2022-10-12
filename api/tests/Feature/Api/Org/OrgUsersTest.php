@@ -44,7 +44,21 @@ class OrgUsersTest extends TestCase
                     'data.name' => 'string',
                     'data.hide' => 'boolean',
                     'data.thumbnail' => 'boolean',
-
+                    'data.gender' => 'string',
+                    'data.first_name' => 'string|null',
+                    'data.last_name' => 'string|null',
+                    'data.middle_name' => 'string|null',
+                    'data.birthday' => 'string|null',
+                    'data.email' => 'string|null',
+                    'data.cn' => 'string|null',
+                    'data.telephone' => 'string|null',
+                    'data.mobile' => 'string|null',
+                    'data.title' => 'string|null',
+                    'data.department' => 'string|null',
+                    'data.company' => 'string|null',
+                    'data.city' => 'string|null',
+                    'data.created_at' => 'string|null',
+                    'data.updated_at' => 'string|null'
                 ])
             );
     }
