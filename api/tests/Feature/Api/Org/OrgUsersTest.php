@@ -18,6 +18,7 @@ class OrgUsersTest extends TestCase
  
         $response
             ->assertStatus(200)
+            ->assertHeader('Content-Type', 'application/json')
             ->assertJson(fn (AssertableJson $json) =>
                 $json
                     ->where('data.first_name', 'Герман')
@@ -38,6 +39,7 @@ class OrgUsersTest extends TestCase
  
         $response
             ->assertStatus(200)
+            ->assertHeader('Content-Type', 'application/json')
             ->assertJson(fn (AssertableJson $json) =>
                 $json->whereAllType([
                     'data.id' => 'string',
@@ -74,6 +76,7 @@ class OrgUsersTest extends TestCase
  
         $response
             ->assertStatus(404)
+            ->assertHeader('Content-Type', 'application/json')
             ->assertJson(fn (AssertableJson $json) =>
                 $json->where('message', '404 not found')
                      ->where('errors', 'Employee with id 976b48f0-7fd3-4d03-82ce-395ddeafe5d1 not found')
@@ -92,10 +95,42 @@ class OrgUsersTest extends TestCase
  
         $response
             ->assertStatus(422)
+            ->assertHeader('Content-Type', 'application/json')
             ->assertJson(fn (AssertableJson $json) =>
                 $json->where('message', 'id validation error')
                      ->where('errors', '976b48f0-7fd3-4d03-82ce-395ddeafe5d111 not valid uuid')
                      ->etc()
+            );
+    }
+
+     /**
+     * Get first page with employees collection.
+     * 
+     * @return void
+     */
+    public function test_get_first_page_with_empoloees(): void
+    {
+        $response = $this->getJson('/api/v1/org/users/');
+ 
+        $response
+            ->assertStatus(200)
+            ->assertHeader('Content-Type', 'application/json')
+            ->assertJson(fn (AssertableJson $json) =>
+                $json->has('links.first')
+                    ->has('links.last')
+                    ->has('links.prev')
+                    ->has('links.next')
+                    ->has('meta')
+                    ->where('meta.current_page', 1)
+                    ->where('meta.from', 1)
+                    ->has('meta.last_page')
+                    ->has('meta.links')
+                    ->has('meta.path')
+                    ->where('meta.per_page', config('app.employees_per_page'))
+                    ->has('meta.to')
+                    ->where('meta.total', config('app.employees_total'))
+                    ->has('data', config('app.employees_per_page'))
+                    
             );
     }
 }

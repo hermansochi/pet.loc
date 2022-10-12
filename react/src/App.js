@@ -28,13 +28,13 @@ function App() {
           dispatch(setPerPage({ perPageNumber: response.employees.per_page }));
           loadUsersBase(response.employees.per_page, response.employees.total);
         } else {
-          alert("bad conncet");
+          alert("bad connect");
         }
       });
   }, []);
 
   function loadUsersBase(perPage, total) {
-    for (let i = 1; i <= perPage; i++) {
+    for (let i = 1; i <= Math.ceil(total/perPage); i++) {
       dispatch(fetchUsers(i));
     }
     dispatch(setTotal({ totalNumber: total }));

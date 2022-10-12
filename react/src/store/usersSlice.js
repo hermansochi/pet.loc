@@ -15,7 +15,6 @@ export const fetchUsers = createAsyncThunk(
         throw new Error("Bad Connect");
       }
       response = await response.json();
-      response = response.data;
       return response;
     } catch (error) {
       return rejectedWithValue(error.message);
@@ -69,12 +68,11 @@ const usersSlice = createSlice({
     },
     [fetchUsers.fulfilled]: (state, action) => {
       state.status = "resolved";
-      let ids = [...state.users].map((t) => t.id);
-      action.payload.map((el) => {
-        if (!ids.includes(el.id)) {
-          state.users.push(el);
-        }
-      });
+      if (state.users.length === 0) {
+        state.users = action.payload.data;
+      } else {
+        state.users = [...state.users, ...action.payload.data];
+      }
       state.error = null;
     },
     [fetchUsers.rejected]: (state, action) => {

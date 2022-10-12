@@ -7,6 +7,7 @@ Tasks for the Laravel + ReactJS Pet project.
 - [ ] Dev: Install Prettier.
 - [ ] Front: Install React router.
 - [ ] Herman: Dev: Fix: Error 409 react ws HMR.
+- [ ] Herman: Back: Add feature tests for qrcodes endpoint.
 
 
 # In Progress
@@ -15,6 +16,7 @@ Tasks for the Laravel + ReactJS Pet project.
 
 ### Done ✓
 
+- [х] Herman: Front: Fix: Errors in react front.
 - [х] Herman: Dev: Add tests commands in Makefile.
 - [х] Herman: Dev: Add coverage for tests.
 - [х] Herman: Dev: Fix: copy custom endpoint docs to ./scribe/endponts.
