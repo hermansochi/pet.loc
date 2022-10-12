@@ -19,6 +19,15 @@ use Illuminate\Support\Str;
 class OrgUserController extends Controller
 {
     /**
+     * Make new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('id.is.uuid')->only('show');
+    }
+    /**
      * Display a listing of the organization users.
      * Возвращает всех сотрудников организации массивом в объекте data, метаинформацией в объекте meta, ссылками в
      * объекте links.
@@ -109,13 +118,6 @@ class OrgUserController extends Controller
      */
     public function show(string $id)
     {
-        if (! Str::isUuid($id)) {
-            return response([
-                'message' => 'id validation error',
-                'errors' => $id.' not valid uuid',
-            ], 422);
-        }
-
         try {
             $user = OrgUser::findOrFail($id);
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {

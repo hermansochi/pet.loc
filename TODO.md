@@ -6,9 +6,9 @@ Tasks for the Laravel + ReactJS Pet project.
 
 - [ ] Dev: Install Prettier.
 - [ ] Front: Install React router.
-- [ ] Herman: Back: Move uuid check for endpoints in middleware.
-- [ ] Herman: Dev: Fix: Error 409 raact ws HMR.
-- [ ] Herman: Dev: Install & Configure Psalm for Laravel.
+- [ ] Herman: Dev: Fix: copy custom endpoint docs to ./scribe/endponts.
+- [ ] Herman: Dev: Fix: Error 409 react ws HMR.
+- [ ] Herman: Dev: Add tests commands in Makefile.
 
 # In Progress
 
@@ -16,6 +16,9 @@ Tasks for the Laravel + ReactJS Pet project.
 
 ### Done ✓
 
+- [х] Herman: Back: Add feature tests for orgusers endpoint.
+- [х] Herman: Back: Move uuid check for endpoints in middleware.
+- [х] Herman: Dev: Install & Configure Psalm for Laravel.
 - [x] Herman: Docs: Fix api/v1/org/users/{id} description.
 - [x] Herman: Back: Add contsant Total Emploees Employes per page and in .env and healthchek endpoint.
 - [x] Herman: Dev: Configure Pint for Laravel.

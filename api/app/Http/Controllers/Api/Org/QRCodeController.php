@@ -15,6 +15,16 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 class QRCodeController extends Controller
 {
     /**
+     * Make new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('id.is.uuid')->only('show');
+    }
+
+    /**
      * @param \Illuminate\Http\Request
      * @param  string  $id
      * @return \Illuminate\Http\Response
@@ -34,12 +44,6 @@ class QRCodeController extends Controller
      */
     public function show(Request $request, string $id)
     {
-        if (! Str::isUuid($id)) {
-            return response([
-                'message' => 'id validation error',
-                'errors' => $id.' not valid uuid',
-            ], 422);
-        }
         // Query parameters
         $validated = $request->validate([
             //Image size. / Размер изображения. Example: 600

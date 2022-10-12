@@ -22,12 +22,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::prefix('v1')->group(function () {
     Route::prefix('org')->group(function () {
-        Route::apiResource('users', OrgUserController::class)->only([
-            'index', 'show',
-        ]);
-        Route::apiResource('qrcodes', QRCodeController::class)->only([
-            'show',
-        ]);
+        Route::apiResource('users', OrgUserController::class)
+            ->only(['index', 'show',])
+            ->parameters(['users' => 'id']);
+        Route::apiResource('qrcodes', QRCodeController::class)
+            ->only(['show',])
+            ->parameters(['qrcodes' => 'id']);
     });
 
     /**
