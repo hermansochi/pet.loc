@@ -37,7 +37,6 @@ export default function ContentPage () {
 
     return (
         <div>
-            ContentPage
             <CurrentPage/>
         </div>
     ) ;
