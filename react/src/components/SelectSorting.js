@@ -1,19 +1,20 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setSorting, setDirectionSort } from "../store/appSlice";
-import { setUsers } from "../store/usersSlice";
+import { sortUsers } from "../store/usersSlice";
 
 export default function SelectSorting() {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.users.users);
+  const total = useSelector((state) => state.app.total);
   const directionSort = useSelector((state) => state.app.directionSort);
   const sorting = useSelector((state) => state.app.sorting);
 
   function changeSorting(e) {
     dispatch(setSorting({ sortingString: e.target.value }));
     dispatch(
-      setUsers({
-        paramString: e.target.value,
+      sortUsers({
+        paramsArray: [e.target.value, "last_name", "first_name"],
         paramSortBoolean: directionSort,
       })
     );
@@ -22,8 +23,8 @@ export default function SelectSorting() {
   function changeDirectionSort(arg) {
     dispatch(setDirectionSort({ directionBool: arg }));
     dispatch(
-      setUsers({
-        paramString: sorting,
+      sortUsers({
+        paramString: [sorting, "last_name", "first_name"],
         paramSortBoolean: arg,
       })
     );
@@ -47,7 +48,7 @@ export default function SelectSorting() {
   );
 
   let out = (
-    <div className={`flex items-center ${users.length !== 1001 && "hidden"}`}>
+    <div className={`flex items-center ${users.length < total && "hidden"}`}>
       Сортировать
       <select
         className="select select-bordered ml-2 select-xs"

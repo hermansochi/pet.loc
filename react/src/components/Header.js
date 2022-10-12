@@ -3,6 +3,7 @@ import InputSearch from "./InputSearch";
 import Progress from "./Progress";
 import SelectSorting from "./SelectSorting";
 import SelectTheme from "./SelectTheme";
+import Menu from "./Menu";
 
 export default function Header() {
   let out = (
@@ -11,6 +12,7 @@ export default function Header() {
       <Progress />
       <SelectSorting />
       <SelectTheme />
+      <Menu />
     </div>
   );
 

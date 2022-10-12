@@ -27,19 +27,38 @@ const usersSlice = createSlice({
   name: "users",
   initialState: {
     users: [],
+    searchResult: [],
     status: null,
     error: null,
   },
 
   reducers: {
-    setUsers(state, action) {
+    sortUsers(state, action) {
       state.users = state.users.sort((a, b) => {
-        if (a[action.payload.paramString] > b[action.payload.paramString])
-          return action.payload.paramSortBoolean ? 1 : -1;
-        if (a[action.payload.paramString] <= b[action.payload.paramString])
-          return action.payload.paramSortBoolean ? -1 : 1;
-        else return false;
+        let p1 = action.payload.paramsArray[0];
+        let p2 = action.payload.paramsArray[1];
+        let p3 = action.payload.paramsArray[2];
+        let sort = action.payload.paramSortBoolean;
+        if (a[p1] + a[p2] + a[p3] > b[p1] + b[p2] + b[p3]) {
+          return sort ? 1 : -1;
+        }
+        if (a[p1] + a[p2] + a[p3] <= b[p1] + b[p2] + b[p3]) {
+          return sort ? -1 : 1;
+        } else {
+          return false;
+        }
       });
+    },
+
+    showSearchResult(state, action) {
+      let str = action.payload.targetString;
+      let result = [];
+      action.payload.users.forEach((el) => {
+        if (el["cn"].toLowerCase().indexOf(str.toLowerCase()) !== -1) {
+          result.push(el);
+        }
+      });
+      state.searchResult = result;
     },
   },
 
@@ -64,6 +83,6 @@ const usersSlice = createSlice({
     },
   },
 });
-export const { setUsers } = usersSlice.actions;
+export const { sortUsers, showSearchResult } = usersSlice.actions;
 
 export default usersSlice.reducer;

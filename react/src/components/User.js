@@ -1,5 +1,5 @@
 import React from "react";
-import { devUrl, versionApi, avatars } from "../patch";
+import { devUrl, avatars } from "../patch";
 import SvgComponent from "./SvgComponent";
 import { useDispatch } from "react-redux";
 import { setId, setShowqr } from "../store/appSlice";
@@ -37,7 +37,7 @@ export default function User({ data }) {
         <SvgComponent name="people" />
         <img
           className="rounded-full"
-          src={devUrl + versionApi + avatars + data.id}
+          src={`${devUrl}${avatars}${data.id}.jpg`}
           alt=""
         />
         <div className="absolute top-[2%] left-0 h-3 w-3 z-10 text-primary">
@@ -76,11 +76,11 @@ export default function User({ data }) {
           {data.birthday}
         </div>
         <div className="w-full">
-          <span className="font-medium w-[50%] inline-block"></span>
+          <span className="font-medium w-[50%] inline-block">город{"  "}</span>
           {data.city}
         </div>
       </div>
-      <div className="flex flex-grow h-full justify-end items-center">
+      <div className="flex flex-grow h-full items-center">
         <div className="tooltip tooltip-left qr" data-tip="посмотреть QR Code">
           <div
             className="w-5 h-5 cursor-pointer qr"
