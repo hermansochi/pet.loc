@@ -7,6 +7,7 @@ export default function InputSearch() {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.users.users);
   const search = useSelector((state) => state.app.search);
+  const total = useSelector((state) => state.app.total);
 
   function inputSearch(e) {
     dispatch(setSearch({ searchString: e.target.value }));
@@ -19,7 +20,7 @@ export default function InputSearch() {
   let out = (
     <div
       className={`relative w-full max-w-[35%] ${
-        users.length <= 1000 && "hidden"
+        users.length < total && "hidden"
       }`}
     >
       <div className="absolute w-4 h-4 top-2 left-2">

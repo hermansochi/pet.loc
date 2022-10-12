@@ -3,6 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const appSlice = createSlice({
   name: "app",
   initialState: {
+    total: null,
+    perPage: null,
     theme: "garden",
     sorting: "last_name",
     directionSort: true,
@@ -12,6 +14,12 @@ const appSlice = createSlice({
     showqr: false,
   },
   reducers: {
+    setTotal(state, action) {
+      state.total = action.payload.totalNumber;
+    },
+    setPerPage(state, action) {
+      state.perPage = action.payload.perPageNumber;
+    },
     setTheme(state, action) {
       state.theme = action.payload.themrString;
     },
@@ -46,6 +54,8 @@ export const {
   setPage,
   setId,
   setShowqr,
+  setTotal,
+  setPerPage,
 } = appSlice.actions;
 
 export default appSlice.reducer;

@@ -1,5 +1,5 @@
 import React from "react";
-import { devUrl, versionApi, avatars } from "../patch";
+// import { devUrl, versionApi, avatars } from "../patch";
 import SvgComponent from "./SvgComponent";
 import { useDispatch } from "react-redux";
 import { setId, setShowqr } from "../store/appSlice";
@@ -37,7 +37,7 @@ export default function User({ data }) {
         <SvgComponent name="people" />
         <img
           className="rounded-full"
-          src={devUrl + versionApi + avatars + data.id}
+          src={`http://api.localhost/storage/avatars/${data.id}.jpg`}
           alt=""
         />
         <div className="absolute top-[2%] left-0 h-3 w-3 z-10 text-primary">
