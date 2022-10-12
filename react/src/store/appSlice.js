@@ -5,7 +5,7 @@ const appSlice = createSlice({
   initialState: {
     total: null,
     perPage: null,
-    theme: "garden",
+    theme: "luxury",
     sorting: "last_name",
     directionSort: true,
     search: "",

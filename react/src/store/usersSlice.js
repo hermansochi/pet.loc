@@ -27,6 +27,7 @@ const usersSlice = createSlice({
   name: "users",
   initialState: {
     users: [],
+    searchResult: [],
     status: null,
     error: null,
   },
@@ -47,6 +48,17 @@ const usersSlice = createSlice({
           return false;
         }
       });
+    },
+
+    showSearchResult(state, action) {
+      let str = action.payload.targetString;
+      let result = [];
+      action.payload.users.forEach((el) => {
+        if (el["cn"].toLowerCase().indexOf(str.toLowerCase()) !== -1) {
+          result.push(el);
+        }
+      });
+      state.searchResult = result;
     },
   },
 
@@ -71,6 +83,6 @@ const usersSlice = createSlice({
     },
   },
 });
-export const { sortUsers } = usersSlice.actions;
+export const { sortUsers, showSearchResult } = usersSlice.actions;
 
 export default usersSlice.reducer;

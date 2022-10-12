@@ -25,7 +25,7 @@ export default function Progress() {
       }`}
     >
       <progress
-        className="progress progress-primary w-full"
+        className="progress progress-secondary w-full"
         value={users.length}
         max={1000}
       ></progress>

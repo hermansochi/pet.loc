@@ -26,7 +26,7 @@ export default function User() {
         <p className={styleP}>*******************************</p>
         <p className={styleP}>********************** *** ***</p>
       </div>
-      <div className="flex flex-grow h-full justify-end items-center">
+      <div className="flex flex-grow h-full items-center">
         <div className="w-5 h-5">
           <SvgComponent name="qr" />
         </div>
