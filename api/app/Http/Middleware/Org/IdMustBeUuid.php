@@ -23,6 +23,7 @@ class IdMustBeUuid
                 'errors' => $request->id.' not valid uuid',
             ], 422);
         }
+
         return $next($request);
     }
 }

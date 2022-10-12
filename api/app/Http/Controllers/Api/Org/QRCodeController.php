@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\Org;
 use App\Http\Controllers\Controller;
 use App\Models\Org\OrgUser;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 

@@ -7,7 +7,6 @@ use App\Http\Resources\Org\OrgUserCollection;
 use App\Http\Resources\Org\OrgUserResource;
 use App\Models\Org\OrgUser;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 /**
  * @group Organization employee directory management
@@ -27,6 +26,7 @@ class OrgUserController extends Controller
     {
         $this->middleware('id.is.uuid')->only('show');
     }
+
     /**
      * Display a listing of the organization users.
      * Возвращает всех сотрудников организации массивом в объекте data, метаинформацией в объекте meta, ссылками в
@@ -108,12 +108,12 @@ class OrgUserController extends Controller
      *      "created_at": "2022-10-11T12:19:10.000000Z",
      *      "updated_at": "2022-10-11T12:19:10.000000Z" }
      * }
-     * 
+     *
      * @response 422 scenario="Validation error" { "message": "id validation error", "errors": "111 not valid uuid" }
      *
      * @response 404 scenario="Employee not found" {"message": "404 not found", "errors": "Employee with id  976b48f0-7fd3-4d03-82ce-395ddeafe5d4 not found"}
-     * 
-     * @param string $id
+     *
+     * @param  string  $id
      * @return \App\Http\Resources\Org\OrgUserResource
      */
     public function show(string $id)
