@@ -214,7 +214,7 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
-        /*
+    /*
     |--------------------------------------------------------------------------
     | Application Additional parameters
     |--------------------------------------------------------------------------
@@ -227,6 +227,5 @@ return [
 
     'employees_total' => (int) env('APP_EMPLOYEES_TOTAL', 1000),
     'employees_per_page' => (int) env('APP_EMPLOYEES_PER_PAGE', 100),
-
 
 ];

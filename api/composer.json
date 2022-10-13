@@ -55,12 +55,12 @@
 			}
 	},
 	"config": {
-            "process-timeout": 0,
-			"optimize-autoloader": true,
-			"preferred-install": "dist",
-			"sort-packages": true,
-			"allow-plugins": {
-					"pestphp/pest-plugin": true
+				"process-timeout": 0,
+				"optimize-autoloader": true,
+				"preferred-install": "dist",
+				"sort-packages": true,
+				"allow-plugins": {
+				"pestphp/pest-plugin": true
 			}
 	},
 	"minimum-stability": "dev",

@@ -80,8 +80,7 @@ class AddAvatars extends Command
      * Returns false if the file name is longer than 25 characters, the file size is greater than 50 kb, or the file
      * type is not jpeg.
      *
-     * @param string $fileName
-     *
+     * @param  string  $fileName
      * @return bool
      */
     private function validAvatar($fileName): bool
