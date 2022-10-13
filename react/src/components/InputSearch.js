@@ -1,23 +1,26 @@
 import React from "react";
-import SvgComponent from "./SvgComponent";
-import { useDispatch, useSelector } from "react-redux";
-import { setSearch } from "../store/appSlice";
-import { showSearchResult } from "../store/usersSlice";
+import SvgComponent from "./SvgComponent"; // Компонент для SVG картинок
+import { useDispatch, useSelector } from "react-redux"; // Хуки редакса
+import { setSearch } from "../store/appSlice"; // Редюсер для изменения значения строки поиска
+import { showSearchResult } from "../store/usersSlice"; // Редюсер для изменения массива результатов поиска
 
 export default function InputSearch() {
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.users.users);
-  const search = useSelector((state) => state.app.search);
-  const total = useSelector((state) => state.app.total);
+  const users = useSelector((state) => state.users.users); // Массив пользователей
+  const search = useSelector((state) => state.app.search); // Значение строки поиска
+  const total = useSelector((state) => state.app.total); // Колличестов пользователей
 
+  // Функция изменяет значение строки поиска
   function inputSearch(e) {
     dispatch(setSearch({ searchString: e.target.value }));
   }
 
+  // Функция очищаетстроку поиска
   function deletTextSearch() {
     dispatch(setSearch({ searchString: "" }));
   }
 
+  // Функция запускает поиск и изменяет массив результатов поиска понажатию Enter
   function enterToSearch(e) {
     if (e.key === "Enter") {
       dispatch(
@@ -26,6 +29,7 @@ export default function InputSearch() {
     }
   }
 
+  // Функция запускает поиск и изменяет массив результатов поиска по клику на иконку поиска
   function clickToSearch(e) {
     if (e.currentTarget.nextElementSibling.value !== "") {
       dispatch(

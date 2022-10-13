@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { sortUsers } from "../store/usersSlice";
+import { useDispatch, useSelector } from "react-redux"; // Хуки редакса
+import { sortUsers } from "../store/usersSlice"; // Редюсер для сортировки массива ползователей
 
 export default function Progress() {
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.users.users);
-  const total = useSelector((state) => state.app.total);
+  const users = useSelector((state) => state.users.users); // массивпользователей
+  const total = useSelector((state) => state.app.total); // Колличетво пользователей
 
+  // Отслеживается колличество пользователей в хранилище, как только все загружены скрывается шкала загрузки и показываются компонены Поиск и Сортировка
   useEffect(() => {
     if (users.length >= total) {
       dispatch(
