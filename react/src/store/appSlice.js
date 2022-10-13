@@ -5,7 +5,7 @@ const appSlice = createSlice({
   initialState: {
     total: null, // Колличество страниц
     perPage: null, // Лолличество пользователеё на странице
-    theme: "luxury", // Тема по умолччанию
+    theme: false, // Тема по умолччанию светлая
     sorting: "last_name", // Параметр для сортировки (изначально фамилия)
     directionSort: true, // Направление сортировки (изначально по убыванию)
     search: "", // Значение в строке поиска

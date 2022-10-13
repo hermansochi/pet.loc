@@ -50,14 +50,17 @@ function App() {
       dispatch(setShowqr({ showqrBoolean: false }));
     }
   };
-
+  console.log("render");
   // Отрисовка компонентов:
   // 1) Если showQr не равно true компонент QrModal скрыт
   // 2) Отрисовывается  компонент Header
   // 3) Пока асинхронный редюсер всостоянии "loading", показывается компонент PreloaderUser, как только состояние стало "resolved" отрисовывается компонент Main
   // 4) При появлении ошибки выводится сообщение об ошибке
   return (
-    <div className="w-full h-full flex flex-col" data-theme={theme}>
+    <div
+      className="w-full h-full flex flex-col"
+      data-theme={theme ? "luxury" : "garden"}
+    >
       <div className="absolute top-20 right-5 z-50"></div>
       {showQr && <QrModal />}
       <Header />

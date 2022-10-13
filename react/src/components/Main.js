@@ -6,7 +6,7 @@ export default function Main() {
   const users = useSelector((state) => state.users.users); // Массив пользователей
   const total = useSelector((state) => state.app.total); // Коллчество пользователей
   const search = useSelector((state) => state.app.search); // Значение в сроке поиска
-  const searchResult = useSelector((state) => state.users.searchResult); // Массив с результатми поиска
+  const searchResult = useSelector((state) => state.users.searchResult); // Массив с результатми
 
   let showUsers = [];
 
