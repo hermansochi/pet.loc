@@ -1,5 +1,6 @@
 import React from "react";
 
+// Объект с ключами которого являются строки, а значения объекты с параметрами для SVG элемента
 const icons = {
   present: {
     path: (
@@ -67,6 +68,7 @@ const icons = {
     box: "0 0 320 512",
   },
 };
+
 export default function SvgComponent({ name }) {
   let out = (
     <svg

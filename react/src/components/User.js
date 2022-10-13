@@ -1,17 +1,19 @@
 import React from "react";
-import { devUrl, avatars } from "../patch";
-import SvgComponent from "./SvgComponent";
-import { useDispatch } from "react-redux";
-import { setId, setShowqr } from "../store/appSlice";
+import { devUrl, avatars } from "../patch"; // Пути для запросов
+import SvgComponent from "./SvgComponent"; // Компонент для SVG картинок
+import { useDispatch } from "react-redux"; // хук редакса для изменения состояния
+import { setId, setShowqr } from "../store/appSlice"; // редюсеры состояния приложения
 
 export default function User({ data }) {
   const dispactch = useDispatch();
 
+  // Функция форматирования номера телефона, возвращает изменённую строку
   function formateNum(num) {
     let n = num.split("");
     return `+7 (${n[0]}${n[1]}${n[2]}) ${n[3]}${n[4]}${n[5]} ${n[6]}${n[7]} ${n[8]}${n[9]}`;
   }
 
+  // Функция мзменяет id текущего пользователя и показывает скрытое окно для QR кода
   function changeCurrentId(e) {
     dispactch(setId({ idString: e.currentTarget.id }));
     dispactch(setShowqr({ showqrBoolean: true }));

@@ -1,15 +1,16 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setSorting, setDirectionSort } from "../store/appSlice";
-import { sortUsers } from "../store/usersSlice";
+import { useDispatch, useSelector } from "react-redux"; // Хуки рудакса
+import { setSorting, setDirectionSort } from "../store/appSlice"; // Редюсерв состояния приложения
+import { sortUsers } from "../store/usersSlice"; // Редюсер сортировки массива пользователей
 
 export default function SelectSorting() {
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.users.users);
-  const total = useSelector((state) => state.app.total);
-  const directionSort = useSelector((state) => state.app.directionSort);
-  const sorting = useSelector((state) => state.app.sorting);
+  const users = useSelector((state) => state.users.users); // Массив пользователей
+  const total = useSelector((state) => state.app.total); // Колличество пользователеё
+  const directionSort = useSelector((state) => state.app.directionSort); // Напрвление сортировки
+  const sorting = useSelector((state) => state.app.sorting); // Параметр для сортировки
 
+  // Функция изменяет параметр  сортировки и запускает редусер для сортировки массива пользователей
   function changeSorting(e) {
     dispatch(setSorting({ sortingString: e.target.value }));
     dispatch(
@@ -20,16 +21,18 @@ export default function SelectSorting() {
     );
   }
 
+  // Функция изменяет направление сортировки
   function changeDirectionSort(arg) {
     dispatch(setDirectionSort({ directionBool: arg }));
     dispatch(
       sortUsers({
-        paramString: [sorting, "last_name", "first_name"],
+        paramsArray: [sorting, "last_name", "first_name"],
         paramSortBoolean: arg,
       })
     );
   }
 
+  // В завимости от направления сотрировки отрисовываются элементы и SVG иконка
   let showDirectionSort = directionSort ? (
     <div className="tooltip tooltip-left cursor-pointer" data-tip="по убыванию">
       <div className="text-2xl ml-2" onClick={() => changeDirectionSort(false)}>
