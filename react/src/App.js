@@ -6,7 +6,7 @@ import PreloaderUser from "./components/PreloaderUser";
 import { devUrl, healthcheck, versionApi, headers } from "./patch";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUsers } from "./store/usersSlice";
-import { setPage, setShowqr } from "./store/appSlice";
+import { setTotal, setPerPage, setPage, setShowqr } from "./store/appSlice";
 
 function App() {
   const dispatch = useDispatch();
@@ -24,17 +24,21 @@ function App() {
     })
       .then((response) => response.json())
       .then((response) => {
-        if (response.status !== "up") {
-          alert("bad conncet");
+        if (response.status === "up") {
+          dispatch(setPerPage({ perPageNumber: response.employees.per_page }));
+          loadUsersBase(response.employees.per_page, response.employees.total);
+        } else {
+          alert("bad connect");
         }
       });
   }, []);
 
-  useEffect(() => {
-    for (let i = 0; i <= 21; i++) {
+  function loadUsersBase(perPage, total) {
+    for (let i = 1; i <= Math.ceil(total/perPage); i++) {
       dispatch(fetchUsers(i));
     }
-  }, [dispatch]);
+    dispatch(setTotal({ totalNumber: total }));
+  }
 
   document.body.onclick = (e) => {
     if (!e.target.classList.contains("qr")) {
@@ -54,6 +58,7 @@ function App() {
 
   return (
     <div className="w-full h-full flex flex-col" data-theme={theme}>
+      <div className="absolute top-20 right-5 z-50"></div>
       {showQr && <QrModal />}
       <Header />
       {status === "loading" ? <PreloaderUser /> : <Main />}

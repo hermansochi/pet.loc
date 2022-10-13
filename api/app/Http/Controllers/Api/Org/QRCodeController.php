@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\Org;
 use App\Http\Controllers\Controller;
 use App\Models\Org\OrgUser;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
@@ -14,6 +13,16 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
  */
 class QRCodeController extends Controller
 {
+    /**
+     * Make new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('id.is.uuid')->only('show');
+    }
+
     /**
      * @param \Illuminate\Http\Request
      * @param  string  $id
@@ -34,12 +43,6 @@ class QRCodeController extends Controller
      */
     public function show(Request $request, string $id)
     {
-        if (! Str::isUuid($id)) {
-            return response([
-                'message' => 'id validation error',
-                'errors' => $id.' not valid uuid',
-            ], 422);
-        }
         // Query parameters
         $validated = $request->validate([
             //Image size. / Размер изображения. Example: 600

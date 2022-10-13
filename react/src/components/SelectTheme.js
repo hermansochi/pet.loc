@@ -16,12 +16,12 @@ export default function SelectTheme() {
         onChange={changeTheme}
       >
         {[
+          "luxury",
           "garden",
           "corporate",
           "fantasy",
           "halloween",
           "forest",
-          "luxury",
           "synthwave",
         ].map((el, i) => {
           return <option key={i}>{el}</option>;
