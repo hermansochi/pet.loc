@@ -14,6 +14,8 @@ Tasks for the Laravel + ReactJS Pet project.
 
 ### Done ✓
 
+- [х] Herman: Back: Add feature tests for OrgUser model.
+- [х] Herman: Back: Add feature tests for add avatars command.
 - [х] Herman: Back: Add feature tests for qrcodes endpoint.
 - [х] Herman: Front: Fix: Errors in react front.
 - [х] Herman: Dev: Add tests commands in Makefile.
