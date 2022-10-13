@@ -28,9 +28,11 @@ class OrgUserController extends Controller
     }
 
     /**
-     * Display a listing of the organization users.
-     * Возвращает всех сотрудников организации массивом в объекте data, метаинформацией в объекте meta, ссылками в
-     * объекте links.
+     * Return paginated organization employees. The number of entries per page is set in .env in 
+     * APP_EMPLOYEES_PER_PAGE=100
+     * Возвращает сотрудников организации массивом в объекте data, метаинформацией в объекте meta, ссылками в
+     * объекте links cс разбивкой оп страницам. Количество записей на страницу устанавливается в .env в
+     * APP_EMPLOYEES_PER_PAGE=100
      *
      * @unauthenticated
      *

@@ -1,8 +1,5 @@
 FROM php:8.1-cli-alpine
 
-ENV XDEBUG_VERSION 3.1.2
-
-
 RUN apk add --no-cache postgresql-dev bash coreutils git \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
     && git clone --branch $XDEBUG_VERSION --depth 1 https://github.com/xdebug/xdebug.git /usr/src/php/ext/xdebug \

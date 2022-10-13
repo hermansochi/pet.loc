@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+    react:
+        image: ${REGISTRY}/pet-react:${IMAGE_TAG}
+        restart: always
+
+    api:
+        image: ${REGISTRY}/pet-api:${IMAGE_TAG}
+        restart: always
+
+    api-php-fpm:
+        image: ${REGISTRY}/pet-api-php-fpm:${IMAGE_TAG}
+        restart: always
+
