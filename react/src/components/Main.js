@@ -4,28 +4,35 @@ import { useSelector } from "react-redux"; //  хук состояния ред�
 
 export default function Main() {
   const users = useSelector((state) => state.users.users); // Массив пользователей
-  const total = useSelector((state) => state.app.total); // Коллчество пользователей
+  const page = useSelector((state) => state.app.page); // Коллчество пользователей на странице
   const search = useSelector((state) => state.app.search); // Значение в сроке поиска
   const searchResult = useSelector((state) => state.users.searchResult); // Массив с результатми
 
   let showUsers = [];
 
-  if (search === "") {
-    showUsers = users.map((el, i) => {
-      if (i <= total) {
-        return <User key={el.id} data={el} />;
+  if (search.length < 3) {
+    users.forEach((el, i) => {
+      if (i <= page * 100) {
+        showUsers.push(<User key={el.id} data={el} />);
       }
     });
   } else {
-    showUsers = searchResult.map((el, i) => {
-      if (i <= total) {
-        return <User key={el.id} data={el} />;
+    searchResult.forEach((el, i) => {
+      if (i <= page * 100) {
+        showUsers.push(<User key={el.id} data={el} />);
       }
     });
+    if (searchResult.length === 0 && search !== "") {
+      showUsers = (
+        <div className="font-semibold text-2xl">Поиск не дал результатов</div>
+      );
+    }
   }
 
   let out = (
-    <div className="w-full flex flex-col items-center ">{showUsers}</div>
+    <div className="w-full flex-grow min-h-screen flex flex-col items-center">
+      {showUsers}
+    </div>
   );
 
   return out;

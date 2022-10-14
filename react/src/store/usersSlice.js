@@ -55,12 +55,23 @@ const usersSlice = createSlice({
     showSearchResult(state, action) {
       let str = action.payload.targetString;
       let result = [];
-      action.payload.users.forEach((el) => {
-        if (el["cn"].toLowerCase().indexOf(str.toLowerCase()) !== -1) {
+      state.users.forEach((el) => {
+        if (
+          el["cn"].toLowerCase().indexOf(str.toLowerCase()) !== -1 ||
+          el["city"].toLowerCase().indexOf(str.toLowerCase()) !== -1 ||
+          el["company"].toLowerCase().indexOf(str.toLowerCase()) !== -1 ||
+          el["title"].toLowerCase().indexOf(str.toLowerCase()) !== -1 ||
+          el["department"].toLowerCase().indexOf(str.toLowerCase()) !== -1
+        ) {
           result.push(el);
         }
       });
       state.searchResult = result;
+    },
+
+    // Редюсер для очистки массива с результатами поиска
+    clearSearchResult(state) {
+      state.searchResult = [];
     },
   },
 
@@ -86,6 +97,7 @@ const usersSlice = createSlice({
     },
   },
 });
-export const { sortUsers, showSearchResult } = usersSlice.actions;
+export const { sortUsers, showSearchResult, clearSearchResult } =
+  usersSlice.actions;
 
 export default usersSlice.reducer;

@@ -14,7 +14,11 @@ export default function SelectTheme() {
   let out = (
     <div className="flex items-center">
       Тема
-      <input type="checkbox" className="toggle ml-1" onChange={changeTheme} />
+      <input
+        type="checkbox"
+        className="toggle ml-1 cursor-pointer"
+        onChange={changeTheme}
+      />
     </div>
   );
 
