@@ -6,8 +6,9 @@ Tasks for the Laravel + ReactJS Pet project.
 
 - [ ] Dev: Install Prettier.
 - [ ] Front: Install React router.
-- [ ] Herman: Dev: Copy Nginx config to Underdante& Fix: Error 409 react ws HMR.
-- [ ] makiDev: Make provisioning for production server vau Ansible playbooks.
+- [ ] Herman: Dev: Copy Nginx config to Underdante & Fix: Error 409 react ws HMR.
+- [ ] Herman: Dev: Make private docker hub repository.
+- [ ] Herman: Dev: Make provisioning for production server vau Ansible playbooks.
 
 # In Progress
 

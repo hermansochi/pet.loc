@@ -24,6 +24,12 @@ restart: down up
 lint: react-lint vue-lint
 lint-fix: react-lint-fix
 
+images:
+	docker images
+
+prune:
+	docker system prune
+
 memory:
 	sudo sh -c "echo 3 > /proc/sys/vm/drop_caches"
 
