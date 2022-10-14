@@ -4,22 +4,22 @@ import { useSelector } from "react-redux"; //  хук состояния ред�
 
 export default function Main() {
   const users = useSelector((state) => state.users.users); // Массив пользователей
-  const total = useSelector((state) => state.app.total); // Коллчество пользователей
+  const page = useSelector((state) => state.app.page); // Коллчество пользователей на странице
   const search = useSelector((state) => state.app.search); // Значение в сроке поиска
   const searchResult = useSelector((state) => state.users.searchResult); // Массив с результатми
 
   let showUsers = [];
 
   if (search === "") {
-    showUsers = users.map((el, i) => {
-      if (i <= total) {
-        return <User key={el.id} data={el} />;
+    users.forEach((el, i) => {
+      if (i <= page * 50) {
+        showUsers.push(<User key={el.id} data={el} />);
       }
     });
   } else {
-    showUsers = searchResult.map((el, i) => {
-      if (i <= total) {
-        return <User key={el.id} data={el} />;
+    searchResult.forEach((el, i) => {
+      if (i <= page * 50) {
+        showUsers.push(<User key={el.id} data={el} />);
       }
     });
   }

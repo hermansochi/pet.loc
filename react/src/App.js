@@ -6,10 +6,11 @@ import PreloaderUser from "./components/PreloaderUser"; // Компонент з
 import { devUrl, healthcheck, versionApi, headers } from "./patch"; // константы путей
 import { useSelector, useDispatch } from "react-redux"; // хуки редакса
 import { fetchUsers } from "./store/usersSlice"; // асинхронный редюсер для загрузки данных
-import { setTotal, setPerPage, setShowqr } from "./store/appSlice"; // редюсеры изменеия состояния приложения
+import { setTotal, setPerPage, setShowqr, setPage } from "./store/appSlice"; // редюсеры изменеия состояния приложения
 
 function App() {
   const dispatch = useDispatch();
+  const page = useSelector((state) => state.app.page); // номер страницы
   const theme = useSelector((state) => state.app.theme); // Изначальная цветовая тема
   const showQr = useSelector((state) => state.app.showqr); // Состояние показа QR кода (изначально скрыто)
   const { status, error } = useSelector((state) => state.users); // Состояние выполнения асинхронного редюсера
@@ -25,6 +26,8 @@ function App() {
       .then((response) => response.json())
       .then((response) => {
         if (response.status === "up") {
+          // Запускаем редюсер для определения колличества всех юзеров
+          dispatch(setTotal({ totalNumber: response.employees.total }));
           // Запускаем редюсер для определения колличества юзеров на странице
           dispatch(setPerPage({ perPageNumber: response.employees.per_page }));
           // Запускаем функцию загрузки базы данных с юзерами
@@ -41,7 +44,6 @@ function App() {
     for (let i = 1; i <= Math.ceil(total / perPage); i++) {
       dispatch(fetchUsers(i));
     }
-    dispatch(setTotal({ totalNumber: total }));
   }
 
   // Функция скрывает окно с QR кодом текущего пользователя, отслеживает клик по документу, если клик сработал на элементе не имеющем класса "qr" меняем состояние хранилища для показа QR кода
@@ -50,6 +52,17 @@ function App() {
       dispatch(setShowqr({ showqrBoolean: false }));
     }
   };
+
+  window.onscroll = () => {
+    let scrollHeight = document.body.scrollHeight;
+    let totalHeight = window.scrollY + window.innerHeight;
+
+    if (totalHeight >= scrollHeight) {
+      console.log("at the bottom");
+      dispatch(setPage({ pageNumber: page + 1 }));
+    }
+  };
+
   console.log("render");
   // Отрисовка компонентов:
   // 1) Если showQr не равно true компонент QrModal скрыт

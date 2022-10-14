@@ -4,7 +4,7 @@ import { sortUsers } from "../store/usersSlice"; // Редюсер для сор
 
 export default function Progress() {
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.users.users); // массивпользователей
+  const users = useSelector((state) => state.users.users); // массив пользователей
   const total = useSelector((state) => state.app.total); // Колличетво пользователей
 
   // Отслеживается колличество пользователей в хранилище, как только все загружены скрывается шкала загрузки и показываются компонены Поиск и Сортировка

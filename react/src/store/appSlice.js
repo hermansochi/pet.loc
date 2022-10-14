@@ -5,6 +5,7 @@ const appSlice = createSlice({
   initialState: {
     total: null, // Колличество страниц
     perPage: null, // Лолличество пользователеё на странице
+    page: 1, // Номер страницы
     theme: false, // Тема по умолччанию светлая
     sorting: "last_name", // Параметр для сортировки (изначально фамилия)
     directionSort: true, // Направление сортировки (изначально по убыванию)
@@ -52,6 +53,7 @@ export const {
   setSearch,
   setId,
   setShowqr,
+  setPage,
   setTotal,
   setPerPage,
 } = appSlice.actions;
