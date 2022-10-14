@@ -58,12 +58,10 @@ function App() {
     let totalHeight = window.scrollY + window.innerHeight;
 
     if (totalHeight >= scrollHeight) {
-      console.log("at the bottom");
       dispatch(setPage({ pageNumber: page + 1 }));
     }
   };
 
-  console.log("render");
   // Отрисовка компонентов:
   // 1) Если showQr не равно true компонент QrModal скрыт
   // 2) Отрисовывается  компонент Header

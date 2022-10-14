@@ -19,20 +19,6 @@ export default function User({ data }) {
     dispactch(setShowqr({ showqrBoolean: true }));
   }
 
-  let gender;
-  switch (data.gender) {
-    case "m":
-      gender = "man";
-      break;
-    case "f":
-      gender = "woman";
-      break;
-
-    default:
-      gender = "";
-      break;
-  }
-
   let out = (
     <div className="w-full outline hover:backdrop-brightness-200 outline-8 outline-secondary h-20 my-1.5  flex  items-center text-xs px-4 py-2 space-x-2">
       <div className="relative h-full min-h-[36px] min-w-[36px] cursor-pointer hover:z-10 hover:translate-x-[20px] hover:scale-[200%] duration-300 aspect-square  flex items-center overflow-hidden  border-current">
@@ -42,9 +28,6 @@ export default function User({ data }) {
           src={`${devUrl}${avatars}${data.id}.jpg`}
           alt=""
         />
-        <div className="absolute top-[2%] left-0 h-3 w-3 z-10 text-primary">
-          <SvgComponent name={gender} />
-        </div>
       </div>
       <div className="flex min-w-[280px] flex-col justify-center h-full p-2">
         <div className="text-sm font-medium">{data.cn}</div>

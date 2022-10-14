@@ -2,16 +2,18 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux"; // Хуки рудакса
 import { setSorting, setDirectionSort } from "../store/appSlice"; // Редюсерв состояния приложения
 import { sortUsers } from "../store/usersSlice"; // Редюсер сортировки массива пользователей
+import { setPage } from "./store/appSlice"; // Редюсер изменения колличества отрисованных страниц
 
 export default function SelectSorting() {
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.users.users); // Массив пользователей
+  const usersLength = useSelector((state) => state.users.users.length); // длинна  массива пользователей
   const total = useSelector((state) => state.app.total); // Колличество пользователеё
   const directionSort = useSelector((state) => state.app.directionSort); // Напрвление сортировки
   const sorting = useSelector((state) => state.app.sorting); // Параметр для сортировки
 
   // Функция изменяет параметр  сортировки и запускает редусер для сортировки массива пользователей
   function changeSorting(e) {
+    dispatch(setPage({ pageNumber: 1 }));
     dispatch(setSorting({ sortingString: e.target.value }));
     dispatch(
       sortUsers({
@@ -23,6 +25,7 @@ export default function SelectSorting() {
 
   // Функция изменяет направление сортировки
   function changeDirectionSort(arg) {
+    dispatch(setPage({ pageNumber: 1 }));
     dispatch(setDirectionSort({ directionBool: arg }));
     dispatch(
       sortUsers({
@@ -51,7 +54,7 @@ export default function SelectSorting() {
   );
 
   let out = (
-    <div className={`flex items-center ${users.length < total && "hidden"}`}>
+    <div className={`flex items-center ${usersLength < total && "hidden"}`}>
       Сортировать
       <select
         className="select select-bordered ml-2 select-xs"

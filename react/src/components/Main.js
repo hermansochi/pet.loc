@@ -10,22 +10,29 @@ export default function Main() {
 
   let showUsers = [];
 
-  if (search === "") {
+  if (search.length < 3) {
     users.forEach((el, i) => {
-      if (i <= page * 50) {
+      if (i <= page * 100) {
         showUsers.push(<User key={el.id} data={el} />);
       }
     });
   } else {
     searchResult.forEach((el, i) => {
-      if (i <= page * 50) {
+      if (i <= page * 100) {
         showUsers.push(<User key={el.id} data={el} />);
       }
     });
+    if (searchResult.length === 0 && search !== "") {
+      showUsers = (
+        <div className="font-semibold text-2xl">Поиск не дал результатов</div>
+      );
+    }
   }
 
   let out = (
-    <div className="w-full flex flex-col items-center ">{showUsers}</div>
+    <div className="w-full flex-grow min-h-screen flex flex-col items-center">
+      {showUsers}
+    </div>
   );
 
   return out;
