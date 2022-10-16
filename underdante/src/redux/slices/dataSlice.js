@@ -47,15 +47,15 @@ const dataSlice = createSlice({
     }
 ,
   reducers: {
-     addUserBlock : (state , action)=>{
+     addUserBlock : (state , action) => {
       state.users.rawUsers.push(action.payload.usersBlock);
       state.users.ripeUsers.push(action.payload.usersBlock.data); // передаю только необходимую информацию
       },
-      inputFiltration : (state, action)=>{  //фильтр по вводу вариант 1 
+      inputFiltration : (state, action) => {  //фильтр по вводу вариант 1 
         state.users.filtredUsers = state.users.ripeUsers.filter(user => user.name.toLowerCase().includes(action.payload.text)) ;
         if (action.payload.showAll) state.users.filtredUsers = state.users.ripeUsers ;
       } ,
-      setInputFilter : (state ,action)=>{ // фильтр по вводу вар 2 
+      setInputFilter : (state ,action) => { // фильтр по вводу вар 2 
         state.inputFilter = action.payload ;
       } , 
 
