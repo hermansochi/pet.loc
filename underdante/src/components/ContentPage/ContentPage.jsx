@@ -1,43 +1,66 @@
 import React from "react";
-// import { useSelector , useDispatch } from "react-redux";
-import CurrentPage from "./CurrentPage";
-// import paths from "../../paths/paths";
+import { useSelector } from "react-redux";
+// import CurrentPage from "./CurrentPage";
+// import { useDispatch } from "react-redux";
+// import { setFultredUsers } from "../../redux/slices/dataSlice";
 
+
+//рендер пользователей
 export default function ContentPage () {
+//  const state = useSelector(state=>state.data.users.filtredUsers) ; // получаю стеит вар 1
+ const state = useSelector(state=>state.data.users.ripeUsers) ; // получаю стеит 
+ const inputFilter = useSelector(state=>state.data.inputFilter) ; // получаю фильтр 
+ const category = useSelector(state => state.data.categoryFilter) ;
+//  let dispatch = useDispatch() ;
 
-// const pagesAmount = useSelector(state=>state.pagesAmount) ;
-// const dispatch = useDispatch() ;
+// отрисовка вар 1
+//  let output = state.map((user)=>{
 
-// useEffect(()=>{
-// async function getAllUsers() {
-//     console.log(pagesAmount) ;
-//     if (pagesAmount.isDone) {
-//     let resultArr = [] ;
+//     return (
+//         <div key = {user.id}>
+//             {user.name}
+//         </div>
+//     ) ;
 
-//     for(let i = 1 ; i <= pagesAmount.amount ; i++) {
-//         let responce = await fetch(paths.getUsers(i)) ;
-//         let json = await responce.json() ;
+//  });
 
-//         resultArr.push(json) ;
-
-//     }
-//     let res = Promise.all(resultArr) ;
-//     let array = await res ;
-//     dispatch(setFullData({data:array})) ;
-//     console.log("getallusers") ;
-//     resultArr = null ;
-//     }
-// }
-// getAllUsers() ;
+let result ;
+if (inputFilter) {
+    result = state.filter(user=>user[category].toLowerCase().includes(inputFilter)) ;
+}else{
+    result = state ;
+}
 
 
-// } , [pagesAmount]) ;
+
+ 
+ let output = result.map((user)=>{
+
+    return (
+        <div key = {user.id}>
+            {user.cn}
+            {user.company}
+            {user.department}
+            {user.birthday}
+            {user.telephone}
+            {user.mobile}
+            {user.title}
+            {user.gender}
+            {user.city}
+            {user.email}
+        </div>
+    ) ;
+
+ });
+
+
 
 
 
     return (
         <div>
-            <CurrentPage/>
+            Content
+            {output}
         </div>
     ) ;
 }

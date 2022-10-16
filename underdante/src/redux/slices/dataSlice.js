@@ -1,6 +1,6 @@
 import { createSlice ,createAsyncThunk } from '@reduxjs/toolkit' ;
 
-
+// запрос и сохранение массива пользователей
 export const getData = createAsyncThunk(
   'dataSlice/getData' ,
   async function(paths , {rejectWithValue , dispatch}) {
@@ -24,7 +24,6 @@ export const getData = createAsyncThunk(
         let json = await usersResponce.json() ;
       
         dispatch(addUserBlock ({usersBlock:json})) ;
-
     } 
   } catch(error) {
       return rejectWithValue({error:error.message}) ;
@@ -32,11 +31,16 @@ export const getData = createAsyncThunk(
   } 
 ) ;
 
-
 const dataSlice = createSlice({
   name: 'data',
   initialState: {
-      users:[] ,
+      users:{
+        rawUsers : [] ,
+        ripeUsers : [] ,
+        filtredUsers : [] ,
+      } ,
+      categoryFilter : "cn" ,
+      inputFilter : "" ,
       status :null ,
       error:null ,    
 
@@ -44,8 +48,26 @@ const dataSlice = createSlice({
 ,
   reducers: {
      addUserBlock : (state , action)=>{
-      state.users.push(action.payload.usersBlock) ;
-    },
+      state.users.rawUsers.push(action.payload.usersBlock);
+      state.users.ripeUsers.push(action.payload.usersBlock.data); // передаю только необходимую информацию
+      },
+      inputFiltration : (state, action)=>{  //фильтр по вводу вариант 1 
+        state.users.filtredUsers = state.users.ripeUsers.filter(user => user.name.toLowerCase().includes(action.payload.text)) ;
+        if (action.payload.showAll) state.users.filtredUsers = state.users.ripeUsers ;
+      } ,
+      setInputFilter : (state ,action)=>{ // фильтр по вводу вар 2 
+        state.inputFilter = action.payload ;
+      } , 
+
+      // setFultredUsers : (state , action) => {
+      //   state.users.filtredUsers = action.payload.filtredUsers ;
+      // } ,
+      
+      setCategoryFilter : (state , action) => { // задаем категорию для поиска
+        state.categoryFilter = action.payload.categoryFilter ; 
+        state.inputFilter = "" ;
+      } ,
+
 } ,
 extraReducers : {
   [getData.pending] : (state)=>{
@@ -53,6 +75,8 @@ extraReducers : {
     state.error = null ;
   } ,
   [getData.fulfilled] : (state)=>{
+    state.users.ripeUsers = state.users.ripeUsers.flat() ; // сплющиваю для удобства
+    // state.users.filtredUsers = state.users.ripeUsers ; // вариант фильтрации 1
     state.status = "resolved" ;
     state.error = null ;
   } ,
@@ -63,6 +87,8 @@ extraReducers : {
 }
 });
 
-export const {addUserBlock } = dataSlice.actions ;
+export const {addUserBlock , inputFiltration , setInputFilter , setFultredUsers , setCategoryFilter} = dataSlice.actions ;
 
 export default dataSlice.reducer ;
+
+
