@@ -149,6 +149,7 @@ build: build-api build-frontend
 
 build-frontend:
 	docker --log-level=debug build --pull --file=react/docker/production/nginx/Dockerfile --tag=${REGISTRY}/pet-react:${IMAGE_TAG} react
+	docker --log-level=debug build --pull --file=frontend/docker/production/nginx/Dockerfile --tag=${REGISTRY}/frontend:${IMAGE_TAG} frontend
 
 build-api:
 	docker --log-level=debug build --pull --file=api/docker/production/nginx/Dockerfile --tag=${REGISTRY}/pet-api:${IMAGE_TAG} api
@@ -158,7 +159,10 @@ build-api:
 try-build:
 	REGISTRY=localhost IMAGE_TAG=0 make build
 
-push: push-react push-api
+push: push-frontend push-react push-api
+
+push-frontend:
+	docker push ${REGISTRY}/frontend:${IMAGE_TAG}
 
 push-react:
 	docker push ${REGISTRY}/pet-react:${IMAGE_TAG}
@@ -169,19 +173,17 @@ push-api:
 	docker push ${REGISTRY}/pet-api-php-cli:${IMAGE_TAG}
 	
 deploy:
-	ssh ${HOST} -p ${PORT} 'rm -rf site_${BUILD_NUMBER} && mkdir site_${BUILD_NUMBER}'
-	scp -P ${PORT} docker-compose-production-env.yml ${HOST}:site_${BUILD_NUMBER}/docker-compose-production.yml
-	ssh ${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && echo "COMPOSE_PROJECT_NAME=pet >> .env'
-	ssh ${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && echo "REGISTRY=${REGISTRY} >> .env'
-	ssh ${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && echo "IMAGE_TAG=${IMAHE_TAG} >> .env'
-	ssh ${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && docker compose -f docker-compose-production.yml pull'
-	ssh ${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && docker compose -f docker-compose-production.yml down --build --remove-orphans -d'
-	ssh ${HOST} -p ${PORT} 'rm -f site'
-	ssh ${HOST} -p ${PORT} 'ln -sr site_${BUILD_NUMBER} site'
+	ssh -o StrictHostKeyChecking=no deploy@${HOST} -p ${PORT} 'docker network create --driver=overlay traefik-public || true'
+	ssh -o StrictHostKeyChecking=no deploy@${HOST} -p ${PORT} 'rm -rf site_${BUILD_NUMBER} && mkdir site_${BUILD_NUMBER}'
+	envsubst < docker-compose-production.yml > docker-compose-production-env.yml
+	scp -o StrictHostKeyChecking=no -P ${PORT} docker-compose-production-env.yml deploy@${HOST}:site_${BUILD_NUMBER}/docker-compose.yml
+	rm -f docker-compose-production-env.yml
+	ssh -o StrictHostKeyChecking=no deploy@${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && docker stack deploy  --with-registry-auth --prune --compose-file docker-compose.yml pet'
+
+deploy-clean:
+	rm -f docker-compose-production-env.yml
 
 rollback:
-	ssh ${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && docker compose -f docker-compose-production.yml pull'
-	ssh ${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && docker compose -f docker-compose-production.yml down --build --remove-orphans -d'
-	ssh ${HOST} -p ${PORT} 'rm -f site'
-	ssh ${HOST} -p ${PORT} 'ln -sr site_${BUILD_NUMBER} site'
+	ssh -o StrictHostKeyChecking=no deploy@${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && docker stack deploy --with-registry-auth --prune --compose-file docker-compose.yml pet'
+
 
