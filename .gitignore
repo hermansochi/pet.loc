@@ -1,3 +1,7 @@
 /.docker-images-before
 /.docker-images-after
-/provisioning
+/provisioning/hosts.yml
+/provisioning/site.yml
+/provisioning/docker-login.yml
+/provisioning/authorize.yml
+/provisioning/roles/site/defaults/main.yml

@@ -1,0 +1,10 @@
+---
+-   name: Add authorized key
+    hosts: all
+    remote_user: user
+    become: yes
+    tasks:
+        -   name: Add user authorized key
+            authorized_key:
+                user: deploy
+                key: "{{ lookup('file', '~/.ssh/id_ed25519.pub') }}"
