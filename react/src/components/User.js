@@ -19,15 +19,20 @@ export default function User({ data }) {
     dispactch(setShowqr({ showqrBoolean: true }));
   }
 
+  // Показывает дефолтную иконку при отсутстрии фотографии на сервере
+  let showImage = data.thumbnail && (
+    <img
+      className="rounded-full"
+      src={`${devUrl}${avatars}${data.id}.jpg`}
+      alt=""
+    />
+  );
+
   let out = (
     <div className="w-full outline hover:backdrop-brightness-200 outline-8 outline-secondary h-20 my-1.5  flex  items-center text-xs px-4 py-2 space-x-2">
       <div className="relative h-full min-h-[36px] min-w-[36px] cursor-pointer hover:z-10 hover:translate-x-[20px] hover:scale-[200%] duration-300 aspect-square  flex items-center overflow-hidden  border-current">
         <SvgComponent name="people" />
-        <img
-          className="rounded-full"
-          src={`${devUrl}${avatars}${data.id}.jpg`}
-          alt=""
-        />
+        {showImage}
       </div>
       <div className="flex min-w-[280px] flex-col justify-center h-full p-2">
         <div className="text-sm font-medium">{data.cn}</div>

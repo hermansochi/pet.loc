@@ -12,13 +12,13 @@ export default function Main() {
 
   if (search.length < 3) {
     users.forEach((el, i) => {
-      if (i <= page * 100) {
+      if (i <= page * 100 && el.fide !== false) {
         showUsers.push(<User key={el.id} data={el} />);
       }
     });
   } else {
     searchResult.forEach((el, i) => {
-      if (i <= page * 100) {
+      if (i <= page * 100 && el.fide !== false) {
         showUsers.push(<User key={el.id} data={el} />);
       }
     });
