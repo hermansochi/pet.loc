@@ -16,8 +16,7 @@ export default function Main() {
     dispatch(getData(paths)) ;
   }, []);
 
-  return <div>
-    hello everyone
+  return <div className ={`w-screen`}>
     { status === "loading" && <div>Loading.... </div> }
     { status === "resolved" && <>
     <Header/>

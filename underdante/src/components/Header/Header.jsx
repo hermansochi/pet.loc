@@ -5,7 +5,7 @@ import SelectCategory from "./SelectCategory";
 export default function Header () {
     
 
-    return (<div>
+    return (<div className={`flex mb-[3rem] justify-evenly`}>
         <SelectCategory/>
         <Input/>
     </div>) ;

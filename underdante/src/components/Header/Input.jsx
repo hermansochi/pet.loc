@@ -27,13 +27,13 @@ export default function Input () {
     }, [categoryFilter]) ;
     
     
-    function filtration(event) {
+    function filtration(event) {  // запуск фильтрации
         setText(event.target.value) ;
         console.log(event.target.value) ;
         console.log(text) ;
         if(event.target.value.length > 1) {
             console.log("start filter") ;
-            dispatch(setInputFilter(event.target.value)) ;
+            dispatch(setInputFilter(event.target.value)) ; // почему то если передавать сюда text  то передается на 1 букву меньше. 
             // dispatch(inputFiltration({text:text , showAll:false})) ;  вар 1
         }else{
             dispatch(setInputFilter("")) ;
@@ -45,8 +45,8 @@ export default function Input () {
 
 
 
-    return (<div>
-<input value = {text}
+    return (<div className = {`w-[55%]`}>
+<input className = {`border-[4px] rounded-md  w-[100%]`} value = {text}
  onChange={(event)=>filtration(event)}
    />
     </div>) ;
