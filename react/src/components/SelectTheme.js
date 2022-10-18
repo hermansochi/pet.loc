@@ -8,7 +8,7 @@ export default function SelectTheme() {
 
   // Функция изменяет цветовую тему
   function changeTheme() {
-    dispatch(setTheme({ themrString: !theme }));
+    dispatch(setTheme({ themeBoolean: !theme }));
   }
 
   let out = (

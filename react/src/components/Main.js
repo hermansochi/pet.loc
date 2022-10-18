@@ -30,7 +30,10 @@ export default function Main() {
   }
 
   let out = (
-    <div className="w-full flex-grow min-h-screen flex flex-col items-center">
+    <div
+      className="w-full flex-grow min-h-screen flex flex-col items-center"
+      data-testid="main"
+    >
       {showUsers}
     </div>
   );

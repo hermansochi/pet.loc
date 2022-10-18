@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux"; // Хуки рудакса
 import { setSorting, setDirectionSort } from "../store/appSlice"; // Редюсерв состояния приложения
 import { sortUsers } from "../store/usersSlice"; // Редюсер сортировки массива пользователей
-import { setPage } from "./store/appSlice"; // Редюсер изменения колличества отрисованных страниц
+import { setPage } from "../store/appSlice"; // Редюсер изменения колличества отрисованных страниц
 
 export default function SelectSorting() {
   const dispatch = useDispatch();
