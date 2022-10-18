@@ -1,0 +1,9 @@
+all:
+  children:
+    manager:
+      hosts:
+        swarm-manager:
+          ansible_connection: ssh
+          ansible_user: user
+          ansible_host: 0.0.0.0
+          ansible_port: 22

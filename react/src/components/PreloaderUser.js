@@ -1,5 +1,5 @@
 import React from "react";
-import SvgComponent from "./SvgComponent";
+import SvgComponent from "./SvgComponent"; // Компонент для SVG иконок
 
 export default function User() {
   const styleP = "leading-[8px] text-xs bg-current rounded-xl my-1";
@@ -12,19 +12,19 @@ export default function User() {
         </div>
       </div>
       <div className="flex min-w-[280px] flex-col justify-center h-full p-2">
-        <p className={styleP}>*********************************</p>
-        <p className={styleP}>**********************</p>
-        <p className={styleP}>******************************</p>
-        <p className={styleP}>******************</p>
+        <p className={styleP}>*</p>
+        <p className={styleP}>*</p>
+        <p className={styleP}>*</p>
+        <p className={styleP}>**</p>
       </div>
       <div className="flex w-[25%] min-w-[280px] flex-col justify-center  h-full p-2">
-        <p className={styleP}>******************* **********************</p>
-        <p className={styleP}>********************** **********************</p>
-        <p className={styleP}>**********************</p>
+        <p className={styleP}>*</p>
+        <p className={styleP}>*</p>
+        <p className={styleP}>*</p>
       </div>
       <div className="flex w-[25%] flex-col justify-center h-full p-2">
-        <p className={styleP}>*******************************</p>
-        <p className={styleP}>********************** *** ***</p>
+        <p className={styleP}>*</p>
+        <p className={styleP}>*</p>
       </div>
       <div className="flex flex-grow h-full items-center">
         <div className="w-5 h-5">

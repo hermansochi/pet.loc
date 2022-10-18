@@ -3,15 +3,15 @@ import { createSlice } from "@reduxjs/toolkit";
 const appSlice = createSlice({
   name: "app",
   initialState: {
-    total: null,
-    perPage: null,
-    theme: "luxury",
-    sorting: "last_name",
-    directionSort: true,
-    search: "",
-    page: 1,
-    id: "",
-    showqr: false,
+    total: null, // Колличество страниц
+    perPage: null, // Лолличество пользователеё на странице
+    page: 1, // Номер страницы
+    theme: false, // Тема по умолччанию светлая
+    sorting: "last_name", // Параметр для сортировки (изначально фамилия)
+    directionSort: true, // Направление сортировки (изначально по убыванию)
+    search: "", // Значение в строке поиска
+    id: "", // id текущего пользователя
+    showqr: false, // Состояние окошка для QR кода (изначально скрыто)
   },
   reducers: {
     setTotal(state, action) {
@@ -51,9 +51,9 @@ export const {
   setSorting,
   setDirectionSort,
   setSearch,
-  setPage,
   setId,
   setShowqr,
+  setPage,
   setTotal,
   setPerPage,
 } = appSlice.actions;

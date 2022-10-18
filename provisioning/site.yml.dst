@@ -1,0 +1,10 @@
+---
+- name: Provisioning Site
+  hosts: manager
+  remote_user: user
+  become: yes
+  roles:
+    - swap
+    - docker
+    - certbot
+    - swarm-manager

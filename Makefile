@@ -24,6 +24,12 @@ restart: down up
 lint: react-lint vue-lint
 lint-fix: react-lint-fix
 
+images:
+	docker images
+
+prune:
+	docker system prune
+
 memory:
 	sudo sh -c "echo 3 > /proc/sys/vm/drop_caches"
 
@@ -138,4 +144,46 @@ underdante-test:
 
 vue-lint:
 	docker compose run --rm vue-node-cli npm run lint
+
+build: build-api build-frontend
+
+build-frontend:
+	docker --log-level=debug build --pull --file=react/docker/production/nginx/Dockerfile --tag=${REGISTRY}/pet-react:${IMAGE_TAG} react
+	docker --log-level=debug build --pull --file=frontend/docker/production/nginx/Dockerfile --tag=${REGISTRY}/frontend:${IMAGE_TAG} frontend
+
+build-api:
+	docker --log-level=debug build --pull --file=api/docker/production/nginx/Dockerfile --tag=${REGISTRY}/pet-api:${IMAGE_TAG} api
+	docker --log-level=debug build --pull --file=api/docker/production/php-fpm/Dockerfile --tag=${REGISTRY}/pet-api-php-fpm:${IMAGE_TAG} api
+	docker --log-level=debug build --pull --file=api/docker/production/php-cli/Dockerfile --tag=${REGISTRY}/pet-api-php-cli:${IMAGE_TAG} api
+
+try-build:
+	REGISTRY=localhost IMAGE_TAG=0 make build
+
+push: push-frontend push-react push-api
+
+push-frontend:
+	docker push ${REGISTRY}/frontend:${IMAGE_TAG}
+
+push-react:
+	docker push ${REGISTRY}/pet-react:${IMAGE_TAG}
+
+push-api:
+	docker push ${REGISTRY}/pet-api:${IMAGE_TAG}
+	docker push ${REGISTRY}/pet-api-php-fpm:${IMAGE_TAG}
+	docker push ${REGISTRY}/pet-api-php-cli:${IMAGE_TAG}
+	
+deploy:
+	ssh -o StrictHostKeyChecking=no deploy@${HOST} -p ${PORT} 'docker network create --driver=overlay traefik-public || true'
+	ssh -o StrictHostKeyChecking=no deploy@${HOST} -p ${PORT} 'rm -rf site_${BUILD_NUMBER} && mkdir site_${BUILD_NUMBER}'
+	envsubst < docker-compose-production.yml > docker-compose-production-env.yml
+	scp -o StrictHostKeyChecking=no -P ${PORT} docker-compose-production-env.yml deploy@${HOST}:site_${BUILD_NUMBER}/docker-compose.yml
+	rm -f docker-compose-production-env.yml
+	ssh -o StrictHostKeyChecking=no deploy@${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && docker stack deploy  --compose-file docker-compose.yml pet --with-registry-auth --prune'
+
+deploy-clean:
+	rm -f docker-compose-production-env.yml
+
+rollback:
+	ssh -o StrictHostKeyChecking=no deploy@${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && docker stack deploy docker-compose.yml pet --with-registry-auth --prune --compose-file'
+
 

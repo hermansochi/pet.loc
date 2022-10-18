@@ -1,9 +1,9 @@
 import React from "react";
-import InputSearch from "./InputSearch";
-import Progress from "./Progress";
-import SelectSorting from "./SelectSorting";
-import SelectTheme from "./SelectTheme";
-import Menu from "./Menu";
+import InputSearch from "./InputSearch"; // Компонент для поиска
+import Progress from "./Progress"; // Компонент шкала загрузки
+import SelectSorting from "./SelectSorting"; // Компонент для вабора параметров сортировки
+import SelectTheme from "./SelectTheme"; // Компонент для выбора темв
+import Menu from "./Menu"; // Компонент меню
 
 export default function Header() {
   let out = (

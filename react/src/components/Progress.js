@@ -1,14 +1,15 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { sortUsers } from "../store/usersSlice";
+import { useDispatch, useSelector } from "react-redux"; // Хуки редакса
+import { sortUsers } from "../store/usersSlice"; // Редюсер для сортировки массива ползователей
 
 export default function Progress() {
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.users.users);
-  const total = useSelector((state) => state.app.total);
+  const usersLength = useSelector((state) => state.users.users.length); // длинна  массива пользователей
+  const total = useSelector((state) => state.app.total); // Колличетво пользователей
 
+  // Отслеживается колличество пользователей в хранилище, как только все загружены скрывается шкала загрузки и показываются компонены Поиск и Сортировка
   useEffect(() => {
-    if (users.length >= total) {
+    if (usersLength >= total) {
       dispatch(
         sortUsers({
           paramsArray: ["last_name", "last_name", "first_name"],
@@ -16,20 +17,20 @@ export default function Progress() {
         })
       );
     }
-  }, [users.length]);
+  }, [usersLength]);
 
   let out = (
     <div
       className={`flex flex-grow flex-col items-center ${
-        users.length >= total && "hidden"
+        usersLength >= total && "hidden"
       }`}
     >
       <progress
         className="progress progress-secondary w-full"
-        value={users.length}
+        value={usersLength}
         max={1000}
       ></progress>
-      <div className="">Загрузка базы {Math.round(users.length / 10)}%</div>
+      <div className="">Загрузка базы {Math.round(usersLength / 10)}%</div>
     </div>
   );
 

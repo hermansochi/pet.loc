@@ -1,32 +1,24 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { setTheme } from "../store/appSlice";
+import { useDispatch, useSelector } from "react-redux"; // Хук редакса для изменения состояния
+import { setTheme } from "../store/appSlice"; // Редюсер для изменения цветовой темы
 
 export default function SelectTheme() {
   const dispatch = useDispatch();
+  const theme = useSelector((state) => state.app.theme);
 
-  function changeTheme(e) {
-    dispatch(setTheme({ themrString: e.target.value }));
+  // Функция изменяет цветовую тему
+  function changeTheme() {
+    dispatch(setTheme({ themrString: !theme }));
   }
 
   let out = (
-    <div className="tooltip tooltip-left" data-tip="выбрать тему">
-      <select
-        className="select select-bordered select-xs"
+    <div className="flex items-center">
+      Тема
+      <input
+        type="checkbox"
+        className="toggle ml-1 cursor-pointer"
         onChange={changeTheme}
-      >
-        {[
-          "luxury",
-          "garden",
-          "corporate",
-          "fantasy",
-          "halloween",
-          "forest",
-          "synthwave",
-        ].map((el, i) => {
-          return <option key={i}>{el}</option>;
-        })}
-      </select>
+      />
     </div>
   );
 

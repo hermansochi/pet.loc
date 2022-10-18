@@ -1,8 +1,9 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { devUrl, versionApi, headers, orgUsers } from "../patch";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"; // хуки для асинхронных редюсеров
+import { devUrl, versionApi, headers, orgUsers } from "../patch"; // пути для запросов
 
-const url = new URL(`${devUrl}${versionApi}${orgUsers}?page=`);
+const url = new URL(`${devUrl}${versionApi}${orgUsers}?page=`); // контанта URL
 
+// Создание асинхронного запроса, перевым пераметром принимает номер страници, отправляетзапрос на сервер, есди статус ответа "ок" возвращает пришедшие данные, если не возвращает ошибку
 export const fetchUsers = createAsyncThunk(
   "users/fetchUsers",
   async function (page, rejectedWithValue) {
@@ -25,13 +26,14 @@ export const fetchUsers = createAsyncThunk(
 const usersSlice = createSlice({
   name: "users",
   initialState: {
-    users: [],
-    searchResult: [],
-    status: null,
-    error: null,
+    users: [], // Массив пользавателей
+    searchResult: [], // Массив с результатми поиска
+    status: null, // статус выполнения асинхронного запроса
+    error: null, //  ошибка
   },
 
   reducers: {
+    // Редюсер для сортировки массива пользователей, action возвращает массив параметров для сортировки, сортировка идёт по строке составленной и значений параметров для сортировки
     sortUsers(state, action) {
       state.users = state.users.sort((a, b) => {
         let p1 = action.payload.paramsArray[0];
@@ -49,23 +51,37 @@ const usersSlice = createSlice({
       });
     },
 
+    // Редюсер для добавления пользователей в массив для показа Результатов сортировки, условие добавления присутствие в значении параметров значения строки поиска, которое приходит в action
     showSearchResult(state, action) {
       let str = action.payload.targetString;
       let result = [];
-      action.payload.users.forEach((el) => {
-        if (el["cn"].toLowerCase().indexOf(str.toLowerCase()) !== -1) {
+      state.users.forEach((el) => {
+        if (
+          el["cn"].toLowerCase().indexOf(str.toLowerCase()) !== -1 ||
+          el["city"].toLowerCase().indexOf(str.toLowerCase()) !== -1 ||
+          el["company"].toLowerCase().indexOf(str.toLowerCase()) !== -1 ||
+          el["title"].toLowerCase().indexOf(str.toLowerCase()) !== -1 ||
+          el["department"].toLowerCase().indexOf(str.toLowerCase()) !== -1
+        ) {
           result.push(el);
         }
       });
       state.searchResult = result;
     },
+
+    // Редюсер для очистки массива с результатами поиска
+    clearSearchResult(state) {
+      state.searchResult = [];
+    },
   },
 
+  // Асинхронный редюсер
   extraReducers: {
     [fetchUsers.pending]: (state, action) => {
       state.status = "loading";
       state.error = action.payload;
     },
+    // При успшном завершении запроса добавляем в массив пользоватлей пришедшие данные
     [fetchUsers.fulfilled]: (state, action) => {
       state.status = "resolved";
       if (state.users.length === 0) {
@@ -81,6 +97,7 @@ const usersSlice = createSlice({
     },
   },
 });
-export const { sortUsers, showSearchResult } = usersSlice.actions;
+export const { sortUsers, showSearchResult, clearSearchResult } =
+  usersSlice.actions;
 
 export default usersSlice.reducer;

@@ -1,34 +1,22 @@
 import React from "react";
-import { devUrl, avatars } from "../patch";
-import SvgComponent from "./SvgComponent";
-import { useDispatch } from "react-redux";
-import { setId, setShowqr } from "../store/appSlice";
+import { devUrl, avatars } from "../patch"; // Пути для запросов
+import SvgComponent from "./SvgComponent"; // Компонент для SVG картинок
+import { useDispatch } from "react-redux"; // хук редакса для изменения состояния
+import { setId, setShowqr } from "../store/appSlice"; // редюсеры состояния приложения
 
 export default function User({ data }) {
   const dispactch = useDispatch();
 
+  // Функция форматирования номера телефона, возвращает изменённую строку
   function formateNum(num) {
     let n = num.split("");
     return `+7 (${n[0]}${n[1]}${n[2]}) ${n[3]}${n[4]}${n[5]} ${n[6]}${n[7]} ${n[8]}${n[9]}`;
   }
 
+  // Функция мзменяет id текущего пользователя и показывает скрытое окно для QR кода
   function changeCurrentId(e) {
     dispactch(setId({ idString: e.currentTarget.id }));
     dispactch(setShowqr({ showqrBoolean: true }));
-  }
-
-  let gender;
-  switch (data.gender) {
-    case "m":
-      gender = "man";
-      break;
-    case "f":
-      gender = "woman";
-      break;
-
-    default:
-      gender = "";
-      break;
   }
 
   let out = (
@@ -40,9 +28,6 @@ export default function User({ data }) {
           src={`${devUrl}${avatars}${data.id}.jpg`}
           alt=""
         />
-        <div className="absolute top-[2%] left-0 h-3 w-3 z-10 text-primary">
-          <SvgComponent name={gender} />
-        </div>
       </div>
       <div className="flex min-w-[280px] flex-col justify-center h-full p-2">
         <div className="text-sm font-medium">{data.cn}</div>
