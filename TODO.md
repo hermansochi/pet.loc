@@ -7,6 +7,7 @@ Tasks for the Laravel + ReactJS Pet project.
 - [ ] Dev: Install Prettier.
 - [ ] Front: Install React router.
 - [ ] Herman: Dev: Copy Nginx config to Underdante & Fix: Error 409 react ws HMR.
+- [ ] Herman: Dev: Add Docker swarm.
 - [ ] Herman: Dev: Install Jenkins.
 - [ ] Herman: Dev: Make test env.
 

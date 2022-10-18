@@ -1,12 +1,12 @@
 ---
 - name: Check if swap file exists
   stat:
-    patch: "{{ swap_file }}"
+    path: "{{ swap_file }}"
   register: swap_file_check
 
 - name: Create swap file
   command: fallocate -l {{ swap_size }} {{ swap_file }}
-  when: not swap_file_check_stat.exists
+  when: not swap_file_check.stat.exists
 
 - name: Set permissopns on swap file
   file:
@@ -15,13 +15,13 @@
 
 - name: Make swap
   command: mkswap {{ swap_file }}
-  when: not swap_file_check_stat.exists
+  when: not swap_file_check.stat.exists
 
 - name: Add swap to fstab
   lineinfile:
-  dest: /etc/fstab
-  regexp: "{{ swap_file }}"
-  line: "{{ swap_file }} none swap sw 0 0"
+    dest: /etc/fstab
+    regexp: "{{ swap_file }}"
+    line: "{{ swap_file }} none swap sw 0 0"
 
 - name: Turn on swap
   command: swapon -a

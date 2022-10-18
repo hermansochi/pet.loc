@@ -4,4 +4,4 @@
 /provisioning/site.yml
 /provisioning/docker-login.yml
 /provisioning/authorize.yml
-/provisioning/roles/site/defaults/main.yml
+/provisioning/roles/swarm-manager/defaults/main.yml

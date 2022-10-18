@@ -1,6 +1,6 @@
 ---
 - name: Log into private registry
-  hosts: site
+  hosts: manager
   remote_user: user
   become: yes
   become_user: deploy

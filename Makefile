@@ -178,12 +178,12 @@ deploy:
 	envsubst < docker-compose-production.yml > docker-compose-production-env.yml
 	scp -o StrictHostKeyChecking=no -P ${PORT} docker-compose-production-env.yml deploy@${HOST}:site_${BUILD_NUMBER}/docker-compose.yml
 	rm -f docker-compose-production-env.yml
-	ssh -o StrictHostKeyChecking=no deploy@${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && docker stack deploy  --with-registry-auth --prune --compose-file docker-compose.yml pet'
+	ssh -o StrictHostKeyChecking=no deploy@${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && docker stack deploy  --compose-file docker-compose.yml pet --with-registry-auth --prune'
 
 deploy-clean:
 	rm -f docker-compose-production-env.yml
 
 rollback:
-	ssh -o StrictHostKeyChecking=no deploy@${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && docker stack deploy --with-registry-auth --prune --compose-file docker-compose.yml pet'
+	ssh -o StrictHostKeyChecking=no deploy@${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && docker stack deploy docker-compose.yml pet --with-registry-auth --prune --compose-file'
 
 
