@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import paths from "../../paths/paths";
 import ContentPage from "../ContentPage/ContentPage";
+import Header from "../Header/Header";
 import { useDispatch , useSelector } from "react-redux";
 import { getData } from "../../redux/slices/dataSlice";
 
@@ -15,10 +16,13 @@ export default function Main() {
     dispatch(getData(paths)) ;
   }, []);
 
-  return <div>
-    hello everyone
+  return <div className ={`w-screen`}>
     { status === "loading" && <div>Loading.... </div> }
-    { status === "fullfiled" && <ContentPage/> }
+    { status === "resolved" && <>
+    <Header/>
+    <ContentPage/> 
+    </>
+    }
     { error ? <div>
       произошла ошибка
       <button>
