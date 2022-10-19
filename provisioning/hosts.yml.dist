@@ -7,3 +7,5 @@ all:
           ansible_user: user
           ansible_host: 0.0.0.0
           ansible_port: 22
+  vars:
+    ansyble_pyton_interpreter: /usr/bin/python3
