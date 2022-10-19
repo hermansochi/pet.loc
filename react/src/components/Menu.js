@@ -8,7 +8,10 @@ export default function Menu() {
   const styleLine = "flex border border-current grow m-1 w-0";
 
   let out = (
-    <div className="fixed z-20 top-[15%] right-[2%] h-[50%] flex flex-col justify-around items-center">
+    <div
+      className="fixed z-20 top-[15%] right-[2%] h-[50%] flex flex-col justify-around items-center"
+      data-testid="menu"
+    >
       <div className={styleLine}></div>
       <div className={styleLink}>
         <SvgComponent name="users" />

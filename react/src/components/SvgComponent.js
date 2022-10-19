@@ -75,6 +75,7 @@ export default function SvgComponent({ name }) {
       xmlns="http://www.w3.org/2000/svg"
       className="fill-current qr"
       viewBox={icons[name].box}
+      data-testid="svg"
     >
       {icons[name].path}
     </svg>

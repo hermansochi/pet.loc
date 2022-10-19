@@ -26,6 +26,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test-cover": "CI=true npm test -- --env=jsdom --coverage",
     "eject": "react-scripts eject",
     "eslint": "eslint --ext .js,.jsx src",
     "eslint-fix": "eslint --fix --ext .js,.jsx src",

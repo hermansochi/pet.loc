@@ -1,5 +1,5 @@
 ---
 - name: Init swarm
   docker_swarm:
-    advertise_addr: "{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}:2377"
+    advertise_addr: "eth0:2377"
     state: present

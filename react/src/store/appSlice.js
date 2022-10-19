@@ -21,7 +21,7 @@ const appSlice = createSlice({
       state.perPage = action.payload.perPageNumber;
     },
     setTheme(state, action) {
-      state.theme = action.payload.themrString;
+      state.theme = action.payload.themeBoolean;
     },
     setSorting(state, action) {
       state.sorting = action.payload.sortingString;

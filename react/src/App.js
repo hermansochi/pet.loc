@@ -71,6 +71,7 @@ function App() {
     <div
       className="w-full h-full flex flex-col"
       data-theme={theme ? "luxury" : "garden"}
+      data-testid="app"
     >
       <div className="absolute top-20 right-5 z-50"></div>
       {showQr && <QrModal />}

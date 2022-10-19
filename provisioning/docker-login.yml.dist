@@ -3,8 +3,7 @@
   hosts: manager
   remote_user: user
   become: yes
-  become_user: deploy
-  varn_prompt:
+  vars_prompt:
     - name: registry
       prompt: "Registry"
       private: no
