@@ -37,17 +37,54 @@ if (inputFilter) {
  let output = result.map((user)=>{
 
     return (
-        <div key = {user.id}>
-            {user.cn}
-            {user.company}
-            {user.department}
-            {user.birthday}
-            {user.telephone}
-            {user.mobile}
-            {user.title}
-            {user.gender}
-            {user.city}
-            {user.email}
+        <div className = {`flex flex-row items-center justify-around bg-cyan-500 mb-[2rem] w-[30%] rounded-md`} key = {user.id}>
+            <div className = {``}>
+                <img className = {`rounded-lg border-[3px]`} src={`http://api.localhost/storage/avatars/${user.id}.jpg`}/>
+            </div>
+            
+            <div className ={``}>
+            <div>
+               Имя : {user.cn}
+            </div>
+            
+            <div>
+            Пол : {user.gender === "m" ? "M" : "Ж"}
+            </div>
+
+            <div>
+            Компания : {user.company}
+            </div>
+
+            <div>
+            Департамент : {user.department}
+            </div>
+
+            <div>
+            Город : {user.city}
+            </div>
+            
+            <div>
+            Должность : {user.title}
+            </div>
+            
+            <div>
+            День рождения : {user.birthday}
+            </div>
+            
+            <div>
+            Раб.телефон : {user.telephone}
+            </div>
+
+            <div>
+            Моб. телефон : {user.mobile}
+            </div>
+
+            <div>
+            Эл. почта : {user.email}
+            </div>
+
+            </div>
+
         </div>
     ) ;
 
@@ -58,8 +95,7 @@ if (inputFilter) {
 
 
     return (
-        <div>
-            Content
+        <div className = {`flex w-[100%] flex-wrap justify-evenly`}>
             {output}
         </div>
     ) ;

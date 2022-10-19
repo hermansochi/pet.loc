@@ -5,18 +5,18 @@ import { setCategoryFilter } from "../../redux/slices/dataSlice";
 export default function SelectCategory () {
 
 const dispatch = useDispatch() ;
-const [chosen , setChosen] = useState("FullName") ;
+const [chosen , setChosen] = useState("Ф.И.О.") ;
 
     let categories = {  
-        FullName : "cn" ,
-        title : "title" ,
-        company : "company" ,
-        birthday : "birthday" ,
-        email : "email" ,
-        "work phone" : "telephone" ,
-        mobile : "mobile" ,
-        departament : "departament",
-        city : "city" ,
+        "Ф.И.О." : "cn" ,
+        "Должность" : "title" ,
+        "Компания" : "company" ,
+        "День рождения" : "birthday" ,
+        "Эл. почта" : "email" ,
+        "Раб.телефон" : "telephone" ,
+        "Моб.телефон" : "mobile" ,
+        "Департамент" : "departament",
+        "Город" : "city" ,
 };
 
 function changeCategory (event) {
