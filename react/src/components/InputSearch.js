@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import SvgComponent from "./SvgComponent"; // Компонент для SVG картинок
 import { useDispatch, useSelector } from "react-redux"; // Хуки редакса
 import { setSearch } from "../store/appSlice"; // Редюсер для изменения значения строки поиска
@@ -9,13 +9,24 @@ export default function InputSearch() {
   const usersLength = useSelector((state) => state.users.users.length); // длинна  массива пользователей
   const search = useSelector((state) => state.app.search); // Значение строки поиска
   const total = useSelector((state) => state.app.total); // Колличестов пользователей
+  const debounceRef = useRef(); // Значение таймкера для задержки выполнения поиска при изменении значения в инпуте
+
+  // Функция задержки выполнения поиска при вводе в строку поиска
+  function debunceSearch(value) {
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current);
+    }
+    debounceRef.current = setTimeout(() => {
+      if (value.length > 2) {
+        dispatch(showSearchResult({ targetString: value }));
+      }
+    }, 500);
+  }
 
   // Функция изменяет значение строки поиска и запускает поиск по массиву рользователей
   function inputSearch(e) {
     dispatch(setSearch({ searchString: e.target.value }));
-    if (e.target.value.length > 2) {
-      dispatch(showSearchResult({ targetString: e.target.value }));
-    }
+    debunceSearch(e.target.value);
   }
 
   // Функция очищаетстроку поиска
@@ -38,7 +49,7 @@ export default function InputSearch() {
         placeholder="Поиск..."
         className="input  input-sm input-bordered indent-[20px] w-full"
         value={search}
-        onInput={inputSearch}
+        onChange={inputSearch}
       />
       <div
         className="absolute w-3 h-3 top-[6px] right-[10px] cursor-pointer"
