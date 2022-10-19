@@ -53,15 +53,13 @@ const usersSlice = createSlice({
 
     // Редюсер для добавления пользователей в массив для показа Результатов сортировки, условие добавления присутствие в значении параметров значения строки поиска, которое приходит в action
     showSearchResult(state, action) {
-      let str = action.payload.targetString;
+      let rex = new RegExp(action.payload.targetString, "i");
       let result = [];
       state.users.forEach((el) => {
         if (
-          el["cn"].toLowerCase().indexOf(str.toLowerCase()) !== -1 ||
-          el["city"].toLowerCase().indexOf(str.toLowerCase()) !== -1 ||
-          el["company"].toLowerCase().indexOf(str.toLowerCase()) !== -1 ||
-          el["title"].toLowerCase().indexOf(str.toLowerCase()) !== -1 ||
-          el["department"].toLowerCase().indexOf(str.toLowerCase()) !== -1
+          rex.test(
+            `${el["cn"]} ${el["city"]} ${el["company"]} ${el["title"]} ${el["department"]}`
+          )
         ) {
           result.push(el);
         }

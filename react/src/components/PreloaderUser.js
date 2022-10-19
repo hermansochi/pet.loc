@@ -35,7 +35,7 @@ export default function User() {
   );
 
   let out = (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col w-full" data-testid="preloaderuser">
       {preloaderCart}
       {preloaderCart}
       {preloaderCart}

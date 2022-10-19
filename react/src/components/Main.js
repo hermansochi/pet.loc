@@ -12,14 +12,14 @@ export default function Main() {
 
   if (search.length < 3) {
     users.forEach((el, i) => {
-      if (i <= page * 100) {
-        showUsers.push(<User key={el.id} data={el} />);
+      if (i <= page * 100 && el.fide !== false) {
+        showUsers.push(<User key={el.id} data={el} str={search} />);
       }
     });
   } else {
     searchResult.forEach((el, i) => {
-      if (i <= page * 100) {
-        showUsers.push(<User key={el.id} data={el} />);
+      if (i <= page * 100 && el.fide !== false) {
+        showUsers.push(<User key={el.id} data={el} str={search} />);
       }
     });
     if (searchResult.length === 0 && search !== "") {
@@ -30,7 +30,10 @@ export default function Main() {
   }
 
   let out = (
-    <div className="w-full flex-grow min-h-screen flex flex-col items-center">
+    <div
+      className="w-full flex-grow min-h-screen flex flex-col items-center"
+      data-testid="main"
+    >
       {showUsers}
     </div>
   );
