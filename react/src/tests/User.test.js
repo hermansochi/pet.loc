@@ -41,9 +41,7 @@ describe("User component", () => {
   test("Should be rendered", () => {
     renderComponent();
 
-    const elem = screen.getByText(/день рождения/i);
-
-    expect(elem).toBeInTheDocument();
+    expect(screen.getByText(/день рождения/i)).toBeInTheDocument();
   });
 
   test("Functinon formateNum should be return formated string", () => {

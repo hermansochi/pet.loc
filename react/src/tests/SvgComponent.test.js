@@ -18,8 +18,6 @@ describe("SvgComponent component", () => {
       <RenderWrapperTest component={() => <SvgComponent name="present" />} />
     );
 
-    const elem = screen.getByTestId("svg");
-
-    expect(elem).toBeInTheDocument();
+    expect(screen.getByTestId("svg")).toBeInTheDocument();
   });
 });

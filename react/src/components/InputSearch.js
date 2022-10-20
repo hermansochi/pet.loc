@@ -52,6 +52,7 @@ export default function InputSearch() {
         onChange={inputSearch}
       />
       <div
+        data-testid="clearSearch"
         className="absolute w-3 h-3 top-[6px] right-[10px] cursor-pointer"
         onClick={deletTextSearch}
       >
