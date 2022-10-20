@@ -3,6 +3,7 @@ import { devUrl, avatars } from "../patch"; // Пути для запросов
 import SvgComponent from "./SvgComponent"; // Компонент для SVG картинок
 import { useDispatch } from "react-redux"; // хук редакса для изменения состояния
 import { setId, setShowqr } from "../store/appSlice"; // редюсеры состояния приложения
+import lightSubStrin from "./lightSubString";
 
 export default function User({ data, str }) {
   const dispactch = useDispatch();
@@ -28,47 +29,6 @@ export default function User({ data, str }) {
       alt=""
     />
   );
-
-  // Функция подсвечивает подстроку по которой вёлся поиск в параметрах пользователя на странице
-  function lightSubStrin(str, subString, len) {
-    if (subString && len > 2) {
-      let reg = new RegExp(subString, "i");
-      if (reg.test(str)) {
-        let result = [];
-        str = str.replace(reg, "^");
-        str = str.split("");
-        str.forEach((el, i) => {
-          if (el === "^") {
-            let span = (
-              <span className="bg-green-500 inline-block text-black" key={i}>
-                {subString}
-              </span>
-            );
-            result.push(span);
-          } else if (el === " ") {
-            let div = (
-              <div className="inline-block opacity-0" key={i}>
-                {"_"}
-              </div>
-            );
-            result.push(div);
-          } else {
-            let div = (
-              <div className="inline-block" key={i}>
-                {el}
-              </div>
-            );
-            result.push(div);
-          }
-        });
-        return result;
-      } else {
-        return str;
-      }
-    } else {
-      return str;
-    }
-  }
 
   let out = (
     <div className="w-full outline hover:backdrop-brightness-200 outline-8 outline-secondary h-20 my-1.5  flex  items-center text-xs px-4 py-2 space-subString-2">
@@ -120,6 +80,7 @@ export default function User({ data, str }) {
             className="w-5 h-5 cursor-pointer qr"
             id={data.id}
             onClick={changeCurrentId}
+            data-testid="qr"
           >
             <SvgComponent name="qr" />
           </div>
