@@ -53,8 +53,10 @@ WORKDIR /app
 
 COPY --from=builder /app ./
 COPY ./ ./
+COPY ./.env.prod ./.env
 
-#RUN chown www-data:www-data ./var -R
+RUN chown www-data:www-data ./bootstrap -R \
+  && chown www-data:www-data ./storage -R
 
 HEALTHCHECK --interval=5s --timeout=3s --start-period=1s \
     CMD REDIRECT_STATUS=true SCRIPT_NAME=/ping SCRIPT_FILENAME=/ping REQUEST_METHOD=GET \

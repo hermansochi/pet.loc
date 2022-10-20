@@ -8,6 +8,7 @@ Tasks for the Laravel + ReactJS Pet project.
 - [ ] Front: Install React router.
 - [ ] Herman: Dev: Copy Nginx config to Underdante & Fix: Error 409 react ws HMR.
 - [ ] Herman: Dev: Make test env.
+- [ ] Herman: Dev: Install Jenkins.
 
 # In Progress
 
@@ -18,7 +19,6 @@ Tasks for the Laravel + ReactJS Pet project.
 - [х] Herman: Dev: Refactor provisioning.
 - [х] Herman: Dev: Add healhchecks for containers.
 - [х] Herman: Dev: Add Docker swarm.
-- [х] Herman: Dev: Install Jenkins.
 - [х] Herman: Dev: Make private docker hub repository.
 - [х] Herman: Dev: Make provisioning for production server via Ansible playbooks.
 - [х] Herman: Dev: Fix: Error 409 react ws HMR.
