@@ -79,6 +79,7 @@ api-fixtures:
 api-generate-docs:
 	mkdir -p ${PWD}/api/.scribe/endpoints/ && cp ${PWD}/docs/scribe/* ${PWD}/api/.scribe/endpoints/
 	docker compose run --rm api-php-cli php artisan route:clear
+	docker compose run --rm api-php-cli php artisan config:clear
 	docker compose run --rm api-php-cli php artisan scribe:generate
 
 react-clear:
