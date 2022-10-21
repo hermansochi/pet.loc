@@ -6,13 +6,13 @@
     "require": {
         "php": "^8.0.2",
         "guzzlehttp/guzzle": "^7.2",
+        "knuckleswtf/scribe": "^4.1",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "simplesoftwareio/simple-qrcode": "~4"
     },
 	"require-dev": {
-        "knuckleswtf/scribe": "^4.1",
         "laravel/pint": "^1.0",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",

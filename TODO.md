@@ -9,7 +9,6 @@ Tasks for the Laravel + ReactJS Pet project.
 - [ ] Herman: Dev: Copy Nginx config to Underdante & Fix: Error 409 react ws HMR.
 - [ ] Herman: Dev: Make test env.
 - [ ] Herman: Dev: Install Jenkins.
-- [ ] Herman: Dev: Reinstall knuckleswtf/scribe to dev env.
 
 # In Progress
 
@@ -17,6 +16,7 @@ Tasks for the Laravel + ReactJS Pet project.
 
 ### Done ✓
 
+- [х] Herman: Dev: Reinstall knuckleswtf/scribe to dev env.
 - [х] Herman: Dev: Refactor provisioning.
 - [х] Herman: Dev: Add healhchecks for containers.
 - [х] Herman: Dev: Add Docker swarm.

@@ -20,6 +20,4 @@ auth.json
 npm-debug.log
 yarn-error.log
 
-/.scribe
-/resources/views/scribe
 /reports

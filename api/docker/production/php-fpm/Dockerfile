@@ -56,7 +56,12 @@ COPY --from=builder /app ./
 COPY ./ ./
 COPY ./.env.prod ./.env
 
-RUN RUN chmod -R ug+rwx storage bootstrap/cache
+RUN chmod -R ug+rwx storage bootstrap/cache
+
+# Get latest Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+RUN composer install --no-dev --prefer-dist --no-progress --optimize-autoloader --ignore-platform-req=ext-gd\
+    && rm -rf /usr/bin/composer
 
 HEALTHCHECK --interval=5s --timeout=3s --start-period=1s \
     CMD REDIRECT_STATUS=true SCRIPT_NAME=/ping SCRIPT_FILENAME=/ping REQUEST_METHOD=GET \

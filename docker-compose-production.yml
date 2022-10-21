@@ -81,8 +81,6 @@ services:
             update_config:
                 parallelism: 1
                 delay: 10s
-            placement:
-                constraints: [node.role == manager]
 
     react:
         image: ${REGISTRY}/pet-react:${IMAGE_TAG}
@@ -130,6 +128,8 @@ services:
             update_config:
                 parallelism: 1
                 delay: 5s
+            placement:
+                constraints: [node.role == manager]
 
     api-php-fpm:
         image: ${REGISTRY}/api-php-fpm:${IMAGE_TAG}
