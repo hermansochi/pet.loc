@@ -8,13 +8,14 @@ services:
             --api.insecure=true
             --providers.docker=true
             --providers.docker.exposedByDefault=false
+            --accesslog=true
         ports:
             - "80:80"
             - "8080:8080"
         networks:
             - traefik-public
         volumes:
-            - /var/run/docker.sock:/var/run/docker.sock:ro
+            - /var/run/docker.sock:/var/run/docker.sock
         labels:
             - traefik.enable=true
             - traefik.docker.network=traefik-public
@@ -132,6 +133,7 @@ services:
     vue:
         build:
             context: vue/docker/development/nginx
+        restart: always
         volumes:
             - ./vue:/app:rw
         networks:

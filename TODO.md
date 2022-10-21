@@ -17,6 +17,7 @@ Tasks for the Laravel + ReactJS Pet project.
 
 ### Done ✓
 
+- [х] Herman: Dev: Fix: Vue Erorr 404 6789 crbug/1173575, non-JS module files deprecated.
 - [х] Herman: Dev: Add Environment Variables for frontends.
 - [х] Herman: Dev: Reinstall knuckleswtf/scribe to dev env.
 - [х] Herman: Dev: Refactor provisioning.

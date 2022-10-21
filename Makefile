@@ -104,7 +104,7 @@ underdante-yarn-install:
 	docker compose run --rm underdante-node-cli yarn install
 
 vue-npm-install:
-	docker compose run --rm vue-node-cli npm install
+	docker compose run --rm vue-node-cli npm instal
 
 react-ready:
 	docker run --rm -v ${PWD}/react:/app -w /app alpine touch .ready
