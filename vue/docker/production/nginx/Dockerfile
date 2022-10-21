@@ -4,11 +4,11 @@ ENV REACT_APP_AUTH_URL=%%REACT_APP_AUTH_URL%%
 
 WORKDIR /app
 
-COPY ./package.json ./yarn.lock ./
-RUN yarn install && yarn cache clean
+COPY ./package.json ./package-lock.json ./
+RUN npm install && npm cache clean --force
 
 COPY ./ ./
-RUN yarn build
+RUN npm build
 
 FROM nginx:1.21-alpine
 
