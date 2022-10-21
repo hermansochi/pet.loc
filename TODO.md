@@ -10,6 +10,7 @@ Tasks for the Laravel + ReactJS Pet project.
 - [ ] Herman: Dev: Make test env.
 - [ ] Herman: Dev: Install Jenkins.
 - [ ] Herman: Dev: Change scribe mode to static.
+- [ ] Herman: Dev: Add underdante & vue to prodaction.
 
 # In Progress
 

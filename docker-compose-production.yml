@@ -110,6 +110,62 @@ services:
                 parallelism: 1
                 delay: 10s
 
+    underdante:
+        image: ${REGISTRY}/pet-underdante:${IMAGE_TAG}
+        environment:
+            NODE_ENV: development
+            REACT_APP_API_URL: https://api.herman.team/api
+            REACT_APP_API_VER: v1
+        networks:
+            - traefik-public
+            - default
+        deploy:
+            labels:
+                - traefik.enable=true
+                - traefik.docker.network=traefik-public
+                - traefik.http.routers.underdante.rule=Host(`underdante.herman.team`) || Host(`www.underdante.herman.team`)
+                - traefik.http.services.underdante.loadBalancer.server.port=80
+                - traefik.http.middlewares.underdante-redirect.redirectRegex.regex=^(https?://)www.underdante.herman.team/(.*)$$
+                - traefik.http.middlewares.underdante-redirect.redirectRegex.replacement=$${1}underdante.herman.team/$${2}
+                - traefik.http.middlewares.underdante-redirect.redirectRegex.permanent=true
+                - traefik.http.routers.underdante.middlewares=underdante-redirect,secure-headers
+                - traefik.http.routers.underdante.entrypoints=https
+                - traefik.http.routers.underdante.tls=true
+                - traefik.http.routers.underdante.tls.certResolver=letsEncrypt
+            mode: replicated
+            replicas: 1
+            update_config:
+                parallelism: 1
+                delay: 10s
+
+    vue:
+        image: ${REGISTRY}/pet-vue:${IMAGE_TAG}
+        environment:
+            NODE_ENV: development
+            REACT_APP_API_URL: https://api.herman.team/api
+            REACT_APP_API_VER: v1
+        networks:
+            - traefik-public
+            - default
+        deploy:
+            labels:
+                - traefik.enable=true
+                - traefik.docker.network=traefik-public
+                - traefik.http.routers.vue.rule=Host(`vue.herman.team`) || Host(`www.vue.herman.team`)
+                - traefik.http.services.vue.loadBalancer.server.port=80
+                - traefik.http.middlewares.vue-redirect.redirectRegex.regex=^(https?://)www.vue.herman.team/(.*)$$
+                - traefik.http.middlewares.vue-redirect.redirectRegex.replacement=$${1}vue.herman.team/$${2}
+                - traefik.http.middlewares.vue-redirect.redirectRegex.permanent=true
+                - traefik.http.routers.vue.middlewares=vue-redirect,secure-headers
+                - traefik.http.routers.vue.entrypoints=https
+                - traefik.http.routers.vue.tls=true
+                - traefik.http.routers.vue.tls.certResolver=letsEncrypt
+            mode: replicated
+            replicas: 1
+            update_config:
+                parallelism: 1
+                delay: 10s
+
     api:
         image: ${REGISTRY}/pet-api:${IMAGE_TAG}
         networks:
