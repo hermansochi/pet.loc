@@ -1,7 +1,63 @@
 version: "3.9"
 services:
+    cron:
+        image: crazymax/swarm-cronjob:latest
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+        environment:
+            LOG_LEVEL: info
+        deploy:
+            placement:
+                constraints: [node.role == manager]
+
+    traefik:
+        image: traefik:2.9
+        command:
+            --providers.docker=true
+            --providers.docker.watch=true
+            --providers.docker.swarmMode=true
+            --providers.docker.exposedByDefault=false
+            --entryPoints.http.address=:80
+            --entryPoints.https.address=:443
+            --certificatesresolvers.letsEncrypt.acme.httpChallenge=true
+            --certificatesresolvers.letsEncrypt.acme.httpChallenge.entryPoint=http
+            --certificatesresolvers.letsEncrypt.acme.email=hermansochi@ya.ru
+            --certificatesresolvers.letsEncrypt.acme.storage=/certs/acme.json
+        ports:
+            - target: 80
+              published: 80
+              protocol: tcp
+              mode: host
+            - target: 443
+              published: 443
+              protocol: tcp
+              mode: host
+        networks:
+            - traefik-public
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock:ro
+            - traefik-public-certs:/certs
+        deploy:
+            labels:
+                - traefik.enable=true
+                - traefik.docker.network=traefik-public
+
+                - traefik.http.routers.http-catchall.rule=HostRegexp(`{host:.+}`)
+                - traefik.http.routers.http-catchall.entryPoints=http
+                - traefik.http.routers.http-catchall.middlewares=redirect-to-https
+                - traefik.http.services.http-catchall.loadBalancer.server.port=80
+
+                - traefik.http.middlewares.redirect-to-https.redirectScheme.scheme=https
+                - traefik.http.middlewares.redirect-to-https.redirectScheme.permanent=true
+
+                - traefik.http.middlewares.secure-headers.headers.sslRedirect=true
+                - traefik.http.middlewares.secure-headers.headers.stsSeconds=31536000
+                - traefik.http.middlewares.secure-headers.headers.contentSecurityPolicy=block-all-mixed-content
+            placement:
+                constraints: [ node.role == manager ]
+
     frontend:
-        image: ${REGISTRY}/pet-frontend:${IMAGE_TAG}
+        image: ${REGISTRY}/frontend:${IMAGE_TAG}
         environment:
             REACT_APP_AUTH_URL: https://api.herman.team
         networks:
@@ -14,14 +70,14 @@ services:
                 - traefik.http.routers.frontend.rule=Host(`herman.team`) || Host(`www.herman.team`)
                 - traefik.http.services.frontend.loadBalancer.server.port=80
                 - traefik.http.middlewares.frontend-redirect.redirectRegex.regex=^(https?://)www.herman.team/(.*)$$
-                - traefik.http.middlewares.frontend-redirect.redirectRegex.replacement=$${1}demo-auction.deworker.pro/$${2}
+                - traefik.http.middlewares.frontend-redirect.redirectRegex.replacement=$${1}herman.team/$${2}
                 - traefik.http.middlewares.frontend-redirect.redirectRegex.permanent=true
                 - traefik.http.routers.frontend.middlewares=frontend-redirect,secure-headers
                 - traefik.http.routers.frontend.entryPoints=https
                 - traefik.http.routers.frontend.tls=true
                 - traefik.http.routers.frontend.tls.certResolver=letsEncrypt
             mode: replicated
-            replicas: 2
+            replicas: 1
             update_config:
                 parallelism: 1
                 delay: 10s
@@ -29,7 +85,9 @@ services:
     react:
         image: ${REGISTRY}/pet-react:${IMAGE_TAG}
         environment:
-            REACT_APP_AUTH_URL: https://api.herman.team
+            NODE_ENV: development
+            REACT_APP_API_URL: https://api.herman.team/api
+            REACT_APP_API_VER: v1
         networks:
             - traefik-public
             - default
@@ -47,7 +105,7 @@ services:
                 - traefik.http.routers.react.tls=true
                 - traefik.http.routers.react.tls.certResolver=letsEncrypt
             mode: replicated
-            replicas: 2
+            replicas: 1
             update_config:
                 parallelism: 1
                 delay: 10s
@@ -68,10 +126,12 @@ services:
                 - traefik.http.routers.api.tls=true
                 - traefik.http.routers.api.tls.certResolver=letsEncrypt
             mode: replicated
-            replicas: 2
+            replicas: 1
             update_config:
                 parallelism: 1
                 delay: 5s
+            placement:
+                constraints: [node.role == manager]
 
     api-php-fpm:
         image: ${REGISTRY}/api-php-fpm:${IMAGE_TAG}
@@ -97,9 +157,23 @@ services:
                 max_attempts: 5
                 window: 120s
 
+    api-postgres:
+        image: postgres:13.3-alpine
+        environment:
+            POSTGRES_USER: app
+            POSTGRES_PASSWORD: ${API_DB_PASSWORD}
+            POSTGRES_DB: app
+        volumes:
+            - api-postgres:/var/lib/postgresql/data
+        deploy:
+            placement:
+                constraints: [node.role == manager]
+            endpoint_mode: dnsrr
+
 volumes:
     api-postgres:
+    traefik-public-certs:
 
 networks:
     traefik-public:
-        external: true
+        name: traefik-public

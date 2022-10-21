@@ -138,7 +138,7 @@ return [
      * - "static" will generate a static HTMl page in the /public/docs folder,
      * - "laravel" will generate the documentation as a Blade view, so you can add routing and authentication.
      */
-    'type' => 'laravel',
+    'type' => 'static',
 
     /*
      * Settings for `static` type output.
@@ -185,7 +185,7 @@ return [
          * Add a Try It Out button to your endpoints so consumers can test endpoints right from their browser.
          * Don't forget to enable CORS headers for your endpoints.
          */
-        'enabled' => true,
+        'enabled' => false,
 
         /**
          * The base URL for the API tester to use (for example, you can set this to your staging URL).
@@ -429,4 +429,15 @@ INTRO
      * If you only use one db connection, you can leave this as is.
      */
     'database_connections_to_transact' => [config('database.default')],
+    /**
+     * Customize the "Last updated" value displayed in the docs by specifying tokens and formats.
+     * Examples:
+     * - {date:F j Y} => March 28, 2022
+     * - {git:short} => Short hash of the last Git commit
+     *
+     * Available tokens are `{date:<format>}` and `{git:<format>}`.
+     * The format you pass to `date` will be passed to PhP's `date()` function.
+     * The format you pass to `git` can be either "short" or "long".
+     */
+    'last_updated' => 'Last updated: {date:F j, Y}',
 ];

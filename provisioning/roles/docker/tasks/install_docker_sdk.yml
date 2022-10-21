@@ -4,7 +4,7 @@
     name:
       - python3-pip
       - virtualenv
-      - python-setuptools
+      - python3-setuptools
     state: present
     update_cache: yes
 

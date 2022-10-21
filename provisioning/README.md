@@ -5,7 +5,6 @@
 	/provisioning/site.yml
 	/provisioning/docker-login.yml
 	/provisioning/authorize.yml
-	/provisioning/roles/site/defaults/main.yml
 
 1. cd provisioning && make site
 

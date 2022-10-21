@@ -1,5 +1,0 @@
-certbot_email: my@email.ru
-certbot_hosts:
-    - mysite.ru
-    - api.mysite.ru
-    ...

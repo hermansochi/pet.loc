@@ -12,3 +12,39 @@
 - Лог docker:
   - docker compose logs -f
   - docker logs pet-vue-node-1
+
+#show swarms
+docker node ls
+
+#show services
+docker service ls
+
+#show list of task for one service
+docker service ps SERVICE
+
+#stop all containers:
+docker stop $(docker ps -a -q)
+
+#stop all containers by force
+docker kill $(docker ps -q)
+
+#remove all containers
+docker rm $(docker ps -a -q)
+
+#remove all docker images
+docker rmi $(docker images -q)
+
+#purge the rest
+docker system prune --all --force --volumes
+
+#list all docker stacks
+docker stack ls
+
+#remove stack
+docker stack rm NAME
+
+#list all networks
+docker network ls
+
+#Leave the swarm
+docker swarm leave --force

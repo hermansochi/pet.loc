@@ -57,5 +57,6 @@ WORKDIR /app
 
 COPY --from=builder /app ./
 COPY ./ ./
+COPY ./.env.prod ./.env
 
 USER app
