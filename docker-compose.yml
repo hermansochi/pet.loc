@@ -56,6 +56,9 @@ services:
             context: react/docker/development/node
         environment:
             WDS_SOCKET_PORT: 0
+            NODE_ENV: development
+            REACT_APP_API_URL: http://api.localhost/api
+            REACT_APP_API_VER: v1
         volumes:
             - ./react:/app:rw
         command: sh -c "until [ -f .ready ] ; do sleep 1 ; done && yarn start"
@@ -85,6 +88,9 @@ services:
             context: underdante/docker/development/node
         environment:
             WDS_SOCKET_PORT: 0
+            NODE_ENV: development
+            REACT_APP_API_URL: http://api.localhost/api
+            REACT_APP_API_VER: v1
         volumes:
             - ./underdante:/app:rw
         command: sh -c "until [ -f .ready ] ; do sleep 1 ; done && yarn start"
@@ -114,7 +120,7 @@ services:
             context: vue/docker/development/node
         volumes:
             - ./vue:/app:rw
-        command: npm run dev
+        command: sh -c "until [ -f .ready ] ; do sleep 1 ; done && npm run dev"
         tty: true
 
     vue-node-cli:

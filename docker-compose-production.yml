@@ -85,7 +85,9 @@ services:
     react:
         image: ${REGISTRY}/pet-react:${IMAGE_TAG}
         environment:
-            REACT_APP_AUTH_URL: https://api.herman.team
+            NODE_ENV: development
+            REACT_APP_API_URL: https://api.herman.team/api
+            REACT_APP_API_VER: v1
         networks:
             - traefik-public
             - default
