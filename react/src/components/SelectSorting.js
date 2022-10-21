@@ -37,17 +37,20 @@ export default function SelectSorting() {
 
   // В завимости от направления сотрировки отрисовываются элементы и SVG иконка
   let showDirectionSort = directionSort ? (
-    <div className="tooltip tooltip-left cursor-pointer" data-tip="по убыванию">
-      <div className="text-2xl ml-2" onClick={() => changeDirectionSort(false)}>
+    <div
+      className="tooltip tooltip-bottom  cursor-pointer"
+      data-tip="по убыванию"
+    >
+      <div className="text-xl mx-1" onClick={() => changeDirectionSort(false)}>
         ↓
       </div>
     </div>
   ) : (
     <div
-      className="tooltip tooltip-left cursor-pointer"
+      className="tooltip tooltip-bottom cursor-pointer"
       data-tip="по возростанию"
     >
-      <div className="text-2xl ml-2" onClick={() => changeDirectionSort(true)}>
+      <div className="text-xl mx-1" onClick={() => changeDirectionSort(true)}>
         ↑
       </div>
     </div>
@@ -55,21 +58,25 @@ export default function SelectSorting() {
 
   let out = (
     <div className={`flex items-center ${usersLength < total && "hidden"}`}>
-      Сортировать
-      <select
-        className="select select-bordered ml-2 select-xs"
-        onChange={changeSorting}
-      >
-        <option value="last_name">Фамилия</option>
-        <option value="first_name">Имя</option>
-        <option value="middle_name">Отчество</option>
-        <option value="gender">Пол</option>
-        <option value="city">Город</option>
-        <option value="company">Компания</option>
-        <option value="department">Отдел</option>
-        <option value="title">Должность</option>
-      </select>
       <div className="flex items-center">{showDirectionSort}</div>
+      <div
+        className="tooltip tooltip-bottom  cursor-pointer"
+        data-tip="сортировка"
+      >
+        <select
+          className="select select-bordered select-xs"
+          onChange={changeSorting}
+        >
+          <option value="last_name">Фамилия</option>
+          <option value="first_name">Имя</option>
+          <option value="middle_name">Отчество</option>
+          <option value="gender">Пол</option>
+          <option value="city">Город</option>
+          <option value="company">Компания</option>
+          <option value="department">Отдел</option>
+          <option value="title">Должность</option>
+        </select>
+      </div>
     </div>
   );
 

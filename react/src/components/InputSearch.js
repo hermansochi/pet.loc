@@ -37,23 +37,23 @@ export default function InputSearch() {
 
   let out = (
     <div
-      className={`relative w-full max-w-[35%] ${
+      className={`relative w-full max-w-[330px]  ${
         usersLength < total && "hidden"
       }`}
     >
-      <div className="absolute w-4 h-4 top-2 left-2 cursor-pointer">
+      <div className="absolute w-4 h-4 top-1 left-1">
         <SvgComponent name="search" />
       </div>
       <input
         type="text"
         placeholder="Поиск..."
-        className="input  input-sm input-bordered indent-[20px] w-full"
+        className="input input-xs input-bordered indent-[16px] w-full"
         value={search}
         onChange={inputSearch}
       />
       <div
         data-testid="clearSearch"
-        className="absolute w-3 h-3 top-[6px] right-[10px] cursor-pointer"
+        className="absolute w-3 h-3 top-0.5 right-1.5 cursor-pointer"
         onClick={deletTextSearch}
       >
         <SvgComponent name="close" />

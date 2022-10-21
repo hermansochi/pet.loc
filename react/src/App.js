@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import QrModal from "./components/QrModal"; // Компонент для показа QR кода текущего польвателя
 import Header from "./components/Header"; // Компонент шапка сайта
-import Main from "./components/Main"; // Компонент для основного контента
-import PreloaderUser from "./components/PreloaderUser"; // Компонент заглушка во время загрузки данных
+// import Main from "./components/Main"; // Компонент для основного контента
+// import PreloaderUser from "./components/PreloaderUser"; // Компонент заглушка во время загрузки данных
 import { devUrl, healthcheck, versionApi, headers } from "./patch"; // константы путей
 import { useSelector, useDispatch } from "react-redux"; // хуки редакса
 import { fetchUsers } from "./store/usersSlice"; // асинхронный редюсер для загрузки данных
@@ -13,7 +13,7 @@ function App() {
   const page = useSelector((state) => state.app.page); // номер страницы
   const theme = useSelector((state) => state.app.theme); // Изначальная цветовая тема
   const showQr = useSelector((state) => state.app.showqr); // Состояние показа QR кода (изначально скрыто)
-  const { status, error } = useSelector((state) => state.users); // Состояние выполнения асинхронного редюсера
+  // const { status, error } = useSelector((state) => state.users); // Состояние выполнения асинхронного редюсера
 
   const url = new URL(`${devUrl}${versionApi}`); // адрес с версией api
 
@@ -76,8 +76,8 @@ function App() {
       <div className="absolute top-20 right-5 z-50"></div>
       {showQr && <QrModal />}
       <Header />
-      {status === "loading" ? <PreloaderUser /> : <Main />}
-      {error && <div>Error: {error}</div>}
+      {/* {status === "loading" ? <PreloaderUser /> : <Main />}
+      {error && <div>Error: {error}</div>} */}
     </div>
   );
 }
