@@ -7,8 +7,6 @@ describe("Prorgess component", () => {
   test("Should be rendered", () => {
     render(<RenderWrapperTest component={() => <Progress />} />);
 
-    const elem = screen.getByText(/загрузка базы/i);
-
-    expect(elem).toBeInTheDocument();
+    expect(screen.getByText(/загрузка базы/i)).toBeInTheDocument();
   });
 });

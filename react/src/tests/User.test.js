@@ -1,17 +1,18 @@
 /* eslint-disable camelcase */
 import React from "react";
 import RenderWrapperTest from "./RenderWrapperTest";
-import { screen, render } from "@testing-library/react";
+import { screen, render, fireEvent } from "@testing-library/react";
 import User from "../components/User";
+import store from "../store/store";
 
 describe("User component", () => {
-  test("Should be rendered", () => {
+  const renderComponent = () =>
     render(
       <RenderWrapperTest
         component={() => (
           <User
             data={{
-              id: "976b48f0-7fd3-4d03-82ce-395ddeafe5d5",
+              id: "111",
               name: "Alexandrov.H.976b48f0-7fd3-4d03-82ce-395ddeafe5d5",
               hide: false,
               thumbnail: true,
@@ -31,13 +32,32 @@ describe("User component", () => {
               created_at: "2022-10-17T07:35:11.000000Z",
               updated_at: "2022-10-17T07:35:11.000000Z",
             }}
+            str={""}
           />
         )}
       />
     );
 
-    const elem = screen.getByText(/день рождения/i);
+  test("Should be rendered", () => {
+    renderComponent();
 
-    expect(elem).toBeInTheDocument();
+    expect(screen.getByText(/день рождения/i)).toBeInTheDocument();
+  });
+
+  test("Functinon formateNum should be return formated string", () => {
+    const mockFormateNum = jest.fn(function formateNum(num) {
+      let n = num.split("");
+      return `+7 (${n[0]}${n[1]}${n[2]}) ${n[3]}${n[4]}${n[5]} ${n[6]}${n[7]} ${n[8]}${n[9]}`;
+    });
+
+    expect(mockFormateNum("1234567890")).toEqual("+7 (123) 456 78 90");
+  });
+
+  test("Action setId retrn string", () => {
+    renderComponent();
+
+    fireEvent.click(screen.getByTestId("qr"));
+    expect(store.getState().app.id).toBe("111");
+    expect(store.getState().app.showqr).toBeTruthy();
   });
 });

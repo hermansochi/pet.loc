@@ -3,13 +3,13 @@ import SvgComponent from "./SvgComponent"; // Компонент для SVG ик
 
 export default function Menu() {
   const styleLink =
-    "h-7 w-7 duration-300 hover:scale-125 hover:text-primary cursor-pointer";
+    "h-5 sm:h-7 w-5 sm:w-7 duration-300 hover:scale-125 hover:text-primary cursor-pointer";
 
   const styleLine = "flex border border-current grow m-1 w-0";
 
   let out = (
     <div
-      className="fixed z-20 top-[15%] right-[2%] h-[50%] flex flex-col justify-around items-center"
+      className="fixed z-20 top-[15%] right-[2%] h-[40%] sm:h-[50%] flex flex-col justify-around items-center"
       data-testid="menu"
     >
       <div className={styleLine}></div>

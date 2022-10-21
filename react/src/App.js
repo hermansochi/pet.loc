@@ -7,6 +7,7 @@ import { devUrl, healthcheck, versionApi, headers } from "./patch"; // конс�
 import { useSelector, useDispatch } from "react-redux"; // хуки редакса
 import { fetchUsers } from "./store/usersSlice"; // асинхронный редюсер для загрузки данных
 import { setTotal, setPerPage, setShowqr, setPage } from "./store/appSlice"; // редюсеры изменеия состояния приложения
+import Menu from "./components/Menu"; // Компонент меню
 
 function App() {
   const dispatch = useDispatch();
@@ -73,6 +74,7 @@ function App() {
       data-theme={theme ? "luxury" : "garden"}
       data-testid="app"
     >
+      <Menu />
       <div className="absolute top-20 right-5 z-50"></div>
       {showQr && <QrModal />}
       <Header />

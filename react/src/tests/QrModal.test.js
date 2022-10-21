@@ -7,8 +7,6 @@ describe("QrModal component", () => {
   test("Should be rendered", () => {
     render(<RenderWrapperTest component={() => <QrModal />} />);
 
-    const elem = screen.getByAltText(/altQrCode/i);
-
-    expect(elem).toBeInTheDocument();
+    expect(screen.getByAltText(/altQrCode/i)).toBeInTheDocument();
   });
 });

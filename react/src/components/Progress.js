@@ -21,16 +21,16 @@ export default function Progress() {
 
   let out = (
     <div
-      className={`flex flex-grow flex-col items-center ${
+      className={`w-full flex justify-center items-center ${
         usersLength >= total && "hidden"
       }`}
     >
       <progress
-        className="progress progress-secondary w-full"
+        className="progress progress-warning w-full"
         value={usersLength}
         max={1000}
       ></progress>
-      <div className="">Загрузка базы {Math.round(usersLength / 10)}%</div>
+      <div className="">{Math.round(usersLength / 10)}%</div>
     </div>
   );
 

@@ -58,7 +58,7 @@ const usersSlice = createSlice({
       state.users.forEach((el) => {
         if (
           rex.test(
-            `${el["cn"]} ${el["city"]} ${el["company"]} ${el["title"]} ${el["department"]}`
+            `${el["cn"]} ${el["city"]} ${el["company"]} ${el["title"]} ${el["department"]} ${el["email"]} ${el["telephone"]} ${el["mobile"]}`
           )
         ) {
           result.push(el);
