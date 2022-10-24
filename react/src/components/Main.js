@@ -32,7 +32,7 @@ export default function Main() {
 
   let out = (
     <div
-      className="w-full mt-24 sm:mt-20 flex-grow min-h-screen flex flex-col items-center"
+      className="w-full mt-28 sm:mt-20 flex-grow min-h-screen flex flex-col items-center"
       data-testid="main"
     >
       {showUsers}

@@ -6,7 +6,13 @@ import PreloaderUser from "./components/PreloaderUser"; // Компонент з
 import { url, version, healthcheck, headers } from "./patch"; // константы путей
 import { useSelector, useDispatch } from "react-redux"; // хуки редакса
 import { fetchUsers } from "./store/usersSlice"; // асинхронный редюсер для загрузки данных
-import { setTotal, setPerPage, setShowqr, setPage } from "./store/appSlice"; // редюсеры изменеия состояния приложения
+import {
+  setTotal,
+  setPerPage,
+  setShowqr,
+  setPage,
+  setShowAuthForm,
+} from "./store/appSlice"; // редюсеры изменеия состояния приложения
 import Menu from "./components/Menu"; // Компонент меню
 
 function App() {
@@ -52,12 +58,20 @@ function App() {
     }
   };
 
+  // Фунция отслеживает прокрутку документа до самого низа и отрисовывает дополнительно ещё 1-- пользователей
   window.onscroll = () => {
     let scrollHeight = document.body.scrollHeight;
     let totalHeight = window.scrollY + window.innerHeight;
 
     if (totalHeight >= scrollHeight) {
       dispatch(setPage({ pageNumber: page + 1 }));
+    }
+  };
+
+  // Функция отслеживает нажатие на "Escape" и скрывает форму авторизации
+  window.onkeydown = (e) => {
+    if (e.key === "Escape") {
+      dispatch(setShowAuthForm({ showAuthFormString: "close" }));
     }
   };
 
