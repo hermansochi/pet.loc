@@ -6,11 +6,9 @@ Tasks for the Laravel + ReactJS Pet project.
 
 - [ ] Dev: Install Prettier.
 - [ ] Front: Install React router.
-- [ ] Herman: Dev: Copy Nginx config to Underdante & Fix: Error 409 react ws HMR.
 - [ ] Herman: Dev: Make test env.
 - [ ] Herman: Dev: Install Jenkins.
 - [ ] Herman: Dev: Change scribe mode to static.
-- [ ] Herman: Dev: Add underdante & vue to prodaction.
 
 # In Progress
 
@@ -18,6 +16,8 @@ Tasks for the Laravel + ReactJS Pet project.
 
 ### Done ✓
 
+- [х] Herman: Dev: Copy Nginx config to Underdante & Fix: Error 409 react ws HMR.
+- [х] Herman: Dev: Add underdante & vue to production.
 - [х] Herman: Dev: Fix: Vue Erorr 404 6789 crbug/1173575, non-JS module files deprecated.
 - [х] Herman: Dev: Add Environment Variables for frontends.
 - [х] Herman: Dev: Reinstall knuckleswtf/scribe to dev env.

@@ -134,7 +134,6 @@ services:
     vue:
         build:
             context: vue/docker/development/nginx
-        restart: always
         volumes:
             - ./vue:/app:rw
         networks:
