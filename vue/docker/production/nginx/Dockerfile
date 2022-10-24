@@ -4,11 +4,11 @@ ENV REACT_APP_AUTH_URL=%%REACT_APP_AUTH_URL%%
 
 WORKDIR /app
 
-COPY ./package.json ./yarn.lock ./
-RUN yarn install && yarn cache clean
+COPY ./package.json ./package-lock.json ./
+RUN npm install
 
 COPY ./ ./
-RUN yarn build
+RUN npm run build
 
 FROM nginx:1.21-alpine
 
@@ -23,6 +23,6 @@ CMD ["nginx", "-g", "daemon off;"]
 
 WORKDIR /app
 
-COPY --from=builder /app/build ./public
+COPY --from=builder /app/dist ./public
 
 HEALTHCHECK --interval=5s --timeout=3s --start-period=1s CMD curl --fail http://127.0.0.1/health || exit 1

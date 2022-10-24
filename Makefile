@@ -104,7 +104,7 @@ underdante-yarn-install:
 	docker compose run --rm underdante-node-cli yarn install
 
 vue-npm-install:
-	docker compose run --rm vue-node-cli npm install
+	docker compose run --rm vue-node-cli npm instal
 
 react-ready:
 	docker run --rm -v ${PWD}/react:/app -w /app alpine touch .ready
@@ -152,6 +152,8 @@ build: build-api build-frontend
 build-frontend:
 	docker --log-level=debug build --pull --file=react/docker/production/nginx/Dockerfile --tag=${REGISTRY}/pet-react:${IMAGE_TAG} react
 	docker --log-level=debug build --pull --file=frontend/docker/production/nginx/Dockerfile --tag=${REGISTRY}/frontend:${IMAGE_TAG} frontend
+	docker --log-level=debug build --pull --file=underdante/docker/production/nginx/Dockerfile --tag=${REGISTRY}/pet-underdante:${IMAGE_TAG} underdante
+	docker --log-level=debug build --pull --file=vue/docker/production/nginx/Dockerfile --tag=${REGISTRY}/pet-vue:${IMAGE_TAG} vue
 
 build-api:
 	docker --log-level=debug build --pull --file=api/docker/production/nginx/Dockerfile --tag=${REGISTRY}/pet-api:${IMAGE_TAG} api
@@ -161,13 +163,19 @@ build-api:
 try-build:
 	REGISTRY=localhost IMAGE_TAG=0 make build
 
-push: push-frontend push-react push-api
+push: push-frontend push-react push-underdante push-vue push-api
 
 push-frontend:
 	docker push ${REGISTRY}/frontend:${IMAGE_TAG}
 
 push-react:
 	docker push ${REGISTRY}/pet-react:${IMAGE_TAG}
+
+push-underdante:
+	docker push ${REGISTRY}/pet-underdante:${IMAGE_TAG}
+
+push-vue:
+	docker push ${REGISTRY}/pet-vue:${IMAGE_TAG}
 
 push-api:
 	docker push ${REGISTRY}/pet-api:${IMAGE_TAG}
