@@ -1,5 +1,5 @@
 import React from "react";
-import { devUrl, avatars } from "../patch"; // Пути для запросов
+import { avatars } from "../patch"; // Пути для запросов
 import SvgComponent from "./SvgComponent"; // Компонент для SVG картинок
 import { useDispatch } from "react-redux"; // хук редакса для изменения состояния
 import { setId, setShowqr } from "../store/appSlice"; // редюсеры состояния приложения
@@ -8,6 +8,12 @@ import lightSubStrin from "./lightSubString";
 export default function User({ data, str }) {
   const dispactch = useDispatch();
   const sublength = str.length;
+
+  // Путь вычисляестя в зависимости от среды окружения
+  const url =
+    process.env.NODE_ENV === "development"
+      ? "http://api.localhost"
+      : "https://api.herman.team";
 
   // Функция форматирования номера телефона, возвращает изменённую строку
   function formateNum(num) {
@@ -25,7 +31,7 @@ export default function User({ data, str }) {
   let showImage = data.thumbnail && (
     <img
       className="rounded-full"
-      src={`${devUrl}${avatars}${data.id}.jpg`}
+      src={`${url}/${avatars}${data.id}.jpg`}
       alt=""
     />
   );
