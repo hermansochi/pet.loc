@@ -5,6 +5,7 @@ import { setShowAuthForm } from "../store/appSlice"; // Редюсер изме�
 export default function ButtonsAuth() {
   const dispatch = useDispatch();
 
+  // Функция изменяет отображение формы фвторизации
   function handlerAuth(e) {
     dispatch(setShowAuthForm({ showAuthFormString: e.target.dataset.auth }));
   }

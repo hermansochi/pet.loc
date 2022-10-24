@@ -14,6 +14,7 @@ import {
   setShowAuthForm,
 } from "./store/appSlice"; // редюсеры изменеия состояния приложения
 import Menu from "./components/Menu"; // Компонент меню
+import AuthForm from "./components/AuthForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -92,6 +93,7 @@ function App() {
       <Header />
       {status === "loading" ? <PreloaderUser /> : <Main />}
       {error && <div>Error: {error}</div>}
+      <AuthForm />
     </div>
   );
 }

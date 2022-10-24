@@ -1,7 +1,7 @@
 import React from "react";
 import User from "./User"; // Компонент для показа отдельного пользователя
 import { useSelector } from "react-redux"; //  хук состояния редакса
-import uuid from "react-uuid";
+import uuid from "react-uuid"; // Библиотека генерации случайного id
 
 export default function Main() {
   const users = useSelector((state) => state.users.users); // Массив пользователей
