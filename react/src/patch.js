@@ -1,9 +1,8 @@
 // Base urls
-export const devUrl = "http://api.localhost/"; // Основной api для разработки
-export const prodUrl = "bla-bla-bla"; // Api для продакшена
-export const healthcheck = "healthcheck"; // Адрес для проверки соеденения
-export const versionApi = "api/v1/"; // Версия Api
+export const url = process.env.REACT_APP_API_URL; // Основной путь
+export const version = process.env.REACT_APP_API_VER; // Версия api
 export const home = "/"; // Корневая директория
+export const healthcheck = "healthcheck"; // Адрес для проверки соеденения
 export const avatars = "storage/avatars/"; // Директория для запроса аватарок
 export const orgUsers = "org/users/"; // Директория для запроса пользователей
 export const qrcodes = "org/qrcodes/"; // Директория для запроса QR кодов

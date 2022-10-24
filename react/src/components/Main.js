@@ -1,6 +1,7 @@
 import React from "react";
 import User from "./User"; // Компонент для показа отдельного пользователя
 import { useSelector } from "react-redux"; //  хук состояния редакса
+import uuid from "react-uuid";
 
 export default function Main() {
   const users = useSelector((state) => state.users.users); // Массив пользователей
@@ -13,13 +14,13 @@ export default function Main() {
   if (search.length < 3) {
     users.forEach((el, i) => {
       if (i <= page * 100 && el.fide !== false) {
-        showUsers.push(<User key={el.id} data={el} str={search} />);
+        showUsers.push(<User key={uuid()} data={el} str={search} />);
       }
     });
   } else {
     searchResult.forEach((el, i) => {
       if (i <= page * 100 && el.fide !== false) {
-        showUsers.push(<User key={el.id} data={el} str={search} />);
+        showUsers.push(<User key={uuid()} data={el} str={search} />);
       }
     });
     if (searchResult.length === 0 && search !== "") {
