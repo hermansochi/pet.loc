@@ -62,6 +62,7 @@ RUN chmod -R ug+rwx storage bootstrap/cache
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN composer install --no-dev --prefer-dist --no-progress --optimize-autoloader --ignore-platform-req=ext-gd\
     && rm -rf /usr/bin/composer
+RUN php artisan storage:link
 
 HEALTHCHECK --interval=5s --timeout=3s --start-period=1s \
     CMD REDIRECT_STATUS=true SCRIPT_NAME=/ping SCRIPT_FILENAME=/ping REQUEST_METHOD=GET \
