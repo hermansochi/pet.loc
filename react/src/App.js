@@ -16,6 +16,7 @@ import {
 import Menu from "./components/Menu"; // Компонент меню
 import AuthForm from "./components/AuthForm";
 
+
 function App() {
   const dispatch = useDispatch();
   const page = useSelector((state) => state.app.page); // номер страницы
@@ -23,6 +24,7 @@ function App() {
   const showQr = useSelector((state) => state.app.showqr); // Состояние показа QR кода (изначально скрыто)
   const { status, error } = useSelector((state) => state.users); // Состояние выполнения асинхронного редюсера
 
+  console.log(process.env);
   useEffect(() => {
     // запрос для проверки соединения
     fetch(url + "/" + version + "/" + healthcheck, {
