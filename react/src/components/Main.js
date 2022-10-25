@@ -1,7 +1,7 @@
 import React from "react";
 import User from "./User"; // Компонент для показа отдельного пользователя
 import { useSelector } from "react-redux"; //  хук состояния редакса
-import uuid from "react-uuid";
+import uuid from "react-uuid"; // Библиотека генерации случайного id
 
 export default function Main() {
   const users = useSelector((state) => state.users.users); // Массив пользователей
@@ -32,7 +32,7 @@ export default function Main() {
 
   let out = (
     <div
-      className="w-full mt-24 sm:mt-20 flex-grow min-h-screen flex flex-col items-center"
+      className="w-full mt-28 sm:mt-20 flex-grow min-h-screen flex flex-col items-center"
       data-testid="main"
     >
       {showUsers}

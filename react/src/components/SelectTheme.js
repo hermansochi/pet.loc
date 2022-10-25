@@ -15,7 +15,11 @@ export default function SelectTheme() {
   }
 
   let out = (
-    <div className={`flex items-center ${usersLength < total && "hidden"}`}>
+    <div
+      className={`flex sm:order-4 items-center ${
+        usersLength < total && "hidden"
+      }`}
+    >
       <div className="w-4 h-4 mx-1">
         <SvgComponent name={theme ? "moon" : "sun"} />
       </div>
