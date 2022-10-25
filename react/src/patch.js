@@ -3,7 +3,6 @@ export const url = process.env.REACT_APP_API_URL; // Основной путь
 export const version = process.env.REACT_APP_API_VER; // Версия api
 export const home = "/"; // Корневая директория
 export const healthcheck = "healthcheck"; // Адрес для проверки соеденения
-export const avatars = "storage/avatars/"; // Директория для запроса аватарок
 export const orgUsers = "org/users/"; // Директория для запроса пользователей
 export const qrcodes = "org/qrcodes/"; // Директория для запроса QR кодов
 export const login = "login";

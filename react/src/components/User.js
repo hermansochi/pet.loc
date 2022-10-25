@@ -1,5 +1,4 @@
 import React from "react";
-import { avatars } from "../patch"; // Пути для запросов
 import SvgComponent from "./SvgComponent"; // Компонент для SVG картинок
 import { useDispatch } from "react-redux"; // хук редакса для изменения состояния
 import { setId, setShowqr } from "../store/appSlice"; // редюсеры состояния приложения
@@ -10,10 +9,7 @@ export default function User({ data, str }) {
   const sublength = str.length;
 
   // Путь вычисляестя в зависимости от среды окружения
-  const url =
-    process.env.NODE_ENV === "development"
-      ? "http://api.localhost"
-      : "https://api.herman.team";
+  const url = process.env.REACT_APP_AVATARS;
 
   // Функция форматирования номера телефона, возвращает изменённую строку
   function formateNum(num) {
@@ -29,11 +25,7 @@ export default function User({ data, str }) {
 
   // Показывает дефолтную иконку при отсутстрии фотографии на сервере
   let showImage = data.thumbnail && (
-    <img
-      className="rounded-full"
-      src={`${url}/${avatars}${data.id}.jpg`}
-      alt=""
-    />
+    <img className="rounded-full" src={`${url}/${data.id}.jpg`} alt="" />
   );
 
   let fotoName = (
