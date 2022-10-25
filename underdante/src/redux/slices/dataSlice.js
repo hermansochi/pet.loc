@@ -39,8 +39,8 @@ const dataSlice = createSlice({
         ripeUsers : [] ,
         filtredUsers : [] ,
       } ,
-      categoryFilter : "cn" ,
-      inputFilter : "" ,
+      categoryFilter : "email" ,
+      inputFilter : null ,
       status :null ,
       error:null ,    
 
@@ -49,7 +49,7 @@ const dataSlice = createSlice({
   reducers: {
      addUserBlock : (state , action) => {
       state.users.rawUsers.push(action.payload.usersBlock);
-      state.users.ripeUsers.push(action.payload.usersBlock.data); // передаю только необходимую информацию
+        state.users.ripeUsers.push(action.payload.usersBlock.data); // передаю только необходимую информацию
       },
       inputFiltration : (state, action) => {  //фильтр по вводу вариант 1 
         state.users.filtredUsers = state.users.ripeUsers.filter(user => user.name.toLowerCase().includes(action.payload.text)) ;
@@ -75,7 +75,7 @@ extraReducers : {
     state.error = null ;
   } ,
   [getData.fulfilled] : (state)=>{
-    state.users.ripeUsers = state.users.ripeUsers.flat() ; // сплющиваю для удобства
+    // state.users.ripeUsers = state.users.ripeUsers.flat() ; // сплющиваю для удобства
     // state.users.filtredUsers = state.users.ripeUsers ; // вариант фильтрации 1
     state.status = "resolved" ;
     state.error = null ;

@@ -1,48 +1,63 @@
-import React from "react";
+import React , { useState ,useEffect } from "react";
 import { useSelector } from "react-redux";
-// import CurrentPage from "./CurrentPage";
-// import { useDispatch } from "react-redux";
-// import { setFultredUsers } from "../../redux/slices/dataSlice";
-
 
 //рендер пользователей
 export default function ContentPage () {
-//  const state = useSelector(state=>state.data.users.filtredUsers) ; // получаю стеит вар 1
  const state = useSelector(state=>state.data.users.ripeUsers) ; // получаю стеит 
- const inputFilter = useSelector(state=>state.data.inputFilter) ; // получаю фильтр 
- const category = useSelector(state => state.data.categoryFilter) ;
-//  let dispatch = useDispatch() ;
 
-// отрисовка вар 1
-//  let output = state.map((user)=>{
+const [ page , setPage  ] = useState(1) ; // следующая страница для отрисовки
+const [ inlet , setInlet  ] = useState([]) ; //  вхдящие данные для отрисовки
+const [ update , setUpdate  ] = useState(false) ; // флаг указатель о необходимости добавления данные для отрисовки
 
-//     return (
-//         <div key = {user.id}>
-//             {user.name}
-//         </div>
-//     ) ;
 
-//  });
+function start (set , data) { // функция для задания начальной страницы
+    set(data) ;
+} 
 
-let result ;
-if (inputFilter) {
-    result = state.filter(user=>user[category].toLowerCase().includes(inputFilter)) ;
-}else{
-    result = state ;
-}
+const scrollHandler = (e) => {  // обработчик скролл .если до конца страницы осталось менее 100 пх и сномер страницы не больше чем страниц вообще
+    if (e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 100 && page < state.length) {
+            setUpdate(true) ; // меняем флаг и запускаем добавление новых данных
+    }
+} ;
 
+useEffect(()=>{
+    if (update) {    // если true ,то добавляем данные к существющим и увеличиваем номер страницы
+        setInlet([...inlet , ...state[page]]) ;
+        setPage(page + 1) ;
+    }
+    setUpdate(false) ;  // переводим индикатор в false
+} , [update]) ;
+
+
+useEffect(()=>{  // не нашел решения изящнее чем ванильный js , добавляем слушатель на скролл и обновляем его при изменении page
+    document.addEventListener('scroll' , scrollHandler) ; // без обновления page в ф-ий scrollHandler остается начальное значение page
+
+
+    if (page === 1) start(setInlet , state[0]) ; // начальный рендер , если следующая к отрисовке страница -1 то выводим 0 страницу
+
+    return function () {
+        document.removeEventListener('scroll' ,scrollHandler) ;
+    } ;
+
+} , [page]) ;
 
 
  
- let output = result.map((user)=>{
+ let output = inlet.map((user)=>{ // отрисовка пользователей 
+
+    if(user.hide) return ;
 
     return (
-        <div className = {`flex flex-row items-center justify-around bg-cyan-500 mb-[2rem] w-[30%] rounded-md`} key = {user.id}>
-            <div className = {``}>
-                <img className = {`rounded-lg border-[3px]`} src={`http://api.localhost/storage/avatars/${user.id}.jpg`}/>
+        <div className = {`flex flex-row items-center bg-cyan-500 mb-[2rem] h-[8rem] w-[80%] rounded-md`} key = {user.id}
+        >
+            <div className = {`h-[60%] ml-[3rem] mr-[3rem]`}>
+                <img className = {`rounded-lg border-[3px] h-full`} src={`http://api.localhost/storage/avatars/${user.id}.jpg`}/>
             </div>
             
-            <div className ={``}>
+
+
+
+            <div className ={`flex flex-col flex-wrap h-[100%] w-[80%]`}>
             <div>
                Имя : {user.cn}
             </div>
@@ -84,7 +99,6 @@ if (inputFilter) {
             </div>
 
             </div>
-
         </div>
     ) ;
 
@@ -92,10 +106,8 @@ if (inputFilter) {
 
 
 
-
-
     return (
-        <div className = {`flex w-[100%] flex-wrap justify-evenly`}>
+        <div className = {`flex flex-col w-full items-center`} >
             {output}
         </div>
     ) ;
