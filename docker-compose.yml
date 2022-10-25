@@ -8,7 +8,6 @@ services:
             --api.insecure=true
             --providers.docker=true
             --providers.docker.exposedByDefault=false
-            --accesslog=true
         ports:
             - "80:80"
             - "8080:8080"
@@ -61,6 +60,7 @@ services:
             NODE_ENV: development
             REACT_APP_API_URL: http://api.localhost/api
             REACT_APP_API_VER: v1
+            REACT_APP_AVATARS: http://storage.localhost/pet/avatars
         volumes:
             - ./react:/app:rw
         command: sh -c "until [ -f .ready ] ; do sleep 1 ; done && yarn start"
@@ -93,6 +93,7 @@ services:
             NODE_ENV: development
             REACT_APP_API_URL: http://api.localhost/api
             REACT_APP_API_VER: v1
+            REACT_APP_AVATARS: http://storage.localhost/pet/avatars
         volumes:
             - ./underdante:/app:rw
         command: sh -c "until [ -f .ready ] ; do sleep 1 ; done && yarn start"
@@ -156,8 +157,53 @@ services:
             - api-postgres:/var/lib/postgresql/data
         ports:
             - "54321:5432"
+
+    minio:
+        image: minio/minio:RELEASE.2022-10-21T22-37-48Z
+        command: server --console-address ":9001" /data
+        environment:
+            MINIO_ROOT_USER: local
+            MINIO_ROOT_PASSWORD: secret123456
+            MINIO_BROWSER_REDIRECT_URL: http://console.storage.localhost
+        volumes:
+            - minio-storage:/data
+        networks:
+            - traefik-public
+            - default
+        labels:
+            - traefik.enable=true
+            - traefik.docker.network=traefik-public
+            # Console
+            - "traefik.http.routers.storage-console.rule=Host(`console.storage.localhost`)"
+            - "traefik.http.routers.storage-console.entrypoints=http"
+            - "traefik.http.routers.storage-console.service=storage-console"
+            - "traefik.http.services.storage-console.loadbalancer.server.port=9001"
+            # APi
+            - "traefik.http.routers.storage.rule=Host(`storage.localhost`)"
+            - "traefik.http.routers.storage.entrypoints=http"
+            - "traefik.http.routers.storage.service=storage"
+            - "traefik.http.services.storage.loadbalancer.server.port=9000"
+
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://127.0.0.1:9000/minio/health/live"]
+            interval: 30s
+            timeout: 20s
+            retries: 3
+
+    mc-service:
+        image: minio/mc
+        depends_on:
+            minio:
+                condition: service_healthy
+        restart: on-failure
+        entrypoint: /bin/sh -c "/usr/bin/mc alias set myminio http://minio:9000 local secret123456 && /usr/bin/mc mb myminio/pet && /usr/bin/mc anonymous set download myminio/pet"
+        networks:
+            - traefik-public
+            - default
+
 volumes:
     api-postgres:
+    minio-storage:
 
 networks:
     traefik-public:

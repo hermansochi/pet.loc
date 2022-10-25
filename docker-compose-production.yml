@@ -96,7 +96,7 @@ services:
             labels:
                 - traefik.enable=true
                 - traefik.docker.network=traefik-public
-                - traefik.http.routers.react.rule=Host(`react.herman.team`) || Host(`www.react.herman.team`)
+                - traefik.http.routers.react.rule=Host(`react.herman.team`)
                 - traefik.http.services.react.loadBalancer.server.port=80
                 - traefik.http.middlewares.react-redirect.redirectRegex.regex=^(https?://)www.react.herman.team/(.*)$$
                 - traefik.http.middlewares.react-redirect.redirectRegex.replacement=$${1}react.herman.team/$${2}
@@ -194,9 +194,6 @@ services:
 
     api-php-fpm:
         image: ${REGISTRY}/api-php-fpm:${IMAGE_TAG}
-        environment:
-            APP_ENV: prod
-            APP_DEBUG: 0
         deploy:
             mode: replicated
             replicas: 1
@@ -206,9 +203,7 @@ services:
 
     api-php_cli:
         image: ${REGISTRY}/api-php-cli:${IMAGE_TAG}
-        environment:
-            APP_ENV: prod
-            APP_DEBUG: 0
+        command: sh -c 'wait-for-it api-postgres:5432 -t 60 && php artisan migrate:fresh && php artisan db:seed && php artisan avatar:add && php artisan scribe:generate && php artisan route:cache && php artisan config:cache'
         deploy:
             restart_policy:
                 condition: on-failure
@@ -220,7 +215,7 @@ services:
         image: postgres:13.3-alpine
         environment:
             POSTGRES_USER: app
-            POSTGRES_PASSWORD: ${API_DB_PASSWORD}
+            POSTGRES_PASSWORD: 4lR@n9^3VYmg
             POSTGRES_DB: app
         volumes:
             - api-postgres:/var/lib/postgresql/data

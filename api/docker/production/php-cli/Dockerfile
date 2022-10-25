@@ -59,4 +59,12 @@ COPY --from=builder /app ./
 COPY ./ ./
 COPY ./.env.prod ./.env
 
+RUN chmod -R ug+rwx storage bootstrap/cache
+
+# Get latest Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+RUN composer install --no-dev --prefer-dist --no-progress --optimize-autoloader --ignore-platform-req=ext-gd\
+    && rm -rf /usr/bin/composer
+RUN php artisan storage:link
+
 USER app
