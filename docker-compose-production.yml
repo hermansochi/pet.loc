@@ -89,6 +89,7 @@ services:
             REACT_APP_API_URL: https://api.herman.team/api
             REACT_APP_API_VER: v1
             REACT_APP_AUTH_URL: https://api.herman.team
+            REACT_APP_AVATARS: https://storage.herman.team/pet/avatars/
         networks:
             - traefik-public
             - default
@@ -118,6 +119,7 @@ services:
             REACT_APP_API_URL: https://api.herman.team/api
             REACT_APP_API_VER: v1
             REACT_APP_AUTH_URL: https://api.herman.team
+            REACT_APP_AVATARS: https://storage.herman.team/pet/avatars/
         networks:
             - traefik-public
             - default
@@ -125,7 +127,7 @@ services:
             labels:
                 - traefik.enable=true
                 - traefik.docker.network=traefik-public
-                - traefik.http.routers.underdante.rule=Host(`underdante.herman.team`) || Host(`www.underdante.herman.team`)
+                - traefik.http.routers.underdante.rule=Host(`underdante.herman.team`)
                 - traefik.http.services.underdante.loadBalancer.server.port=80
                 - traefik.http.middlewares.underdante-redirect.redirectRegex.regex=^(https?://)www.underdante.herman.team/(.*)$$
                 - traefik.http.middlewares.underdante-redirect.redirectRegex.replacement=$${1}underdante.herman.team/$${2}
@@ -147,6 +149,7 @@ services:
             REACT_APP_API_URL: https://api.herman.team/api
             REACT_APP_API_VER: v1
             REACT_APP_AUTH_URL: https://api.herman.team
+            REACT_APP_AVATARS: https://storage.herman.team/pet/avatars/
         networks:
             - traefik-public
             - default
@@ -154,7 +157,7 @@ services:
             labels:
                 - traefik.enable=true
                 - traefik.docker.network=traefik-public
-                - traefik.http.routers.vue.rule=Host(`vue.herman.team`) || Host(`www.vue.herman.team`)
+                - traefik.http.routers.vue.rule=Host(`vue.herman.team`)
                 - traefik.http.services.vue.loadBalancer.server.port=80
                 - traefik.http.middlewares.vue-redirect.redirectRegex.regex=^(https?://)www.vue.herman.team/(.*)$$
                 - traefik.http.middlewares.vue-redirect.redirectRegex.replacement=$${1}vue.herman.team/$${2}
@@ -201,9 +204,9 @@ services:
                 parallelism: 1
                 delay: 5s
 
-    api-php_cli:
+    appinit:
         image: ${REGISTRY}/api-php-cli:${IMAGE_TAG}
-        command: sh -c 'wait-for-it api-postgres:5432 -t 60 && php artisan migrate:fresh && php artisan db:seed && php artisan avatar:add && php artisan scribe:generate && php artisan route:cache && php artisan config:cache'
+        command: sh -c 'wait-for-it api-postgres:5432 -t 60 && php artisan migrate:fresh && php artisan db:seed && php artisan avatar:add && php artisan route:cache && php artisan config:cache'
         deploy:
             restart_policy:
                 condition: on-failure
@@ -224,9 +227,60 @@ services:
                 constraints: [node.role == manager]
             endpoint_mode: dnsrr
 
+    minio:
+        image: minio/minio:RELEASE.2022-10-21T22-37-48Z
+        command: server --console-address ":9001" /data
+        environment:
+            MINIO_ROOT_USER: local
+            MINIO_ROOT_PASSWORD: secret123456
+            MINIO_BROWSER_REDIRECT_URL: https://console.storage.herman.team
+        volumes:
+            - minio-storage:/data
+        networks:
+            - traefik-public
+            - default
+        deploy:
+            labels:
+                - traefik.enable=true
+                - traefik.docker.network=traefik-public
+                # Console
+                - traefik.http.routers.storage-console.rule=Host(`console.storage.herman.team`)
+                - traefik.http.routers.storage-console.entrypoints=https
+                - traefik.http.routers.storage-console.service=storage-console
+                - traefik.http.services.storage-console.loadbalancer.server.port=9001
+                - traefik.http.routers.storage-console.tls=true
+                - traefik.http.routers.storage-console.tls.certResolver=letsEncrypt
+                # APi
+                - traefik.http.routers.storage.rule=Host(`storage.herman.team`)
+                - traefik.http.routers.storage.entrypoints=https
+                - traefik.http.routers.storage.service=storage
+                - traefik.http.services.storage.loadbalancer.server.port=9000
+                - traefik.http.routers.storage.tls=true
+                - traefik.http.routers.storage.tls.certResolver=letsEncrypt
+            mode: replicated
+            replicas: 1
+            update_config:
+                parallelism: 1
+                delay: 5s
+            placement:
+                constraints: [node.role == manager]
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://127.0.0.1:9000/minio/health/live"]
+            interval: 30s
+            timeout: 20s
+            retries: 3
+
+    mc-service:
+        image: minio/mc
+        entrypoint: /bin/sh -c "/usr/bin/mc alias set myminio http://minio:9000 local secret123456 && /usr/bin/mc mb myminio/pet && /usr/bin/mc anonymous set download myminio/pet"
+        networks:
+            - traefik-public
+            - default
+
 volumes:
     api-postgres:
     traefik-public-certs:
+    minio-storage:
 
 networks:
     traefik-public:
