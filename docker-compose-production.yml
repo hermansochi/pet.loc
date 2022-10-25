@@ -96,7 +96,7 @@ services:
             labels:
                 - traefik.enable=true
                 - traefik.docker.network=traefik-public
-                - traefik.http.routers.react.rule=Host(`react.herman.team`) || Host(`www.react.herman.team`)
+                - traefik.http.routers.react.rule=Host(`react.herman.team`)
                 - traefik.http.services.react.loadBalancer.server.port=80
                 - traefik.http.middlewares.react-redirect.redirectRegex.regex=^(https?://)www.react.herman.team/(.*)$$
                 - traefik.http.middlewares.react-redirect.redirectRegex.replacement=$${1}react.herman.team/$${2}
