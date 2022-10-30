@@ -10,18 +10,18 @@
 
 
 
-import React , { useState , useRef , useEffect }  from "react";
+import React , { useState , useEffect }  from "react";
 import { useDispatch ,useSelector } from "react-redux";
 // import { inputFiltration } from "../../redux/slices/dataSlice";  // вар 1
-import { setInputFilter } from "../../redux/slices/dataSlice";
-
+import { selection } from "../../redux/slices/dataSlice";
+import { resetFultredUsers } from "../../redux/slices/dataSlice";
 
 export default function Input () {
     const dispatch = useDispatch() ;
     let categoryFilter = useSelector(state => state.data.categoryFilter) ;
     
     const [text , setText] = useState("") ;
-    const showldWait = useRef() ;
+    // const showldWait = useRef() ;
 
     useEffect(()=>{
         setText("") ;
@@ -29,13 +29,10 @@ export default function Input () {
     
     
     function filtration(event) {  // запуск фильтрации
-        // setText(value) ;
-        let value = event.target.value ;
-
-        if (value.length > 2) {
-            dispatch(setInputFilter(value)) ;
+        if (event.target.value.length > 2) {
+            dispatch(selection({categoryFilter : categoryFilter , word : event.target.value})) ;
         }else{
-            dispatch(setInputFilter("")) ;
+            dispatch(resetFultredUsers()) ;
         }
 
 
@@ -55,15 +52,15 @@ export default function Input () {
     } 
 
  
- function thorttle (cb, delay = 1000) {
-    if(showldWait.current) return ;
+//  function thorttle (cb, delay = 1000) {
+//     if(showldWait.current) return ;
     
-    showldWait.current = true ;
-    setTimeout(()=>{
-        cb(); 
-        showldWait.current = false ;
-    } , delay) ;
- } 
+//     showldWait.current = true ;
+//     setTimeout(()=>{
+//         cb(); 
+//         showldWait.current = false ;
+//     } , delay) ;
+//  } 
 
 
     return (<div className = {`w-[55%]`}>
@@ -71,7 +68,8 @@ export default function Input () {
 //  onChange={(event)=>thorttle(filtration(event.target.value))}
  onChange={(event) => {
     setText(event.target.value) ;
-    thorttle(filtration) ;
+    filtration(event) ;
+    // thorttle(filtration) ;
  } }
    />
     </div>) ;

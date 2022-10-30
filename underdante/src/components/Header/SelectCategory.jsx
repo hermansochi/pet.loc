@@ -1,7 +1,7 @@
 import React , { useState } from "react";
 import { useDispatch} from "react-redux";
 import { setCategoryFilter } from "../../redux/slices/dataSlice";
-
+import { resetFultredUsers } from "../../redux/slices/dataSlice";
 
 
 
@@ -28,7 +28,9 @@ let categories = {
 function changeCategory (event) {
     console.log(event.target.value) ;
     setChosen(event.target.value) ;
+    dispatch (resetFultredUsers()) ;
     dispatch(setCategoryFilter({categoryFilter : categories[event.target.value]})) ;  // очень долгое переключение при не пустом поле инпута
+
 } 
 
     // let options = Object.keys(categories).map((item , num)=>{
