@@ -181,6 +181,9 @@ push-api:
 	docker push ${REGISTRY}/api-php-fpm:${IMAGE_TAG}
 	docker push ${REGISTRY}/api-php-cli:${IMAGE_TAG}
 	
+validate-jenkins:
+	curl --user ${USER} -X POST -F "jenkinsfile=<Jenkinsfile" ${HOST}/pipeline-model-converter/validate
+
 deploy:
 	ssh -o StrictHostKeyChecking=no deploy@${HOST} -p ${PORT} 'rm -rf site_${BUILD_NUMBER} && mkdir site_${BUILD_NUMBER}'
 	envsubst < docker-compose-production.yml > docker-compose-production-env.yml
@@ -193,6 +196,3 @@ deploy-clean:
 
 rollback:
     ssh -o StrictHostKeyChecking=no deploy@${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && docker stack deploy docker-compose.yml server --with-registry-auth --prune --compose-file'
-
-validate-jenkins:
-    curl --user ${USER} -X POST -F "jenkinsfile=<Jenkinsfile" ${HOST}/pipeline-model-converter/validate
