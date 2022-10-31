@@ -38,7 +38,7 @@
 
 -   name: Install Docker Compose
     get_url:
-        url: https://github.com/docker/compose/releases/download/1.27.4/docker-compose-{{ ansible_system }}-{{ ansible_userspace_architecture }}
+        url: https://github.com/docker/compose/releases/download/v2.12.2/docker-compose-{{ ansible_system }}-{{ ansible_userspace_architecture }}
         dest: /usr/local/bin/docker-compose
         force: true
         group: docker
@@ -47,7 +47,7 @@
 -   name: Set periodic Docker prune
     cron:
         name: docker-prune
-        job: 'docker system prune -af --filter until=720h'
+        job: 'docker system prune -af --filter until=120h'
         minute: '0'
         hour: '1'
 
