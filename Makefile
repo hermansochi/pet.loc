@@ -192,6 +192,7 @@ deploy-clean:
 	rm -f docker-compose-production-env.yml
 
 rollback:
-	ssh -o StrictHostKeyChecking=no deploy@${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && docker stack deploy docker-compose.yml server --with-registry-auth --prune --compose-file'
+    ssh -o StrictHostKeyChecking=no deploy@${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && docker stack deploy docker-compose.yml server --with-registry-auth --prune --compose-file'
 
-
+validate-jenkins:
+    curl --user ${USER} -X POST -F "jenkinsfile=<Jenkinsfile" ${HOST}/pipeline-model-converter/validate
