@@ -59,6 +59,9 @@ api-composer-install:
 api-tests:
 	docker compose run --rm api-php-cli php artisan test
 
+api-test:
+	docker compose run --rm api-php-cli ./vendor/bin/phpunit
+
 api-tests-coverage:
 	docker compose run --rm api-php-cli vendor/bin/phpunit --coverage-html reports/
 

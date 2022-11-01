@@ -7,7 +7,6 @@ Tasks for the Laravel + ReactJS Pet project.
 - [ ] Dev: Install Prettier.
 - [ ] Front: Install React router.
 - [ ] Herman: Dev: Make test env.
-- [ ] Herman: Dev: Make Jenkinsfile.
 - [ ] Herman: Dev: Change scribe mode to static.
 
 # In Progress
@@ -16,10 +15,12 @@ Tasks for the Laravel + ReactJS Pet project.
 
 ### Done ✓
 
+- [х] Herman: Dev: Add Paslm for API & Unit tests fro api and frontends in Jenkins.
 - [х] Herman: Dev: Ignore lint stage errors in Jenkins.
 - [х] Herman: Dev: Add lint stage in Jenkins.
 - [х] Herman: Dev: Uninstall docker-compose, instal docker compose plugin for dind in jenkins.herman.team.
 - [х] Herman: Dev: Uninstall docker-compose, instal docker compose plugin for jenkins.herman.team.
+- [х] Herman: Dev: Make Jenkinsfile.
 - [х] Herman: Dev: Install Jenkins.
 - [х] Herman: Dev: Add Minio to dev env.
 - [х] Herman: Dev: Copy Nginx config to Underdante & Fix: Error 409 react ws HMR.

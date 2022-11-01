@@ -59,7 +59,7 @@ pipeline {
                 stage('API') {
                     steps {
                         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                            sh 'make api-tests'
+                            sh 'make api-test'
                         }
                     }
                 }
