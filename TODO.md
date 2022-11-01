@@ -17,6 +17,7 @@ Tasks for the Laravel + ReactJS Pet project.
 
 ### Done ✓
 
+- [х] Herman: Dev: Uninstall docker-compose, instal docker compose plugin for jenkins.herman.team.
 - [х] Herman: Dev: Install Jenkins.
 - [х] Herman: Dev: Add Minio to dev env.
 - [х] Herman: Dev: Copy Nginx config to Underdante & Fix: Error 409 react ws HMR.
