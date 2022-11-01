@@ -26,17 +26,23 @@ pipeline {
                 }
                 stage('React') {
                     steps {
-                        sh 'make react-lint'
+                        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                            sh 'make react-lint'
+                        }
                     }
                 }
                 stage('Underdante') {
                     steps {
-                        sh 'make underdante-lint'
+                        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                            sh 'make underdante-lint'
+                        }
                     }
                 }
                 stage('Vue') {
                     steps {
-                        sh 'make vue-lint'
+                        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                            sh 'make vue-lint'
+                        }
                     }
                 }
             }
