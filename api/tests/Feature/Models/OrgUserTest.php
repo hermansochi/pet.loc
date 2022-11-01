@@ -2,14 +2,14 @@
 
 namespace Tests\Feature\Models;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use App\Models\Org\OrgUser;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class OrgUserTest extends TestCase
 {
     use RefreshDatabase;
+
     /**
      * OrgUser test.
      *

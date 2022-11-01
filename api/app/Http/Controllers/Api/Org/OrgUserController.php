@@ -28,7 +28,7 @@ class OrgUserController extends Controller
     }
 
     /**
-     * Return paginated organization employees. The number of entries per page is set in .env in 
+     * Return paginated organization employees. The number of entries per page is set in .env in
      * APP_EMPLOYEES_PER_PAGE=100
      * Возвращает сотрудников организации массивом в объекте data, метаинформацией в объекте meta, ссылками в
      * объекте links cс разбивкой оп страницам. Количество записей на страницу устанавливается в .env в

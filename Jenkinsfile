@@ -47,6 +47,38 @@ pipeline {
                 }
             }
         }
+        stage('Analyze') {
+            steps {
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    sh 'make api-analyze'
+                }
+            }
+        }
+        stage('Test') {
+            parallel {
+                stage('API') {
+                    steps {
+                        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                            sh 'make api-tests'
+                        }
+                    }
+                }
+                stage('React') {
+                    steps {
+                        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                            sh 'make react-test'
+                        }
+                    }
+                }
+                stage('Underdante') {
+                    steps {
+                        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                            sh 'make underdante-test'
+                        }
+                    }
+                }
+            }
+        }
         stage('Down') {
             steps {
                 sh 'make docker-down-clear'

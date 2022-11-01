@@ -65,6 +65,12 @@ api-tests-coverage:
 api-psalm:
 	docker compose run --rm api-php-cli ./vendor/bin/psalm --show-info=true
 
+api-lint:
+	docker compose run --rm api-php-cli ./vendor/bin/pint
+
+api-analyze:
+	docker compose run --rm api-php-cli ./vendor/bin/psalm
+
 api-wait-db:
 	docker compose run --rm api-php-cli wait-for-it api-postgres:5432 -t 30
 
@@ -113,9 +119,6 @@ underdante-ready:
 
 vue-ready:
 	docker run --rm -v ${PWD}/vue:/app -w /app alpine touch .ready
-
-api-lint:
-	docker compose run --rm api-php-cli ./vendor/bin/pint
 
 react-lint:
 	docker compose run --rm react-node-cli yarn eslint
