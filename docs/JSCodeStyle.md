@@ -1,6 +1,16 @@
 # Java Script Code style
 
-Провеются js и jsx файлы в /src
+Команды для проверки:
+1. make react-lint
+1. make underdante-lint
+1. make vue-lint
+
+Команды для исправления:
+1. make react-lint-fix
+1. make underdante-lint-fix
+1. make vue-lint-fix
+
+Проверются js и jsx файлы в /src
 Используется eslint с настройкой eslint:recommended со следующими соглашениями:
 
 space-before-function-paren
