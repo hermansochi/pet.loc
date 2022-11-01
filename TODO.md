@@ -8,7 +8,6 @@ Tasks for the Laravel + ReactJS Pet project.
 - [ ] Front: Install React router.
 - [ ] Herman: Dev: Make test env.
 - [ ] Herman: Dev: Make Jenkinsfile.
-
 - [ ] Herman: Dev: Change scribe mode to static.
 
 # In Progress
@@ -17,6 +16,7 @@ Tasks for the Laravel + ReactJS Pet project.
 
 ### Done ✓
 
+- [х] Herman: Dev: Uninstall docker-compose, instal docker compose plugin for dind in jenkins.herman.team.
 - [х] Herman: Dev: Uninstall docker-compose, instal docker compose plugin for jenkins.herman.team.
 - [х] Herman: Dev: Install Jenkins.
 - [х] Herman: Dev: Add Minio to dev env.
