@@ -7,11 +7,6 @@ pipeline {
         CI = 'true'
     }
     stages {
-        stage('Start notify') {
-            steps {
-
-            }
-        }
         stage('Init') {
             steps {
                 withCredentials([string(credentialsId: 'telegramToken', variable: 'TOKEN'), string(credentialsId: 'telegramChatId', variable: 'CHAT_ID')]) {

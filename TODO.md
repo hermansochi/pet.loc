@@ -16,6 +16,7 @@ Tasks for the Laravel + ReactJS Pet project.
 
 ### Done ✓
 
+- [х] Herman: Dev: Add lint stage in Jenkins.
 - [х] Herman: Dev: Uninstall docker-compose, instal docker compose plugin for dind in jenkins.herman.team.
 - [х] Herman: Dev: Uninstall docker-compose, instal docker compose plugin for jenkins.herman.team.
 - [х] Herman: Dev: Install Jenkins.
