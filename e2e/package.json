@@ -1,0 +1,19 @@
+{
+  "license": "MIT",
+  "scripts": {
+    "e2e": "cucumber-js",
+    "lint": "eslint --ext .ts,.js features",
+    "lint-fix": "eslint --fix --ext .ts,.js features"
+  },
+  "dependencies": {
+    "@cucumber/cucumber": "^8.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.1.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-n": "^15.4.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.0.0"
+  }
+}

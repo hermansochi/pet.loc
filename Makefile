@@ -1,7 +1,7 @@
 init: docker-down-clear \
 	react-clear vue-clear underdante-clear \
 	docker-pull docker-build docker-up \
-	api-init react-init underdante-init vue-init
+	api-init react-init underdante-init vue-init e2e-init
 
 init-andrey: docker-down-clear \
 	react-clear \
@@ -23,6 +23,7 @@ down: docker-down
 restart: down up
 lint: react-lint vue-lint
 lint-fix: react-lint-fix
+test-e2e: api-migrations api-fixtures e2e-cucumber
 
 images:
 	docker images
@@ -60,9 +61,6 @@ api-tests:
 	docker compose run --rm api-php-cli php artisan test
 
 api-test:
-	docker compose run --rm api-php-cli ls /
-	docker compose run --rm api-php-cli ls /app
-	docker compose run --rm api-php-cli ls /app/tests
 	docker compose run --rm api-php-cli ./vendor/bin/phpunit
 
 api-tests-coverage:
@@ -154,6 +152,20 @@ underdante-test:
 
 vue-lint:
 	docker compose run --rm vue-node-cli npm run lint
+
+e2e-init: e2e-assets-install
+
+e2e-assets-install:
+	docker compose run --rm cucumber-node-cli yarn install
+
+e2e-cucumber:
+	docker compose run --rm cucumber-node-cli yarn e2e
+
+e2e-lint:
+	docker compose run --rm cucumber-node-cli yarn lint
+
+e2e-lint-fix:
+	docker compose run --rm cucumber-node-cli yarn lint-fix
 
 build: build-api build-frontend
 

@@ -201,6 +201,13 @@ services:
             - traefik-public
             - default
 
+    cucumber-node-cli:
+        build:
+            context: e2e/docker/development/node
+        volumes:
+            - ./e2e:/app
+
+
 volumes:
     api-postgres:
     minio-storage:
