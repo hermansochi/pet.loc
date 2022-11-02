@@ -60,6 +60,9 @@ api-tests:
 	docker compose run --rm api-php-cli php artisan test
 
 api-test:
+	docker compose run --rm api-php-cli ls /
+	docker compose run --rm api-php-cli ls /app
+	docker compose run --rm api-php-cli ls /app/tests
 	docker compose run --rm api-php-cli ./vendor/bin/phpunit
 
 api-tests-coverage:

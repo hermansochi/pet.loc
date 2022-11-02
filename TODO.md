@@ -9,6 +9,8 @@ Tasks for the Laravel + ReactJS Pet project.
 - [ ] Herman: Dev: Make test env.
 - [ ] Herman: Dev: Change scribe mode to static.
 - [ ] Herman: Dev: Uninstall docker-compose, instal docker compose plugin for herman.team.
+- [ ] Herman: Dev: Fix: env.BUILD_USER_ID is null in Jenkins.
+- [ ] Herman: Dev: Implement smoke & e2e tests via Cucumber.
 
 # In Progress
 
