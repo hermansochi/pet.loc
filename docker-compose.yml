@@ -206,7 +206,9 @@ services:
             context: e2e/docker/development/node
         volumes:
             - ./e2e:/app
-
+        depends_on:
+            - traefik
+        network_mode: container:traefik
 
 volumes:
     api-postgres:
