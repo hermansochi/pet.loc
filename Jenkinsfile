@@ -101,7 +101,12 @@ pipeline {
     }
     post {
         always {
-         sh 'make docker-down-clear || true'
+            sh 'make docker-down-clear || true'
+            script {
+                if (getContext(hudson.FilePath)) {
+                    deleteDir()
+                }
+            }
         }
         success {
             withCredentials([string(credentialsId: 'telegramToken', variable: 'TOKEN'), string(credentialsId: 'telegramChatId', variable: 'CHAT_ID')]) {
