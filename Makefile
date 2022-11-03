@@ -1,5 +1,5 @@
 init: docker-down-clear \
-	react-clear vue-clear underdante-clear \
+	react-clear vue-clear underdante-clear e2e-clear \
 	docker-pull docker-build docker-up \
 	api-init react-init underdante-init vue-init e2e-init
 
@@ -23,7 +23,19 @@ down: docker-down
 restart: down up
 lint: react-lint vue-lint
 lint-fix: react-lint-fix
-test-e2e: api-migrations api-fixtures e2e-cucumber
+test-e2e:
+	make api-migrations
+	make api-fixtures
+	make e2e-clear
+	- make e2e-cucumber
+	make e2e-report
+
+test-smoke:
+	make api-migrations
+	make api-fixtures
+	make e2e-clear
+	- make smoke-cucumber
+	make e2e-report
 
 images:
 	docker images
@@ -161,11 +173,20 @@ e2e-assets-install:
 e2e-cucumber:
 	docker compose run --rm cucumber-node-cli yarn e2e
 
+smoke-cucumber:
+	docker compose run --rm cucumber-node-cli yarn smoke
+
 e2e-lint:
 	docker compose run --rm cucumber-node-cli yarn lint
 
 e2e-lint-fix:
 	docker compose run --rm cucumber-node-cli yarn lint-fix
+
+e2e-clear:
+	docker run --rm -v ${PWD}/e2e:/app -w /app alpine sh -c 'rm -rf var/*'
+
+e2e-report:
+	docker compose run --rm cucumber-node-cli yarn report
 
 build: build-api build-frontend
 

@@ -1,8 +1,9 @@
 {
   "license": "MIT",
   "scripts": {
-    "e2e": "cucumber-js --parallel 2",
-    "smoke": "cucumber-js --tags @smoke --fail-fast --parallel 2",
+    "e2e": "cucumber-js --parallel 2 --format json:var/report.json",
+    "smoke": "cucumber-js --tags @smoke --fail-fast --parallel 2 --format json:var/report.json",
+    "report": "node reporter.js",
     "lint": "eslint --ext .ts,.js features",
     "lint-fix": "eslint --fix --ext .ts,.js features"
   },
@@ -12,6 +13,7 @@
     "puppeteer": "^16.0.0"
   },
   "devDependencies": {
+    "cucumber-html-reporter": "^5.5.0",
     "eslint": "^8.1.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.20.2",

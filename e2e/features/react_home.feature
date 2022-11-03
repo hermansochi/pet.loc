@@ -6,5 +6,5 @@ Feature: View home page
   @smoke
   Scenario: View home page content
     Given I am a guest user
-    When I open home page
+    When I open "/" page in react project
     Then I see ...
