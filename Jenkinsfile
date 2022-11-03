@@ -12,7 +12,7 @@ pipeline {
         stage('Init') {
             steps {
                 wrap([$class: 'BuildUser']) {
-                    def user = env.BUILD_USER_ID
+                    user = env.BUILD_USER_ID
                 }
                 withCredentials([string(credentialsId: 'telegramToken', variable: 'TOKEN'), string(credentialsId: 'telegramChatId', variable: 'CHAT_ID')]) {
                     sh  ("""
