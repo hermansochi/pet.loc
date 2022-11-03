@@ -5,13 +5,18 @@ pipeline {
     }
     environment {
         CI = 'true'
+        REGISTRY = credentials('REGESTRY')
+        IMAGE_TAG = sh(returnStdout: true, script: "echo '${env.BUILD_TAG}' | sed 's/%2F/-/g'").trim()
     }
     stages {
         stage('Init') {
             steps {
+                wrap([$class: 'BuildUser']) {
+                    def user = env.BUILD_USER_ID
+                }
                 withCredentials([string(credentialsId: 'telegramToken', variable: 'TOKEN'), string(credentialsId: 'telegramChatId', variable: 'CHAT_ID')]) {
                     sh  ("""
-                        curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode=markdown -d text='Branch ${env.GIT_BRANCH} changed. Build start. Please go to ${BUILD_URL} and verify the build. Start by ${env.BUILD_USER}.'
+                        curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode=markdown -d text='Branch ${env.GIT_BRANCH} changed. Build start. Please go to ${BUILD_URL} and verify the build. Start by ${user}.'
                     """)
                 }
                 sh 'make init'
@@ -89,6 +94,11 @@ pipeline {
         stage('Down') {
             steps {
                 sh 'make docker-down-clear'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'make build'
             }
         }
     }
