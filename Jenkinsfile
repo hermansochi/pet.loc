@@ -5,7 +5,7 @@ pipeline {
     }
     environment {
         CI = 'true'
-        REGISTRY = credentials('REGESTRY')
+
 
     }
     stages {
