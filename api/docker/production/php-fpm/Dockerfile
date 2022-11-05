@@ -54,7 +54,7 @@ WORKDIR /app
 
 COPY --from=builder /app ./
 COPY ./ ./
-COPY ./.env.prod ./.env
+COPY ./.env.prod ./.env --ignore-errors 
 
 RUN chmod -R ug+rwx storage bootstrap/cache
 
