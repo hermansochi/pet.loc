@@ -97,11 +97,7 @@ pipeline {
                 sh 'make docker-down-clear'
             }
         }
-        stage('Build') {
-            steps {
-                sh 'make build'
-            }
-        }
+
     }
     post {
         always {
