@@ -37,8 +37,8 @@ class QRCodeController extends Controller
      * @response 422 scenario="Validation error" {"message":"The selected style is invalid.","errors":{"style":["The selected style is invalid."]}}
      * @response 404 scenario="Employee not found" {"message": "404 not found", "errors": "Employee with id  976b48f0-7fd3-4d03-82ce-395ddeafe5d4 not found"}
      *
-     * @param \Illuminate\Http\Request
-     * @param  string  $id
+     * @param \Illuminate\Http\Request $request
+     * @param String $id
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request, string $id)
