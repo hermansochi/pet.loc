@@ -115,8 +115,8 @@ class OrgUserController extends Controller
      *
      * @response 404 scenario="Employee not found" {"message": "404 not found", "errors": "Employee with id  976b48f0-7fd3-4d03-82ce-395ddeafe5d4 not found"}
      *
-     * @param  string  $id
-     * @return \App\Http\Resources\Org\OrgUserResource
+     * @param string $id
+     * @return \App\Http\Resources\Org\OrgUserResource|\Illuminate\Http\Response
      */
     public function show(string $id)
     {
