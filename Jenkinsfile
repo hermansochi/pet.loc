@@ -10,6 +10,26 @@ pipeline {
             returnStdout: true,
             script: "echo '${env.BUILD_TAG}' | sed 's/%2F/-/g'"
         ).trim()
+        GIT_DIFF_API = sh(
+            returnStdout: true,
+            script: "git diff --name-only ${env.GIT_PREVIOUS_SUCCESSFYL_COMMUT} HEAD -- api"
+        ).trim()
+        GIT_DIFF_REACT = sh(
+            returnStdout: true,
+            script: "git diff --name-only ${env.GIT_PREVIOUS_SUCCESSFYL_COMMUT} HEAD -- react"
+        ).trim()
+        GIT_DIFF_UNDERDANTE = sh(
+            returnStdout: true,
+            script: "git diff --name-only ${env.GIT_PREVIOUS_SUCCESSFYL_COMMUT} HEAD -- underdante"
+        ).trim()
+        GIT_DIFF_VUE = sh(
+            returnStdout: true,
+            script: "git diff --name-only ${env.GIT_PREVIOUS_SUCCESSFYL_COMMUT} HEAD -- vue"
+        ).trim()
+        GIT_DIFF_E2E = sh(
+            returnStdout: true,
+            script: "git diff --name-only ${env.GIT_PREVIOUS_SUCCESSFYL_COMMUT} HEAD -- e2e"
+        ).trim()
 
     }
     stages {
@@ -26,11 +46,17 @@ pipeline {
         stage('Lint') {
             parallel {
                 stage('API') {
+                    when {
+                        expression { return env.GIT_DIFF_API }
+                    }
                     steps {
                         sh 'make api-lint'
                     }
                 }
                 stage('React') {
+                    when {
+                        expression { return env.GIT_DIFF_REACT }
+                    }
                     steps {
                         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                             sh 'make react-lint'
@@ -38,6 +64,9 @@ pipeline {
                     }
                 }
                 stage('Underdante') {
+                    when {
+                        expression { return env.GIT_DIFF_UNDERDANTE }
+                    }
                     steps {
                         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                             sh 'make underdante-lint'
@@ -45,6 +74,9 @@ pipeline {
                     }
                 }
                 stage('Vue') {
+                    when {
+                        expression { return env.GIT_DIFF_VUE }
+                    }
                     steps {
                         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                             sh 'make vue-lint'
@@ -52,6 +84,9 @@ pipeline {
                     }
                 }
                 stage('Cucumber') {
+                    when {
+                        expression { return env.GIT_DIFF_E2E }
+                    }
                     steps {
                         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                             sh 'make e2e-lint'
@@ -61,6 +96,9 @@ pipeline {
             }
         }
         stage('Analyze') {
+            when {
+                expression { return env.GIT_DIFF_API }
+            }
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     sh 'make api-analyze'
@@ -70,6 +108,9 @@ pipeline {
         stage('Test') {
             parallel {
                 stage('API') {
+                    when {
+                       expression { return env.GIT_DIFF_API }
+                    }
                     steps {
                         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                             sh 'make api-test'
@@ -77,6 +118,9 @@ pipeline {
                     }
                 }
                 stage('React') {
+                    when {
+                       expression { return env.GIT_DIFF_REACT }
+                    }
                     steps {
                         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                             sh 'make react-test'
@@ -84,6 +128,9 @@ pipeline {
                     }
                 }
                 stage('Underdante') {
+                    when {
+                       expression { return env.GIT_DIFF_UNDERDANTE }
+                    }
                     steps {
                         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                             sh 'make underdante-test'
