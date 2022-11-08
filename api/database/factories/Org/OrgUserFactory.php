@@ -5,7 +5,7 @@ namespace Database\Factories\Org;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory
+ * 
  */
 class OrgUserFactory extends Factory
 {
