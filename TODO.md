@@ -11,12 +11,14 @@ Tasks for the Laravel + ReactJS Pet project.
 - [ ] Herman: Dev: Uninstall docker-compose, instal docker compose plugin for herman.team.
 - [ ] Herman: Dev: Fix: env.BUILD_USER_ID is null in Jenkins.
 
+
 # In Progress
 
 - [ ] Work ...
 
 ### Done ✓
 
+- [х] Herman: Docs: Auth use case.
 - [х] Herman: Dev: Implement smoke & e2e tests via Cucumber.
 - [х] Herman: Dev: Fix lint and unit tests errors.
 - [х] Herman: Dev: Add Paslm for API & Unit tests fro api and frontends in Jenkins.
