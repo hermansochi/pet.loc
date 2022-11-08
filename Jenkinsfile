@@ -20,7 +20,7 @@ pipeline {
                         curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode=markdown -d text='Branch ${env.GIT_BRANCH} changed. Build start. Please go to ${BUILD_URL} and verify the build.'
                     """)
                 }
-                sh 'make init'
+                sh 'make init-ci'
             }
         }
         stage('Lint') {

@@ -10,7 +10,9 @@ Tasks for the Laravel + ReactJS Pet project.
 - [ ] Herman: Dev: Change scribe mode to static.
 - [ ] Herman: Dev: Uninstall docker-compose, instal docker compose plugin for herman.team.
 - [ ] Herman: Dev: Fix: env.BUILD_USER_ID is null in Jenkins.
-- [ ] Herman: Dev: Fix: Environment Variables for frontends.
+- [ ] Herman: Dev: Change production credentials to gitignore folder.
+- [ ] Herman: Dev: Backup DB to Minio.
+- [ ] Herman: Dev: Optimize monorepo.
 
 
 # In Progress
@@ -19,6 +21,7 @@ Tasks for the Laravel + ReactJS Pet project.
 
 ### Done ✓
 
+- [х] Herman: Dev: Fix: Environment Variables for frontends.
 - [х] Herman: Docs: Auth use case.
 - [х] Herman: Dev: Implement smoke & e2e tests via Cucumber.
 - [х] Herman: Dev: Fix lint and unit tests errors.

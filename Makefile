@@ -1,4 +1,6 @@
-init: docker-down-clear \
+init: init-ci react-ready underdante-ready vue-ready
+	
+init-ci: docker-down-clear \
 	react-clear vue-clear underdante-clear e2e-clear \
 	docker-pull docker-build docker-up \
 	api-init react-init underdante-init vue-init e2e-init
@@ -112,11 +114,11 @@ underdante-clear:
 vue-clear:
 	docker run --rm -v ${PWD}/vue:/app -w /app alpine sh -c 'rm -rf .ready dist'
 
-react-init: react-yarn-install react-ready 
+react-init: react-yarn-install
 
-underdante-init: underdante-yarn-install underdante-ready
+underdante-init: underdante-yarn-install
 
-vue-init: vue-npm-install vue-ready
+vue-init: vue-npm-install
 
 react-yarn-install:
 	docker compose run --rm react-node-cli yarn install
