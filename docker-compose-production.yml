@@ -58,8 +58,6 @@ services:
 
     frontend:
         image: ${REGISTRY}/frontend:${IMAGE_TAG}
-        environment:
-            REACT_APP_AUTH_URL: https://api.herman.team
         networks:
             - traefik-public
             - default
@@ -85,7 +83,7 @@ services:
     react:
         image: ${REGISTRY}/pet-react:${IMAGE_TAG}
         environment:
-            NODE_ENV: development
+            NODE_ENV: production
             REACT_APP_API_URL: https://api.herman.team/api
             REACT_APP_API_VER: v1
             REACT_APP_AUTH_URL: https://api.herman.team
@@ -115,7 +113,7 @@ services:
     underdante:
         image: ${REGISTRY}/pet-underdante:${IMAGE_TAG}
         environment:
-            NODE_ENV: development
+            NODE_ENV: production
             REACT_APP_API_URL: https://api.herman.team/api
             REACT_APP_API_VER: v1
             REACT_APP_AUTH_URL: https://api.herman.team
@@ -145,7 +143,7 @@ services:
     vue:
         image: ${REGISTRY}/pet-vue:${IMAGE_TAG}
         environment:
-            NODE_ENV: development
+            NODE_ENV: production
             REACT_APP_API_URL: https://api.herman.team/api
             REACT_APP_API_VER: v1
             REACT_APP_AUTH_URL: https://api.herman.team
