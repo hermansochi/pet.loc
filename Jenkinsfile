@@ -12,23 +12,23 @@ pipeline {
         ).trim()
         GIT_DIFF_API = sh(
             returnStdout: true,
-            script: "git diff --name-only ${env.GIT_PREVIOUS_SUCCESSFYL_COMMUT} HEAD -- api"
+            script: "git diff --name-only ${env.GIT_PREVIOUS_SUCCESSFUL_COMMUT} HEAD -- api"
         ).trim()
         GIT_DIFF_REACT = sh(
             returnStdout: true,
-            script: "git diff --name-only ${env.GIT_PREVIOUS_SUCCESSFYL_COMMUT} HEAD -- react"
+            script: "git diff --name-only ${env.GIT_PREVIOUS_SUCCESSFUL_COMMUT} HEAD -- react"
         ).trim()
         GIT_DIFF_UNDERDANTE = sh(
             returnStdout: true,
-            script: "git diff --name-only ${env.GIT_PREVIOUS_SUCCESSFYL_COMMUT} HEAD -- underdante"
+            script: "git diff --name-only ${env.GIT_PREVIOUS_SUCCESSFUL_COMMUT} HEAD -- underdante"
         ).trim()
         GIT_DIFF_VUE = sh(
             returnStdout: true,
-            script: "git diff --name-only ${env.GIT_PREVIOUS_SUCCESSFYL_COMMUT} HEAD -- vue"
+            script: "git diff --name-only ${env.GIT_PREVIOUS_SUCCESSFUL_COMMUT} HEAD -- vue"
         ).trim()
         GIT_DIFF_E2E = sh(
             returnStdout: true,
-            script: "git diff --name-only ${env.GIT_PREVIOUS_SUCCESSFYL_COMMUT} HEAD -- e2e"
+            script: "git diff --name-only ${env.GIT_PREVIOUS_SUCCESSFUL_COMMUT} HEAD -- e2e"
         ).trim()
 
     }
