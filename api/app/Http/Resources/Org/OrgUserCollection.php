@@ -4,6 +4,9 @@ namespace App\Http\Resources\Org;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
+/**
+ * @psalm-suppress PropertyNotSetInConstructor
+ */
 class OrgUserCollection extends ResourceCollection
 {
     /**

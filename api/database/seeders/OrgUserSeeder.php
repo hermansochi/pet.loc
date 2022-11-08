@@ -6,6 +6,9 @@ use App\Models\Org\OrgUser;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * @psalm-suppress TooManyTemplateParams, InvalidTemplateParam
+ */
 class OrgUserSeeder extends Seeder
 {
     /**

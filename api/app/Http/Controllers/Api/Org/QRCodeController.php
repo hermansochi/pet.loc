@@ -40,6 +40,7 @@ class QRCodeController extends Controller
      * @param \Illuminate\Http\Request $request
      * @param String $id
      * @return \Illuminate\Http\Response
+     * @psalm-suppress UndefinedMethod
      */
     public function show(Request $request, string $id)
     {
