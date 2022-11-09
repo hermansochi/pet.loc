@@ -32,7 +32,8 @@ WORKDIR /app
 
 COPY ./composer.json ./composer.lock ./
 
-RUN composer install --no-dev --prefer-dist --no-progress --optimize-autoloader --no-scripts
+RUN composer install --no-dev --prefer-dist --no-progress --optimize-autoloader --no-scripts\
+    && rm -rf /root/.composer/cache
 
 ### CLI ###
 
@@ -58,5 +59,7 @@ COPY --from=builder /app ./
 COPY ./ ./
 
 RUN chmod -R ug+rwx storage bootstrap/cache
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/bin --filename=composer --quiet
 
 USER app
