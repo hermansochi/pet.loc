@@ -32,8 +32,7 @@ WORKDIR /app
 
 COPY ./composer.json ./composer.lock ./
 
-RUN composer install --no-dev --prefer-dist --no-progress --optimize-autoloader --no-scripts\
-    && rm -rf /root/.composer/cache
+RUN composer install --no-dev --prefer-dist --no-progress --optimize-autoloader --no-scripts
 
 ### CLI ###
 
