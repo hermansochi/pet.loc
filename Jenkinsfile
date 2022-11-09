@@ -86,7 +86,7 @@ pipeline {
                     }
                     steps {
                         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                            sh 'make underdante-lint'
+                            sh 'sleep 1'
                         }
                     }
                 }
