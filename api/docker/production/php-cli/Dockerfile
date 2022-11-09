@@ -60,6 +60,4 @@ COPY ./ ./
 
 RUN chmod -R ug+rwx storage bootstrap/cache
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/bin --filename=composer --quiet
-
 USER app
