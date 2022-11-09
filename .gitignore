@@ -5,4 +5,4 @@
 /provisioning/docker-login.yml
 /provisioning/authorize.yml
 /api/.env.prod
-/secrets
+/docker
