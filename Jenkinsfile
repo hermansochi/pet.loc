@@ -49,7 +49,7 @@ pipeline {
                 }
                 sh 'touch .docker-images-before'              
                 sh 'make init-ci'
-                sh 'docker-compose images > .docker-images-after'
+                sh 'docker compose images > .docker-images-after'
                 script {
                     DOCKER_DIFF = sh(
                         returnStdout: true,
