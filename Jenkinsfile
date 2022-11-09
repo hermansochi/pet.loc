@@ -234,59 +234,52 @@ pipeline {
             }
         }
         stage('Testing') {
-                stages {
-                    stage('Build') {
-                        steps {
-                            sh 'sleep 1'
-                        }
-                    }
-                    stage('Init') {
-                        steps {
-                            sh 'sleep 1'
-                        }
-                    }
-                    stage('Smoke') {
-                        steps {
-                            sh 'sleep 1'
-                        }
-                        post {
-                            failure {
-                                archiveArtifacts 'e2e/var/*'
-                            }
-                        }
-                    }
-                    stage('E2E') {
-                        steps {
-                            parallel {
-                                stage('Herman') {
-                                    sh 'sleep 1'
-                                }
-                                stage('Vue') {
-                                    sh 'sleep 1'
-                                }
-                                stage('Underdante') {
-                                    sh 'sleep 1'
-                                }
-                                stage('Vlad') {
-                                    sh 'sleep 1'
-                                }
-                                stage('Dim') {
-                                    sh 'sleep 1'
-                                }
-                            }
-                        }
-                        post {
-                            failure {
-                                archiveArtifacts 'e2e/var/*'
-                            }
-                        }
-                    }
-                    stage('Down') {
-                        steps {
-                            sh 'sleep 1'
-                        }
-                    }
+            steps {
+                sh 'sleep 1'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'sleep 1'
+            }
+        }
+        stage('Init') {
+            steps {
+                sh 'sleep 1'
+            }
+        }
+        stage('Smoke') {
+            steps {
+                sh 'sleep 1'
+            }
+            post {
+                failure {
+                    archiveArtifacts 'e2e/var/*'
                 }
+            }
+        }
+        stage('E2E') {
+            parallel {
+                stage('Herman') {
+                    sh 'sleep 1'
+                }
+                stage('Vue') {
+                    sh 'sleep 1'
+                }
+                stage('Underdante') {
+                    sh 'sleep 1'
+                }
+                stage('Vlad') {
+                    sh 'sleep 1'
+                }
+                stage('Dim') {
+                    sh 'sleep 1'
+                }
+            }
+        }
+        stage('Down') {
+            steps {
+                sh 'sleep 1'
             }
         }
         stage('Push') {
