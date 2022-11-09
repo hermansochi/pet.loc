@@ -30,7 +30,10 @@ pipeline {
             returnStdout: true,
             script: "git diff --name-only ${env.GIT_PREVIOUS_SUCCESSFUL_COMMIT} HEAD -- e2e"
         ).trim()
-
+        GIT_DIFF_ROOT = sh(
+            returnStdout: true,
+            script: "{ git diff --name-only ${env.GIT_DIFF_BASE_COMMIT} HEAD -- . || echo 'all'; } | { grep -v / - || true; }"
+        ).trim()
     }
     stages {
         stage('Init') {
@@ -47,7 +50,7 @@ pipeline {
             parallel {
                 stage('API') {
                     when {
-                        expression { return env.GIT_DIFF_API }
+                        expression { return env.GIT_DIFF_ROOT || env.GIT_DIFF_API }
                     }
                     steps {
                         sh 'make api-lint'
@@ -55,7 +58,7 @@ pipeline {
                 }
                 stage('React') {
                     when {
-                        expression { return env.GIT_DIFF_REACT }
+                        expression { return env.GIT_DIFF_ROOT || env.GIT_DIFF_REACT }
                     }
                     steps {
                         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
@@ -65,7 +68,7 @@ pipeline {
                 }
                 stage('Underdante') {
                     when {
-                        expression { return env.GIT_DIFF_UNDERDANTE }
+                        expression { return env.GIT_DIFF_ROOT || env.GIT_DIFF_UNDERDANTE }
                     }
                     steps {
                         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
@@ -75,7 +78,7 @@ pipeline {
                 }
                 stage('Vue') {
                     when {
-                        expression { return env.GIT_DIFF_VUE }
+                        expression { return env.GIT_DIFF_ROOT || env.GIT_DIFF_VUE }
                     }
                     steps {
                         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
@@ -85,7 +88,7 @@ pipeline {
                 }
                 stage('Cucumber') {
                     when {
-                        expression { return env.GIT_DIFF_E2E }
+                        expression { return env.GIT_DIFF_ROOT || env.GIT_DIFF_E2E }
                     }
                     steps {
                         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
@@ -97,7 +100,7 @@ pipeline {
         }
         stage('Analyze') {
             when {
-                expression { return env.GIT_DIFF_API }
+                expression { return env.GIT_DIFF_ROOT || env.GIT_DIFF_API }
             }
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
@@ -109,7 +112,7 @@ pipeline {
             parallel {
                 stage('API') {
                     when {
-                       expression { return env.GIT_DIFF_API }
+                       expression { return env.GIT_DIFF_ROOT || env.GIT_DIFF_API }
                     }
                     steps {
                         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
@@ -119,7 +122,7 @@ pipeline {
                 }
                 stage('React') {
                     when {
-                       expression { return env.GIT_DIFF_REACT }
+                       expression { return env.GIT_DIFF_ROOT || env.GIT_DIFF_REACT }
                     }
                     steps {
                         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
@@ -129,7 +132,7 @@ pipeline {
                 }
                 stage('Underdante') {
                     when {
-                       expression { return env.GIT_DIFF_UNDERDANTE }
+                       expression { return env.GIT_DIFF_ROOT || env.GIT_DIFF_UNDERDANTE }
                     }
                     steps {
                         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
