@@ -170,7 +170,6 @@ pipeline {
                 sh 'docker compose run --rm api-php-cli composer install --no-dev --prefer-dist --no-progress --optimize-autoloader --ignore-platform-req=ext-gd'
                 sh 'echo MINIO_SECRET_ACCESS_KEY=${MINIO_SECRET_ACCESS_KEY} >> .env'
                 sh 'echo DB_PASSWORD=${DB_PASSWORD} >> .env'
-                sh 'php artisan key:generate'
                 sh 'make build'
             }
         }
