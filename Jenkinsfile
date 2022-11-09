@@ -234,79 +234,76 @@ pipeline {
             }
         }
         stage('Testing') {
-            steps {
-                sh 'sleep 1'
-            }
-        }
-        stage('Build') {
-            steps {
-                sh 'sleep 1'
-            }
-        }
-        stage('Init') {
-            steps {
-                sh 'sleep 1'
-            }
-        }
-        stage('Smoke') {
-            steps {
-                sh 'sleep 1'
-            }
-            post {
-                failure {
-                    archiveArtifacts 'e2e/var/*'
+            stage('Build') {
+                steps {
+                    sh 'sleep 1'
                 }
             }
-        }
-        stage('E2E') {
-            parallel {
-                stage('Herman') {
-                    steps {
-                        sh 'sleep 1'
-                    }
+            stage('Init') {
+                steps {
+                    sh 'sleep 1'
                 }
-                stage('Vue') {
-                    steps {
-                        sh 'sleep 1'
-                    }
+            }
+            stage('Smoke') {
+                steps {
+                    sh 'sleep 1'
                 }
-                stage('Underdante') {
-                    steps {
-                        sh 'sleep 1'
-                    }
-                }
-                stage('Vlad') {
-                    steps {
-                        sh 'sleep 1'
-                    }
-                }
-                stage('Dim') {
-                    steps {
-                        sh 'sleep 1'
+                post {
+                    failure {
+                        archiveArtifacts 'e2e/var/*'
                     }
                 }
             }
-        }
-        stage('Down') {
-            steps {
-                sh 'sleep 1'
-            }
-        }
-        stage('Push') {
-            when {
-                branch 'master'
-            }
-            steps {
-                withCredentials([
-                    usernamePassword(
-                        credentialsId: 'REGISTRY_AUTH',
-                        usernameVariable: 'USER',
-                        passwordVariable: 'PASSWORD'
-                    )
-                ]) {
-                    sh 'docker login -u=$USER -p=$PASSWORD $REGISTRY'
+            stage('E2E') {
+                parallel {
+                    stage('Herman') {
+                        steps {
+                            sh 'sleep 1'
+                        }
+                    }
+                    stage('Vue') {
+                        steps {
+                            sh 'sleep 1'
+                        }
+                    }
+                    stage('Underdante') {
+                        steps {
+                            sh 'sleep 1'
+                        }
+                    }
+                    stage('Vlad') {
+                        steps {
+                            sh 'sleep 1'
+                        }
+                    }
+                    stage('Dim') {
+                        steps {
+                            sh 'sleep 1'
+                        }
+                    }
                 }
-                sh 'make push'
+            }
+            stage('Down') {
+                steps {
+                    sh 'sleep 1'
+                }
+            }
+            stage('Push') {
+                when {
+                    branch 'master'
+                }
+                steps {
+                    withCredentials([
+                        usernamePassword(
+                            credentialsId: 'REGISTRY_AUTH',
+                            usernameVariable: 'USER',
+                            passwordVariable: 'PASSWORD'
+                        )
+                    ]) {
+                        sh 'docker login -u=$USER -p=$PASSWORD $REGISTRY'
+                    }
+                    sh 'make push'
+                }
             }
         }
     }
