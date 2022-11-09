@@ -234,7 +234,7 @@ pipeline {
             }
         }
         stage('Testing') {
-            steps {
+            stages {
                 stage('Build') {
                     steps {
                         sh 'sleep 1'
