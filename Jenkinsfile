@@ -309,7 +309,6 @@ pipeline {
                 sh 'make push'
             }
         }
-
     }
     post {
         always {
