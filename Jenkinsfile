@@ -22,6 +22,14 @@ pipeline {
             returnStdout: true,
             script: "git diff --name-only ${env.GIT_DIFF_BASE_COMMIT} HEAD -- react || echo 'all'"
         ).trim()
+        GIT_DIFF_VLAD = sh(
+            returnStdout: true,
+            script: "git diff --name-only ${env.GIT_DIFF_BASE_COMMIT} HEAD -- vlad || echo 'all'"
+        ).trim()
+        GIT_DIFF_DIM = sh(
+            returnStdout: true,
+            script: "git diff --name-only ${env.GIT_DIFF_BASE_COMMIT} HEAD -- dim || echo 'all'"
+        ).trim()
         GIT_DIFF_UNDERDANTE = sh(
             returnStdout: true,
             script: "git diff --name-only ${env.GIT_DIFF_BASE_COMMIT} HEAD -- underdante || echo 'all'"
@@ -40,7 +48,6 @@ pipeline {
         ).trim()
     }
     stages {
-        /*
         stage('Init') {
             steps {
                 withCredentials([string(credentialsId: 'telegramToken', variable: 'TOKEN'), string(credentialsId: 'telegramChatId', variable: 'CHAT_ID')]) {
@@ -69,16 +76,6 @@ pipeline {
                         sh 'make api-lint'
                     }
                 }
-                stage('React') {
-                    when {
-                        expression { return DOCKER_DIFF || env.GIT_DIFF_ROOT || env.GIT_DIFF_REACT }
-                    }
-                    steps {
-                        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                            sh 'make react-lint'
-                        }
-                    }
-                }
                 stage('Underdante') {
                     when {
                         expression { return DOCKER_DIFF || env.GIT_DIFF_ROOT || env.GIT_DIFF_UNDERDANTE }
@@ -96,6 +93,26 @@ pipeline {
                     steps {
                         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                             sh 'make vue-lint'
+                        }
+                    }
+                }
+                stage('Vlad') {
+                    when {
+                        expression { return DOCKER_DIFF || env.GIT_DIFF_ROOT || env.GIT_DIFF_VLAD }
+                    }
+                    steps {
+                        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                            sh 'sleep 1'
+                        }
+                    }
+                }
+                stage('Dim') {
+                    when {
+                        expression { return DOCKER_DIFF || env.GIT_DIFF_ROOT || env.GIT_DIFF_DIM }
+                    }
+                    steps {
+                        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                            sh 'sleep 1'
                         }
                     }
                 }
@@ -133,16 +150,6 @@ pipeline {
                         }
                     }
                 }
-                stage('React') {
-                    when {
-                       expression { return DOCKER_DIFF || env.GIT_DIFF_ROOT || env.GIT_DIFF_REACT }
-                    }
-                    steps {
-                        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                            sh 'make react-test'
-                        }
-                    }
-                }
                 stage('Underdante') {
                     when {
                        expression { return DOCKER_DIFF || env.GIT_DIFF_ROOT || env.GIT_DIFF_UNDERDANTE }
@@ -153,6 +160,26 @@ pipeline {
                         }
                     }
                 }
+                stage('Vlad') {
+                    when {
+                       expression { return DOCKER_DIFF || env.GIT_DIFF_ROOT || env.GIT_DIFF_VLAD }
+                    }
+                    steps {
+                        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                            sh 'sleep 1'
+                        }
+                    }
+                }
+                stage('Dim') {
+                    when {
+                       expression { return DOCKER_DIFF || env.GIT_DIFF_ROOT || env.GIT_DIFF_DIM }
+                    }
+                    steps {
+                        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                            sh 'sleep 1'
+                        }
+                    }
+                }
             }
         }
         stage('Down') {
@@ -160,7 +187,6 @@ pipeline {
                 sh 'make docker-down-clear'
             }
         }
-        */
         stage('Build') {
             environment {
                 MINIO_SECRET_ACCESS_KEY = credentials("MINIO_PASSWORD")
