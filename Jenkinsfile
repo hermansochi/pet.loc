@@ -261,19 +261,29 @@ pipeline {
         stage('E2E') {
             parallel {
                 stage('Herman') {
-                    sh 'sleep 1'
+                    steps {
+                        sh 'sleep 1'
+                    }
                 }
                 stage('Vue') {
-                    sh 'sleep 1'
+                    steps {
+                        sh 'sleep 1'
+                    }
                 }
                 stage('Underdante') {
-                    sh 'sleep 1'
+                    steps {
+                        sh 'sleep 1'
+                    }
                 }
                 stage('Vlad') {
-                    sh 'sleep 1'
+                    steps {
+                        sh 'sleep 1'
+                    }
                 }
                 stage('Dim') {
-                    sh 'sleep 1'
+                    steps {
+                        sh 'sleep 1'
+                    }
                 }
             }
         }
