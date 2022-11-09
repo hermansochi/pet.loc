@@ -22,6 +22,10 @@ pipeline {
             returnStdout: true,
             script: "git diff --name-only ${env.GIT_DIFF_BASE_COMMIT} HEAD -- react || echo 'all'"
         ).trim()
+        GIT_DIFF_HERMAN = sh(
+            returnStdout: true,
+            script: "git diff --name-only ${env.GIT_DIFF_BASE_COMMIT} HEAD -- herman || echo 'all'"
+        ).trim()
         GIT_DIFF_VLAD = sh(
             returnStdout: true,
             script: "git diff --name-only ${env.GIT_DIFF_BASE_COMMIT} HEAD -- vlad || echo 'all'"
@@ -74,6 +78,16 @@ pipeline {
                     }
                     steps {
                         sh 'make api-lint'
+                    }
+                }
+                stage('Herman') {
+                    when {
+                        expression { return DOCKER_DIFF || env.GIT_DIFF_ROOT || env.GIT_DIFF_HERMAN }
+                    }
+                    steps {
+                        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                            sh 'make underdante-lint'
+                        }
                     }
                 }
                 stage('Underdante') {
@@ -150,6 +164,16 @@ pipeline {
                         }
                     }
                 }
+                stage('Herman') {
+                    when {
+                       expression { return DOCKER_DIFF || env.GIT_DIFF_ROOT || env.GIT_DIFF_UNDERDANTE }
+                    }
+                    steps {
+                        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                            sh 'sleep 1'
+                        }
+                    }
+                }
                 stage('Underdante') {
                     when {
                        expression { return DOCKER_DIFF || env.GIT_DIFF_ROOT || env.GIT_DIFF_UNDERDANTE }
@@ -180,6 +204,16 @@ pipeline {
                         }
                     }
                 }
+                stage('Vue') {
+                    when {
+                       expression { return DOCKER_DIFF || env.GIT_DIFF_ROOT || env.GIT_DIFF_VUE }
+                    }
+                    steps {
+                        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                            sh 'sleep 1'
+                        }
+                    }
+                }
             }
         }
         stage('Down') {
@@ -200,40 +234,57 @@ pipeline {
             }
         }
         stage('Testing') {
-            stages {
-                stage('Build') {
-                    steps {
-                        sh 'sleep 1'
-                    }
-                }
-                stage('Init') {
-                    steps {
-                        sh 'sleep 1'
-                    }
-                }
-                stage('Smoke') {
-                    steps {
-                        sh 'sleep 1'
-                    }
-                    post {
-                        failure {
-                            archiveArtifacts 'e2e/var/*'
+                stages {
+                    stage('Build') {
+                        steps {
+                            sh 'sleep 1'
                         }
                     }
-                }
-                stage('E2E') {
-                    steps {
-                        sh 'sleep 1'
-                    }
-                    post {
-                        failure {
-                            archiveArtifacts 'e2e/var/*'
+                    stage('Init') {
+                        steps {
+                            sh 'sleep 1'
                         }
                     }
-                }
-                stage('Down') {
-                    steps {
-                        sh 'sleep 1'
+                    stage('Smoke') {
+                        steps {
+                            sh 'sleep 1'
+                        }
+                        post {
+                            failure {
+                                archiveArtifacts 'e2e/var/*'
+                            }
+                        }
+                    }
+                    stage('E2E') {
+                        steps {
+                            parallel {
+                                stage('Herman') {
+                                    sh 'sleep 1'
+                                }
+                                stage('Vue') {
+                                    sh 'sleep 1'
+                                }
+                                stage('Underdante') {
+                                    sh 'sleep 1'
+                                }
+                                stage('Vlad') {
+                                    sh 'sleep 1'
+                                }
+                                stage('Dim') {
+                                    sh 'sleep 1'
+                                }
+                            }
+                        }
+                        post {
+                            failure {
+                                archiveArtifacts 'e2e/var/*'
+                            }
+                        }
+                    }
+                    stage('Down') {
+                        steps {
+                            sh 'sleep 1'
+                        }
                     }
                 }
             }
