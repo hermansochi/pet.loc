@@ -10,25 +10,29 @@ pipeline {
             returnStdout: true,
             script: "echo '${env.BUILD_TAG}' | sed 's/%2F/-/g'"
         ).trim()
+        GIT_DIFF_BASE_COMMIT = sh(
+            returnStdout: true,
+            script: "echo ${env.GIT_PREVIOUS_SUCCESSFUL_COMMIT ?: '`git rev-list HEAD | tail -n 1`'}"
+        ).trim()
         GIT_DIFF_API = sh(
             returnStdout: true,
-            script: "git diff --name-only ${env.GIT_PREVIOUS_SUCCESSFUL_COMMIT} HEAD -- api"
+            script: "git diff --name-only ${env.GIT_DIFF_BASE_COMMIT} HEAD -- api || echo 'all'"
         ).trim()
         GIT_DIFF_REACT = sh(
             returnStdout: true,
-            script: "git diff --name-only ${env.GIT_PREVIOUS_SUCCESSFUL_COMMIT} HEAD -- react"
+            script: "git diff --name-only ${env.GIT_DIFF_BASE_COMMIT} HEAD -- react || echo 'all'"
         ).trim()
         GIT_DIFF_UNDERDANTE = sh(
             returnStdout: true,
-            script: "git diff --name-only ${env.GIT_PREVIOUS_SUCCESSFUL_COMMIT} HEAD -- underdante"
+            script: "git diff --name-only ${env.GIT_DIFF_BASE_COMMIT} HEAD -- underdante || echo 'all'"
         ).trim()
         GIT_DIFF_VUE = sh(
             returnStdout: true,
-            script: "git diff --name-only ${env.GIT_PREVIOUS_SUCCESSFUL_COMMIT} HEAD -- vue"
+            script: "git diff --name-only ${env.GIT_DIFF_BASE_COMMIT} HEAD -- vue || echo 'all'"
         ).trim()
         GIT_DIFF_E2E = sh(
             returnStdout: true,
-            script: "git diff --name-only ${env.GIT_PREVIOUS_SUCCESSFUL_COMMIT} HEAD -- e2e"
+            script: "git diff --name-only ${env.GIT_DIFF_BASE_COMMIT} HEAD -- e2e || echo 'all'"
         ).trim()
         GIT_DIFF_ROOT = sh(
             returnStdout: true,
@@ -43,14 +47,22 @@ pipeline {
                         curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode=markdown -d text='Branch ${env.GIT_BRANCH} changed. Build start. Please go to ${BUILD_URL} and verify the build.'
                     """)
                 }
+                sh 'touch .docker-images-before'              
                 sh 'make init-ci'
+                sh 'docker-compose images > .docker-images-after'
+                script {
+                    DOCKER_DIFF = sh(
+                        returnStdout: true,
+                        script: 'diff .docker-images-before .docker-images-after || true'
+                    ).trim()
+                }
             }
         }
         stage('Lint') {
             parallel {
                 stage('API') {
                     when {
-                        expression { return env.GIT_DIFF_ROOT || env.GIT_DIFF_API }
+                        expression { return DOCKER_DIFF || env.GIT_DIFF_ROOT || env.GIT_DIFF_API }
                     }
                     steps {
                         sh 'make api-lint'
@@ -58,7 +70,7 @@ pipeline {
                 }
                 stage('React') {
                     when {
-                        expression { return env.GIT_DIFF_ROOT || env.GIT_DIFF_REACT }
+                        expression { return DOCKER_DIFF || env.GIT_DIFF_ROOT || env.GIT_DIFF_REACT }
                     }
                     steps {
                         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
@@ -68,7 +80,7 @@ pipeline {
                 }
                 stage('Underdante') {
                     when {
-                        expression { return env.GIT_DIFF_ROOT || env.GIT_DIFF_UNDERDANTE }
+                        expression { return DOCKER_DIFF || env.GIT_DIFF_ROOT || env.GIT_DIFF_UNDERDANTE }
                     }
                     steps {
                         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
@@ -78,7 +90,7 @@ pipeline {
                 }
                 stage('Vue') {
                     when {
-                        expression { return env.GIT_DIFF_ROOT || env.GIT_DIFF_VUE }
+                        expression { return DOCKER_DIFF || env.GIT_DIFF_ROOT || env.GIT_DIFF_VUE }
                     }
                     steps {
                         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
@@ -88,7 +100,7 @@ pipeline {
                 }
                 stage('Cucumber') {
                     when {
-                        expression { return env.GIT_DIFF_ROOT || env.GIT_DIFF_E2E }
+                        expression { return DOCKER_DIFF || env.GIT_DIFF_ROOT || env.GIT_DIFF_E2E }
                     }
                     steps {
                         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
@@ -100,7 +112,7 @@ pipeline {
         }
         stage('Analyze') {
             when {
-                expression { return env.GIT_DIFF_ROOT || env.GIT_DIFF_API }
+                expression { return DOCKER_DIFF || env.GIT_DIFF_ROOT || env.GIT_DIFF_API }
             }
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
@@ -112,7 +124,7 @@ pipeline {
             parallel {
                 stage('API') {
                     when {
-                       expression { return env.GIT_DIFF_ROOT || env.GIT_DIFF_API }
+                       expression { return DOCKER_DIFF || env.GIT_DIFF_ROOT || env.GIT_DIFF_API }
                     }
                     steps {
                         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
@@ -122,7 +134,7 @@ pipeline {
                 }
                 stage('React') {
                     when {
-                       expression { return env.GIT_DIFF_ROOT || env.GIT_DIFF_REACT }
+                       expression { return DOCKER_DIFF || env.GIT_DIFF_ROOT || env.GIT_DIFF_REACT }
                     }
                     steps {
                         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
@@ -132,7 +144,7 @@ pipeline {
                 }
                 stage('Underdante') {
                     when {
-                       expression { return env.GIT_DIFF_ROOT || env.GIT_DIFF_UNDERDANTE }
+                       expression { return DOCKER_DIFF || env.GIT_DIFF_ROOT || env.GIT_DIFF_UNDERDANTE }
                     }
                     steps {
                         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
@@ -164,6 +176,7 @@ pipeline {
                   curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode=markdown -d text='Build #${env.BUILD_NUMBER} *${env.JOB_NAME}* : POC *Branch*: ${env.GIT_BRANCH} *Build* : OK.'
                 """)
             }
+            sh 'mv -f .docker-images-after .docker-images-before'
         }
         aborted {
                 withCredentials([string(credentialsId: 'telegramToken', variable: 'TOKEN'), string(credentialsId: 'telegramChatId', variable: 'CHAT_ID')]) {
