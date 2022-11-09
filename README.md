@@ -7,6 +7,7 @@
 Учебный проект группы товарищей Lunch Brotherhood:
  - Herman Alexandrov (hermansochi@ya.ru): Software Architect, Lead fullstack developer, devops.
  - Anna Semenenko (cleo412): trainee
+ - Alexandr Shvetsov (AlexShvet): trainee
  - Andrey Dovban (dovban.andreyy@rambler.ru): React frontend developer
 
 1. Ставим docker, docker-compose и make.
