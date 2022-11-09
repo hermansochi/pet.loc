@@ -234,58 +234,60 @@ pipeline {
             }
         }
         stage('Testing') {
-            stage('Build') {
-                steps {
-                    sh 'sleep 1'
-                }
-            }
-            stage('Init') {
-                steps {
-                    sh 'sleep 1'
-                }
-            }
-            stage('Smoke') {
-                steps {
-                    sh 'sleep 1'
-                }
-                post {
-                    failure {
-                        archiveArtifacts 'e2e/var/*'
+            steps {
+                stage('Build') {
+                    steps {
+                        sh 'sleep 1'
                     }
                 }
-            }
-            stage('E2E') {
-                parallel {
-                    stage('Herman') {
-                        steps {
-                            sh 'sleep 1'
-                        }
+                stage('Init') {
+                    steps {
+                        sh 'sleep 1'
                     }
-                    stage('Vue') {
-                        steps {
-                            sh 'sleep 1'
-                        }
+                }
+                stage('Smoke') {
+                    steps {
+                        sh 'sleep 1'
                     }
-                    stage('Underdante') {
-                        steps {
-                            sh 'sleep 1'
-                        }
-                    }
-                    stage('Vlad') {
-                        steps {
-                            sh 'sleep 1'
-                        }
-                    }
-                    stage('Dim') {
-                        steps {
-                            sh 'sleep 1'
+                    post {
+                        failure {
+                            archiveArtifacts 'e2e/var/*'
                         }
                     }
                 }
-            }
-            stage('Down') {
-                steps {
-                    sh 'sleep 1'
+                stage('E2E') {
+                    parallel {
+                        stage('Herman') {
+                            steps {
+                                sh 'sleep 1'
+                            }
+                        }
+                        stage('Vue') {
+                            steps {
+                                sh 'sleep 1'
+                            }
+                        }
+                        stage('Underdante') {
+                            steps {
+                                sh 'sleep 1'
+                            }
+                        }
+                        stage('Vlad') {
+                            steps {
+                                sh 'sleep 1'
+                            }
+                        }
+                        stage('Dim') {
+                            steps {
+                                sh 'sleep 1'
+                            }
+                        }
+                    }
+                }
+                stage('Down') {
+                    steps {
+                        sh 'sleep 1'
+                    }
                 }
             }
         }
