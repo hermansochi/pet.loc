@@ -288,22 +288,22 @@ pipeline {
                     sh 'sleep 1'
                 }
             }
-            stage('Push') {
-                when {
-                    branch 'master'
+        }
+        stage('Push') {
+            when {
+                branch 'master'
+            }
+            steps {
+                withCredentials([
+                    usernamePassword(
+                        credentialsId: 'REGISTRY_AUTH',
+                        usernameVariable: 'USER',
+                        passwordVariable: 'PASSWORD'
+                    )
+                ]) {
+                    sh 'docker login -u=$USER -p=$PASSWORD $REGISTRY'
                 }
-                steps {
-                    withCredentials([
-                        usernamePassword(
-                            credentialsId: 'REGISTRY_AUTH',
-                            usernameVariable: 'USER',
-                            passwordVariable: 'PASSWORD'
-                        )
-                    ]) {
-                        sh 'docker login -u=$USER -p=$PASSWORD $REGISTRY'
-                    }
-                    sh 'make push'
-                }
+                sh 'make push'
             }
         }
     }
