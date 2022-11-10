@@ -1,4 +1,4 @@
-FROM node:18-alpine as builder
+FROM node:19-alpine as builder
 
 ENV REACT_APP_AUTH_URL=%%REACT_APP_AUTH_URL%%
 ENV REACT_APP_API_URL=%%REACT_APP_API_URL%%
