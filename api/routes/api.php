@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\Org\QRCodeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Api\Org\OrgHealthcheckController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -30,6 +31,9 @@ Route::prefix('v1')->group(function () {
             ->parameters(['qrcodes' => 'id']);
     });
 
+    //Route::get('/healthcheck', 'OrgHealthcheckController::class@OrgHealthcheck');
+    Route::get('/healthcheck', [OrgHealthcheckController::class, 'OrgHealthcheck']);
+
     /**
      * Healthcheck
      *
@@ -45,6 +49,7 @@ Route::prefix('v1')->group(function () {
      * @responseField services Map of each downstream service and their status (`ping time` or `down`).
      * @responseField employees total - How many employees in DB, per_page - How much to give to the api per page
      */
+    /*
     Route::get('/healthcheck', function () {
         function ping($host, $port, $timeout)
         {
@@ -69,4 +74,5 @@ Route::prefix('v1')->group(function () {
             ],
         ];
     });
+    */
 });
