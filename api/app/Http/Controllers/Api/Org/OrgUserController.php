@@ -28,7 +28,7 @@ class OrgUserController extends Controller
     }
 
     /**
-     * Return paginated organization employees. The number of entries per page is set in .env in 
+     * Return paginated organization employees. The number of entries per page is set in .env in
      * APP_EMPLOYEES_PER_PAGE=100
      * Возвращает сотрудников организации массивом в объекте data, метаинформацией в объекте meta, ссылками в
      * объекте links cс разбивкой оп страницам. Количество записей на страницу устанавливается в .env в
@@ -115,8 +115,8 @@ class OrgUserController extends Controller
      *
      * @response 404 scenario="Employee not found" {"message": "404 not found", "errors": "Employee with id  976b48f0-7fd3-4d03-82ce-395ddeafe5d4 not found"}
      *
-     * @param  string  $id
-     * @return \App\Http\Resources\Org\OrgUserResource
+     * @param string $id
+     * @return \App\Http\Resources\Org\OrgUserResource|\Illuminate\Http\Response
      */
     public function show(string $id)
     {

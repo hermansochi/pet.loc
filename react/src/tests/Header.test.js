@@ -7,8 +7,6 @@ describe("Header component", () => {
   test("Should be rendered", () => {
     render(<RenderWrapperTest component={() => <Header />} />);
 
-    const elem = screen.getByText(/тема/i);
-
-    expect(elem).toBeInTheDocument();
+    expect(screen.getByText(/тема/i)).toBeInTheDocument();
   });
 });

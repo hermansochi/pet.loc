@@ -28,6 +28,7 @@ class AddAvatars extends Command
      * Execute the console command.
      *
      * @return int
+     * @psalm-suppress UndefinedInterfaceMethod
      */
     public function handle(): int
     {
@@ -53,7 +54,7 @@ class AddAvatars extends Command
         $orgUsers = OrgUser::select('id', 'gender')->get();
         $bar = $this->output->createProgressBar(count($orgUsers));
         $bar->start();
-        Storage::disk('public')->deleteDirectory('avatars');
+        Storage::disk('minio')->deleteDirectory('avatars');
         foreach ($orgUsers as $item) {
             if (mb_strtolower($item->gender) === 'm') {
                 $randomAvatar = $mansFileNames[array_rand($mansFileNames)];
@@ -62,7 +63,8 @@ class AddAvatars extends Command
             }
             $bar->advance();
 
-            $path = Storage::disk('public')
+            /* @psalm-suppress UndefinedInterfaceMethod */
+            $path = Storage::disk('minio')
                 ->putFileAs('avatars', new File(resource_path().'/avatars/'.$randomAvatar), $item->id.'.jpg');
         }
 
@@ -82,6 +84,7 @@ class AddAvatars extends Command
      *
      * @param  string  $fileName
      * @return bool
+     * @psalm-suppress UndefinedInterfaceMethod
      */
     private function validAvatar($fileName): bool
     {

@@ -6,14 +6,14 @@
     "require": {
         "php": "^8.0.2",
         "guzzlehttp/guzzle": "^7.2",
+        "knuckleswtf/scribe": "^4.1",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
+        "league/flysystem-aws-s3-v3": "^3.0",
         "simplesoftwareio/simple-qrcode": "~4"
     },
 	"require-dev": {
-        "fakerphp/faker": "^1.9.1",
-        "knuckleswtf/scribe": "^4.0",
         "laravel/pint": "^1.0",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",
@@ -35,6 +35,12 @@
 			}
 	},
 	"scripts": {
+			"post-install-cmd":[
+				"@php -r \"file_exists('.env.example') || copy('.env.example', '.env');\"",
+				"@php artisan config:cache",
+				"@php artisan route:cache",
+				"@php artisan view:cache"
+			],
 			"post-autoload-dump": [
 					"Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
 					"@php artisan package:discover --ansi"

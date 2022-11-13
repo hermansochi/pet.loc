@@ -12,6 +12,7 @@ const appSlice = createSlice({
     search: "", // Значение в строке поиска
     id: "", // id текущего пользователя
     showqr: false, // Состояние окошка для QR кода (изначально скрыто)
+    showAuthForm: "close", // Состояния отображения окна формы авторизации
   },
   reducers: {
     setTotal(state, action) {
@@ -43,6 +44,9 @@ const appSlice = createSlice({
     setShowqr(state, action) {
       state.showqr = action.payload.showqrBoolean;
     },
+    setShowAuthForm(state, action) {
+      state.showAuthForm = action.payload.showAuthFormString;
+    },
   },
 });
 
@@ -56,6 +60,7 @@ export const {
   setPage,
   setTotal,
   setPerPage,
+  setShowAuthForm,
 } = appSlice.actions;
 
 export default appSlice.reducer;

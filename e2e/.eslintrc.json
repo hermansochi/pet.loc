@@ -1,0 +1,30 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "node": true,
+        "commonjs": true
+    },
+    "extends": [
+        "eslint:recommended"
+    ],
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parserOptions": {
+        "ecmaVersion": 2018
+    },
+    "rules": {
+        "camelcase": 2,
+        "space-before-function-paren": 0,
+        "eqeqeq": 2,
+        "space-infix-ops": 1,
+        "comma-dangle": 0,
+        "space-before-blocks": 2,
+        "space-in-parens": 2,
+        "template-curly-spacing": 1,
+        "semi": 1,
+        "react/prop-types": 0
+    }
+}

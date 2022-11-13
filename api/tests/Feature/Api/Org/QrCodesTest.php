@@ -133,7 +133,7 @@ public function test_get_qr_code_for_non_existent_employee(): void
         ]);
     }
 
-     /**
+    /**
      * Get QR Code with valid style.
      *
      * @return void
@@ -143,9 +143,9 @@ public function test_get_qr_code_for_non_existent_employee(): void
         $response = $this->json('GET', '/api/v1/org/qrcodes/976b48f0-7fd3-4d03-82ce-395ddeafe5d5',
             ['style' => 'dot']);
 
-            $response
-            ->assertStatus(200)
-            ->assertHeader('Content-Type', 'image/svg+xml');
+        $response
+        ->assertStatus(200)
+        ->assertHeader('Content-Type', 'image/svg+xml');
     }
 
     /**
@@ -156,7 +156,7 @@ public function test_get_qr_code_for_non_existent_employee(): void
     public function test_get_qr_code_with_invalid_style(): void
     {
         $response = $this->json('GET', '/api/v1/org/qrcodes/976b48f0-7fd3-4d03-82ce-395ddeafe5d5',
-        ['style' => 13]);
+            ['style' => 13]);
 
         $response
         ->assertStatus(422)
@@ -177,9 +177,9 @@ public function test_get_qr_code_for_non_existent_employee(): void
         $response = $this->json('GET', '/api/v1/org/qrcodes/976b48f0-7fd3-4d03-82ce-395ddeafe5d5',
             ['eye' => 'circle']);
 
-            $response
-            ->assertStatus(200)
-            ->assertHeader('Content-Type', 'image/svg+xml');
+        $response
+        ->assertStatus(200)
+        ->assertHeader('Content-Type', 'image/svg+xml');
     }
 
     /**
@@ -190,7 +190,7 @@ public function test_get_qr_code_for_non_existent_employee(): void
     public function test_get_qr_code_with_invalid_eye_style(): void
     {
         $response = $this->json('GET', '/api/v1/org/qrcodes/976b48f0-7fd3-4d03-82ce-395ddeafe5d5',
-        ['eye' => 13]);
+            ['eye' => 13]);
 
         $response
         ->assertStatus(422)

@@ -1,7 +1,9 @@
-init: docker-down-clear \
-	react-clear vue-clear underdante-clear \
+init: init-ci react-ready underdante-ready vue-ready
+	
+init-ci: docker-down-clear \
+	react-clear vue-clear underdante-clear e2e-clear \
 	docker-pull docker-build docker-up \
-	api-init react-init underdante-init vue-init
+	api-init react-init underdante-init vue-init e2e-init
 
 init-andrey: docker-down-clear \
 	react-clear \
@@ -23,6 +25,19 @@ down: docker-down
 restart: down up
 lint: react-lint vue-lint
 lint-fix: react-lint-fix
+test-e2e:
+	make api-migrations
+	make api-fixtures
+	make e2e-clear
+	- make e2e-cucumber
+	make e2e-report
+
+test-smoke:
+	make api-migrations
+	make api-fixtures
+	make e2e-clear
+	- make smoke-cucumber
+	make e2e-report
 
 images:
 	docker images
@@ -59,11 +74,20 @@ api-composer-install:
 api-tests:
 	docker compose run --rm api-php-cli php artisan test
 
+api-test:
+	docker compose run --rm api-php-cli ./vendor/bin/phpunit
+
 api-tests-coverage:
 	docker compose run --rm api-php-cli vendor/bin/phpunit --coverage-html reports/
 
 api-psalm:
 	docker compose run --rm api-php-cli ./vendor/bin/psalm --show-info=true
+
+api-lint:
+	docker compose run --rm api-php-cli ./vendor/bin/pint
+
+api-analyze:
+	docker compose run --rm api-php-cli ./vendor/bin/psalm
 
 api-wait-db:
 	docker compose run --rm api-php-cli wait-for-it api-postgres:5432 -t 30
@@ -72,12 +96,13 @@ api-migrations:
 	docker compose run --rm api-php-cli php artisan migrate:fresh
 
 api-fixtures:
-	docker compose run --rm api-php-cli php artisan storage:link
 	docker compose run --rm api-php-cli php artisan db:seed
 	docker compose run --rm api-php-cli php artisan avatar:add
 
 api-generate-docs:
-	mkdir -p ${PWD}/api/.scribe/endpoints/ && cp ${PWD}/docs/scribe/* ${PWD}/api/.scribe/endpoints/ 
+	mkdir -p ${PWD}/api/.scribe/endpoints/ && cp ${PWD}/docs/scribe/* ${PWD}/api/.scribe/endpoints/
+	docker compose run --rm api-php-cli php artisan route:clear
+	docker compose run --rm api-php-cli php artisan config:clear
 	docker compose run --rm api-php-cli php artisan scribe:generate
 
 react-clear:
@@ -89,11 +114,11 @@ underdante-clear:
 vue-clear:
 	docker run --rm -v ${PWD}/vue:/app -w /app alpine sh -c 'rm -rf .ready dist'
 
-react-init: react-yarn-install react-ready 
+react-init: react-yarn-install
 
-underdante-init: underdante-yarn-install underdante-ready
+underdante-init: underdante-yarn-install
 
-vue-init: vue-npm-install vue-ready
+vue-init: vue-npm-install
 
 react-yarn-install:
 	docker compose run --rm react-node-cli yarn install
@@ -102,7 +127,7 @@ underdante-yarn-install:
 	docker compose run --rm underdante-node-cli yarn install
 
 vue-npm-install:
-	docker compose run --rm vue-node-cli npm install
+	docker compose run --rm vue-node-cli npm instal
 
 react-ready:
 	docker run --rm -v ${PWD}/react:/app -w /app alpine touch .ready
@@ -112,9 +137,6 @@ underdante-ready:
 
 vue-ready:
 	docker run --rm -v ${PWD}/vue:/app -w /app alpine touch .ready
-
-api-lint:
-	docker compose run --rm api-php-cli ./vendor/bin/pint
 
 react-lint:
 	docker compose run --rm react-node-cli yarn eslint
@@ -145,11 +167,36 @@ underdante-test:
 vue-lint:
 	docker compose run --rm vue-node-cli npm run lint
 
+e2e-init: e2e-assets-install
+
+e2e-assets-install:
+	docker compose run --rm cucumber-node-cli yarn install
+
+e2e-cucumber:
+	docker compose run --rm cucumber-node-cli yarn e2e
+
+smoke-cucumber:
+	docker compose run --rm cucumber-node-cli yarn smoke
+
+e2e-lint:
+	docker compose run --rm cucumber-node-cli yarn lint
+
+e2e-lint-fix:
+	docker compose run --rm cucumber-node-cli yarn lint-fix
+
+e2e-clear:
+	docker run --rm -v ${PWD}/e2e:/app -w /app alpine sh -c 'rm -rf var/*'
+
+e2e-report:
+	docker compose run --rm cucumber-node-cli yarn report
+
 build: build-api build-frontend
 
 build-frontend:
 	docker --log-level=debug build --pull --file=react/docker/production/nginx/Dockerfile --tag=${REGISTRY}/pet-react:${IMAGE_TAG} react
 	docker --log-level=debug build --pull --file=frontend/docker/production/nginx/Dockerfile --tag=${REGISTRY}/frontend:${IMAGE_TAG} frontend
+	docker --log-level=debug build --pull --file=underdante/docker/production/nginx/Dockerfile --tag=${REGISTRY}/pet-underdante:${IMAGE_TAG} underdante
+	docker --log-level=debug build --pull --file=vue/docker/production/nginx/Dockerfile --tag=${REGISTRY}/pet-vue:${IMAGE_TAG} vue
 
 build-api:
 	docker --log-level=debug build --pull --file=api/docker/production/nginx/Dockerfile --tag=${REGISTRY}/pet-api:${IMAGE_TAG} api
@@ -159,7 +206,7 @@ build-api:
 try-build:
 	REGISTRY=localhost IMAGE_TAG=0 make build
 
-push: push-frontend push-react push-api
+push: push-frontend push-react push-underdante push-vue push-api
 
 push-frontend:
 	docker push ${REGISTRY}/frontend:${IMAGE_TAG}
@@ -167,22 +214,31 @@ push-frontend:
 push-react:
 	docker push ${REGISTRY}/pet-react:${IMAGE_TAG}
 
+push-underdante:
+	docker push ${REGISTRY}/pet-underdante:${IMAGE_TAG}
+
+push-vue:
+	docker push ${REGISTRY}/pet-vue:${IMAGE_TAG}
+
 push-api:
 	docker push ${REGISTRY}/pet-api:${IMAGE_TAG}
 	docker push ${REGISTRY}/api-php-fpm:${IMAGE_TAG}
 	docker push ${REGISTRY}/api-php-cli:${IMAGE_TAG}
-	
+
 deploy:
 	ssh -o StrictHostKeyChecking=no deploy@${HOST} -p ${PORT} 'rm -rf site_${BUILD_NUMBER} && mkdir site_${BUILD_NUMBER}'
 	envsubst < docker-compose-production.yml > docker-compose-production-env.yml
 	scp -o StrictHostKeyChecking=no -P ${PORT} docker-compose-production-env.yml deploy@${HOST}:site_${BUILD_NUMBER}/docker-compose.yml
 	rm -f docker-compose-production-env.yml
+	ssh -o StrictHostKeyChecking=no deploy@${HOST} -p ${PORT} 'mkdir site_${BUILD_NUMBER}/secrets'
+	scp -o StrictHostKeyChecking=no -P ${PORT} ${API_DB_PASSWORD_FILE} deploy@${HOST}:site_${BUILD_NUMBER}/secrets/api_db_password
 	ssh -o StrictHostKeyChecking=no deploy@${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && docker stack deploy  --compose-file docker-compose.yml server --with-registry-auth --prune'
 
 deploy-clean:
 	rm -f docker-compose-production-env.yml
 
 rollback:
-	ssh -o StrictHostKeyChecking=no deploy@${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && docker stack deploy docker-compose.yml server --with-registry-auth --prune --compose-file'
+	ssh -o StrictHostKeyChecking=no deploy@${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && docker stack deploy --compose-file docker-compose.yml auction --with-registry-auth --prune'
 
-
+validate-jenkins:
+	curl --user ${USER} -X POST -F "jenkinsfile=<Jenkinsfile" ${HOST}/pipeline-model-converter/validate

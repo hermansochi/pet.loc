@@ -58,4 +58,6 @@ WORKDIR /app
 COPY --from=builder /app ./
 COPY ./ ./
 
+RUN chmod -R ug+rwx storage bootstrap/cache
+
 USER app

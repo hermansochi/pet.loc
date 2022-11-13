@@ -7,8 +7,6 @@ describe("PreloaderUser component", () => {
   test("Should be rendered", () => {
     render(<RenderWrapperTest component={() => <PreloaderUser />} />);
 
-    const elem = screen.getByTestId("preloaderuser");
-
-    expect(elem).toBeInTheDocument();
+    expect(screen.getByTestId("preloaderuser")).toBeInTheDocument();
   });
 });

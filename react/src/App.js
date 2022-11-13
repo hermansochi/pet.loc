@@ -3,10 +3,19 @@ import QrModal from "./components/QrModal"; // Компонент для пок�
 import Header from "./components/Header"; // Компонент шапка сайта
 import Main from "./components/Main"; // Компонент для основного контента
 import PreloaderUser from "./components/PreloaderUser"; // Компонент заглушка во время загрузки данных
-import { devUrl, healthcheck, versionApi, headers } from "./patch"; // константы путей
+import { url, version, healthcheck, headers } from "./patch"; // константы путей
 import { useSelector, useDispatch } from "react-redux"; // хуки редакса
 import { fetchUsers } from "./store/usersSlice"; // асинхронный редюсер для загрузки данных
-import { setTotal, setPerPage, setShowqr, setPage } from "./store/appSlice"; // редюсеры изменеия состояния приложения
+import {
+  setTotal,
+  setPerPage,
+  setShowqr,
+  setPage,
+  setShowAuthForm,
+} from "./store/appSlice"; // редюсеры изменеия состояния приложения
+import Menu from "./components/Menu"; // Компонент меню
+import AuthForm from "./components/AuthForm";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -15,11 +24,10 @@ function App() {
   const showQr = useSelector((state) => state.app.showqr); // Состояние показа QR кода (изначально скрыто)
   const { status, error } = useSelector((state) => state.users); // Состояние выполнения асинхронного редюсера
 
-  const url = new URL(`${devUrl}${versionApi}`); // адрес с версией api
-
+  console.log(process.env);
   useEffect(() => {
     // запрос для проверки соединения
-    fetch(url + healthcheck, {
+    fetch(url + "/" + version + "/" + healthcheck, {
       method: "GET",
       headers,
     })
@@ -53,12 +61,20 @@ function App() {
     }
   };
 
+  // Фунция отслеживает прокрутку документа до самого низа и отрисовывает дополнительно ещё 1-- пользователей
   window.onscroll = () => {
     let scrollHeight = document.body.scrollHeight;
     let totalHeight = window.scrollY + window.innerHeight;
 
     if (totalHeight >= scrollHeight) {
       dispatch(setPage({ pageNumber: page + 1 }));
+    }
+  };
+
+  // Функция отслеживает нажатие на "Escape" и скрывает форму авторизации
+  window.onkeydown = (e) => {
+    if (e.key === "Escape") {
+      dispatch(setShowAuthForm({ showAuthFormString: "close" }));
     }
   };
 
@@ -73,11 +89,13 @@ function App() {
       data-theme={theme ? "luxury" : "garden"}
       data-testid="app"
     >
+      <Menu />
       <div className="absolute top-20 right-5 z-50"></div>
       {showQr && <QrModal />}
       <Header />
       {status === "loading" ? <PreloaderUser /> : <Main />}
       {error && <div>Error: {error}</div>}
+      <AuthForm />
     </div>
   );
 }

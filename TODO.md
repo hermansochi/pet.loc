@@ -6,8 +6,13 @@ Tasks for the Laravel + ReactJS Pet project.
 
 - [ ] Dev: Install Prettier.
 - [ ] Front: Install React router.
-- [ ] Herman: Dev: Copy Nginx config to Underdante & Fix: Error 409 react ws HMR.
 - [ ] Herman: Dev: Make test env.
+- [ ] Herman: Dev: Change scribe mode to static.
+- [ ] Herman: Dev: Uninstall docker-compose, instal docker compose plugin for herman.team.
+- [ ] Herman: Dev: Fix: env.BUILD_USER_ID is null in Jenkins.
+- [ ] Herman: Dev: Optimize production security. Change production credentials to docker secrets gitignore folder.
+- [ ] Herman: Dev: Backup DB to Minio.
+- [ ] Herman: Dev: Optimize monorepo.
 
 # In Progress
 
@@ -15,10 +20,28 @@ Tasks for the Laravel + ReactJS Pet project.
 
 ### Done ✓
 
+- [х] Herman: Dev: Update Node version.
+- [х] Herman: Dev: Remove cypress from Vue.
+- [х] Herman: Dev: Fix: Environment Variables for frontends.
+- [х] Herman: Docs: Auth use case.
+- [х] Herman: Dev: Implement smoke & e2e tests via Cucumber.
+- [х] Herman: Dev: Fix lint and unit tests errors.
+- [х] Herman: Dev: Add Paslm for API & Unit tests fro api and frontends in Jenkins.
+- [х] Herman: Dev: Ignore lint stage errors in Jenkins.
+- [х] Herman: Dev: Add lint stage in Jenkins.
+- [х] Herman: Dev: Uninstall docker-compose, instal docker compose plugin for dind in jenkins.herman.team.
+- [х] Herman: Dev: Uninstall docker-compose, instal docker compose plugin for jenkins.herman.team.
+- [х] Herman: Dev: Make Jenkinsfile.
+- [х] Herman: Dev: Install Jenkins.
+- [х] Herman: Dev: Add Minio to dev env.
+- [х] Herman: Dev: Copy Nginx config to Underdante & Fix: Error 409 react ws HMR.
+- [х] Herman: Dev: Add underdante & vue to production.
+- [х] Herman: Dev: Fix: Vue Erorr 404 6789 crbug/1173575, non-JS module files deprecated.
+- [х] Herman: Dev: Add Environment Variables for frontends.
+- [х] Herman: Dev: Reinstall knuckleswtf/scribe to dev env.
 - [х] Herman: Dev: Refactor provisioning.
 - [х] Herman: Dev: Add healhchecks for containers.
 - [х] Herman: Dev: Add Docker swarm.
-- [х] Herman: Dev: Install Jenkins.
 - [х] Herman: Dev: Make private docker hub repository.
 - [х] Herman: Dev: Make provisioning for production server via Ansible playbooks.
 - [х] Herman: Dev: Fix: Error 409 react ws HMR.

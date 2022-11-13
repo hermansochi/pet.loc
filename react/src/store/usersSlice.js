@@ -1,17 +1,20 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"; // хуки для асинхронных редюсеров
-import { devUrl, versionApi, headers, orgUsers } from "../patch"; // пути для запросов
+import { url, version, headers, orgUsers } from "../patch"; // пути для запросов
 
-const url = new URL(`${devUrl}${versionApi}${orgUsers}?page=`); // контанта URL
+// const url = new URL(`${url}/${versionApi}${orgUsers}?page=`); // контанта URL
 
 // Создание асинхронного запроса, перевым пераметром принимает номер страници, отправляетзапрос на сервер, есди статус ответа "ок" возвращает пришедшие данные, если не возвращает ошибку
 export const fetchUsers = createAsyncThunk(
   "users/fetchUsers",
   async function (page, rejectedWithValue) {
     try {
-      let response = await fetch(url + page, {
-        method: "GET",
-        headers,
-      });
+      let response = await fetch(
+        url + "/" + version + "/" + orgUsers + "?page=" + page,
+        {
+          method: "GET",
+          headers,
+        }
+      );
       if (!response.ok) {
         throw new Error("Bad Connect");
       }
@@ -58,7 +61,7 @@ const usersSlice = createSlice({
       state.users.forEach((el) => {
         if (
           rex.test(
-            `${el["cn"]} ${el["city"]} ${el["company"]} ${el["title"]} ${el["department"]}`
+            `${el["cn"]} ${el["city"]} ${el["company"]} ${el["title"]} ${el["department"]} ${el["email"]} ${el["telephone"]} ${el["mobile"]}`
           )
         ) {
           result.push(el);

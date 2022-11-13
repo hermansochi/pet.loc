@@ -7,8 +7,6 @@ describe("Main component", () => {
   test("Should be render", () => {
     render(<RenderWrapperTest component={() => <Main />} />);
 
-    const elem = screen.getByTestId("main");
-
-    expect(elem).toBeInTheDocument();
+    expect(screen.getByTestId("main")).toBeInTheDocument();
   });
 });

@@ -4,3 +4,6 @@
 /provisioning/site.yml
 /provisioning/docker-login.yml
 /provisioning/authorize.yml
+/provisioning/authorize-deploy.yml
+/api/.env.prod
+/docker

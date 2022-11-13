@@ -4,15 +4,13 @@ namespace Database\Factories\Org;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory
- */
 class OrgUserFactory extends Factory
 {
     /**
      * Define the model's default state.
      *
      * @return array<string, mixed>
+     * @psalm-suppress UndefinedMagicMethod
      */
     public function definition()
     {

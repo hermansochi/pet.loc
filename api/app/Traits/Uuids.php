@@ -12,7 +12,7 @@ trait Uuids
     protected static function boot()
     {
         parent::boot();
-        static::creating(function ($model) {
+        static::creating(function (\Illuminate\Database\Eloquent\Model $model) {
             if (empty($model->{$model->getKeyName()})) {
                 $model->{$model->getKeyName()} = Str::orderedUuid()->toString();
             }
