@@ -34,13 +34,3 @@ export default function Main() {
 
 
 
-// It looks like you wrote useEffect(async () => ...) or returned a Promise. Instead, write the async function inside your effect and call it immediately:
-
-// useEffect(() => {
-//   async function fetchData() {
-//     // You can await here
-//     const response = await MyAPI.getData(someId);
-//     // ...
-//   }
-//   fetchData();
-// }, [someId]); // Or [] if effect doesn't need props or state

@@ -1,20 +1,7 @@
-// вариант фильтрации в инпуте  номер 1 :
-// получаем введеное значение и фильтруем в редьюсере в саисе dataSlice
-// для правльной первой отрисовке приходится копировать ripeUsers  в filtredUsers , далее при начале поиска происходит фильтрация 
-//ripeUsers и запись результата в filthrlUsers с последующей отрисовкой
-
-
-// вариант 2 
-//  задаем своиство слаиса inputFilter и в компоненте отрисовки выполняем фильтрацию и вывод
-
-
-
-
 import React , { useState , useEffect }  from "react";
 import { useDispatch ,useSelector } from "react-redux";
-// import { inputFiltration } from "../../redux/slices/dataSlice";  // вар 1
-import { selection } from "../../redux/slices/dataSlice";
-import { resetFultredUsers } from "../../redux/slices/dataSlice";
+// import { selection } from "../../redux/slices/dataSlice";
+import { resetFultredUsers ,selection } from "../../redux/slices/dataSlice";
 
 export default function Input () {
     const dispatch = useDispatch() ;
@@ -64,7 +51,7 @@ export default function Input () {
 
 
     return (<div className = {`w-[55%]`}>
-<input className = {`border-[4px] rounded-md  w-[100%]`} value = {text}
+<input role = 'input' className = {`border-[4px] rounded-md  w-[100%]`} value = {text}
 //  onChange={(event)=>thorttle(filtration(event.target.value))}
  onChange={(event) => {
     setText(event.target.value) ;

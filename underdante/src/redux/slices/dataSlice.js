@@ -110,8 +110,8 @@ const dataSlice = createSlice({
       } ,
 
       selection : (state , action) => {  // поиск по категории и буквам
-        const {ripeUsers} = state.users ;  // получаем готовых юзеров
-        const {categoryFilter , word}  = action.payload ; // получаем категорию и слово для поиска
+        const { ripeUsers } = state.users ;  // получаем готовых юзеров
+        const { categoryFilter , word }  = action.payload ; // получаем категорию и слово для поиска
     
         const base = Object.assign([] , ripeUsers).flat() ; // копирую и сплющиваю массив юзеров
     

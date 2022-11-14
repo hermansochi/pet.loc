@@ -9,6 +9,7 @@
  - Anna Semenenko (cleo412): trainee
  - Alexandr Shvetsov (AlexShvet): trainee
  - Andrey Dovban (dovban.andreyy@rambler.ru): React frontend developer
+ - Petr Mashin (petemashine@gmail.com) : React frontend developer
 
 1. Ставим docker, docker-compose и make.
 1. Форкаем репу.

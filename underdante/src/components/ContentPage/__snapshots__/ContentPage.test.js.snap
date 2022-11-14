@@ -1,0 +1,314 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Content page tests render Content page 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="flex flex-col w-full items-center"
+        role="Content Page"
+      >
+        <div
+          class="flex flex-row items-center bg-cyan-500 mb-[2rem] h-[8rem] w-[80%] rounded-md"
+        >
+          <div
+            class="ml-[3rem] mr-[3rem]"
+          >
+            <img
+              class="rounded-lg border-[3px] h-full"
+              src="http://storage.localhost/pet/avatars/97bbe3f4-617c-4a94-8590-f6e69d42def2.jpg"
+            />
+          </div>
+          <div
+            class="flex flex-col flex-nowrap h-[100%] w-[80%]"
+          >
+            <div>
+              Имя : 
+              Костина Изабелла Максимовна
+            </div>
+            <div>
+              Пол : 
+              Ж
+            </div>
+            <div>
+              Компания : 
+              ООО "Партнер"
+            </div>
+            <div>
+              Департамент : 
+              Администрация
+            </div>
+            <div>
+              Город : 
+              Владивосток
+            </div>
+          </div>
+          <div
+            class="flex flex-col flex-nowrap h-[100%] w-[80%]"
+          >
+            <div>
+              Должность : 
+              Моторист механической лопаты
+            </div>
+            <div>
+              День рождения : 
+              11.05
+            </div>
+            <div>
+              Раб.телефон : 
+              3511
+            </div>
+            <div>
+              Моб. телефон : 
+              9890675977
+            </div>
+            <div>
+              Эл. почта : 
+              Kostina.I@example.ru
+            </div>
+          </div>
+        </div>
+        <div
+          class="flex flex-row items-center bg-cyan-500 mb-[2rem] h-[8rem] w-[80%] rounded-md"
+        >
+          <div
+            class="ml-[3rem] mr-[3rem]"
+          >
+            <img
+              class="rounded-lg border-[3px] h-full"
+              src="http://storage.localhost/pet/avatars/97bbe3f4-6963-4794-a8eb-0e845f465a9e.jpg"
+            />
+          </div>
+          <div
+            class="flex flex-col flex-nowrap h-[100%] w-[80%]"
+          >
+            <div>
+              Имя : 
+              Быкова Алиса Максимовна
+            </div>
+            <div>
+              Пол : 
+              Ж
+            </div>
+            <div>
+              Компания : 
+              ООО "Рога и копыта
+            </div>
+            <div>
+              Департамент : 
+              Отдел продаж
+            </div>
+            <div>
+              Город : 
+              Москва
+            </div>
+          </div>
+          <div
+            class="flex flex-col flex-nowrap h-[100%] w-[80%]"
+          >
+            <div>
+              Должность : 
+              Раздирщик пакетов
+            </div>
+            <div>
+              День рождения : 
+              04.09
+            </div>
+            <div>
+              Раб.телефон : 
+              1578
+            </div>
+            <div>
+              Моб. телефон : 
+              9890554019
+            </div>
+            <div>
+              Эл. почта : 
+              Bykova.A@example.ru
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="flex flex-col w-full items-center"
+      role="Content Page"
+    >
+      <div
+        class="flex flex-row items-center bg-cyan-500 mb-[2rem] h-[8rem] w-[80%] rounded-md"
+      >
+        <div
+          class="ml-[3rem] mr-[3rem]"
+        >
+          <img
+            class="rounded-lg border-[3px] h-full"
+            src="http://storage.localhost/pet/avatars/97bbe3f4-617c-4a94-8590-f6e69d42def2.jpg"
+          />
+        </div>
+        <div
+          class="flex flex-col flex-nowrap h-[100%] w-[80%]"
+        >
+          <div>
+            Имя : 
+            Костина Изабелла Максимовна
+          </div>
+          <div>
+            Пол : 
+            Ж
+          </div>
+          <div>
+            Компания : 
+            ООО "Партнер"
+          </div>
+          <div>
+            Департамент : 
+            Администрация
+          </div>
+          <div>
+            Город : 
+            Владивосток
+          </div>
+        </div>
+        <div
+          class="flex flex-col flex-nowrap h-[100%] w-[80%]"
+        >
+          <div>
+            Должность : 
+            Моторист механической лопаты
+          </div>
+          <div>
+            День рождения : 
+            11.05
+          </div>
+          <div>
+            Раб.телефон : 
+            3511
+          </div>
+          <div>
+            Моб. телефон : 
+            9890675977
+          </div>
+          <div>
+            Эл. почта : 
+            Kostina.I@example.ru
+          </div>
+        </div>
+      </div>
+      <div
+        class="flex flex-row items-center bg-cyan-500 mb-[2rem] h-[8rem] w-[80%] rounded-md"
+      >
+        <div
+          class="ml-[3rem] mr-[3rem]"
+        >
+          <img
+            class="rounded-lg border-[3px] h-full"
+            src="http://storage.localhost/pet/avatars/97bbe3f4-6963-4794-a8eb-0e845f465a9e.jpg"
+          />
+        </div>
+        <div
+          class="flex flex-col flex-nowrap h-[100%] w-[80%]"
+        >
+          <div>
+            Имя : 
+            Быкова Алиса Максимовна
+          </div>
+          <div>
+            Пол : 
+            Ж
+          </div>
+          <div>
+            Компания : 
+            ООО "Рога и копыта
+          </div>
+          <div>
+            Департамент : 
+            Отдел продаж
+          </div>
+          <div>
+            Город : 
+            Москва
+          </div>
+        </div>
+        <div
+          class="flex flex-col flex-nowrap h-[100%] w-[80%]"
+        >
+          <div>
+            Должность : 
+            Раздирщик пакетов
+          </div>
+          <div>
+            День рождения : 
+            04.09
+          </div>
+          <div>
+            Раб.телефон : 
+            1578
+          </div>
+          <div>
+            Моб. телефон : 
+            9890554019
+          </div>
+          <div>
+            Эл. почта : 
+            Bykova.A@example.ru
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
