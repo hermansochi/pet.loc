@@ -52,6 +52,7 @@ pipeline {
         ).trim()
     }
     stages {
+        /*
         stage('Init') {
             steps {
                 withCredentials([string(credentialsId: 'telegramToken', variable: 'TOKEN'), string(credentialsId: 'telegramChatId', variable: 'CHAT_ID')]) {
@@ -308,6 +309,7 @@ pipeline {
                 sh 'make push'
             }
         }
+        */
         stage ('Prod') {
             when {
                 branch 'master'
@@ -319,7 +321,7 @@ pipeline {
                     file(credentialsId: 'API_DB_PASSWORD_FILE', variable: 'API_DB_PASSWORD_FILE'),
                 ]) {
                     sshagent (credentials: ['PRODUCTION_AUTH']) {
-                        sh 'make deploy'
+                        sh 'BUILD_NUMBER=${env.BUILD_NUMBER} make deploy'
                     }
                 }
             }
