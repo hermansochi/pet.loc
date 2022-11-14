@@ -321,7 +321,7 @@ pipeline {
                     file(credentialsId: 'API_DB_PASSWORD_FILE', variable: 'API_DB_PASSWORD_FILE'),
                 ]) {
                     sshagent (credentials: ['PRODUCTION_AUTH']) {
-                        sh 'BUILD_NUMBER=${env.BUILD_NUMBER} make deploy'
+                        sh 'make deploy'
                     }
                 }
             }
