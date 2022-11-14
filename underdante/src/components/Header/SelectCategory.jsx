@@ -26,7 +26,6 @@ let categories = {
 
 
 function changeCategory (event) {
-    console.log(event.target.value) ;
     setChosen(event.target.value) ;
     dispatch (resetFultredUsers()) ;
     dispatch(setCategoryFilter({categoryFilter : categories[event.target.value]})) ;  // очень долгое переключение при не пустом поле инпута
@@ -41,13 +40,14 @@ function changeCategory (event) {
 
      return (
         <select 
+         role = 'select'
          onChange= {changeCategory} 
     >
         <option defaultValue = {chosen}  hidden> {chosen} </option>
        
         {/* {options} */}
         {Object.keys(categories).map((item , num)=>{
-            return <option key={num} value={item}>{item}</option> ;
+            return <option role = {`${num}`} key={num} value={item}>{item}</option> ;
     })}
     </select>) ;
 }
