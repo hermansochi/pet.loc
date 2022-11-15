@@ -1,8 +1,8 @@
 import React from "react";
 import SelectCategory from "./SelectCategory" ;
 import * as reduxHooks from "react-redux" ;
-// import * as actions from "../../redux/slices/dataSlice" ;
-import { render , screen , fireEvent } from "@testing-library/react" ;
+import * as actions from "../../redux/slices/dataSlice" ;
+import { render , screen } from "@testing-library/react" ;
 import userEvent from "@testing-library/user-event" ;
 
 jest.mock("react-redux") ;
@@ -10,6 +10,7 @@ jest.mock("react-redux") ;
 
 const jestDispatch = jest.spyOn(reduxHooks , 'useDispatch') ;
 
+// const mockedSetCategory = jest.spyOn(actions , 'setCategoryFilter') ;
 
 describe("input tests" ,() => {
     
@@ -20,17 +21,34 @@ describe("input tests" ,() => {
         expect(screen.getByRole('select')).toBeInTheDocument() ;
     }) ;
 
-    // it ('onChange on select' , () => {
-    //     const onChange = jest.fn() ;
-    //     jestDispatch.mockReturnValue(onChange) ; 
-        
-    //     render(<SelectCategory/>) ;
+    // снапшот 
+    it ('select snapshot' , () => {
+        const view = render(<SelectCategory/>) ;
 
-    //     userEvent.click(screen.getByRole('select')) ;
-    //     userEvent.click(screen.getByRole('0')) ;
+        expect(view).toMatchSnapshot() ;
+    }) ;
 
-    //     expect(onChange).toHaveBeenCalled() ;
-    // }) ;
+
+    // вызовы функции при взаимодеиствии
+    it ('onChange on select' , () => {
+        const dispatch = jest.fn() ;
+       
+        const mackedResetFiltredusers = jest.spyOn(actions ,'resetFultredUsers') ;
+
+        const mockedSetCategory = jest.spyOn(actions , 'setCategoryFilter') ;
+       
+        jestDispatch.mockReturnValue(dispatch) ; 
+       
+        render(<SelectCategory/>) ;
+ 
+        // вызываем клик на option с определенным value
+        userEvent.selectOptions(screen.getByRole('select'), ['cat-0']) ;
+
+        // запускается диспатч , запускается функция выбора
+        expect(dispatch).toHaveBeenCalled() ;
+        expect(mockedSetCategory).toHaveBeenCalled() ;
+        expect(mackedResetFiltredusers).toHaveBeenCalled() ;
+    }) ;
 
 
 

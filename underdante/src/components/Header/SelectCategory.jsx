@@ -47,7 +47,7 @@ function changeCategory (event) {
        
         {/* {options} */}
         {Object.keys(categories).map((item , num)=>{
-            return <option role = {`${num}`} key={num} value={item}>{item}</option> ;
+            return <option value = {`cat-${num}`} key={num} >{item}</option> ;
     })}
     </select>) ;
 }
