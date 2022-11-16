@@ -52,6 +52,7 @@ pipeline {
         ).trim()
     }
     stages {
+        /*
         stage('Init') {
             steps {
                 withCredentials([string(credentialsId: 'telegramToken', variable: 'TOKEN'), string(credentialsId: 'telegramChatId', variable: 'CHAT_ID')]) {
@@ -308,6 +309,7 @@ pipeline {
                 sh 'make push'
             }
         }
+        */
         stage ('Prod') {
             when {
                 branch 'master'
