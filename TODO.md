@@ -13,7 +13,9 @@ Tasks for the Laravel + ReactJS Pet project.
 - [ ] Herman: Dev: Optimize production security. Change production credentials to docker secrets gitignore folder.
 - [ ] Herman: Dev: Backup DB to Minio.
 - [ ] Herman: Dev: Optimize monorepo.
-- [ ] Herman: Dev: Add private docker registry manager.
+- [ ] Herman: Dev: Remove old networks from dev server.
+- [ ] Herman: Dev: Add prune old containers & volumes in docker private registry.
+- [ ] Herman: Dev: Add docker private registry & cache registry.
 
 # In Progress
 
