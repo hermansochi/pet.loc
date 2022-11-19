@@ -31,47 +31,6 @@ export const getData = createAsyncThunk(
   } 
 ) ;
 
-
-// export const selection = createAsyncThunk(
-//   'dataSlice/selection' ,
-//   async function(word, {dispatch , getState}) {
-//     console.log(word) ;
-//     const {data} = getState() ;
-//     const {categoryFilter , ripeUsers}  = data ;
-
-//     const base = Object.assign([] , ripeUsers).flat() ;
-
-//     base.filter(user => user[`${categoryFilter}`].includes(word)) ; 
-
-//     const output = base.reduce((acc , cur) => {
-//       if (acc[acc.length - 1].length === 100) {
-//         acc.push([]) ;
-//       }
-
-//       acc[acc.length - 1].push(cur) ;
-
-//       return acc ;
-//     } , [[]]);
-
-//       }
-//   ) ;
-
-  // const s = [{a:1},{a:2},{a:3},{a:4},{a:5},{a:6}];
-  // const SIZE = 4;
-  
-  // const res = s.reduce((p,c)=>{
-  //   if(p[p.length-1].length == SIZE){
-  //     p.push([]);
-  //   }
-    
-  //   p[p.length-1].push(c);
-  //   return p;
-  // }, [[]]);
-  
-
-
-
-
 const dataSlice = createSlice({
   name: 'data',
   initialState: {
@@ -87,17 +46,20 @@ const dataSlice = createSlice({
     }
 ,
   reducers: {
+
      addUserBlock : (state , action) => {
       state.users.rawUsers.push(action.payload.usersBlock);
-        state.users.ripeUsers.push(action.payload.usersBlock.data); // передаю только необходимую информацию
+      state.users.ripeUsers.push(action.payload.usersBlock.data); // передаю только необходимую информацию
       },
-      inputFiltration : (state, action) => {  //фильтр по вводу вариант 1 
-        state.users.filtredUsers = state.users.ripeUsers.filter(user => user.name.toLowerCase().includes(action.payload.text)) ;
-        if (action.payload.showAll) state.users.filtredUsers = state.users.ripeUsers ;
-      } ,
-      setInputFilter : (state ,action) => { // фильтр по вводу вар 2 
-        state.inputFilter = action.payload ;
-      } , 
+
+      // inputFiltration : (state, action) => {  //фильтр по вводу вариант 1 
+      //   state.users.filtredUsers = state.users.ripeUsers.filter(user => user.name.toLowerCase().includes(action.payload.text)) ;
+      //   if (action.payload.showAll) state.users.filtredUsers = state.users.ripeUsers ;
+      // } ,
+      
+      // setInputFilter : (state ,action) => { // фильтр по вводу вар 2 
+      //   state.inputFilter = action.payload ;
+      // } , 
 
       resetFultredUsers : (state) => {  // задаем отфильтованных пользователей
         // if (action.payload.isStart)
@@ -138,7 +100,7 @@ extraReducers : {
     state.error = null ;
   } ,
   [getData.fulfilled] : (state)=>{
-    state.users.filtredUsers = Object.assign(state.users.ripeUsers , [])  ; // вариант фильтрации 1
+    state.users.filtredUsers = Object.assign(state.users.ripeUsers , [])  ; // после успешного получения всех данных
     state.status = "resolved" ;
     state.error = null ;
   } ,
