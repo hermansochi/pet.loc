@@ -1,7 +1,7 @@
 import React , { useState , useEffect }  from "react";
 import { useDispatch ,useSelector } from "react-redux";
 // import { selection } from "../../redux/slices/dataSlice";
-import { resetFultredUsers ,selection } from "../../redux/slices/dataSlice";
+import { resetFiltredUsers ,selection } from "../../redux/slices/dataSlice";
 
 export default function Input () {
     const dispatch = useDispatch() ;
@@ -19,7 +19,7 @@ export default function Input () {
         if (event.target.value.length > 2) {
             dispatch(selection({categoryFilter : categoryFilter , word : event.target.value})) ;
         }else{
-            dispatch(resetFultredUsers()) ;
+            dispatch(resetFiltredUsers()) ;
         }
 
 

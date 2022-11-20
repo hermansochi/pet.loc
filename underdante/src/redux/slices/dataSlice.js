@@ -31,6 +31,39 @@ export const getData = createAsyncThunk(
   } 
 ) ;
 
+
+
+function typisedArray (array) {
+   return array.reduce((acc , cur) => { // разбиваю на массивы по 100 юзеров , т.к. в компоненте отрисовки ожидается именно такой формат
+    if (acc[acc.length - 1].length === 100) {
+      acc.push([]) ;
+    }
+    
+    acc[acc.length - 1].push(cur) ;
+    
+    return acc ;
+  } , [[]]);
+} 
+
+function sortUsers(array , category) {
+  let sorted = array.sort((a, b) => {
+    const nameA = a[`${category}`].toLowerCase() ;
+    const nameB = b[`${category}`].toLowerCase() ;
+
+    switch (nameA > nameB) {
+      case (true) : 
+        return 1 ;
+      case (false) :
+        return -1 ;
+      default :
+        return 0 ;
+    }
+  }) ; 
+
+  return typisedArray(sorted) ;
+}
+
+
 const dataSlice = createSlice({
   name: 'data',
   initialState: {
@@ -42,7 +75,7 @@ const dataSlice = createSlice({
       categoryFilter : "email" ,
       status :null ,
       error:null ,    
-
+      sortAt: "last_name" ,  
     }
 ,
   reducers: {
@@ -52,66 +85,65 @@ const dataSlice = createSlice({
       state.users.ripeUsers.push(action.payload.usersBlock.data); // передаю только необходимую информацию
       },
 
-      // inputFiltration : (state, action) => {  //фильтр по вводу вариант 1 
-      //   state.users.filtredUsers = state.users.ripeUsers.filter(user => user.name.toLowerCase().includes(action.payload.text)) ;
-      //   if (action.payload.showAll) state.users.filtredUsers = state.users.ripeUsers ;
-      // } ,
-      
-      // setInputFilter : (state ,action) => { // фильтр по вводу вар 2 
-      //   state.inputFilter = action.payload ;
-      // } , 
+    resetFiltredUsers : (state) => {  // задаем отфильтованных пользователей
+        const base = Object.assign(state.users.ripeUsers , []).flat() ;
+        state.users.filtredUsers = sortUsers(base , state.sortAt) ;
 
-      resetFultredUsers : (state) => {  // задаем отфильтованных пользователей
-        // if (action.payload.isStart)
-        state.users.filtredUsers = Object.assign(state.users.ripeUsers , []) ;
       } ,
       
-      setCategoryFilter : (state , action) => { // задаем категорию для поиска
+    setCategoryFilter : (state , action) => { // задаем категорию для поиска
         state.categoryFilter = action.payload.categoryFilter ; 
-        state.inputFilter = "" ;
       } ,
 
-      selection : (state , action) => {  // поиск по категории и буквам
+    selection : (state , action) => {  // поиск по категории и буквам
         const { ripeUsers } = state.users ;  // получаем готовых юзеров
         const { categoryFilter , word }  = action.payload ; // получаем категорию и слово для поиска
     
-        const base = Object.assign([] , ripeUsers).flat() ; // копирую и сплющиваю массив юзеров
+        const base = Object.assign([] , ripeUsers).flat(); // копирую массив юзеров
     
         let filtered = base.filter(user => user[`${categoryFilter}`].toLowerCase().includes(word.toLowerCase())) ;  // фильтрация
         
-        const output = filtered.reduce((acc , cur) => { // разбиваю на массивы по 100 юзеров , т.к. в компоненте отрисовки ожидается именно такой формат
-          if (acc[acc.length - 1].length === 100) {
-            acc.push([]) ;
-          }
-          
-          acc[acc.length - 1].push(cur) ;
-          
-          return acc ;
-        } , [[]]);
-        
+        // const output = typisedArray(filtered) ;
+        const output = sortUsers(filtered , state.sortAt) ;
+            
         state.users.filtredUsers = output ; 
+        
+      } ,
+      
+    setSortCategory : (state , action) => {
+        const { sortAt }  = action.payload ; // получаем категорию сортировки
+        state.sortAt = sortAt ;
+      } ,
 
-          }
+    sorting : (state) => {
+        const { sortAt } = state ;
+        
+        let users = state.users.filtredUsers ;
+        const base = Object.assign([] , users).flat();
+        state.users.filtredUsers = sortUsers(base , sortAt) ;
+      } ,
 
 } ,
 extraReducers : {
-  [getData.pending] : (state)=>{
+  [getData.pending] : (state) => {
     state.status = "loading";
     state.error = null ;
   } ,
-  [getData.fulfilled] : (state)=>{
-    state.users.filtredUsers = Object.assign(state.users.ripeUsers , [])  ; // после успешного получения всех данных
+  [getData.fulfilled] : (state) => { 
     state.status = "resolved" ;
+    const base = Object.assign(state.users.ripeUsers , []).flat() ;
+    state.users.ripeUsers = sortUsers(base , state.sortAt)  ;
+    state.users.filtredUsers = state.users.ripeUsers ;
     state.error = null ;
   } ,
-  [getData.rejected] : (state , action)=>{
+  [getData.rejected] : (state , action) => {
     state.error = action.payload.error ;
     state.status = "rejected" ;
   } ,
 }
 });
 
-export const {addUserBlock  , resetFultredUsers , setCategoryFilter , selection} = dataSlice.actions ;
+export const {addUserBlock  , resetFiltredUsers , setCategoryFilter , selection , setSortCategory , sorting } = dataSlice.actions ;
 
 export default dataSlice.reducer ;
 

@@ -41,7 +41,7 @@ describe("data slice testing" , () => {
 
         const result = datareducer(initialState , action) ;
 
-        expect(result.categoryFilter).toEqual('test') ;
+        expect(result.users.categoryFilter).toEqual('test') ;
     }) ;
     
     

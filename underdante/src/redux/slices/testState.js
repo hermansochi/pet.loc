@@ -145,7 +145,7 @@ const initialState = {
         categoryFilter : "email" ,
         status :null ,
         error:null ,    
-        
+        sortAt: "cn" ,
         } ;
 
 export {testState , initialState} ;

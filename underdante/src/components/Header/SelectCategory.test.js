@@ -42,12 +42,13 @@ describe("input tests" ,() => {
         render(<SelectCategory/>) ;
  
         // вызываем клик на option с определенным value
-        userEvent.selectOptions(screen.getByRole('select'), ['cat-0']) ;
+        userEvent.selectOptions(screen.getByRole('select'), ['Эл. почта']) ;
 
         // запускается диспатч , запускаются функций выбора и очистки
         expect(dispatch).toHaveBeenCalled() ;
         expect(mockedSetCategory).toHaveBeenCalled() ;
         expect(mackedResetFiltredusers).toHaveBeenCalled() ;
+        // expect(screen.getByRole('option', {name: 'cat-0'}).selected).toBe(true) ;
     }) ;
 
 
