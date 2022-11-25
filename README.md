@@ -1,3 +1,9 @@
+# DEPRICATED
+
+Монорепозиторий разделен.
+Продолжение проекта в репозитории https://github.com/hermansochi/phonebook-back.git
+
+
 # Laravel + ReactJS + VueJS Pet project
 
 >**Документацию по проекту см. в папке /docs**
