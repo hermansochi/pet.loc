@@ -23,7 +23,15 @@ describe("input tests" ,() => {
     }) ;
     
 
-// сты работы инпута на ввод данный и вызов функции    
+    // снапшот 
+    it ('input snapshot' , () => {
+        const view = render(<Input/>) ;
+
+        expect(view).toMatchSnapshot() ;
+    }) ;
+
+
+// тесты работы инпута на ввод данный и вызов функции    
 it ('onChange in input' , () => {
     const onChange = jest.fn() ;
     jestDispatch.mockReturnValue(onChange) ;
@@ -38,7 +46,7 @@ userEvent.type(screen.getByRole('input') , "test") ;
 expect(onChange).toHaveBeenCalledTimes(4) ; //запуск приизменении
 expect(jestSelection).toHaveBeenCalledTimes(2) ; // отправка в стор при длинне >2
 expect(jestReset).toHaveBeenCalledTimes(2) ; // сброс стора при длинне <2
-
+expect(screen.getByRole('input')).toHaveValue('test') ;
 }) ;
 
 

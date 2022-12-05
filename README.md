@@ -30,7 +30,7 @@
 1. Бек в /api
 1. Шлем PR как [описано тут](https://rustycrate.ru/%D1%80%D1%83%D0%BA%D0%BE%D0%B2%D0%BE%D0%B4%D1%81%D1%82%D0%B2%D0%B0/2016/03/07/contributing.html).
 1. Соглашение о именах коммитов: Herman: Back: Make .... AnderyDov: Front: Fix: Fix mini problems with themes.
-Где Herman - имя автора коммита, затем Front | Back | Dev | Doc к какому разелу относиться коммит. В слечае исправления ошибки - Fix:
+Где Herman - имя автора коммита, затем Front | Back | Dev | Doc к какому разелу относиться коммит. В случае исправления ошибки - Fix:
 
 # Полезные команды:
 - `make init`     			- Полная пересборка проекта (с потерей данных)

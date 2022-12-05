@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
+
 //рендер пользователей
 export default function ContentPage() {
   const state = useSelector((state) => state.data.users.filtredUsers); // получаю стеит
@@ -10,6 +11,8 @@ export default function ContentPage() {
   const [inlet, setInlet] = useState(state[0]); //  входящие данные для отрисовки
   const [update, setUpdate] = useState(false); // флаг указатель о необходимости добавления данные для отрисовки
 
+
+ 
   useEffect(() => {
     setInlet(state[0]);
   }, [state]);
