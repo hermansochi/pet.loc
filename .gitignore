@@ -7,3 +7,4 @@
 /provisioning/authorize-deploy.yml
 /api/.env.prod
 /docker
+.DS_Store
