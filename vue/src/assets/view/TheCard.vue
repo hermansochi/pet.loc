@@ -124,7 +124,6 @@ export default {
 
 .container_contacts {
   grid-template-columns: auto 1fr;
-  gap: 20px;
 }
 
 label {
