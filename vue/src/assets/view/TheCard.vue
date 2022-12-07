@@ -1,20 +1,4 @@
-<!-- <script setup>
-const props = defineProps({
-  empl: {
-    type: Object, // ObjectConstructor
-    required: true,
-    default: () => {},
-  },
-});
-</script> 
-
-<script setup>
-// import { useEmployeeStore } from "../../stores/EmployeeStore";
-// const EmployeeStore = useEmployeeStore();
-</script> -->
-
 <template>
-  <!-- {{ EmployeeStore.empl }} -->
   <form class="container_form" @submit.prevent>
     <fieldset class="container container_fullname">
       <div class="photo" width="128" height="128"></div>
