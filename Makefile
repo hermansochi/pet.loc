@@ -8,17 +8,17 @@ init-ci: docker-down-clear \
 init-andrey: docker-down-clear \
 	react-clear \
 	docker-pull docker-build docker-up \
-	api-init react-init
+	api-init react-init react-ready
 
 init-ann: docker-down-clear \
 	vue-clear \
 	docker-pull docker-build docker-up \
-	api-init vue-init
+	api-init vue-init vue-ready
 
 init-underdante: docker-down-clear \
 	underdante-clear \
 	docker-pull docker-build docker-up \
-	api-init underdante-init
+	api-init underdante-init underdante-ready
 
 up: docker-up
 down: docker-down
