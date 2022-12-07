@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\Org\QRCodeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Api\HealthcheckController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -30,6 +31,8 @@ Route::prefix('v1')->group(function () {
             ->parameters(['qrcodes' => 'id']);
     });
 
+    
+
     /**
      * Healthcheck
      *
@@ -45,28 +48,5 @@ Route::prefix('v1')->group(function () {
      * @responseField services Map of each downstream service and their status (`ping time` or `down`).
      * @responseField employees total - How many employees in DB, per_page - How much to give to the api per page
      */
-    Route::get('/healthcheck', function () {
-        function ping($host, $port, $timeout)
-        {
-            $tB = microtime(true);
-            $fP = fsockopen($host, $port, $errno, $errstr, $timeout);
-            if (! $fP) {
-                return 'down';
-            }
-            $tA = microtime(true);
-
-            return round((($tA - $tB) * 1000), 0).' ms';
-        }
-
-        return [
-            'status' => 'up',
-            'services' => [
-                'database' => ping('api-postgres', 5432, 10),
-            ],
-            'employees' => [
-                'total' => config('app.employees_total'),
-                'per_page' => config('app.employees_per_page'),
-            ],
-        ];
-    });
+    Route::get('/healthcheck', [HealthcheckController::class, 'Healthcheck']);
 });
