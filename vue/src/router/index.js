@@ -10,10 +10,9 @@ const router = createRouter({
       name: "main",
       component: TheMain,
     },
-
     {
-      path: "/card",
-      name: "card",
+      path: "/card/:id",
+      name: "TheCard",
       component: TheCard,
       props: true,
     },

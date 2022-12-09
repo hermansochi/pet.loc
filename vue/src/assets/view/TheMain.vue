@@ -41,6 +41,27 @@ export default {
           created_at: "2022-10-11T12:19:10.000000Z",
           updated_at: "2022-10-11T12:19:10.000000Z",
         },
+        {
+          id: 2,
+          name: "K.Romanova",
+          hide: false, // status
+          thumbnail: true, // img ?
+          gender: "f",
+          first_name: "Клеопатра",
+          last_name: "Ивановна",
+          middle_name: "Романова",
+          birthday: "0202",
+          email: "K.Romanova@ya.ru",
+          cn: "Романова Клеопатра Ивановна",
+          telephone: "2222",
+          mobile: "92222222222",
+          title: "doctor",
+          department: "Dream team",
+          company: "Looking for a job",
+          city: "Сочи",
+          created_at: "2022-10-11T12:19:10.000000Z",
+          updated_at: "2022-10-11T12:19:10.000000Z",
+        },
       ],
     };
   },

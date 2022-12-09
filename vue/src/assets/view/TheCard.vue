@@ -1,11 +1,17 @@
+<script setup>
+import { useEmployeeStore } from "../../stores/EmployeeStore";
+</script>
+
 <template>
+  <!-- {{ EmployeeStore }} -->
+  <div></div>
   <form class="container_form" @submit.prevent>
     <fieldset class="container container_fullname">
       <div class="photo" width="128" height="128"></div>
 
       <div class="wrapper">
         <label for="first_name">FIRST NAME:</label>
-        <input id="first_name" name="first_name" />
+        <input id="first_name" name="first_name" v-model="first_name" />
       </div>
 
       <div class="wrapper">
@@ -22,12 +28,7 @@
     <fieldset class="container container_contacts">
       <div class="wrapper">
         <label for="id_enployee">ID:</label>
-        <input
-          id="id_enployee"
-          name="id_enployee"
-          v-model.number="id_enployee"
-          disabled
-        />
+        <input id="id_enployee" name="id_enployee" v-model="id" disabled />
       </div>
 
       <div class="wrapper">
@@ -92,6 +93,10 @@
 <script>
 export default {
   isEditing: true,
+  created() {
+    this.id = this.$route.params.id;
+    // const EmployeeStore = useEmployeeStore();
+  },
 };
 </script>
 

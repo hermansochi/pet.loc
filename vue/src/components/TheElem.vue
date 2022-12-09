@@ -20,7 +20,12 @@ import IconFullinfo from "./IconFullinfo.vue";
       {{ getEmployeeStatus }}
     </li>
     <li>
-      <RouterLink to="/card">
+      <RouterLink
+        :to="{
+          name: 'TheCard',
+          params: { id: employee.id },
+        }"
+      >
         <button type="button" class="btn_fullInfo">
           <IconFullinfo />
         </button>
@@ -67,6 +72,11 @@ export default {
   computed: {
     getEmployeeStatus() {
       return this.employee.hide == true ? "online" : "offline";
+    },
+  },
+  methods: {
+    getId() {
+      return this.employee.id;
     },
   },
 };
