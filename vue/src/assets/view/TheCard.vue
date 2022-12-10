@@ -1,9 +1,20 @@
 <script setup>
-import { useEmployeeStore } from "../../stores/EmployeeStore";
+// import { useEmployeeStore } from "../../stores/EmployeeStore";
+// const EmployeeStore = useEmployeeStore();
+
+const props = defineProps({
+  movie: {
+    type: Object,
+    required: true,
+    default: () => {},
+  },
+});
 </script>
 
 <template>
   <!-- {{ EmployeeStore }} -->
+  <!-- {{ EmployeeStore.empls }} -->
+  <!-- {{ EmployeeStore.empls.id }} -->
   <div></div>
   <form class="container_form" @submit.prevent>
     <fieldset class="container container_fullname">
@@ -39,7 +50,7 @@ import { useEmployeeStore } from "../../stores/EmployeeStore";
       <div class="wrapper">
         <label for="gender">GENDER:</label>
         <select id="gender" v-model="gender">
-          <option disabled value="">Please select one</option>
+          <option value="">Please select one</option>
           <option>male</option>
           <option>female</option>
           <option selected>unknown</option>

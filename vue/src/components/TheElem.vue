@@ -61,11 +61,11 @@ export default {
       return this.employee.hide == true ? "online" : "offline";
     },
   },
-  methods: {
-    getId() {
-      return this.employee.id;
-    },
-  },
+  // methods: {
+  //   getId() {
+  //     return this.employee.id;
+  //   },
+  // },
 };
 </script>
 
