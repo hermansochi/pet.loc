@@ -10,17 +10,17 @@ import { useEmployeeStore } from "../../stores/EmployeeStore";
       <div class="photo" width="128" height="128"></div>
 
       <div class="wrapper">
-        <label for="first_name">FIRST NAME:</label>
+        <label for="first_name">SURNAME:</label>
         <input id="first_name" name="first_name" v-model="first_name" />
       </div>
 
       <div class="wrapper">
-        <label for="last_name">LAST NAME:</label>
+        <label for="last_name">NAME:</label>
         <input id="last_name" name="last_name" v-model="last_name" />
       </div>
 
       <div class="wrapper">
-        <label for="middle_name">MIDDLE&nbsp;NAME:</label>
+        <label for="middle_name">PATRONYMIC:</label>
         <input id="middle_name" name="middle_name" v-model="middle_name" />
       </div>
     </fieldset>
@@ -105,7 +105,7 @@ export default {
   display: grid;
   grid-template-columns: 128px ifr 1fr;
   gap: 20px;
-  width: 80%;
+  max-width: 80%;
   background-color: var(--vt-c-white-mute);
   padding: 40px;
   margin: 0 auto;

@@ -1,6 +1,8 @@
 <script setup>
 import TheHeader from "../../components/TheHeader.vue";
 import TheElem from "../../components/TheElem.vue";
+
+// import { useEmployeeStore } from "../../stores/EmployeeStore";
 </script>
 
 <template>
@@ -33,7 +35,7 @@ export default {
           email: "hermansochi@ya.ru",
           cn: "Александров Герман Евгеньевич",
           telephone: "6677",
-          mobile: "9899001010",
+          mobile: "91111111111",
           title: "Web developer",
           department: "Dream team",
           company: "Looking for a job",

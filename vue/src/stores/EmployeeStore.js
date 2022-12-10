@@ -13,7 +13,7 @@ export const useEmployeeStore = defineStore("EmployeeStore", {
         birthday: "25.01",
         email: "hermansochi@ya.ru",
         telephone: "6677",
-        mobile: "9899001010",
+        mobile: "91111111111",
         title: "Web developer",
         department: "Dream team",
         company: "Looking for a job",
