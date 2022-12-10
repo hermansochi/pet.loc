@@ -131,6 +131,12 @@ export default {
   grid-template-columns: auto 1fr;
 }
 
+.container_contacts .wrapper:first-child,
+.container_contacts .wrapper:nth-child(3),
+.container_contacts .wrapper:nth-child(5) {
+  margin-right: 60px;
+}
+
 label {
   display: grid;
   align-content: center;
