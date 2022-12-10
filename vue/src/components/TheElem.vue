@@ -15,6 +15,7 @@ import IconFullinfo from "./IconFullinfo.vue";
     <li class="position">{{ employee.title }}</li>
     <li class="email">{{ employee.email }}</li>
     <li class="phone">{{ employee.telephone }}</li>
+    <li class="phone">{{ employee.mobile }}</li>
 
     <li class="employee_status" :class="{ active: employee.hide }">
       {{ getEmployeeStatus }}
@@ -48,48 +49,34 @@ export default {
   props: {
     employee: {
       id: [Number, String],
-      name: String,
-      hide: Boolean,
-      thumbnail: Boolean,
-      gender: String,
-      first_name: String,
-      last_name: String,
-      middle_name: String,
-      birthday: [Number, String],
-      email: String,
       cn: String,
+      title: String,
+      email: String,
       telephone: [Number, String],
       mobile: [Number, String],
-      title: String,
-      department: String,
-      company: String,
-      city: String,
-      created_at: String,
-      updated_at: String,
     },
   },
-
   computed: {
     getEmployeeStatus() {
       return this.employee.hide == true ? "online" : "offline";
     },
   },
-  methods: {
-    getId() {
-      return this.employee.id;
-    },
-  },
+  // methods: {
+  //   getId() {
+  //     return this.employee.id;
+  //   },
+  // },
 };
 </script>
 
 <style scoped>
 .container_employee {
   display: grid;
-  grid-template-columns: 5% 25% 19% 20% auto 12% 3% 3%;
-  gap: 10px;
+  grid-template-columns: 5% 20% 10% 15% auto auto 9% 3% 3%;
+  grid-gap: 2%;
+  max-width: 100%;
   line-height: 1.6;
   align-items: center;
-  justify-items: center;
   list-style: none;
   border-radius: 8px;
   background-color: var(--vt-c-white-mute);
@@ -101,10 +88,11 @@ export default {
   height: 35px;
   background-color: var(--vt-c-grey-light);
   border-radius: 10%;
-  margin-right: 10px;
+  margin: 0;
 }
 
-.full_name {
+.full_name,
+.position {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -113,7 +101,7 @@ export default {
 .employee_status {
   display: flex;
   justify-content: center;
-  width: 30%;
+  width: 50%;
   color: var(--vt-c-white);
   font-size: 12px;
   line-height: 15px;
