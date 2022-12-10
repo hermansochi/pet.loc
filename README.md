@@ -1,4 +1,4 @@
-# DEPRICATED
+# DEPRICATED/НЕ АКТУАЛЕН!
 
 Монорепозиторий разделен.
 Продолжение проекта в репозитории https://github.com/hermansochi/phonebook-back.git
