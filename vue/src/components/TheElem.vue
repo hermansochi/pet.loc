@@ -48,12 +48,12 @@ import IconFullinfo from "./IconFullinfo.vue";
 export default {
   props: {
     employee: {
-      id: [Number, String],
+      id: Number,
       cn: String,
       title: String,
       email: String,
-      telephone: [Number, String],
-      mobile: [Number, String],
+      telephone: String,
+      mobile: String,
     },
   },
   computed: {
@@ -61,11 +61,6 @@ export default {
       return this.employee.hide == true ? "online" : "offline";
     },
   },
-  // methods: {
-  //   getId() {
-  //     return this.employee.id;
-  //   },
-  // },
 };
 </script>
 

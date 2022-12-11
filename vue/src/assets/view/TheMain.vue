@@ -27,8 +27,6 @@ export default {
   },
   created() {
     this.employees = this.EmployeeStore.empls;
-    // console.log(this.EmployeeStore.empls);
-    // console.log(this.employees);
   },
   methods: {
     deleteEmployee(index) {
