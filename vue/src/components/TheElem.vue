@@ -67,7 +67,7 @@ export default {
 <style scoped>
 .container_employee {
   display: grid;
-  grid-template-columns: 5% 20% 10% 15% auto auto 9% 3% 3%;
+  grid-template-columns: 5% 20% 10% 15% auto auto 9% 4% 4%;
   grid-gap: 2%;
   max-width: 100%;
   line-height: 1.6;
@@ -104,6 +104,7 @@ export default {
   background-color: var(--vt-c-grey-silver);
   border-radius: 17px;
   padding: 3px 8px;
+  margin: 0 auto;
 }
 
 .active {
