@@ -1,20 +1,9 @@
 <script setup>
-// import { useEmployeeStore } from "../../stores/EmployeeStore";
-// const EmployeeStore = useEmployeeStore();
-
-const props = defineProps({
-  movie: {
-    type: Object,
-    required: true,
-    default: () => {},
-  },
-});
+import { useEmployeeStore } from "../../stores/EmployeeStore";
+const EmployeeStore = useEmployeeStore();
 </script>
 
 <template>
-  <!-- {{ EmployeeStore }} -->
-  <!-- {{ EmployeeStore.empls }} -->
-  <!-- {{ EmployeeStore.empls.id }} -->
   <div></div>
   <form class="container_form" @submit.prevent>
     <fieldset class="container container_fullname">
@@ -22,76 +11,71 @@ const props = defineProps({
 
       <div class="wrapper">
         <label for="first_name">SURNAME:</label>
-        <input id="first_name" name="first_name" v-model="first_name" />
+        <input id="first_name" name="first_name" :value="empl.first_name" />
       </div>
 
       <div class="wrapper">
         <label for="last_name">NAME:</label>
-        <input id="last_name" name="last_name" v-model="last_name" />
+        <input id="last_name" name="last_name" :value="empl.last_name" />
       </div>
 
       <div class="wrapper">
         <label for="middle_name">PATRONYMIC:</label>
-        <input id="middle_name" name="middle_name" v-model="middle_name" />
+        <input id="middle_name" name="middle_name" :value="empl.middle_name" />
       </div>
     </fieldset>
 
     <fieldset class="container container_contacts">
       <div class="wrapper">
         <label for="id_enployee">ID:</label>
-        <input id="id_enployee" name="id_enployee" v-model="id" disabled />
+        <input id="id_enployee" name="id_enployee" :value="paramsId" disabled />
       </div>
 
       <div class="wrapper">
         <label for="born">BIRTH:</label>
-        <input id="born" name="born" v-model="born" />
+        <input id="born" name="born" :value="empl.birthday" />
       </div>
 
       <div class="wrapper">
         <label for="gender">GENDER:</label>
-        <select id="gender" v-model="gender">
-          <option value="">Please select one</option>
-          <option>male</option>
-          <option>female</option>
-          <option selected>unknown</option>
-        </select>
+        <input id="gender" name="gender" :value="empl.gender" />
       </div>
 
       <div class="wrapper wrapper_email">
         <label for="email">EMAIL:</label>
-        <input id="email" name="email" v-model="email" />
+        <input id="email" name="email" :value="empl.email" />
       </div>
 
       <div class="wrapper wrapper_phone">
         <label for="phone">PHONE:</label>
-        <input id="phone" name="phone" v-model="telephone" />
+        <input id="phone" name="phone" :value="empl.telephone" />
       </div>
 
       <div class="wrapper" wrapper_mobile>
         <label for="mobile">MOBILE:</label>
-        <input id="mobile" name="mobile" v-model="mobile" />
+        <input id="mobile" name="mobile" :value="empl.mobile" />
       </div>
     </fieldset>
 
     <fieldset class="container">
       <div class="wrapper">
         <label for="company">CITY:</label>
-        <input id="city" name="city" v-model="city" />
+        <input id="city" name="city" :value="empl.city" />
       </div>
 
       <div class="wrapper">
         <label for="company">COMPANY:</label>
-        <input id="company" name="company" v-model="company" />
+        <input id="company" name="company" :value="empl.company" />
       </div>
 
       <div class="wrapper">
         <label for="department">DEPATMENT:</label>
-        <input id="department" name="department" v-model="department" />
+        <input id="department" name="department" :value="empl.department" />
       </div>
 
       <div class="wrapper">
         <label for="position">POSITION:</label>
-        <input id="position" type="text" name="position" v-model="title" />
+        <input id="position" type="text" name="position" :value="empl.title" />
       </div>
     </fieldset>
 
@@ -105,8 +89,15 @@ const props = defineProps({
 export default {
   isEditing: true,
   created() {
-    this.id = this.$route.params.id;
-    // const EmployeeStore = useEmployeeStore();
+    // Id from the router (RouterLink in TheElem)
+    this.paramsId = this.$route.params.id;
+
+    //obj in EmployeeStore
+    const empl = this.EmployeeStore.empls.find(
+      (elem) => elem.id == this.paramsId
+    );
+
+    this.empl = empl;
   },
 };
 </script>

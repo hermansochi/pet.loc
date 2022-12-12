@@ -48,12 +48,12 @@ import IconFullinfo from "./IconFullinfo.vue";
 export default {
   props: {
     employee: {
-      id: [Number, String],
+      id: Number,
       cn: String,
       title: String,
       email: String,
-      telephone: [Number, String],
-      mobile: [Number, String],
+      telephone: String,
+      mobile: String,
     },
   },
   computed: {
@@ -61,18 +61,13 @@ export default {
       return this.employee.hide == true ? "online" : "offline";
     },
   },
-  // methods: {
-  //   getId() {
-  //     return this.employee.id;
-  //   },
-  // },
 };
 </script>
 
 <style scoped>
 .container_employee {
   display: grid;
-  grid-template-columns: 5% 20% 10% 15% auto auto 9% 3% 3%;
+  grid-template-columns: 5% 20% 10% 15% auto auto 9% 4% 4%;
   grid-gap: 2%;
   max-width: 100%;
   line-height: 1.6;
@@ -109,6 +104,7 @@ export default {
   background-color: var(--vt-c-grey-silver);
   border-radius: 17px;
   padding: 3px 8px;
+  margin: 0 auto;
 }
 
 .active {

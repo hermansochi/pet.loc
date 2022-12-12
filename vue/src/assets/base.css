@@ -72,6 +72,7 @@ button {
 input,
 textarea,
 select {
+  color: var(--vt-c-grey-main-font);
   background-color: var(--vt-c-white-background);
   border: none;
   outline: none;
