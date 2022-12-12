@@ -1,6 +1,6 @@
 <script setup>
-import { useEmployeeStore } from "../../stores/EmployeeStore";
-const EmployeeStore = useEmployeeStore();
+import { useEmplStore } from "../../stores/EmplStore";
+const EmplStore = useEmplStore();
 </script>
 
 <template>
@@ -27,8 +27,8 @@ const EmployeeStore = useEmployeeStore();
 
     <fieldset class="container container_contacts">
       <div class="wrapper">
-        <label for="id_enployee">ID:</label>
-        <input id="id_enployee" name="id_enployee" :value="paramsId" disabled />
+        <label for="id_employee">ID:</label>
+        <input id="id_employee" name="id_employee" :value="paramsId" disabled />
       </div>
 
       <div class="wrapper">
@@ -38,7 +38,7 @@ const EmployeeStore = useEmployeeStore();
 
       <div class="wrapper">
         <label for="gender">GENDER:</label>
-        <input id="gender" name="gender" :value="empl.gender" />
+        <input id="gender" name="gender" :value="getEmplGender" />
       </div>
 
       <div class="wrapper wrapper_email">
@@ -92,12 +92,20 @@ export default {
     // Id from the router (RouterLink in TheElem)
     this.paramsId = this.$route.params.id;
 
-    //obj in EmployeeStore
-    const empl = this.EmployeeStore.empls.find(
-      (elem) => elem.id == this.paramsId
-    );
-
+    //obj in EmplStore
+    const empl = this.EmplStore.empls.find((elem) => elem.id == this.paramsId);
     this.empl = empl;
+  },
+
+  computed: {
+    getEmplGender() {
+      return (this.gender =
+        this.empl.gender === "m"
+          ? "male"
+          : this.empl.gender === "f"
+          ? "female"
+          : "unknown");
+    },
   },
 };
 </script>

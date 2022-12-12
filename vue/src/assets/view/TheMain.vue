@@ -2,8 +2,8 @@
 import TheHeader from "../../components/TheHeader.vue";
 import TheElem from "../../components/TheElem.vue";
 
-import { useEmployeeStore } from "../../stores/EmployeeStore";
-const EmployeeStore = useEmployeeStore();
+import { useEmplStore } from "../../stores/EmplStore";
+const EmplStore = useEmplStore();
 </script>
 
 <template>
@@ -12,7 +12,7 @@ const EmployeeStore = useEmployeeStore();
     v-for="(employee, index) in employees"
     :key="index"
     :employee="employee"
-    @delEmpl="deleteEmployee(index)"
+    @delEmpl="deleteEmpl(index)"
   />
 
   <h2 class="message" v-if="employees.length === 0">Список сотрудников пуст</h2>
@@ -26,10 +26,10 @@ export default {
     };
   },
   created() {
-    this.employees = this.EmployeeStore.empls;
+    this.employees = this.EmplStore.empls;
   },
   methods: {
-    deleteEmployee(index) {
+    deleteEmpl(index) {
       this.employees.splice(index, 1);
     },
   },
