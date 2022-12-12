@@ -10,18 +10,18 @@ const EmployeeStore = useEmployeeStore();
       <div class="photo" width="128" height="128"></div>
 
       <div class="wrapper">
-        <label for="first_name">SURNAME:</label>
+        <label for="middle_name">SURNAME:</label>
+        <input id="middle_name" name="middle_name" :value="empl.last_name" />
+      </div>
+
+      <div class="wrapper">
+        <label for="first_name">NAME:</label>
         <input id="first_name" name="first_name" :value="empl.first_name" />
       </div>
 
       <div class="wrapper">
-        <label for="last_name">NAME:</label>
-        <input id="last_name" name="last_name" :value="empl.last_name" />
-      </div>
-
-      <div class="wrapper">
-        <label for="middle_name">PATRONYMIC:</label>
-        <input id="middle_name" name="middle_name" :value="empl.middle_name" />
+        <label for="last_name">PATRONYMIC :</label>
+        <input id="last_name" name="last_name" :value="empl.middle_name" />
       </div>
     </fieldset>
 

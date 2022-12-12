@@ -30,8 +30,8 @@ export const useEmployeeStore = defineStore("EmployeeStore", {
         thumbnail: true, // img ?
         gender: "f",
         first_name: "Клеопатра",
-        last_name: "Ивановна",
-        middle_name: "Романова",
+        last_name: "Романова",
+        middle_name: "Ивановна ",
         birthday: "0202",
         email: "K.Romanova@ya.ru",
         cn: "Романова Клеопатра Ивановна",
