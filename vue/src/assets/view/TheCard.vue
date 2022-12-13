@@ -9,10 +9,10 @@ const EmplStore = useEmplStore();
       <div class="photo" width="128" height="128"></div>
 
       <div class="wrapper">
-        <label for="middle_name">SURNAME:</label>
+        <label for="last_name">SURNAME:</label>
         <input
-          id="middle_name"
-          name="middle_name"
+          id="last_name"
+          name="last_name"
           :value="empl.last_name"
           :disabled="disabled"
         />
@@ -29,10 +29,10 @@ const EmplStore = useEmplStore();
       </div>
 
       <div class="wrapper">
-        <label for="last_name">PATRONYMIC :</label>
+        <label for="middle_name">PATRONYMIC :</label>
         <input
-          id="last_name"
-          name="last_name"
+          id="middle_name"
+          name="middle_name"
           :value="empl.middle_name"
           :disabled="disabled"
         />
@@ -139,9 +139,9 @@ const EmplStore = useEmplStore();
       </div>
     </fieldset>
 
-    <fieldset class="container">
+    <!-- <fieldset class="container">
       <textarea rows="6" placeholder="about..." :disabled="disabled"></textarea>
-    </fieldset>
+    </fieldset> -->
     <button type="button" class="button btn_edit" @click="disabled = !disabled">
       {{ disabled ? "Edit employee" : "Save employee" }}
     </button>
