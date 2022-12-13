@@ -18,7 +18,7 @@ import IconFullinfo from "./IconFullinfo.vue";
     <li class="phone">{{ employee.mobile }}</li>
 
     <li class="employee_status" :class="{ active: employee.hide }">
-      {{ getEmployeeStatus }}
+      {{ getEmplStatus }}
     </li>
     <li>
       <RouterLink
@@ -57,7 +57,7 @@ export default {
     },
   },
   computed: {
-    getEmployeeStatus() {
+    getEmplStatus() {
       return this.employee.hide == true ? "online" : "offline";
     },
   },
@@ -67,7 +67,7 @@ export default {
 <style scoped>
 .container_employee {
   display: grid;
-  grid-template-columns: 5% 20% 10% 15% auto auto 9% 4% 4%;
+  grid-template-columns: 5% 20% 10% 15% auto auto 9% 3% 4%;
   grid-gap: 2%;
   max-width: 100%;
   line-height: 1.6;

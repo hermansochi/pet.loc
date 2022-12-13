@@ -11,8 +11,8 @@
   --vt-c-grey-gainsboro: #cdcdcd;
   --vt-c-grey-light: #dcdcdc;
 
-  --vt-c-alert-btn: #ff9777;
-  --vt-c-active-btn: rgba(32, 178, 178, 10);
+  --vt-c-alert-btn: rgba(255, 164, 116, 1);
+  --vt-c-active-btn: rgba(95, 158, 160, 1);
 }
 
 body {
@@ -72,6 +72,7 @@ button {
 input,
 textarea,
 select {
+  font-style: italic;
   color: var(--vt-c-grey-main-font);
   background-color: var(--vt-c-white-background);
   border: none;
@@ -80,6 +81,14 @@ select {
   border-radius: 17px;
   padding: 5px 20px;
 }
+
+input:disabled,
+textarea:disabled,
+select:disabled {
+  font-style: normal;
+}
+
 label {
-  vertical-align: center;
+  display: grid;
+  align-content: center;
 }
