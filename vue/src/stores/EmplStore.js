@@ -11,7 +11,7 @@ export const useEmplStore = defineStore("EmplStore", {
         first_name: "Герман", //name
         last_name: "Александров", // surname
         middle_name: "Евгеньевич", // patronymic
-        birthday: "25.01",
+        birthday: "2501",
         email: "hermansochi@ya.ru",
         cn: "Александров Герман Евгеньевич",
         telephone: "6677",
