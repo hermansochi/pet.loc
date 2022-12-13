@@ -62,8 +62,7 @@ const EmplStore = useEmplStore();
 
       <div class="wrapper">
         <label for="gender">GENDER:</label>
-        <select id="gender" :disabled="disabled">
-          <option selected>{{ getEmplGender }}</option>
+        <select id="gender" v-model="getEmplGender" :disabled="disabled">
           <option>male</option>
           <option>female</option>
           <option>unknown</option>
@@ -85,7 +84,7 @@ const EmplStore = useEmplStore();
         <input
           id="born"
           name="born"
-          :value="empl.birthday"
+          :value="getEmplBirth"
           :disabled="disabled"
         />
       </div>
@@ -173,6 +172,9 @@ export default {
           : this.empl.gender === "f"
           ? "female"
           : "unknown");
+    },
+    getEmplBirth() {
+      return (this.birthday = this.empl.birthday.match(/.{2}/g).join("."));
     },
   },
 };
