@@ -14,8 +14,8 @@ import IconFullinfo from "./IconFullinfo.vue";
 
     <li class="position">{{ employee.title }}</li>
     <li class="email">{{ employee.email }}</li>
-    <li class="phone">{{ employee.telephone }}</li>
-    <li class="phone">{{ employee.mobile }}</li>
+    <li class="phone">{{ getEmplTelephone }}</li>
+    <li class="mobile">{{ getEmplMobile }}</li>
 
     <li class="employee_status" :class="{ active: employee.hide }">
       {{ getEmplStatus }}
@@ -59,6 +59,18 @@ export default {
   computed: {
     getEmplStatus() {
       return this.employee.hide == true ? "online" : "offline";
+    },
+    getEmplTelephone() {
+      return (this.telephone = this.employee.telephone
+        .match(/.{2}/g)
+        .join("-"));
+    },
+    getEmplMobile() {
+      let format = "+7 xxx xxx-xx-xx";
+      for (let i = 0; i < this.employee.mobile.length; i++) {
+        format = format.replace("x", this.employee.mobile[i]);
+      }
+      return format;
     },
   },
 };
