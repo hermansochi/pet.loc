@@ -66,11 +66,12 @@ export default {
         .join("-"));
     },
     getEmplMobile() {
-      let format = "+7 xxx xxx-xx-xx";
-      for (let i = 0; i < this.employee.mobile.length; i++) {
-        format = format.replace("x", this.employee.mobile[i]);
-      }
-      return format;
+      return (this.mobile = this.employee.mobile
+        .split("")
+        .reduce(
+          (accumulator, elem) => accumulator.replace("x", elem),
+          "xxx xxx-xx-xx"
+        ));
     },
   },
 };
