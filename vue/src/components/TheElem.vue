@@ -14,7 +14,7 @@ import IconFullinfo from "./IconFullinfo.vue";
 
     <li class="position">{{ employee.title }}</li>
     <li class="email">{{ employee.email }}</li>
-    <li class="phone">{{ getEmplTelephone }}</li>
+    <li class="phone">{{ employee.telephone }}</li>
     <li class="mobile">{{ getEmplMobile }}</li>
 
     <li class="employee_status" :class="{ active: employee.hide }">
@@ -48,12 +48,12 @@ import IconFullinfo from "./IconFullinfo.vue";
 export default {
   props: {
     employee: {
-      id: Number,
-      cn: String,
-      title: String,
-      email: String,
-      telephone: String,
-      mobile: String,
+      id: { type: Number, required: true },
+      cn: { type: String, required: true },
+      title: { type: String, required: true },
+      email: { type: String, required: true },
+      telephone: { type: String, required: true },
+      mobile: { type: String, required: true },
     },
   },
   computed: {
