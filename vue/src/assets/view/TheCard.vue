@@ -13,7 +13,8 @@ const EmplStore = useEmplStore();
         <input
           id="last_name"
           name="last_name"
-          :value="empl.last_name"
+          ref="last_name"
+          v-model="empl.last_name"
           :disabled="disabled"
         />
       </div>
@@ -23,7 +24,7 @@ const EmplStore = useEmplStore();
         <input
           id="first_name"
           name="first_name"
-          :value="empl.first_name"
+          v-model="empl.first_name"
           :disabled="disabled"
         />
       </div>
@@ -33,7 +34,7 @@ const EmplStore = useEmplStore();
         <input
           id="middle_name"
           name="middle_name"
-          :value="empl.middle_name"
+          v-model="empl.middle_name"
           :disabled="disabled"
         />
       </div>
@@ -45,7 +46,7 @@ const EmplStore = useEmplStore();
         <input
           id="id_employee"
           name="id_employee"
-          :value="paramsId"
+          v-model="paramsId"
           :disabled="true"
         />
       </div>
@@ -55,14 +56,14 @@ const EmplStore = useEmplStore();
         <input
           id="phone"
           name="phone"
-          :value="empl.telephone"
+          v-model="empl.telephone"
           :disabled="disabled"
         />
       </div>
 
       <div class="wrapper">
         <label for="gender">GENDER:</label>
-        <select id="gender" v-model="getEmplGender" :disabled="disabled">
+        <select id="gender" v-model="empl.gender" :disabled="disabled">
           <option>male</option>
           <option>female</option>
           <option>unknown</option>
@@ -74,7 +75,7 @@ const EmplStore = useEmplStore();
         <input
           id="email"
           name="email"
-          :value="empl.email"
+          v-model="empl.email"
           :disabled="disabled"
         />
       </div>
@@ -84,7 +85,7 @@ const EmplStore = useEmplStore();
         <input
           id="born"
           name="born"
-          :value="getEmplBirth"
+          v-model="empl.birthday"
           :disabled="disabled"
         />
       </div>
@@ -94,7 +95,7 @@ const EmplStore = useEmplStore();
         <input
           id="mobile"
           name="mobile"
-          :value="empl.mobile"
+          v-model="empl.mobile"
           :disabled="disabled"
         />
       </div>
@@ -103,7 +104,7 @@ const EmplStore = useEmplStore();
     <fieldset class="container">
       <div class="wrapper">
         <label for="company">CITY:</label>
-        <input id="city" name="city" :value="empl.city" :disabled="disabled" />
+        <input id="city" name="city" v-model="empl.city" :disabled="disabled" />
       </div>
 
       <div class="wrapper">
@@ -111,7 +112,7 @@ const EmplStore = useEmplStore();
         <input
           id="company"
           name="company"
-          :value="empl.company"
+          v-model="empl.company"
           :disabled="disabled"
         />
       </div>
@@ -121,7 +122,7 @@ const EmplStore = useEmplStore();
         <input
           id="department"
           name="department"
-          :value="empl.department"
+          v-model="empl.department"
           :disabled="disabled"
         />
       </div>
@@ -132,17 +133,18 @@ const EmplStore = useEmplStore();
           id="position"
           type="text"
           name="position"
-          :value="empl.title"
+          v-model="empl.title"
           :disabled="disabled"
         />
       </div>
     </fieldset>
 
-    <!-- <fieldset class="container">
-      <textarea rows="6" placeholder="about..." :disabled="disabled"></textarea>
-    </fieldset> -->
-    <button type="button" class="button btn_edit" @click="disabled = !disabled">
-      {{ disabled ? "Edit employee" : "Save employee" }}
+    <button
+      type="button"
+      class="button btn_edit"
+      @click="sendUpdateEmplToStore"
+    >
+      Edit employee
     </button>
   </form>
 </template>
@@ -151,6 +153,7 @@ const EmplStore = useEmplStore();
 export default {
   data() {
     return {
+      index: 1,
       disabled: true,
     };
   },
@@ -160,22 +163,15 @@ export default {
     this.paramsId = this.$route.params.id;
 
     //obj in EmplStore
-    const empl = this.EmplStore.empls.find((elem) => elem.id == this.paramsId);
-    this.empl = empl;
-  },
+    const empl = this.EmplStore.empls.find((elem, index) => {
+      if (elem.id == this.paramsId) {
+        this.index = index;
+        return true;
+      }
+      return false;
+    });
 
-  computed: {
-    getEmplGender() {
-      return (this.gender =
-        this.empl.gender === "m"
-          ? "male"
-          : this.empl.gender === "f"
-          ? "female"
-          : "unknown");
-    },
-    getEmplBirth() {
-      return (this.birthday = this.empl.birthday.match(/.{2}/g).join("."));
-    },
+    this.empl = empl;
   },
 };
 </script>

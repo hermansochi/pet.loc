@@ -6,7 +6,7 @@ export const useEmplStore = defineStore("EmplStore", {
         id: 1,
         name: "Alexandrov.H.976b48f0-7fd3-4d03-82ce-395ddeafe5d5",
         hide: true,
-        thumbnail: true,
+        thumbnail: true, //photo
         gender: "m",
         first_name: "Герман", //name
         last_name: "Александров", // surname

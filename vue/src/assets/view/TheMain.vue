@@ -9,13 +9,13 @@ const EmplStore = useEmplStore();
 <template>
   <TheHeader />
   <TheElem
-    v-for="(employee, index) in employees"
+    v-for="(employee, index) of employees"
     :key="index"
     :employee="employee"
     @delEmpl="deleteEmpl(index)"
   />
 
-  <h2 class="message" v-if="employees.length === 0">Список сотрудников пуст</h2>
+  <h2 class="message">{{ showMessage }}</h2>
 </template>
 
 <script>
@@ -26,8 +26,16 @@ export default {
     };
   },
   created() {
+    //  console.log(this.EmplStore.getEmplTelephone);
     this.employees = this.EmplStore.empls;
   },
+
+  computed: {
+    showMessage() {
+      return this.employees.length === 0 ? "Список сотрудников пуст" : "";
+    },
+  },
+
   methods: {
     deleteEmpl(index) {
       this.employees.splice(index, 1);
