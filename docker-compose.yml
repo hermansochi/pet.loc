@@ -198,7 +198,6 @@ services:
         restart: on-failure
         entrypoint: /bin/sh -c "/usr/bin/mc alias set myminio http://minio:9000 local secret123456 && /usr/bin/mc mb myminio/pet && /usr/bin/mc anonymous set download myminio/pet"
         networks:
-            - traefik-public
             - default
 
     cucumber-node-cli:
